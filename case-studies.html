@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Studies – MMGRESS</title>
+  <meta name="description" content="Przykłady problemów, które zostały rozwiązane: diagnoza przyczyn, przebieg analizy i efekt końcowy." />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #0f766e;
+      --accent-light: #14b8a6;
+      --line: #e5e7eb;
+      --soft: #f8fafc;
+      --warn: #b91c1c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1f2937 100%);
+      color: #fff;
+      padding: 56px 20px 44px;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    nav {
+      margin-bottom: 26px;
+      font-size: 15px;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #99f6e4;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: 40px;
+      line-height: 1.15;
+      max-width: 820px;
+    }
+
+    .lead {
+      max-width: 760px;
+      font-size: 19px;
+      color: #d1d5db;
+      margin: 0;
+    }
+
+    .summary {
+      margin-top: -26px;
+      padding: 0 20px;
+    }
+
+    .summary-grid {
+      max-width: 980px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .summary-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(229, 231, 235, 0.9);
+    }
+
+    .summary-card .label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .summary-card .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 980px;
+      margin: 28px auto 60px;
+      padding: 0 20px;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 18px;
+      padding: 30px;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 26px;
+      line-height: 1.2;
+      color: #111827;
+    }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    .intro {
+      max-width: 760px;
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .case-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+    .case-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.10);
+      border-color: #cbd5e1;
+    }
+
+    .case-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .case-card h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      line-height: 1.25;
+      color: #111827;
+    }
+
+    .case-card p {
+      color: #4b5563;
+      margin-bottom: 14px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .meta span {
+      background: var(--soft);
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    .cta-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .note-box {
+      border-left: 4px solid var(--accent-light);
+      padding: 14px 18px;
+      background: var(--soft);
+      border-radius: 10px;
+      margin-top: 18px;
+      color: #111827;
+    }
+
+    .empty-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px dashed #cbd5e1;
+      color: #4b5563;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 700px) {
+      h1 { font-size: 31px; }
+      .lead { font-size: 17px; }
+      .section { padding: 22px; }
+      .case-card h3 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <nav>
+        <a href="/">Strona główna</a> |
+        <a href="/case-studies.html">Case studies</a> |
+        <a href="/about.html">O mnie</a>
+      </nav>
+      <div class="eyebrow">Case Studies</div>
+      <h1>Przykłady problemów, które udało się rozwiązać</h1>
+      <p class="lead">
+        Poniżej znajdziesz wybrane przypadki. Każdy z nich pokazuje nie tylko efekt końcowy,
+        ale przede wszystkim sposób dojścia do rzeczywistej przyczyny problemu.
+      </p>
+    </div>
+  </header>
+
+  <section class="summary">
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="label">Zakres</div>
+        <div class="value">Różne branże</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Podejście</div>
+        <div class="value">Diagnoza</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Cel</div>
+        <div class="value">Przyczyna</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Efekt</div>
+        <div class="value">Rozwiązanie</div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <h2>Po co ta sekcja</h2>
+      <div class="intro">
+        <p>
+          Nie każdy problem da się opisać jednym hasłem. Czasem wygląda na awarię urządzenia, a okazuje się błędem po stronie zasilania.
+          Czasem standardowe pomiary są poprawne, ale całość nadal nie działa.
+        </p>
+        <p>
+          Właśnie dlatego case studies są ważne — pokazują sposób myślenia, prowadzenia wywiadu, łączenia faktów
+          i dochodzenia do rzeczywistej przyczyny.
+        </p>
+      </div>
+
+      <div class="note-box">
+        Jeśli chcesz sprawdzić, czy Twój problem pasuje do tego sposobu pracy, zacznij od krótkiego opisu sytuacji na stronie głównej.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Lista case studies</h2>
+
+      <div class="cases-grid">
+        <a class="case-card" href="/case-study-pv-brak-fazy.html">
+          <div class="case-tag">Fotowoltaika / diagnoza</div>
+          <h3>Fotowoltaika, która nie działała i nikt nie wiedział dlaczego</h3>
+          <p>
+            Instalacja PV przez wiele miesięcy nie produkowała energii mimo braku błędów falownika,
+            wymiany urządzenia i serii poprawnych pomiarów. Rzeczywista przyczyna leżała gdzie indziej.
+          </p>
+          <div class="meta">
+            <span>6 kW</span>
+            <span>8 miesięcy przestoju</span>
+            <span>Brak L3</span>
+          </div>
+          <span class="cta-link">Czytaj case study →</span>
+        </a>
+
+        <div class="empty-card">
+          <div class="case-tag">Wkrótce</div>
+          <h3>Precyzja cięcia rur</h3>
+          <p>
+            Studium przypadku dotyczące problemu dokładności procesu i dojścia do rozwiązania
+            w układzie produkcyjnym.
+          </p>
+        </div>
+
+        <div class="empty-card">
+          <div class="case-tag">Wkrótce</div>
+          <h3>Automatyzacja produkcji</h3>
+          <p>
+            Przypadek związany z poprawą działania procesu, organizacją pracy urządzeń
+            i praktycznym efektem wdrożenia.
+          </p>
+        </div>
+      </div>
+
+      <p class="footer-note">
+        Kolejne case studies będą dodawane stopniowo. Każde z nich będzie opisywać problem, tok analizy,
+        rzeczywistą przyczynę oraz efekt końcowy.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
