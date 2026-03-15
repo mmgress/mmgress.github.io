@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study – Precyzja cięcia profili zamkniętych w procesie ciągłym</title>
+  <meta name="description" content="Case study: modernizacja układu cięcia profili zamkniętych w procesie ciągłym. Zmniejszenie odchyłki z około ±500 mm do około ±1,5 mm oraz uproszczenie obsługi maszyny." />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #0f766e;
+      --accent-light: #14b8a6;
+      --line: #e5e7eb;
+      --soft: #f8fafc;
+      --warn: #b91c1c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f4f6;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1f2937 100%);
+      color: #fff;
+      padding: 56px 20px 44px;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    nav {
+      margin-bottom: 26px;
+      font-size: 15px;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    nav a:hover { color: #fff; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #99f6e4;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: 40px;
+      line-height: 1.15;
+      max-width: 860px;
+    }
+
+    .lead {
+      max-width: 790px;
+      font-size: 19px;
+      color: #d1d5db;
+      margin: 0;
+    }
+
+    .summary {
+      margin-top: -26px;
+      padding: 0 20px;
+    }
+
+    .summary-grid {
+      max-width: 980px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .summary-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(229, 231, 235, 0.9);
+    }
+
+    .summary-card .label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .summary-card .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 980px;
+      margin: 28px auto 60px;
+      padding: 0 20px;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 18px;
+      padding: 30px;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 26px;
+      line-height: 1.2;
+      color: #111827;
+    }
+
+    p { margin: 0 0 16px; }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li { margin-bottom: 10px; }
+
+    .quote {
+      border-left: 4px solid var(--accent-light);
+      padding: 14px 18px;
+      background: var(--soft);
+      border-radius: 10px;
+      margin: 18px 0;
+      color: #111827;
+    }
+
+    .result-box {
+      background: #ecfeff;
+      border: 1px solid #a5f3fc;
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .result-box strong {
+      color: #0f766e;
+    }
+
+    .loss-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .loss-box strong {
+      color: var(--warn);
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 700px) {
+      h1 { font-size: 31px; }
+      .lead { font-size: 17px; }
+      .section { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <nav>
+        <a href="/">Strona główna</a> |
+        <a href="/case-studies.html">Case studies</a> |
+        <a href="/about.html">O mnie</a>
+      </nav>
+      <div class="eyebrow">Case Study</div>
+      <h1>Precyzja cięcia profili zamkniętych w procesie ciągłym</h1>
+      <p class="lead">
+        W zakładzie produkcyjnym profile zamknięte były cięte w locie podczas ciągłego procesu formowania i spawania. Dotychczasowy układ działał, ale jego dokładność była zbyt niska dla nowoczesnej i powtarzalnej produkcji.
+      </p>
+    </div>
+  </header>
+
+  <section class="summary">
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="label">Proces</div>
+        <div class="value">Ciągły</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Prędkość profilu</div>
+        <div class="value">0,3–2 m/s</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Przed modernizacją</div>
+        <div class="value">±500 mm</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Po modernizacji</div>
+        <div class="value">~1,5 mm</div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <h2>Problem</h2>
+      <p>
+        Zakład produkował profile zamknięte z taśmy stalowej rozwijanej z dużego bębna. Taśma przechodziła przez zespół rolek formujących, które nadawały jej odpowiedni kształt — od rur po profile o bardziej złożonych zagięciach. Następnie profil był zamykany i spajany w piecu indukcyjnym wysokiej częstotliwości, oczyszczany po spawie i chłodzony wodą.
+      </p>
+      <p>
+        Sam proces był ciągły. Taśma była uzupełniana w trakcie pracy bez zatrzymywania linii, więc profil wychodził praktycznie bez końca. To oznaczało, że cięcie musiało odbywać się w ruchu, podczas pracy linii, przy prędkościach od około 0,3 do prawie 2 metrów na sekundę.
+      </p>
+      <div class="quote">
+        Problem polegał na tym, że dokładność cięcia wynosiła około <strong>plus minus pół metra</strong>. To generowało odpady, konieczność dodatkowego docinania i pogarszało powtarzalność produkcji.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Jak działał stary układ</h2>
+      <p>
+        Dotychczas pomiar długości realizowała rolka dociskana do profilu oraz licznik impulsów. Po osiągnięciu zadanej liczby impulsów układ wyzwalał sekwencję cięcia.
+      </p>
+      <p>
+        Sekwencja była realizowana w sposób klasyczny, z użyciem układów elektromaszynowych: styczników, przekaźników, krańcówek i pneumatyki. Długi stół roboczy miał około 8 metrów, a po nim poruszał się wózek z piłą. Wózek był rozpędzany pneumatycznym tłokiem, następnie chwytał profil szczękami, poruszał się razem z nim, wykonywał cięcie i wracał do pozycji początkowej.
+      </p>
+      <ul>
+        <li>pomiar długości był pośredni i podatny na poślizg,</li>
+        <li>ruch układu zależał od pneumatyki,</li>
+        <li>sekwencja była długa, skomplikowana i trudna do precyzyjnego powtarzania,</li>
+        <li>całość wymagała dużej drogi przejazdu i wielu nastaw zależnych od doświadczenia operatora.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Diagnoza</h2>
+      <p>
+        Kluczowym problemem nie był sam frez ani sam moment cięcia, lecz sposób pomiaru ruchu profilu i sposób nadążania układu tnącego za rzeczywistą prędkością linii.
+      </p>
+      <p>
+        W praktyce prędkość profilu nie była idealnie stała. Zmieniała się w zależności od rodzaju materiału, geometrii profilu, warunków pracy oraz poślizgu. Jeśli układ bazuje wyłącznie na rolce impulsowej i sekwencji mechaniczno-pneumatycznej, to błąd narasta w sposób naturalny.
+      </p>
+      <div class="quote">
+        Żeby uzyskać precyzję, trzeba było przestać „zgadywać” ruch profilu i zacząć go mierzyć bezpośrednio oraz sterować ruchem cięcia w sposób ciągły, a nie tylko sekwencyjny.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Co zostało zrobione</h2>
+      <p>
+        Modernizacja objęła przede wszystkim dwa kluczowe obszary: precyzyjny pomiar oraz precyzyjny napęd.
+      </p>
+      <p>
+        Pomiar został zrealizowany za pomocą przemysłowego układu optycznego działającego podobnie do myszy komputerowej optycznej. Układ mierzy rzeczywistą prędkość przesuwającego się profilu i pozwala bardzo dokładnie wyliczać zarówno drogę, jak i chwilową prędkość.
+      </p>
+      <p>
+        Z kolei stary napęd pneumatyczny został zastąpiony serwomechanizmem współpracującym z pasem zębatym i prowadzeniem na łożyskach liniowych. Sam frez pozostał ten sam, ale jego ruch stał się precyzyjny, powtarzalny i w pełni kontrolowany.
+      </p>
+      <ul>
+        <li>zastosowano optyczny pomiar prędkości i drogi,</li>
+        <li>wymieniono napęd z pneumatycznego na serwonapęd,</li>
+        <li>zrezygnowano z chwytania profilu szczękami,</li>
+        <li>układ tnący zaczął poruszać się synchronicznie z profilem,</li>
+        <li>sterowanie uproszczono do jednego podstawowego parametru wpisywanego przez operatora.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Efekt techniczny</h2>
+      <p>
+        Po modernizacji układ tnący nie musi już mechanicznie łapać profilu. Porusza się z odpowiednią prędkością razem z nim i wykonuje cięcie w sposób płynny oraz przewidywalny.
+      </p>
+      <div class="result-box">
+        <strong>Osiągnięty efekt:</strong> precyzja cięcia wzrosła z około <strong>±500 mm</strong> do około <strong>1,5 mm</strong>. Pozostała odchyłka wynika głównie z bicia tarczy freza, a nie z błędu pozycjonowania układu.
+      </div>
+      <p>
+        Dodatkowo sam proces cięcia znacząco się skrócił. O ile wcześniej wymagał około 8 metrów drogi roboczej, to po modernizacji może być realizowany na około 2 metrach, pod warunkiem prawidłowo przygotowanego i naostrzonego narzędzia.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Efekt biznesowy</h2>
+      <p>
+        Zmiana nie poprawiła wyłącznie samej dokładności. Uderzyła bezpośrednio w najważniejsze wskaźniki produkcyjne.
+      </p>
+      <div class="loss-box">
+        <strong>Najważniejsze korzyści:</strong>
+        <ul>
+          <li>ograniczenie strat materiałowych,</li>
+          <li>wyeliminowanie potrzeby dodatkowego docinania,</li>
+          <li>większa powtarzalność produkcji,</li>
+          <li>krótszy czas realizacji cięcia,</li>
+          <li>prostsza i bardziej przewidywalna obsługa maszyny.</li>
+        </ul>
+      </div>
+      <p>
+        Operator nie musi już ręcznie korygować wielu parametrów ani polegać na doświadczeniu w ustawianiu całej sekwencji. Został wyprowadzony panel HMI, na którym w praktyce wpisuje się tylko jedną wartość — docelową długość ciętego profilu. Resztę oblicza sterownik: prędkość, drogę, moment uruchomienia i przebieg przejazdu.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Wniosek</h2>
+      <p>
+        Ten przypadek pokazuje, że problem precyzji nie zawsze wynika ze zużycia maszyny albo jakości narzędzia. Bardzo często źródłem błędu jest sama logika procesu: zbyt uproszczony pomiar, zbyt duża zależność od pneumatyki i zbyt mała kontrola nad ruchem rzeczywistym.
+      </p>
+      <p>
+        Połączenie dokładnego pomiaru prędkości z serwonapędem i prostym interfejsem operatorskim pozwoliło zmienić układ, który „działał”, w układ, który działa precyzyjnie, szybko i powtarzalnie.
+      </p>
+      <p class="footer-note">
+        Jeśli w procesie ciągłym problemem są odchyłki długości, odpady lub niestabilne cięcie, najczęściej nie potrzeba większej siły ani kolejnych korekt mechanicznych — potrzeba właściwego pomiaru, synchronizacji ruchu i dobrze zaprojektowanego sterowania.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
