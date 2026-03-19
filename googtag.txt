@@ -7,3 +7,5 @@
 
   gtag('config', 'G-L185W23WY6');
 </script>
+
+<meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
