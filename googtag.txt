@@ -5,7 +5,5 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-L185W23WY6');
+  gtag('config', 'G-5KZX20JGP7');
 </script>
-
-<meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
