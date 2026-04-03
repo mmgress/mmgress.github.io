@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
-<meta name="robots" content="index, follow">
-<meta name="author" content="MMGRESS">
-<title>MMGRESS — diagnoza problemów technicznych, procesowych i organizacyjnych</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="W wielu firmach wszystko działa, a mimo to coś się nie spina, generuje straty albo blokuje rozwój. Pomagam diagnozować rzeczywiste przyczyny problemów technicznych, procesowych i organizacyjnych.">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="MMGRESS" />
+  <title>MMGRESS — diagnoza problemów technicznych, procesowych i organizacyjnych</title>
+  <meta name="description" content="W wielu firmach wszystko działa, a mimo to coś się nie spina, generuje straty albo blokuje rozwój. Pomagam diagnozować rzeczywiste przyczyny problemów technicznych, procesowych i organizacyjnych." />
+  <meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
 <script>
@@ -19,399 +17,483 @@
   gtag('config', 'G-5KZX20JGP7');
 </script>
 
-<style>
-:root{
---bg:#ffffff;
---text:#1f2937;
---muted:#4b5563;
---line:#e5e7eb;
---soft:#f8fafc;
---soft2:#f3f4f6;
---dark:#111827;
---accent:#0f766e;
-}
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --surface-2:#f8fafc;
+      --text:#17202b;
+      --muted:#516072;
+      --line:#d9e2ec;
+      --accent:#1f4b7a;
+      --accent-2:#2b6aa8;
+      --accent-soft:#eaf2fb;
+      --hero-top:#f8fbff;
+      --hero-bottom:#eef4fb;
+      --shadow:0 18px 48px rgba(15, 23, 42, 0.07);
+      --radius:22px;
+      --radius-sm:14px;
+      --container:1120px;
+      --content:820px;
+    }
 
-*{
-box-sizing:border-box;
-}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:linear-gradient(180deg, #f8fbff 0%, var(--bg) 220px);
+      line-height:1.72;
+    }
 
-body{
-font-family:Arial, Helvetica, sans-serif;
-margin:0;
-line-height:1.7;
-color:var(--text);
-background:var(--bg);
-}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{color:var(--accent-2)}
 
-nav{
-background:#0b0b0b;
-padding:14px 20px;
-}
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(12px);
+      background:rgba(255,255,255,0.88);
+      border-bottom:1px solid rgba(217,226,236,0.9);
+    }
 
-nav a{
-color:#fff;
-text-decoration:none;
-margin-right:18px;
-font-size:15px;
-font-weight:600;
-}
+    .nav-wrap{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:16px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
 
-nav a:hover{
-text-decoration:underline;
-}
+    .brand{
+      font-size:15px;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#223247;
+      white-space:nowrap;
+    }
 
-.container{
-max-width:1100px;
-margin:auto;
-padding:0 20px 70px 20px;
-}
+    .nav{
+      display:flex;
+      gap:28px;
+      flex-wrap:wrap;
+    }
 
-.hero{
-padding:72px 0 34px 0;
-}
+    .nav a{
+      color:#243446;
+      font-size:15px;
+      font-weight:600;
+    }
 
-.hero-inner{
-max-width:680px;
-}
+    .nav a.active{
+      color:var(--accent);
+    }
 
-h1{
-font-size:44px;
-line-height:1.25;
-margin:0 0 26px 0;
-letter-spacing:-0.5px;
-max-width:700px;
-font-weight:600;
-}
+    .hero{
+      padding:68px 22px 38px;
+      background:
+        radial-gradient(circle at top left, rgba(43,106,168,0.10), transparent 34%),
+        linear-gradient(180deg, var(--hero-top) 0%, var(--hero-bottom) 100%);
+      border-bottom:1px solid rgba(217,226,236,0.8);
+    }
 
-.lead{
-font-size:18px;
-line-height:1.8;
-max-width:820px;
-margin:0 0 22px 0;
-color:#111827;
-}
+    .hero-wrap{
+      max-width:var(--container);
+      margin:0 auto;
+    }
 
-.key-line{
-margin:18px 0 26px 0;
-padding:12px 16px;
-background:#f1f5f9;
-border-left:3px solid #64748b;
-font-size:18px;
-line-height:1.6;
-font-weight:500;
-color:#1f2937;
-}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
 
-.hero-text{
-max-width:820px;
-font-size:18px;
-color:var(--muted);
-margin:0 0 26px 0;
-}
+    .hero h1{
+      margin:0 0 20px;
+      max-width:960px;
+      font-size:clamp(2.4rem, 4.8vw, 4.5rem);
+      line-height:1.08;
+      letter-spacing:-0.04em;
+      font-weight:700;
+      color:#172230;
+    }
 
-.note{
-max-width:820px;
-margin-top:18px;
-padding:20px 22px;
-background:var(--soft);
-border:1px solid var(--line);
-border-radius:12px;
-font-size:17px;
-}
+    .lead{
+      max-width:860px;
+      font-size:clamp(1.08rem, 1.6vw, 1.34rem);
+      color:#425164;
+      margin:0;
+    }
 
-.cta{
-max-width:820px;
-margin-top:28px;
-padding:26px;
-background:#ffffff;
-border:1px solid var(--line);
-border-radius:14px;
-box-shadow:0 10px 30px rgba(15,23,42,0.06);
-}
+    .summary{
+      max-width:var(--container);
+      margin:-20px auto 0;
+      padding:0 22px;
+      position:relative;
+      z-index:2;
+    }
 
-h2{
-margin-top:56px;
-margin-bottom:18px;
-font-size:30px;
-line-height:1.25;
-}
+    .summary-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:16px;
+    }
 
-.section{
-max-width:820px;
-margin-top:18px;
-}
+    .summary-card{
+      background:rgba(255,255,255,0.96);
+      border:1px solid rgba(217,226,236,0.9);
+      border-radius:18px;
+      padding:20px 22px;
+      box-shadow:var(--shadow);
+    }
 
-p{
-margin:0 0 16px 0;
-font-size:17px;
-}
+    .summary-label{
+      margin:0 0 8px;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:#6a7b90;
+    }
 
-ul, ol{
-padding-left:22px;
-}
+    .summary-value{
+      margin:0;
+      color:var(--accent);
+      font-size:1.55rem;
+      line-height:1.2;
+      font-weight:700;
+    }
 
-li{
-margin-bottom:10px;
-font-size:17px;
-}
+    .page{
+      max-width:var(--container);
+      margin:28px auto 72px;
+      padding:0 22px;
+    }
 
-.contact{
-margin-top:20px;
-padding:24px;
-border:1px solid var(--line);
-background:var(--soft);
-border-radius:14px;
-}
+    .stack{display:grid; gap:20px}
 
-.footer{
-margin-top:70px;
-padding-top:22px;
-border-top:1px solid var(--line);
-color:#6b7280;
-font-size:14px;
-max-width:820px;
-}
+    .card{
+      background:var(--surface);
+      border:1px solid rgba(217,226,236,0.95);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:30px 32px;
+    }
 
-strong{
-font-weight:700;
-}
+    .card.narrow{
+      max-width:var(--content);
+    }
 
-a{
-color:#0f766e;
-}
+    .card h2{
+      margin:0 0 18px;
+      font-size:clamp(1.5rem, 2vw, 2rem);
+      line-height:1.15;
+      letter-spacing:-0.02em;
+      color:#182433;
+    }
 
-@media (max-width:900px){
-h1{
-font-size:48px;
-line-height:1.12;
-letter-spacing:-1px;
-}
-.key-line{
-font-size:21px;
-}
-}
+    p{
+      margin:0 0 16px;
+      font-size:1.06rem;
+      color:var(--text);
+    }
 
-@media (max-width:700px){
-.container{
-padding:0 18px 56px 18px;
-}
-.hero{
-padding:46px 0 24px 0;
-}
-h1{
-font-size:36px;
-line-height:1.14;
-letter-spacing:-0.5px;
-margin-bottom:22px;
-}
-.lead{
-font-size:19px;
-line-height:1.75;
-}
-.key-line{
-font-size:19px;
-padding:10px 12px;
-margin-bottom:22px;
-}
-.hero-text,
-p,
-li{
-font-size:16px;
-}
-h2{
-font-size:27px;
-}
-}
-</style>
+    p:last-child{margin-bottom:0}
+
+    ul, ol{
+      margin:0;
+      padding-left:22px;
+    }
+
+    li{
+      margin:0 0 10px;
+      font-size:1.04rem;
+      color:var(--text);
+    }
+
+    .quote, .note, .callout{
+      border:1px solid rgba(190,208,227,0.95);
+      background:linear-gradient(180deg, #f8fbff 0%, #eef5fc 100%);
+      border-left:4px solid var(--accent-2);
+      border-radius:16px;
+      padding:18px 20px;
+    }
+
+    .result{
+      background:linear-gradient(180deg, #f3fbff 0%, #e9f7ff 100%);
+      border:1px solid #b8dff5;
+      border-radius:18px;
+      padding:22px 24px;
+    }
+
+    .warning{
+      background:linear-gradient(180deg, #fff8f2 0%, #fff2e8 100%);
+      border:1px solid #f1d1b5;
+      border-radius:18px;
+      padding:22px 24px;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:20px;
+    }
+
+    .cases-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:18px;
+    }
+
+    .case-card{
+      display:block;
+      color:inherit;
+      background:linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      border:1px solid rgba(217,226,236,0.95);
+      border-radius:20px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .case-card:hover{
+      transform:translateY(-3px);
+      border-color:#bed0e3;
+      box-shadow:0 20px 46px rgba(15,23,42,0.10);
+    }
+
+    .case-tag{
+      display:inline-block;
+      margin-bottom:12px;
+      color:var(--accent);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .case-card h3{
+      margin:0 0 12px;
+      font-size:1.45rem;
+      line-height:1.2;
+      letter-spacing:-0.02em;
+      color:#182433;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .meta span{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f5f8fc;
+      border:1px solid #dde6ef;
+      color:#324457;
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .cta-link{
+      display:inline-block;
+      margin-top:14px;
+      font-weight:700;
+      color:var(--accent);
+    }
+
+    .contact-box{
+      display:grid;
+      gap:10px;
+      padding:22px 24px;
+      border-radius:18px;
+      background:linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border:1px solid rgba(217,226,236,0.95);
+    }
+
+    .footer{
+      max-width:var(--container);
+      margin:0 auto 40px;
+      padding:0 22px;
+      color:#718196;
+      font-size:14px;
+    }
+
+    @media (max-width: 820px){
+      .nav-wrap{padding:14px 18px}
+      .hero{padding:52px 18px 34px}
+      .summary{padding:0 18px}
+      .page{padding:0 18px; margin:24px auto 56px}
+      .card{padding:22px 20px}
+      .grid-2{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 640px){
+      .nav-wrap{align-items:flex-start; flex-direction:column}
+      .nav{gap:18px}
+      p, li{font-size:1rem}
+    }
+  </style>
+
 </head>
-
 <body>
 
-<nav>
-<a href="/">Strona główna</a>
-<a href="/case-studies.html">Case studies</a>
-<a href="/about.html">O mnie</a>
-</nav>
-
-<div class="container">
-
-<div class="hero">
-  <div class="hero-inner">
-
-    <h1>W wielu firmach wszystko działa, a mimo to coś się nie spina, coś niepotrzebnie kosztuje i coś blokuje wejście poziom wyżej.</h1>
-
-    <p class="lead">
-      Właśnie od takich sytuacji zaczynam, bo na pierwszy rzut oka zwykle nie ma się do czego przyczepić, maszyny pracują, ludzie robią swoje, proces idzie dalej i nic spektakularnego się nie dzieje, tylko że bardzo często właśnie w tym miejscu zaczyna się problem, którego nie widać od razu.
-    </p>
-
-    <div class="key-line">
-      Najczęściej problem nie jest tam, gdzie wszyscy go szukają.
+  <header class="site-header">
+    <div class="nav-wrap">
+      <div class="brand">MMGRESS</div>
+      <nav class="nav">
+        <a href="/" class="active">Strona główna</a>
+        <a href="/case-studies.html" >Case studies</a>
+        <a href="/about.html" >O mnie</a>
+      </nav>
     </div>
+  </header>
 
-    <p class="hero-text">
-      Pomagam diagnozować złożone problemy techniczne, technologiczne, procesowe i organizacyjne. Nie zajmuję się leczeniem objawów ani potwierdzaniem pierwszej hipotezy. Szukam rzeczywistej przyczyny problemu, porządkuję sytuację i dopiero wtedy wskazuję, co naprawdę ma sens zrobić dalej.
-    </p>
-
-    <div class="note">
-      Najczęściej trafiają do mnie sytuacje, w których wszystko zostało już sprawdzone, a problem nadal istnieje, albo takie, w których firma działa poprawnie, ale wyraźnie widać, że traci czas, energię, pieniądze albo przestrzeń do wzrostu.
+  <section class="hero">
+    <div class="hero-wrap">
+      <div class="eyebrow">Diagnoza problemów</div>
+      <h1>W wielu firmach wszystko działa, a mimo to coś się nie spina, coś niepotrzebnie kosztuje i coś blokuje wejście poziom wyżej.</h1>
+      <p class="lead">Właśnie od takich sytuacji zaczynam, bo na pierwszy rzut oka zwykle nie ma się do czego przyczepić, maszyny pracują, ludzie robią swoje, proces idzie dalej i nic spektakularnego się nie dzieje, tylko że bardzo często właśnie w tym miejscu zaczyna się problem, którego nie widać od razu.</p>
     </div>
+  </section>
 
-    <div class="cta">
-      <p><strong>Co zrobić teraz?</strong></p>
+  <main class="page stack">
+    <section class="summary">
+      <div class="summary-grid">
+        <div class="summary-card">
+          <p class="summary-label">Obszar</p>
+          <p class="summary-value">Technika + proces</p>
+        </div>
+        <div class="summary-card">
+          <p class="summary-label">Podejście</p>
+          <p class="summary-value">Diagnoza przyczyny</p>
+        </div>
+        <div class="summary-card">
+          <p class="summary-label">Cel</p>
+          <p class="summary-value">Porządek i decyzja</p>
+        </div>
+        <div class="summary-card">
+          <p class="summary-label">Efekt</p>
+          <p class="summary-value">Co ma sens zrobić dalej</p>
+        </div>
+      </div>
+    </section>
 
+    <section class="card narrow">
+      <div class="quote">
+        Najczęściej problem nie jest tam, gdzie wszyscy go szukają.
+      </div>
       <p>
-        Opisz sytuację tak, jak ją widzisz, nawet jeśli nie jest jeszcze poukładana. Nie musi to być formalne zgłoszenie ani gotowa analiza, bo bardzo często właśnie to, co na początku wydaje się chaotyczne, okazuje się najważniejsze.
+        Pomagam diagnozować złożone problemy techniczne, technologiczne, procesowe i organizacyjne. Nie zajmuję się leczeniem objawów ani potwierdzaniem pierwszej hipotezy. Szukam rzeczywistej przyczyny problemu, porządkuję sytuację i dopiero wtedy wskazuję, co naprawdę ma sens zrobić dalej.
       </p>
-
       <p>
-        Po zapoznaniu się z tematem wrócę z informacją, czy podejmę się sprawy, jakich danych potrzebuję i jaki może mieć sens dalszy tryb działania.
+        Najczęściej trafiają do mnie sytuacje, w których wszystko zostało już sprawdzone, a problem nadal istnieje, albo takie, w których firma działa poprawnie, ale wyraźnie widać, że traci czas, energię, pieniądze albo przestrzeń do wzrostu.
       </p>
-    </div>
+    </section>
 
-  </div>
-</div>
+    <section class="grid-2">
+      <div class="card">
+        <h2>Ta strona jest dla Ciebie, jeśli</h2>
+        <ul>
+          <li>masz poczucie, że wszystko niby działa, ale coś wyraźnie ucieka i nikt nie umie tego jasno nazwać,</li>
+          <li>kolejne osoby proponują działania, ale nie docierają do rzeczywistej przyczyny,</li>
+          <li>projekt utknął i nie wiadomo, czy problem jest techniczny, organizacyjny, czy leży pomiędzy,</li>
+          <li>koszty rosną, parametry nie są osiągane albo proces działa gorzej, niż powinien,</li>
+          <li>szukasz świeżego spojrzenia i rzetelnej analizy zamiast kolejnych założeń.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Jak wygląda pierwszy kontakt</h2>
+        <ol>
+          <li>wysyłasz krótki opis sytuacji,</li>
+          <li>zostawiasz kontakt do siebie — email lub telefon,</li>
+          <li>sprawdzam, czy temat mieści się w moim zakresie pracy,</li>
+          <li>jeżeli tak, ustalamy, jakich danych potrzeba i jaki ma sens kolejny krok.</li>
+        </ol>
+      </div>
+    </section>
 
-<div class="section">
-<h2>Ta strona jest dla Ciebie, jeśli</h2>
-<ul>
-<li>masz poczucie, że wszystko niby działa, ale coś wyraźnie ucieka i nikt nie umie tego jasno nazwać,</li>
-<li>kolejne osoby proponują działania, ale nie docierają do rzeczywistej przyczyny,</li>
-<li>projekt utknął i nie wiadomo, czy problem jest techniczny, organizacyjny, czy leży pomiędzy,</li>
-<li>koszty rosną, parametry nie są osiągane albo proces działa gorzej, niż powinien,</li>
-<li>potrzebujesz świeżego spojrzenia i rzetelnej analizy zamiast kolejnych założeń,</li>
-<li>szukasz kogoś, kto łączy praktykę elektroniki, informatyki, elektroenergetyki i myślenia procesowego.</li>
-</ul>
-</div>
+    <section class="grid-2">
+      <div class="card">
+        <h2>Najczęstsze obszary pracy</h2>
+        <ul>
+          <li>problemy w instalacjach energetycznych i elektrycznych,</li>
+          <li>trudne przypadki techniczne na styku elektroniki, automatyki i informatyki,</li>
+          <li>systemy i urządzenia, które działają niestabilnie albo nie osiągają założonych parametrów,</li>
+          <li>projekty, które zatrzymały się na etapie wdrożenia, uruchomienia albo diagnozy,</li>
+          <li>procesy, w których wiadomo, że coś jest nie tak, ale nie wiadomo jeszcze co dokładnie.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Jak pracuję</h2>
+        <p>
+          Nie zaczynam od gotowego rozwiązania ani od sprzedaży konkretnego urządzenia. Najpierw trzeba zobaczyć całość, zrozumieć, gdzie naprawdę powstaje strata albo błąd, i oddzielić to, co jest objawem, od tego, co jest przyczyną.
+        </p>
+        <p>
+          Czasem problem okazuje się czysto techniczny. Czasem organizacyjny. Czasem procesowy. A bardzo często leży dokładnie pomiędzy tym wszystkim i dlatego tak długo pozostaje nierozwiązany.
+        </p>
+      </div>
+    </section>
 
-<div class="section">
-<h2>Jak wygląda pierwszy kontakt</h2>
-<ol>
-<li>wysyłasz krótki opis sytuacji,</li>
-<li>zostawiasz kontakt do siebie — email lub telefon,</li>
-<li>sprawdzam, czy temat mieści się w moim zakresie pracy,</li>
-<li>jeżeli tak, ustalamy, jakie dane są potrzebne i jaki może być kolejny krok.</li>
-</ol>
-</div>
+    <section class="card narrow">
+      <h2>Nie wszystkie tematy podejmuję</h2>
+      <p>
+        Wybieram projekty, w których widzę możliwość realnego zrozumienia problemu i sensownego dojścia do rozwiązania. Jeżeli sprawa nie będzie pasowała do mojego sposobu pracy albo do zakresu doświadczenia, powiem to wprost.
+      </p>
+      <p>
+        Jeżeli szukasz szybkiej odpowiedzi, potwierdzenia z góry przyjętej tezy albo kogoś, kto po prostu zrobi dokładnie to, co już zostało założone, to prawdopodobnie nie jest dobre miejsce. Jeżeli natomiast masz poczucie, że coś się nie zgadza, ale nie do końca wiadomo co, wtedy taki sposób pracy ma sens.
+      </p>
+    </section>
 
-<div class="section">
-<h2>Najczęstsze obszary pracy</h2>
-<ul>
-<li>problemy w instalacjach energetycznych i elektrycznych,</li>
-<li>trudne przypadki techniczne na styku elektroniki, automatyki i informatyki,</li>
-<li>systemy i urządzenia, które działają niestabilnie albo nie osiągają założonych parametrów,</li>
-<li>projekty, które zatrzymały się na etapie wdrożenia, uruchomienia albo diagnozy,</li>
-<li>procesy, w których wiadomo, że coś jest nie tak, ale nie wiadomo jeszcze co dokładnie,</li>
-<li>sytuacje, w których realna strata nie wynika z jednej awarii, tylko z układu zależności między ludźmi, technologią i organizacją.</li>
-</ul>
-</div>
+    <section class="grid-2">
+      <div class="card">
+        <h2>Case studies</h2>
+        <p>
+          Jeżeli chcesz zobaczyć, jak takie problemy wyglądają w praktyce i co tak naprawdę było ich przyczyną, przejdź do sekcji <a href="/case-studies.html"><strong>Case studies</strong></a>.
+        </p>
+        <p>
+          Każdy z opisanych tam przypadków zaczynał się od sytuacji, w której coś było już sprawdzane, analizowane albo poprawiane, a mimo to problem nadal istniał.
+        </p>
+      </div>
+      <div class="card">
+        <h2>O mnie</h2>
+        <p>
+          Nazywam się Michał Grzesiczak. Od ponad 20 lat pracuję na styku elektroniki, informatyki i zagadnień technicznych związanych z diagnozą oraz rozwiązywaniem problemów w praktyce.
+        </p>
+        <p>
+          Więcej informacji znajdziesz na stronie <a href="/about.html"><strong>O mnie</strong></a>.
+        </p>
+      </div>
+    </section>
 
-<div class="section">
-<h2>Jak pracuję</h2>
+    <section class="card narrow">
+      <h2>Kontakt</h2>
+      <div class="contact-box">
+        <p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
+        <p>Email: <a href="mailto:mmgress@proton.me">mmgress@proton.me</a></p>
+        <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
+      </div>
+    </section>
+  </main>
 
-<p>
-Nie zaczynam od gotowego rozwiązania ani od sprzedaży konkretnego urządzenia. Najpierw trzeba zobaczyć całość, zrozumieć, gdzie naprawdę powstaje strata albo błąd, i oddzielić to, co jest objawem, od tego, co jest przyczyną.
-</p>
-
-<p>
-Czasem problem okazuje się czysto techniczny. Czasem organizacyjny. Czasem procesowy. A bardzo często leży dokładnie pomiędzy tym wszystkim i dlatego tak długo pozostaje nierozwiązany.
-</p>
-
-<p>
-Właśnie w takich przypadkach sama teoria zwykle nie wystarcza. Potrzebne są oględziny, wywiad, pomiary, porównanie założeń z rzeczywistością i spokojne uporządkowanie całego układu.
-</p>
-</div>
-
-<div class="section">
-<h2>Nie wszystkie tematy podejmuję</h2>
-
-<p>
-Wybieram projekty, w których widzę możliwość realnego zrozumienia problemu i sensownego dojścia do rozwiązania.
-</p>
-
-<p>
-Nie zajmuję się wszystkim i nie wchodzę w każdy temat. Jeżeli sprawa nie będzie pasowała do mojego sposobu pracy albo do zakresu doświadczenia, powiem to wprost.
-</p>
-
-<p>
-Jeżeli szukasz szybkiej odpowiedzi, potwierdzenia z góry przyjętej tezy albo kogoś, kto po prostu zrobi dokładnie to, co już zostało założone, to prawdopodobnie nie jest dobre miejsce.
-</p>
-
-<p>
-Jeżeli natomiast masz poczucie, że coś się nie zgadza, ale nie do końca wiadomo co, wtedy taki sposób pracy ma sens.
-</p>
-</div>
-
-<div class="section">
-<h2>Case studies</h2>
-
-<p>
-Jeżeli chcesz zobaczyć, jak takie problemy wyglądają w praktyce i co tak naprawdę było ich przyczyną, przejdź do sekcji <a href="/case-studies.html"><strong>Case studies</strong></a>.
-</p>
-
-<p>
-Każdy z opisanych tam przypadków zaczynał się od sytuacji, w której coś było już sprawdzane, analizowane albo poprawiane, a mimo to problem nadal istniał.
-</p>
-
-<p>
-To właśnie tam najlepiej widać nie tylko efekt końcowy, ale również sposób myślenia, prowadzenia analizy i dochodzenia do rzeczywistej przyczyny.
-</p>
-</div>
-
-<div class="section">
-<h2>O mnie</h2>
-
-<p>
-Nazywam się Michał Grzesiczak.
-</p>
-
-<p>
-Od ponad 20 lat pracuję na styku elektroniki, informatyki i zagadnień technicznych związanych z diagnozą oraz rozwiązywaniem problemów w praktyce.
-</p>
-
-<p>
-Pracę zawodową zacząłem wcześnie, a przez kolejne lata przechodziłem przez obszary serwisu, projektowania urządzeń elektronicznych, systemów teleinformatycznych oraz branży elektroenergetycznej. Dzisiaj najczęściej trafiają do mnie sytuacje, w których projekt utknął, system działa nieprawidłowo albo koszty rosną i nikt nie potrafi jasno powiedzieć dlaczego.
-</p>
-
-<p>
-Najczęściej trafiam do firm w momencie, w którym kilka osób wcześniej próbowało już rozwiązać problem i każda z nich miała rację, tylko żadna nie widziała całości.
-</p>
-
-<p>
-Więcej informacji znajdziesz na stronie <a href="/about.html">O mnie</a>.
-</p>
-</div>
-
-<div class="section">
-<h2>Czy to ma sens w Twoim przypadku</h2>
-
-<p>
-Jeżeli zastanawiasz się, czy ten sposób pracy ma zastosowanie u Ciebie, to zwykle odpowiedź jest prosta.
-</p>
-
-<p>
-Jeżeli masz poczucie, że coś działa nie tak, jak powinno, ale nie jesteś w stanie jednoznacznie wskazać przyczyny, albo kolejne działania nie przynoszą efektu, to bardzo możliwe, że właśnie tu zaczyna się właściwy moment na diagnozę.
-</p>
-
-<p>
-Jeżeli natomiast wszystko jest jasne, przyczyna jest znana i potrzebujesz tylko wykonania konkretnego zadania, to prawdopodobnie nie jest to właściwe miejsce.
-</p>
-</div>
-
-<div class="section">
-<h2>Kontakt</h2>
-
-<div class="contact">
-<p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
-<p>Email: <a href="mailto:mmgress@proton.me">mmgress@proton.me</a></p>
-<p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
-</div>
-</div>
-
-<div class="footer">
-MMGRESS
-</div>
-
-</div>
-
+  <footer class="footer">MMGRESS</footer>
 </body>
 </html>
