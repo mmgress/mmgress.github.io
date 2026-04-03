@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="MMGRESS" />
-  <title>Case Study – Wymiana rozdzielni elektrycznych bez wyłączania obiektu technologicznego</title>
-  <meta name="description" content="Case study: wymiana dwóch rozdzielni elektrycznych zasilających obiekt technologiczny oczyszczalni ścieków bez wyłączania całego procesu. Dwa miesiące planowania, 42 obwody i przerwa krótsza niż 15 minut." />
-  <meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Case study: wymiana dwóch rozdzielni elektrycznych zasilających obiekt technologiczny oczyszczalni ścieków bez wyłączania całego procesu. Dwa miesiące planowania, 42 obwody i przerwa krótsza niż 15 minut." />
+
+<title>Case Study – Wymiana rozdzielni elektrycznych bez wyłączania obiektu technologicznego</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
 <script>
@@ -17,435 +15,400 @@
   gtag('config', 'G-5KZX20JGP7');
 </script>
 
-  <style>
-    :root{
-      --bg:#f4f7fb;
-      --surface:#ffffff;
-      --surface-2:#f8fafc;
-      --text:#17202b;
-      --muted:#516072;
-      --line:#d9e2ec;
-      --accent:#1f4b7a;
-      --accent-2:#2b6aa8;
-      --accent-soft:#eaf2fb;
-      --hero-top:#f8fbff;
-      --hero-bottom:#eef4fb;
-      --shadow:0 18px 48px rgba(15, 23, 42, 0.07);
-      --radius:22px;
-      --radius-sm:14px;
-      --container:1120px;
-      --content:820px;
-    }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      color:var(--text);
-      background:linear-gradient(180deg, #f8fbff 0%, var(--bg) 220px);
-      line-height:1.72;
-    }
-
-    a{color:var(--accent); text-decoration:none}
-    a:hover{color:var(--accent-2)}
-
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      backdrop-filter:blur(12px);
-      background:rgba(255,255,255,0.88);
-      border-bottom:1px solid rgba(217,226,236,0.9);
-    }
-
-    .nav-wrap{
-      max-width:var(--container);
-      margin:0 auto;
-      padding:16px 22px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:24px;
-    }
-
-    .brand{
-      font-size:15px;
-      font-weight:700;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:#223247;
-      white-space:nowrap;
-    }
-
-    .nav{
-      display:flex;
-      gap:28px;
-      flex-wrap:wrap;
-    }
-
-    .nav a{
-      color:#243446;
-      font-size:15px;
-      font-weight:600;
-    }
-
-    .nav a.active{
-      color:var(--accent);
-    }
-
-    .hero{
-      padding:68px 22px 38px;
-      background:
-        radial-gradient(circle at top left, rgba(43,106,168,0.10), transparent 34%),
-        linear-gradient(180deg, var(--hero-top) 0%, var(--hero-bottom) 100%);
-      border-bottom:1px solid rgba(217,226,236,0.8);
-    }
-
-    .hero-wrap{
-      max-width:var(--container);
-      margin:0 auto;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 14px;
-      border-radius:999px;
-      background:var(--accent-soft);
-      color:var(--accent);
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.1em;
-      text-transform:uppercase;
-      margin-bottom:18px;
-    }
-
-    .hero h1{
-      margin:0 0 20px;
-      max-width:960px;
-      font-size:clamp(2.4rem, 4.8vw, 4.5rem);
-      line-height:1.08;
-      letter-spacing:-0.04em;
-      font-weight:700;
-      color:#172230;
-    }
-
-    .lead{
-      max-width:860px;
-      font-size:clamp(1.08rem, 1.6vw, 1.34rem);
-      color:#425164;
-      margin:0;
-    }
-
-    .summary{
-      max-width:var(--container);
-      margin:-20px auto 0;
-      padding:0 22px;
-      position:relative;
-      z-index:2;
-    }
-
-    .summary-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-      gap:16px;
-    }
-
-    .summary-card{
-      background:rgba(255,255,255,0.96);
-      border:1px solid rgba(217,226,236,0.9);
-      border-radius:18px;
-      padding:20px 22px;
-      box-shadow:var(--shadow);
-    }
-
-    .summary-label{
-      margin:0 0 8px;
-      font-size:12px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-weight:700;
-      color:#6a7b90;
-    }
-
-    .summary-value{
-      margin:0;
-      color:var(--accent);
-      font-size:1.55rem;
-      line-height:1.2;
-      font-weight:700;
-    }
-
-    .page{
-      max-width:var(--container);
-      margin:28px auto 72px;
-      padding:0 22px;
-    }
-
-    .stack{display:grid; gap:20px}
-
-    .card{
-      background:var(--surface);
-      border:1px solid rgba(217,226,236,0.95);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:30px 32px;
-    }
-
-    .card.narrow{
-      max-width:var(--content);
-    }
-
-    .card h2{
-      margin:0 0 18px;
-      font-size:clamp(1.5rem, 2vw, 2rem);
-      line-height:1.15;
-      letter-spacing:-0.02em;
-      color:#182433;
-    }
-
-    p{
-      margin:0 0 16px;
-      font-size:1.06rem;
-      color:var(--text);
-    }
-
-    p:last-child{margin-bottom:0}
-
-    ul, ol{
-      margin:0;
-      padding-left:22px;
-    }
-
-    li{
-      margin:0 0 10px;
-      font-size:1.04rem;
-      color:var(--text);
-    }
-
-    .quote, .note, .callout{
-      border:1px solid rgba(190,208,227,0.95);
-      background:linear-gradient(180deg, #f8fbff 0%, #eef5fc 100%);
-      border-left:4px solid var(--accent-2);
-      border-radius:16px;
-      padding:18px 20px;
-    }
-
-    .result{
-      background:linear-gradient(180deg, #f3fbff 0%, #e9f7ff 100%);
-      border:1px solid #b8dff5;
-      border-radius:18px;
-      padding:22px 24px;
-    }
-
-    .warning{
-      background:linear-gradient(180deg, #fff8f2 0%, #fff2e8 100%);
-      border:1px solid #f1d1b5;
-      border-radius:18px;
-      padding:22px 24px;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:20px;
-    }
-
-    .cases-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:18px;
-    }
-
-    .case-card{
-      display:block;
-      color:inherit;
-      background:linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
-      border:1px solid rgba(217,226,236,0.95);
-      border-radius:20px;
-      padding:24px;
-      box-shadow:var(--shadow);
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-
-    .case-card:hover{
-      transform:translateY(-3px);
-      border-color:#bed0e3;
-      box-shadow:0 20px 46px rgba(15,23,42,0.10);
-    }
-
-    .case-tag{
-      display:inline-block;
-      margin-bottom:12px;
-      color:var(--accent);
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
-    .case-card h3{
-      margin:0 0 12px;
-      font-size:1.45rem;
-      line-height:1.2;
-      letter-spacing:-0.02em;
-      color:#182433;
-    }
-
-    .meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
-    }
-
-    .meta span{
-      display:inline-flex;
-      align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      background:#f5f8fc;
-      border:1px solid #dde6ef;
-      color:#324457;
-      font-size:13px;
-      font-weight:600;
-    }
-
-    .cta-link{
-      display:inline-block;
-      margin-top:14px;
-      font-weight:700;
-      color:var(--accent);
-    }
-
-    .contact-box{
-      display:grid;
-      gap:10px;
-      padding:22px 24px;
-      border-radius:18px;
-      background:linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-      border:1px solid rgba(217,226,236,0.95);
-    }
-
-    .footer{
-      max-width:var(--container);
-      margin:0 auto 40px;
-      padding:0 22px;
-      color:#718196;
-      font-size:14px;
-    }
-
-    @media (max-width: 820px){
-      .nav-wrap{padding:14px 18px}
-      .hero{padding:52px 18px 34px}
-      .summary{padding:0 18px}
-      .page{padding:0 18px; margin:24px auto 56px}
-      .card{padding:22px 20px}
-      .grid-2{grid-template-columns:1fr}
-    }
-
-    @media (max-width: 640px){
-      .nav-wrap{align-items:flex-start; flex-direction:column}
-      .nav{gap:18px}
-      p, li{font-size:1rem}
-    }
-  </style>
+<style>
+:root{
+  --bg:#f3f6fa;
+  --surface:#ffffff;
+  --surface-soft:#f7f9fc;
+  --hero:#edf3f8;
+  --text:#172435;
+  --muted:#4d6075;
+  --line:#d7e0ea;
+  --accent:#204f86;
+  --accent-soft:#e9f1fb;
+  --shadow:0 14px 34px rgba(15, 23, 42, 0.06);
+  --radius:20px;
+  --radius-sm:14px;
+  --container:1180px;
+  --content:860px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.72;
+}
+a{color:var(--accent)}
+.topbar{
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(12px);
+}
+.topbar-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:18px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.brand{
+  color:#26354a;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+.nav a{
+  text-decoration:none;
+  color:#26354a;
+  font-size:15px;
+  font-weight:700;
+}
+.nav a.active,.nav a:hover{color:var(--accent)}
+.hero{
+  background:
+    radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),
+    linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:84px 28px 74px;
+}
+.hero-content{max-width:var(--content)}
+.eyebrow{
+  display:inline-block;
+  margin:0 0 24px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+h1{
+  margin:0 0 24px;
+  color:#152235;
+  letter-spacing:-0.04em;
+}
+.hero-title{
+  font-size:clamp(2.6rem, 5vw, 5rem);
+  line-height:1.02;
+  font-weight:800;
+  max-width:980px;
+}
+.hero-title.standard{
+  font-size:clamp(2.8rem, 5.2vw, 4.8rem);
+}
+.hero-intro{
+  max-width:980px;
+  font-size:clamp(1.2rem, 1.6vw, 1.5rem);
+  color:#38506c;
+  line-height:1.65;
+  margin:0;
+}
+.hero-lead{
+  max-width:900px;
+  margin:22px 0 0;
+  color:var(--muted);
+  font-size:clamp(1.02rem, 1.3vw, 1.16rem);
+}
+.hero-accent{
+  display:block;
+  font-size:clamp(2.9rem, 6vw, 5.2rem);
+  line-height:.98;
+  font-weight:800;
+  margin-bottom:10px;
+}
+.hero-rest{
+  display:block;
+  font-size:clamp(1.95rem, 3.25vw, 3.45rem);
+  line-height:1.08;
+  font-weight:700;
+  letter-spacing:-0.035em;
+  max-width:980px;
+}
+.main{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:34px 28px 70px;
+}
+.summary{
+  margin-top:-32px;
+  position:relative;
+  z-index:2;
+}
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+.summary-grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.summary-card{
+  min-width:0;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px 26px;
+  box-shadow:var(--shadow);
+}
+.summary-card .label{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:800;
+  color:#68809d;
+  margin:0 0 12px;
+}
+.summary-card .value{
+  margin:0;
+  font-size:clamp(1.5rem, 2.1vw, 2.1rem);
+  line-height:1.15;
+  font-weight:800;
+  color:var(--accent);
+}
+.section{
+  max-width:var(--content);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:34px 38px;
+  margin:22px 0;
+  box-shadow:var(--shadow);
+}
+.section.wide{max-width:none}
+.section h2{
+  margin:0 0 18px;
+  font-size:clamp(1.9rem, 2.6vw, 2.5rem);
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:#122133;
+}
+.section h3{
+  margin:0 0 12px;
+  font-size:1.5rem;
+  line-height:1.2;
+  color:#122133;
+}
+p{margin:0 0 16px;font-size:1.08rem}
+ul,ol{margin:0;padding-left:24px}
+li{margin:0 0 10px;font-size:1.05rem}
+.note-box,.quote{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+  border-radius:16px;
+  padding:18px 20px;
+  margin:22px 0;
+}
+.result-box{
+  background:#eef8f3;
+  border:1px solid #cfe8d8;
+  border-radius:16px;
+  padding:22px 24px;
+  margin:20px 0;
+}
+.loss-box{
+  background:#fcf6ef;
+  border:1px solid #efd7b8;
+  border-radius:16px;
+  padding:22px 24px;
+  margin:20px 0;
+}
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.case-card{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px;
+  box-shadow:var(--shadow);
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.case-card:hover{
+  transform:translateY(-3px);
+  border-color:#c7d5e4;
+  box-shadow:0 18px 40px rgba(15,23,42,.09);
+}
+.case-tag{
+  display:inline-block;
+  margin:0 0 14px;
+  color:var(--accent);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.case-card h3{
+  margin:0 0 14px;
+  font-size:1.7rem;
+  line-height:1.15;
+}
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+.meta span{
+  display:inline-block;
+  padding:8px 12px;
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:13px;
+  color:#42566c;
+}
+.cta-link{
+  display:inline-block;
+  margin-top:16px;
+  color:var(--accent);
+  font-weight:700;
+  text-decoration:none;
+}
+.footer-note{color:#66788e;font-size:.95rem;margin-top:18px}
+.contact-box{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px;
+}
+@media (max-width: 1040px){
+  .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .summary-grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards-grid{grid-template-columns:1fr}
+}
+@media (max-width: 760px){
+  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
+  .nav{gap:18px; flex-wrap:wrap}
+  .hero-inner{padding:56px 18px 52px}
+  .main{padding:22px 18px 50px}
+  .section{padding:26px 22px}
+  .summary{margin-top:0}
+  .summary-grid,.summary-grid.cols-3{grid-template-columns:1fr}
+  .hero-accent{margin-bottom:8px}
+}
+</style>
 
 </head>
 <body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">MMGRESS</a>
+    <nav class="nav">
+      <a href="/" class="">Strona główna</a>
+      <a href="/case-studies.html" class="active">Case studies</a>
+      <a href="/about.html" class="">O mnie</a>
+    </nav>
+  </div>
+</header>
 
-  <header class="site-header">
-    <div class="nav-wrap">
-      <div class="brand">MMGRESS</div>
-      <nav class="nav">
-        <a href="/" >Strona główna</a>
-        <a href="/case-studies.html" class="active">Case studies</a>
-        <a href="/about.html" >O mnie</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="hero-wrap">
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
       <div class="eyebrow">Case study</div>
-      <h1>Wymiana rozdzielni elektrycznych bez wyłączania obiektu technologicznego</h1>
-      <p class="lead">W obiekcie technologicznym oczyszczalni ścieków trzeba było wymienić dwa zespoły rozdzielni zasilających instalację, której praktycznie nie można wyłączyć. Zadanie uznawano za zbyt ryzykowne. Ostatecznie zostało wykonane przy mniej niż 15 minutach pełnej przerwy zasilania.</p>
+      <h1 class="hero-title standard">Wymiana rozdzielni elektrycznych bez wyłączania obiektu technologicznego</h1>
+      <p class="hero-intro">W obiekcie technologicznym oczyszczalni ścieków trzeba było wymienić dwa zespoły rozdzielni zasilających instalację, której praktycznie nie można wyłączyć. Zadanie uznawano za zbyt ryzykowne. Ostatecznie zostało wykonane przy mniej niż 15 minutach pełnej przerwy zasilania.</p>
     </div>
-  </section>
+  </div>
+</section>
 
+<main class="main">
   <section class="summary">
     <div class="summary-grid">
-      <div class="summary-card"><p class="summary-label">Planowanie</p><p class="summary-value">~2 miesiące</p></div>
-      <div class="summary-card"><p class="summary-label">Obwody</p><p class="summary-value">42</p></div>
-      <div class="summary-card"><p class="summary-label">Całe przełączenie</p><p class="summary-value">7,5 h</p></div>
-      <div class="summary-card"><p class="summary-label">Pełna przerwa</p><p class="summary-value">&lt; 15 min</p></div>
+      <div class="summary-card"><div class="label">Planowanie</div><div class="value">~2 miesiące</div></div>
+<div class="summary-card"><div class="label">Obwody</div><div class="value">42</div></div>
+<div class="summary-card"><div class="label">Całe przełączenie</div><div class="value">7,5 h</div></div>
+<div class="summary-card"><div class="label">Pełna przerwa</div><div class="value">< 15 min</div></div>
     </div>
   </section>
-  <main class="page stack">
-    <section class="card narrow">
-      <h2>Problem</h2>
-      <p>Pytanie brzmiało prosto: czy można wymienić zespół dwóch rozdzielni elektrycznych, z których zasilany jest obiekt technologiczny, którego nie da się normalnie wyłączyć?</p>
-      <p>Chodziło o rozdzielnie zamontowane na hali technologicznej oczyszczalni ścieków. Z tych rozdzielni zasilane były wszystkie urządzenia technologiczne, a także oświetlenie, gniazda remontowe i pozostałe obwody pomocnicze. Łącznie był to układ <strong>42 obwodów trójfazowych w układzie TN-S</strong>.</p>
-      <p>Główne zasilanie realizował jeden kabel <strong>5x70 mm²</strong> prowadzony z głównego złącza kablowego na zewnątrz budynku. Kabel był wprowadzony do jednej z rozdzielni, a stamtąd zasilanie było rozdzielane dalej na drugą.</p>
-      <div class="quote">Problem nie polegał tylko na wymianie aparatury. Problem polegał na tym, że zatrzymanie obiektu było możliwe teoretycznie tylko na bardzo krótko, a w praktyce nigdy nie ma idealnego momentu, w którym ryzyko technologiczne jest zerowe.</div>
-    </section>
+  <section class="section">
+<h2>Problem</h2>
+<p>Pytanie brzmiało prosto: czy można wymienić zespół dwóch rozdzielni elektrycznych, z których zasilany jest obiekt technologiczny, którego nie da się normalnie wyłączyć?</p>
+<p>Chodziło o rozdzielnie zamontowane na hali technologicznej oczyszczalni ścieków. Z tych rozdzielni zasilane były wszystkie urządzenia technologiczne, a także oświetlenie, gniazda remontowe i pozostałe obwody pomocnicze. Łącznie był to układ <strong>42 obwodów trójfazowych w układzie TN-S</strong>.</p>
+<p>Główne zasilanie realizował jeden kabel <strong>5x70 mm²</strong> prowadzony z głównego złącza kablowego na zewnątrz budynku. Kabel był wprowadzony do jednej z rozdzielni, a stamtąd zasilanie było rozdzielane dalej na drugą.</p>
+<div class="quote">Problem nie polegał tylko na wymianie aparatury. Problem polegał na tym, że zatrzymanie obiektu było możliwe teoretycznie tylko na bardzo krótko, a w praktyce nigdy nie ma idealnego momentu, w którym ryzyko technologiczne jest zerowe.</div>
+</section>
+<section class="section">
+<h2>Stan wyjściowy</h2>
+<p>Stan istniejących rozdzielni był ciężki. Wszyscy wiedzieli, że powinny zostać wymienione jak najszybciej, ale nikt wcześniej nie chciał tego ruszać. Obiekt pracował, technologia była krytyczna, a rezerwa czasowa na bezpieczne zatrzymanie urządzeń była symboliczna.</p>
+<p>W takich warunkach nie wystarcza standardowa wymiana „wyłączamy – demontujemy – montujemy – uruchamiamy”. Tu trzeba było wymyślić sposób, w którym większość pracy zostanie wykonana przy działającym obiekcie, a końcowe przełączenie będzie krótkie, przewidywalne i kontrolowane.</p>
+</section>
+<section class="section">
+<h2>Planowanie</h2>
+<p>Samo planowanie i uzgadnianie technologii zajęło prawie dwa miesiące. Trzeba było rozrysować kolejność działań, przewidzieć ryzyka, ustalić sekwencję przełączeń oraz uzgodnić sposób współpracy z załogą obsługującą obiekt.</p>
+<p>Nowe rozdzielnie zostały zbudowane w całości poza miejscem docelowym i okablowane <strong>jeden do jednego</strong> względem istniejących odpływów. Zastosowano nowe obudowy Eaton, aparaturę zabezpieczeniową Eaton, wyłącznik główny oraz ochronę przeciwprzepięciową. Na górze nowych rozdzielni przewidziano listwy <strong>WAGO TopJob</strong>, odpowiednio dobrane do poszczególnych kabli odpływowych.</p>
+<div class="quote">Klucz nie polegał na improwizacji na obiekcie, tylko na tym, żeby jak największą część pracy wykonać wcześniej, w kontrolowanych warunkach, zanim zacznie się właściwe przełączanie.</div>
+</section>
+<section class="section">
+<h2>Rozwiązanie techniczne</h2>
+<p>Na miejscu istniejące rozdzielnie zostały najpierw odkręcone od ściany i odchylone o około 45 stopni na specjalnie przygotowanym stelażu. Dzięki temu wszystkie kable pozostały podłączone, a obiekt nadal pracował normalnie.</p>
+<p>W zwolnione miejsce zostały przykręcone nowe rozdzielnie. To stworzyło układ, w którym stara instalacja nadal zasilała obiekt, a nowa była już fizycznie na miejscu i gotowa do przejmowania kolejnych obwodów.</p>
+<p>Dodatkowo sytuację uratowało to, że w istniejącej rozdzielni znajdowało się wolne pole odpływowe. Zostało ono wykorzystane jako <strong>tymczasowy bypass zasilania</strong> do nowych rozdzielni. Dzięki temu nowe rozdzielnie można było zasilić jeszcze przed końcowym przepięciem głównego kabla.</p>
+</section>
+<section class="section">
+<h2>Przebieg przełączania</h2>
+<p>Przełączanie zostało rozłożone na etapy. Najpierw przepinane były obwody najmniej krytyczne: oświetlenie, gniazda remontowe i te elementy technologii, które można było na chwilę bezpiecznie wyłączyć. Każdy obwód był odpinany od starej rozdzielni, przepinany przez złącza WAGO TopJob do nowej i od razu ponownie załączany.</p>
+<p>Dopiero później przełączane były obwody krytyczne. Tu współpraca z załogą była kluczowa.</p>
+<ol>
+<li>załoga zatrzymywała pracę konkretnego urządzenia w odpowiednim momencie,</li>
+<li>zasilanie tego obwodu było odłączane,</li>
+<li>kabel był przepinany do nowej rozdzielni,</li>
+<li>obwód był ponownie załączany,</li>
+<li>urządzenie wracało do pracy.</li>
+</ol>
+<p>W ten sposób krok po kroku przejęto wszystkie odpływy bez wyłączania całego obiektu na cały czas prac.</p>
+</section>
+<section class="section">
+<h2>Moment krytyczny</h2>
+<p>Jedyna pełna przerwa, która musiała wystąpić, dotyczyła końcowego przepięcia głównego kabla zasilającego. Teoretycznie można było tego uniknąć przez prowadzenie drugiego, całkowicie niezależnego kabla zasilającego, ale po ocenie stanu istniejącego kabla uznano, że nie ma technicznego ani ekonomicznego uzasadnienia do takiego wariantu.</p>
+<p>Po wcześniejszym sprawdzeniu całego systemu załoga zatrzymała urządzenia technologiczne w odpowiedniej sekwencji. Następnie zdjęto napięcie z głównego kabla, zdemontowano rusztowanie podtrzymujące stare rozdzielnie, przełączono kabel w docelowe miejsce na nowe rozdzielnie i ponownie podano zasilanie.</p>
+<div class="result-box"><strong>Efekt:</strong> pełna przerwa zasilania całego systemu trwała mniej niż <strong>15 minut</strong>.</div>
+</section>
+<section class="section">
+<h2>Wynik</h2>
+<p>Całe przełączanie trwało łącznie około <strong>7,5 godziny</strong>, ale zdecydowana większość tego czasu upłynęła przy zachowaniu pracy obiektu lub przy krótkich, lokalnych zatrzymaniach poszczególnych urządzeń. To zasadnicza różnica względem klasycznej wymiany, która wymagałaby długiego i ryzykownego postoju całej technologii.</p>
+<div class="loss-box">
+<strong>Najważniejsze efekty:</strong>
+<ul>
+<li>wymieniono dwa zespoły rozdzielni bez długiego wyłączenia obiektu,</li>
+<li>zminimalizowano ryzyko technologiczne dla oczyszczalni,</li>
+<li>uporządkowano i odtworzono 42 obwody w nowym układzie,</li>
+<li>zastąpiono zdegradowaną infrastrukturę nowymi rozdzielniami o przewidywalnej i bezpiecznej pracy,</li>
+<li>udowodniono, że zadanie uznawane wcześniej za praktycznie niewykonalne można zrealizować dzięki dobremu planowi i właściwej sekwencji prac.</li>
+</ul>
+</div>
+</section>
+<section class="section">
+<h2>Wniosek</h2>
+<p>Ten przypadek pokazuje, że w krytycznych obiektach przemysłowych i komunalnych największym ograniczeniem nie zawsze jest sama technika. Często większym problemem jest brak scenariusza, który pozwala przeprowadzić wymianę etapami, bez utraty kontroli nad procesem.</p>
+<p>To nie była „zwykła wymiana rozdzielni”. To było zadanie logistyczne, elektryczne i technologiczne jednocześnie. O powodzeniu zdecydowały nie tylko aparatura i wykonanie, ale przede wszystkim planowanie, przygotowanie układu poza obiektem i ścisła współpraca z obsługą technologii.</p>
+<p class="footer-note">Jeśli obiekt nie może zostać wyłączony, to nie znaczy jeszcze, że modernizacja jest niemożliwa. Bardzo często oznacza to tylko tyle, że trzeba ją zaprojektować inaczej niż standardową wymianę „na postoju”.</p>
+</section>
+</main>
 
-    <section class="grid-2">
-      <div class="card">
-        <h2>Stan wyjściowy i planowanie</h2>
-        <p>Stan istniejących rozdzielni był ciężki. Wszyscy wiedzieli, że powinny zostać wymienione jak najszybciej, ale nikt wcześniej nie chciał tego ruszać. Obiekt pracował, technologia była krytyczna, a rezerwa czasowa na bezpieczne zatrzymanie urządzeń była symboliczna.</p>
-        <p>Samo planowanie i uzgadnianie technologii zajęło prawie dwa miesiące. Trzeba było rozrysować kolejność działań, przewidzieć ryzyka, ustalić sekwencję przełączeń oraz uzgodnić sposób współpracy z załogą obsługującą obiekt.</p>
-        <p>Nowe rozdzielnie zostały zbudowane w całości poza miejscem docelowym i okablowane <strong>jeden do jednego</strong> względem istniejących odpływów. Zastosowano nowe obudowy Eaton, aparaturę zabezpieczeniową Eaton, wyłącznik główny oraz ochronę przeciwprzepięciową. Na górze nowych rozdzielni przewidziano listwy <strong>WAGO TopJob</strong>, odpowiednio dobrane do poszczególnych kabli odpływowych.</p>
-      </div>
-      <div class="card">
-        <h2>Rozwiązanie techniczne</h2>
-        <p>Na miejscu istniejące rozdzielnie zostały najpierw odkręcone od ściany i odchylone o około 45 stopni na specjalnie przygotowanym stelażu. Dzięki temu wszystkie kable pozostały podłączone, a obiekt nadal pracował normalnie.</p>
-        <p>W zwolnione miejsce zostały przykręcone nowe rozdzielnie. To stworzyło układ, w którym stara instalacja nadal zasilała obiekt, a nowa była już fizycznie na miejscu i gotowa do przejmowania kolejnych obwodów.</p>
-        <p>Dodatkowo sytuację uratowało to, że w istniejącej rozdzielni znajdowało się wolne pole odpływowe. Zostało ono wykorzystane jako <strong>tymczasowy bypass zasilania</strong> do nowych rozdzielni. Dzięki temu nowe rozdzielnie można było zasilić jeszcze przed końcowym przepięciem głównego kabla.</p>
-      </div>
-    </section>
-
-    <section class="grid-2">
-      <div class="card">
-        <h2>Przebieg przełączania</h2>
-        <p>Przełączanie zostało rozłożone na etapy. Najpierw przepinane były obwody najmniej krytyczne: oświetlenie, gniazda remontowe i te elementy technologii, które można było na chwilę bezpiecznie wyłączyć. Każdy obwód był odpinany od starej rozdzielni, przepinany przez złącza WAGO TopJob do nowej i od razu ponownie załączany.</p>
-        <p>Dopiero później przełączane były obwody krytyczne. Tu współpraca z załogą była kluczowa.</p>
-        <ol>
-          <li>załoga zatrzymywała pracę konkretnego urządzenia w odpowiednim momencie,</li>
-          <li>zasilanie tego obwodu było odłączane,</li>
-          <li>kabel był przepinany do nowej rozdzielni,</li>
-          <li>obwód był ponownie załączany,</li>
-          <li>urządzenie wracało do pracy.</li>
-        </ol>
-      </div>
-      <div class="card">
-        <h2>Moment krytyczny i wynik</h2>
-        <p>Jedyna pełna przerwa, która musiała wystąpić, dotyczyła końcowego przepięcia głównego kabla zasilającego. Teoretycznie można było tego uniknąć przez prowadzenie drugiego, całkowicie niezależnego kabla zasilającego, ale po ocenie stanu istniejącego kabla uznano, że nie ma technicznego ani ekonomicznego uzasadnienia do takiego wariantu.</p>
-        <p>Po wcześniejszym sprawdzeniu całego systemu załoga zatrzymała urządzenia technologiczne w odpowiedniej sekwencji. Następnie zdjęto napięcie z głównego kabla, zdemontowano rusztowanie podtrzymujące stare rozdzielnie, przełączono kabel w docelowe miejsce na nowe rozdzielnie i ponownie podano zasilanie.</p>
-        <div class="result"><strong>Efekt:</strong> pełna przerwa zasilania całego systemu trwała mniej niż <strong>15 minut</strong>.</div>
-        <p style="margin-top:16px;">Całe przełączanie trwało łącznie około <strong>7,5 godziny</strong>, ale zdecydowana większość tego czasu upłynęła przy zachowaniu pracy obiektu lub przy krótkich, lokalnych zatrzymaniach poszczególnych urządzeń.</p>
-      </div>
-    </section>
-
-    <section class="card narrow">
-      <h2>Wniosek</h2>
-      <div class="warning">
-        <strong>Najważniejsze efekty:</strong>
-        <ul>
-          <li>wymieniono dwa zespoły rozdzielni bez długiego wyłączenia obiektu,</li>
-          <li>zminimalizowano ryzyko technologiczne dla oczyszczalni,</li>
-          <li>uporządkowano i odtworzono 42 obwody w nowym układzie,</li>
-          <li>zastąpiono zdegradowaną infrastrukturę nowymi rozdzielniami o przewidywalnej i bezpiecznej pracy,</li>
-          <li>udowodniono, że zadanie uznawane wcześniej za praktycznie niewykonalne można zrealizować dzięki dobremu planowi i właściwej sekwencji prac.</li>
-        </ul>
-      </div>
-      <p style="margin-top:16px;">Ten przypadek pokazuje, że w krytycznych obiektach przemysłowych i komunalnych największym ograniczeniem nie zawsze jest sama technika. Często większym problemem jest brak scenariusza, który pozwala przeprowadzić wymianę etapami, bez utraty kontroli nad procesem.</p>
-      <p style="color:#6a7b90;">Jeśli obiekt nie może zostać wyłączony, to nie znaczy jeszcze, że modernizacja jest niemożliwa. Bardzo często oznacza to tylko tyle, że trzeba ją zaprojektować inaczej niż standardową wymianę „na postoju”.</p>
-    </section>
-  </main>
-
-  <footer class="footer">MMGRESS</footer>
 </body>
 </html>
