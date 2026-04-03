@@ -3,319 +3,439 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="MMGRESS" />
   <title>Case Study – Precyzja cięcia profili zamkniętych w procesie ciągłym</title>
   <meta name="description" content="Case study: modernizacja układu cięcia profili zamkniętych w procesie ciągłym. Zmniejszenie odchyłki z około ±500 mm do około ±1,5 mm oraz uproszczenie obsługi maszyny." />
+  <meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-5KZX20JGP7');
 </script>
+
   <style>
-    :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --card: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --accent: #0f766e;
-      --accent-light: #14b8a6;
-      --line: #e5e7eb;
-      --soft: #f8fafc;
-      --warn: #b91c1c;
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --surface-2:#f8fafc;
+      --text:#17202b;
+      --muted:#516072;
+      --line:#d9e2ec;
+      --accent:#1f4b7a;
+      --accent-2:#2b6aa8;
+      --accent-soft:#eaf2fb;
+      --hero-top:#f8fbff;
+      --hero-bottom:#eef4fb;
+      --shadow:0 18px 48px rgba(15, 23, 42, 0.07);
+      --radius:22px;
+      --radius-sm:14px;
+      --container:1120px;
+      --content:820px;
     }
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f3f4f6;
-      color: var(--text);
-      line-height: 1.65;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:linear-gradient(180deg, #f8fbff 0%, var(--bg) 220px);
+      line-height:1.72;
     }
 
-    .hero {
-      background: linear-gradient(135deg, #0f172a 0%, #1f2937 100%);
-      color: #fff;
-      padding: 56px 20px 44px;
+    a{color:var(--accent); text-decoration:none}
+    a:hover{color:var(--accent-2)}
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(12px);
+      background:rgba(255,255,255,0.88);
+      border-bottom:1px solid rgba(217,226,236,0.9);
     }
 
-    .wrap {
-      max-width: 980px;
-      margin: 0 auto;
+    .nav-wrap{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:16px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
     }
 
-    nav {
-      margin-bottom: 26px;
-      font-size: 15px;
+    .brand{
+      font-size:15px;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#223247;
+      white-space:nowrap;
     }
 
-    nav a {
-      color: #cbd5e1;
-      text-decoration: none;
-      margin-right: 10px;
+    .nav{
+      display:flex;
+      gap:28px;
+      flex-wrap:wrap;
     }
 
-    nav a:hover { color: #fff; }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: #99f6e4;
-      margin-bottom: 14px;
+    .nav a{
+      color:#243446;
+      font-size:15px;
+      font-weight:600;
     }
 
-    h1 {
-      margin: 0 0 14px;
-      font-size: 40px;
-      line-height: 1.15;
-      max-width: 860px;
+    .nav a.active{
+      color:var(--accent);
     }
 
-    .lead {
-      max-width: 790px;
-      font-size: 19px;
-      color: #d1d5db;
-      margin: 0;
+    .hero{
+      padding:68px 22px 38px;
+      background:
+        radial-gradient(circle at top left, rgba(43,106,168,0.10), transparent 34%),
+        linear-gradient(180deg, var(--hero-top) 0%, var(--hero-bottom) 100%);
+      border-bottom:1px solid rgba(217,226,236,0.8);
     }
 
-    .summary {
-      margin-top: -26px;
-      padding: 0 20px;
+    .hero-wrap{
+      max-width:var(--container);
+      margin:0 auto;
     }
 
-    .summary-grid {
-      max-width: 980px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      margin-bottom:18px;
     }
 
-    .summary-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-      border: 1px solid rgba(229, 231, 235, 0.9);
+    .hero h1{
+      margin:0 0 20px;
+      max-width:960px;
+      font-size:clamp(2.4rem, 4.8vw, 4.5rem);
+      line-height:1.08;
+      letter-spacing:-0.04em;
+      font-weight:700;
+      color:#172230;
     }
 
-    .summary-card .label {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-weight: 700;
+    .lead{
+      max-width:860px;
+      font-size:clamp(1.08rem, 1.6vw, 1.34rem);
+      color:#425164;
+      margin:0;
     }
 
-    .summary-card .value {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--accent);
+    .summary{
+      max-width:var(--container);
+      margin:-20px auto 0;
+      padding:0 22px;
+      position:relative;
+      z-index:2;
     }
 
-    main {
-      max-width: 980px;
-      margin: 28px auto 60px;
-      padding: 0 20px;
+    .summary-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:16px;
     }
 
-    .section {
-      background: #fff;
-      border-radius: 18px;
-      padding: 30px;
-      margin-bottom: 22px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-      border: 1px solid #e5e7eb;
+    .summary-card{
+      background:rgba(255,255,255,0.96);
+      border:1px solid rgba(217,226,236,0.9);
+      border-radius:18px;
+      padding:20px 22px;
+      box-shadow:var(--shadow);
     }
 
-    h2 {
-      margin-top: 0;
-      font-size: 26px;
-      line-height: 1.2;
-      color: #111827;
+    .summary-label{
+      margin:0 0 8px;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:#6a7b90;
     }
 
-    p { margin: 0 0 16px; }
-
-    ul {
-      margin: 0;
-      padding-left: 20px;
+    .summary-value{
+      margin:0;
+      color:var(--accent);
+      font-size:1.55rem;
+      line-height:1.2;
+      font-weight:700;
     }
 
-    li { margin-bottom: 10px; }
-
-    .quote {
-      border-left: 4px solid var(--accent-light);
-      padding: 14px 18px;
-      background: var(--soft);
-      border-radius: 10px;
-      margin: 18px 0;
-      color: #111827;
+    .page{
+      max-width:var(--container);
+      margin:28px auto 72px;
+      padding:0 22px;
     }
 
-    .result-box {
-      background: #ecfeff;
-      border: 1px solid #a5f3fc;
-      border-radius: 16px;
-      padding: 24px;
+    .stack{display:grid; gap:20px}
+
+    .card{
+      background:var(--surface);
+      border:1px solid rgba(217,226,236,0.95);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:30px 32px;
     }
 
-    .result-box strong {
-      color: #0f766e;
+    .card.narrow{
+      max-width:var(--content);
     }
 
-    .loss-box {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      border-radius: 16px;
-      padding: 24px;
+    .card h2{
+      margin:0 0 18px;
+      font-size:clamp(1.5rem, 2vw, 2rem);
+      line-height:1.15;
+      letter-spacing:-0.02em;
+      color:#182433;
     }
 
-    .loss-box strong {
-      color: var(--warn);
+    p{
+      margin:0 0 16px;
+      font-size:1.06rem;
+      color:var(--text);
     }
 
-    .footer-note {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 20px;
+    p:last-child{margin-bottom:0}
+
+    ul, ol{
+      margin:0;
+      padding-left:22px;
     }
 
-    @media (max-width: 700px) {
-      h1 { font-size: 31px; }
-      .lead { font-size: 17px; }
-      .section { padding: 22px; }
+    li{
+      margin:0 0 10px;
+      font-size:1.04rem;
+      color:var(--text);
+    }
+
+    .quote, .note, .callout{
+      border:1px solid rgba(190,208,227,0.95);
+      background:linear-gradient(180deg, #f8fbff 0%, #eef5fc 100%);
+      border-left:4px solid var(--accent-2);
+      border-radius:16px;
+      padding:18px 20px;
+    }
+
+    .result{
+      background:linear-gradient(180deg, #f3fbff 0%, #e9f7ff 100%);
+      border:1px solid #b8dff5;
+      border-radius:18px;
+      padding:22px 24px;
+    }
+
+    .warning{
+      background:linear-gradient(180deg, #fff8f2 0%, #fff2e8 100%);
+      border:1px solid #f1d1b5;
+      border-radius:18px;
+      padding:22px 24px;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:20px;
+    }
+
+    .cases-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:18px;
+    }
+
+    .case-card{
+      display:block;
+      color:inherit;
+      background:linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      border:1px solid rgba(217,226,236,0.95);
+      border-radius:20px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .case-card:hover{
+      transform:translateY(-3px);
+      border-color:#bed0e3;
+      box-shadow:0 20px 46px rgba(15,23,42,0.10);
+    }
+
+    .case-tag{
+      display:inline-block;
+      margin-bottom:12px;
+      color:var(--accent);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .case-card h3{
+      margin:0 0 12px;
+      font-size:1.45rem;
+      line-height:1.2;
+      letter-spacing:-0.02em;
+      color:#182433;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .meta span{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f5f8fc;
+      border:1px solid #dde6ef;
+      color:#324457;
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .cta-link{
+      display:inline-block;
+      margin-top:14px;
+      font-weight:700;
+      color:var(--accent);
+    }
+
+    .contact-box{
+      display:grid;
+      gap:10px;
+      padding:22px 24px;
+      border-radius:18px;
+      background:linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border:1px solid rgba(217,226,236,0.95);
+    }
+
+    .footer{
+      max-width:var(--container);
+      margin:0 auto 40px;
+      padding:0 22px;
+      color:#718196;
+      font-size:14px;
+    }
+
+    @media (max-width: 820px){
+      .nav-wrap{padding:14px 18px}
+      .hero{padding:52px 18px 34px}
+      .summary{padding:0 18px}
+      .page{padding:0 18px; margin:24px auto 56px}
+      .card{padding:22px 20px}
+      .grid-2{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 640px){
+      .nav-wrap{align-items:flex-start; flex-direction:column}
+      .nav{gap:18px}
+      p, li{font-size:1rem}
     }
   </style>
+
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap">
-      <nav>
-        <a href="/">Strona główna</a> |
-        <a href="/case-studies.html">Case studies</a> |
-        <a href="/about.html">O mnie</a>
+
+  <header class="site-header">
+    <div class="nav-wrap">
+      <div class="brand">MMGRESS</div>
+      <nav class="nav">
+        <a href="/" >Strona główna</a>
+        <a href="/case-studies.html" class="active">Case studies</a>
+        <a href="/about.html" >O mnie</a>
       </nav>
-      <div class="eyebrow">Case Study</div>
-      <h1>Precyzja cięcia profili zamkniętych w procesie ciągłym</h1>
-      <p class="lead">
-        W zakładzie produkcyjnym profile zamknięte były cięte w locie podczas ciągłego procesu formowania i spawania. Dotychczasowy układ działał, ale jego dokładność była zbyt niska dla nowoczesnej i powtarzalnej produkcji.
-      </p>
     </div>
   </header>
 
-  <section class="summary">
-    <div class="summary-grid">
-      <div class="summary-card">
-        <div class="label">Proces</div>
-        <div class="value">Ciągły</div>
-      </div>
-      <div class="summary-card">
-        <div class="label">Prędkość profilu</div>
-        <div class="value">0,3–2 m/s</div>
-      </div>
-      <div class="summary-card">
-        <div class="label">Przed modernizacją</div>
-        <div class="value">±500 mm</div>
-      </div>
-      <div class="summary-card">
-        <div class="label">Po modernizacji</div>
-        <div class="value">~1,5 mm</div>
-      </div>
+  <section class="hero">
+    <div class="hero-wrap">
+      <div class="eyebrow">Case study</div>
+      <h1>Precyzja cięcia profili zamkniętych w procesie ciągłym</h1>
+      <p class="lead">W zakładzie produkcyjnym profile zamknięte były cięte w locie podczas ciągłego procesu formowania i spawania. Dotychczasowy układ działał, ale jego dokładność była zbyt niska dla nowoczesnej i powtarzalnej produkcji.</p>
     </div>
   </section>
 
-  <main>
-    <section class="section">
+  <section class="summary">
+    <div class="summary-grid">
+      <div class="summary-card"><p class="summary-label">Proces</p><p class="summary-value">Ciągły</p></div>
+      <div class="summary-card"><p class="summary-label">Prędkość profilu</p><p class="summary-value">0,3–2 m/s</p></div>
+      <div class="summary-card"><p class="summary-label">Przed modernizacją</p><p class="summary-value">±500 mm</p></div>
+      <div class="summary-card"><p class="summary-label">Po modernizacji</p><p class="summary-value">~1,5 mm</p></div>
+    </div>
+  </section>
+  <main class="page stack">
+    <section class="card narrow">
       <h2>Problem</h2>
-      <p>
-        Zakład produkował profile zamknięte z taśmy stalowej rozwijanej z dużego bębna. Taśma przechodziła przez zespół rolek formujących, które nadawały jej odpowiedni kształt — od rur po profile o bardziej złożonych zagięciach. Następnie profil był zamykany i spajany w piecu indukcyjnym wysokiej częstotliwości, oczyszczany po spawie i chłodzony wodą.
-      </p>
-      <p>
-        Sam proces był ciągły. Taśma była uzupełniana w trakcie pracy bez zatrzymywania linii, więc profil wychodził praktycznie bez końca. To oznaczało, że cięcie musiało odbywać się w ruchu, podczas pracy linii, przy prędkościach od około 0,3 do prawie 2 metrów na sekundę.
-      </p>
-      <div class="quote">
-        Problem polegał na tym, że dokładność cięcia wynosiła około <strong>plus minus pół metra</strong>. To generowało odpady, konieczność dodatkowego docinania i pogarszało powtarzalność produkcji.
+      <p>Zakład produkował profile zamknięte z taśmy stalowej rozwijanej z dużego bębna. Taśma przechodziła przez zespół rolek formujących, które nadawały jej odpowiedni kształt — od rur po profile o bardziej złożonych zagięciach. Następnie profil był zamykany i spajany w piecu indukcyjnym wysokiej częstotliwości, oczyszczany po spawie i chłodzony wodą.</p>
+      <p>Sam proces był ciągły. Taśma była uzupełniana w trakcie pracy bez zatrzymywania linii, więc profil wychodził praktycznie bez końca. To oznaczało, że cięcie musiało odbywać się w ruchu, podczas pracy linii, przy prędkościach od około 0,3 do prawie 2 metrów na sekundę.</p>
+      <div class="quote">Problem polegał na tym, że dokładność cięcia wynosiła około <strong>plus minus pół metra</strong>. To generowało odpady, konieczność dodatkowego docinania i pogarszało powtarzalność produkcji.</div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <h2>Jak działał stary układ</h2>
+        <p>Dotychczas pomiar długości realizowała rolka dociskana do profilu oraz licznik impulsów. Po osiągnięciu zadanej liczby impulsów układ wyzwalał sekwencję cięcia.</p>
+        <p>Sekwencja była realizowana w sposób klasyczny, z użyciem układów elektromaszynowych: styczników, przekaźników, krańcówek i pneumatyki. Długi stół roboczy miał około 8 metrów, a po nim poruszał się wózek z piłą. Wózek był rozpędzany pneumatycznym tłokiem, następnie chwytał profil szczękami, poruszał się razem z nim, wykonywał cięcie i wracał do pozycji początkowej.</p>
+        <ul>
+          <li>pomiar długości był pośredni i podatny na poślizg,</li>
+          <li>ruch układu zależał od pneumatyki,</li>
+          <li>sekwencja była długa, skomplikowana i trudna do precyzyjnego powtarzania,</li>
+          <li>całość wymagała dużej drogi przejazdu i wielu nastaw zależnych od doświadczenia operatora.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Diagnoza</h2>
+        <p>Kluczowym problemem nie był sam frez ani sam moment cięcia, lecz sposób pomiaru ruchu profilu i sposób nadążania układu tnącego za rzeczywistą prędkością linii.</p>
+        <p>W praktyce prędkość profilu nie była idealnie stała. Zmieniała się w zależności od rodzaju materiału, geometrii profilu, warunków pracy oraz poślizgu. Jeśli układ bazuje wyłącznie na rolce impulsowej i sekwencji mechaniczno-pneumatycznej, to błąd narasta w sposób naturalny.</p>
+        <div class="quote">Żeby uzyskać precyzję, trzeba było przestać „zgadywać” ruch profilu i zacząć go mierzyć bezpośrednio oraz sterować ruchem cięcia w sposób ciągły, a nie tylko sekwencyjny.</div>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Jak działał stary układ</h2>
-      <p>
-        Dotychczas pomiar długości realizowała rolka dociskana do profilu oraz licznik impulsów. Po osiągnięciu zadanej liczby impulsów układ wyzwalał sekwencję cięcia.
-      </p>
-      <p>
-        Sekwencja była realizowana w sposób klasyczny, z użyciem układów elektromaszynowych: styczników, przekaźników, krańcówek i pneumatyki. Długi stół roboczy miał około 8 metrów, a po nim poruszał się wózek z piłą. Wózek był rozpędzany pneumatycznym tłokiem, następnie chwytał profil szczękami, poruszał się razem z nim, wykonywał cięcie i wracał do pozycji początkowej.
-      </p>
-      <ul>
-        <li>pomiar długości był pośredni i podatny na poślizg,</li>
-        <li>ruch układu zależał od pneumatyki,</li>
-        <li>sekwencja była długa, skomplikowana i trudna do precyzyjnego powtarzania,</li>
-        <li>całość wymagała dużej drogi przejazdu i wielu nastaw zależnych od doświadczenia operatora.</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Diagnoza</h2>
-      <p>
-        Kluczowym problemem nie był sam frez ani sam moment cięcia, lecz sposób pomiaru ruchu profilu i sposób nadążania układu tnącego za rzeczywistą prędkością linii.
-      </p>
-      <p>
-        W praktyce prędkość profilu nie była idealnie stała. Zmieniała się w zależności od rodzaju materiału, geometrii profilu, warunków pracy oraz poślizgu. Jeśli układ bazuje wyłącznie na rolce impulsowej i sekwencji mechaniczno-pneumatycznej, to błąd narasta w sposób naturalny.
-      </p>
-      <div class="quote">
-        Żeby uzyskać precyzję, trzeba było przestać „zgadywać” ruch profilu i zacząć go mierzyć bezpośrednio oraz sterować ruchem cięcia w sposób ciągły, a nie tylko sekwencyjny.
+    <section class="grid-2">
+      <div class="card">
+        <h2>Co zostało zrobione</h2>
+        <p>Modernizacja objęła przede wszystkim dwa kluczowe obszary: precyzyjny pomiar oraz precyzyjny napęd.</p>
+        <p>Pomiar został zrealizowany za pomocą przemysłowego układu optycznego działającego podobnie do myszy komputerowej optycznej. Układ mierzy rzeczywistą prędkość przesuwającego się profilu i pozwala bardzo dokładnie wyliczać zarówno drogę, jak i chwilową prędkość.</p>
+        <p>Z kolei stary napęd pneumatyczny został zastąpiony serwomechanizmem współpracującym z pasem zębatym i prowadzeniem na łożyskach liniowych. Sam frez pozostał ten sam, ale jego ruch stał się precyzyjny, powtarzalny i w pełni kontrolowany.</p>
+        <ul>
+          <li>zastosowano optyczny pomiar prędkości i drogi,</li>
+          <li>wymieniono napęd z pneumatycznego na serwonapęd,</li>
+          <li>zrezygnowano z chwytania profilu szczękami,</li>
+          <li>układ tnący zaczął poruszać się synchronicznie z profilem,</li>
+          <li>sterowanie uproszczono do jednego podstawowego parametru wpisywanego przez operatora.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Efekt techniczny</h2>
+        <p>Po modernizacji układ tnący nie musi już mechanicznie łapać profilu. Porusza się z odpowiednią prędkością razem z nim i wykonuje cięcie w sposób płynny oraz przewidywalny.</p>
+        <div class="result"><strong>Osiągnięty efekt:</strong> precyzja cięcia wzrosła z około <strong>±500 mm</strong> do około <strong>1,5 mm</strong>. Pozostała odchyłka wynika głównie z bicia tarczy freza, a nie z błędu pozycjonowania układu.</div>
+        <p>Dodatkowo sam proces cięcia znacząco się skrócił. O ile wcześniej wymagał około 8 metrów drogi roboczej, to po modernizacji może być realizowany na około 2 metrach, pod warunkiem prawidłowo przygotowanego i naostrzonego narzędzia.</p>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Co zostało zrobione</h2>
-      <p>
-        Modernizacja objęła przede wszystkim dwa kluczowe obszary: precyzyjny pomiar oraz precyzyjny napęd.
-      </p>
-      <p>
-        Pomiar został zrealizowany za pomocą przemysłowego układu optycznego działającego podobnie do myszy komputerowej optycznej. Układ mierzy rzeczywistą prędkość przesuwającego się profilu i pozwala bardzo dokładnie wyliczać zarówno drogę, jak i chwilową prędkość.
-      </p>
-      <p>
-        Z kolei stary napęd pneumatyczny został zastąpiony serwomechanizmem współpracującym z pasem zębatym i prowadzeniem na łożyskach liniowych. Sam frez pozostał ten sam, ale jego ruch stał się precyzyjny, powtarzalny i w pełni kontrolowany.
-      </p>
-      <ul>
-        <li>zastosowano optyczny pomiar prędkości i drogi,</li>
-        <li>wymieniono napęd z pneumatycznego na serwonapęd,</li>
-        <li>zrezygnowano z chwytania profilu szczękami,</li>
-        <li>układ tnący zaczął poruszać się synchronicznie z profilem,</li>
-        <li>sterowanie uproszczono do jednego podstawowego parametru wpisywanego przez operatora.</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Efekt techniczny</h2>
-      <p>
-        Po modernizacji układ tnący nie musi już mechanicznie łapać profilu. Porusza się z odpowiednią prędkością razem z nim i wykonuje cięcie w sposób płynny oraz przewidywalny.
-      </p>
-      <div class="result-box">
-        <strong>Osiągnięty efekt:</strong> precyzja cięcia wzrosła z około <strong>±500 mm</strong> do około <strong>1,5 mm</strong>. Pozostała odchyłka wynika głównie z bicia tarczy freza, a nie z błędu pozycjonowania układu.
-      </div>
-      <p>
-        Dodatkowo sam proces cięcia znacząco się skrócił. O ile wcześniej wymagał około 8 metrów drogi roboczej, to po modernizacji może być realizowany na około 2 metrach, pod warunkiem prawidłowo przygotowanego i naostrzonego narzędzia.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>Efekt biznesowy</h2>
-      <p>
-        Zmiana nie poprawiła wyłącznie samej dokładności. Uderzyła bezpośrednio w najważniejsze wskaźniki produkcyjne.
-      </p>
-      <div class="loss-box">
+    <section class="card narrow">
+      <h2>Efekt biznesowy i wniosek</h2>
+      <div class="warning">
         <strong>Najważniejsze korzyści:</strong>
         <ul>
           <li>ograniczenie strat materiałowych,</li>
@@ -325,23 +445,12 @@
           <li>prostsza i bardziej przewidywalna obsługa maszyny.</li>
         </ul>
       </div>
-      <p>
-        Operator nie musi już ręcznie korygować wielu parametrów ani polegać na doświadczeniu w ustawianiu całej sekwencji. Został wyprowadzony panel HMI, na którym w praktyce wpisuje się tylko jedną wartość — docelową długość ciętego profilu. Resztę oblicza sterownik: prędkość, drogę, moment uruchomienia i przebieg przejazdu.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>Wniosek</h2>
-      <p>
-        Ten przypadek pokazuje, że problem precyzji nie zawsze wynika ze zużycia maszyny albo jakości narzędzia. Bardzo często źródłem błędu jest sama logika procesu: zbyt uproszczony pomiar, zbyt duża zależność od pneumatyki i zbyt mała kontrola nad ruchem rzeczywistym.
-      </p>
-      <p>
-        Połączenie dokładnego pomiaru prędkości z serwonapędem i prostym interfejsem operatorskim pozwoliło zmienić układ, który „działał”, w układ, który działa precyzyjnie, szybko i powtarzalnie.
-      </p>
-      <p class="footer-note">
-        Jeśli w procesie ciągłym problemem są odchyłki długości, odpady lub niestabilne cięcie, najczęściej nie potrzeba większej siły ani kolejnych korekt mechanicznych — potrzeba właściwego pomiaru, synchronizacji ruchu i dobrze zaprojektowanego sterowania.
-      </p>
+      <p style="margin-top:16px;">Operator nie musi już ręcznie korygować wielu parametrów ani polegać na doświadczeniu w ustawianiu całej sekwencji. Został wyprowadzony panel HMI, na którym w praktyce wpisuje się tylko jedną wartość — docelową długość ciętego profilu. Resztę oblicza sterownik: prędkość, drogę, moment uruchomienia i przebieg przejazdu.</p>
+      <p>Ten przypadek pokazuje, że problem precyzji nie zawsze wynika ze zużycia maszyny albo jakości narzędzia. Bardzo często źródłem błędu jest sama logika procesu: zbyt uproszczony pomiar, zbyt duża zależność od pneumatyki i zbyt mała kontrola nad ruchem rzeczywistym.</p>
+      <p style="color:#6a7b90;">Jeśli w procesie ciągłym problemem są odchyłki długości, odpady lub niestabilne cięcie, najczęściej nie potrzeba większej siły ani kolejnych korekt mechanicznych — potrzeba właściwego pomiaru, synchronizacji ruchu i dobrze zaprojektowanego sterowania.</p>
     </section>
   </main>
+
+  <footer class="footer">MMGRESS</footer>
 </body>
 </html>
