@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Dlaczego wiele raportów nie działa? Bo opisują rzeczywistość taką, jaka powinna być, a nie taką, jaka jest naprawdę. Rzetelna analiza zaczyna się od konfrontacji z praktyką." />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="MMGRESS" />
+<title>Dlaczego raporty nie działają — MMGRESS</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5KZX20JGP7');
+</script>
+
+<style>
+:root{
+  --bg:#f3f6fa;
+  --surface:#ffffff;
+  --surface-soft:#f7f9fc;
+  --hero:#edf3f8;
+  --text:#172435;
+  --muted:#4d6075;
+  --line:#d7e0ea;
+  --accent:#204f86;
+  --accent-soft:#e9f1fb;
+  --shadow:0 14px 34px rgba(15, 23, 42, 0.06);
+  --radius:20px;
+  --radius-sm:14px;
+  --container:1180px;
+  --content:860px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.72;
+}
+a{color:var(--accent)}
+.topbar{
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(12px);
+}
+.topbar-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:18px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.brand{
+  color:#26354a;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+.nav a{
+  text-decoration:none;
+  color:#26354a;
+  font-size:15px;
+  font-weight:700;
+}
+.nav a.active,.nav a:hover{color:var(--accent)}
+.hero{
+  background:
+    radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),
+    linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:82px 28px 70px;
+}
+.hero-content{max-width:var(--content)}
+.eyebrow{
+  display:inline-block;
+  margin:0 0 24px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+h1{
+  margin:0 0 22px;
+  color:#152235;
+  letter-spacing:-0.04em;
+}
+.hero-title{
+  font-size:clamp(2.5rem, 5vw, 4.9rem);
+  line-height:1.03;
+  font-weight:800;
+  max-width:980px;
+}
+.hero-intro{
+  max-width:940px;
+  font-size:clamp(1.12rem, 1.45vw, 1.34rem);
+  color:#38506c;
+  line-height:1.68;
+  margin:0;
+}
+.main{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:34px 28px 70px;
+}
+.section{
+  max-width:var(--content);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:34px 38px;
+  margin:22px 0;
+  box-shadow:var(--shadow);
+}
+.section h2{
+  margin:0 0 18px;
+  font-size:clamp(1.85rem, 2.6vw, 2.45rem);
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:#122133;
+}
+.section h3{
+  margin:26px 0 12px;
+  font-size:1.35rem;
+  line-height:1.2;
+  color:#122133;
+}
+p{
+  margin:0 0 16px;
+  font-size:1.08rem;
+}
+.note-box,.quote{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+  border-radius:16px;
+  padding:18px 20px;
+  margin:22px 0;
+}
+.contact-box{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px;
+}
+.cta-link{
+  display:inline-block;
+  margin-top:12px;
+  color:var(--accent);
+  font-weight:700;
+  text-decoration:none;
+}
+.cta-link:hover{
+  text-decoration:underline;
+}
+.footer-note{
+  color:#66788e;
+  font-size:.95rem;
+  margin-top:18px;
+}
+@media (max-width: 760px){
+  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
+  .nav{gap:18px; flex-wrap:wrap}
+  .hero-inner{padding:56px 18px 52px}
+  .main{padding:22px 18px 50px}
+  .section{padding:26px 22px}
+}
+</style>
+
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">MMGRESS</a>
+    <nav class="nav">
+      <a href="/">Strona główna</a>
+      <a href="/case-studies.html">Case studies</a>
+      <a href="/about.html">O mnie</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="eyebrow">Analiza zamiast pozoru</div>
+      <h1 class="hero-title">Dlaczego wiele raportów nie działa</h1>
+      <p class="hero-intro">
+        Większość raportów wygląda dobrze, jest logicznie uporządkowana i sprawia wrażenie solidnej analizy, ale bardzo często problem zaczyna się dokładnie w tym miejscu, w którym taki dokument przestaje opisywać rzeczywistość, a zaczyna opisywać wyobrażenie o niej.
+      </p>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+  <section class="section">
+    <h2>Raport może wyglądać dobrze i nadal niczego nie rozwiązywać</h2>
+    <p>Większość raportów wygląda dobrze. Są w nich dane, wykresy, logicznie ułożone wnioski i całość sprawia wrażenie przemyślanej, uporządkowanej analizy, która powinna prowadzić do rozwiązania problemu. Na poziomie prezentacji wszystko się zgadza i trudno się do czegoś przyczepić.</p>
+    <p>Problem zaczyna się w momencie, gdy okazuje się, że raport opiera się nie na tym, co faktycznie dzieje się w systemie, tylko na tym, co według założeń powinno się dziać. Dane pochodzą z systemów, które same są uproszczeniem rzeczywistości, dochodzą do tego deklaracje, przyjęte modele, uśrednienia i różnego rodzaju założenia, które mają uporządkować obraz, ale jednocześnie go spłaszczają.</p>
+    <p>To wszystko brzmi dobrze i często jest spójne wewnętrznie, dopóki nie zostanie skonfrontowane z praktyką. A rzeczywistość ma jedną cechę, która regularnie rozwala nawet najlepiej przygotowane analizy — nie interesuje jej model.</p>
+    <div class="quote">
+      Rzeczywistość nie działa według prezentacji. Działa tak, jak działa w praktyce.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Największy problem zwykle nie leży w jednym miejscu</h2>
+    <p>Widziałem wiele sytuacji, w których od strony technicznej wszystko było poprawne, proces był zgodny z procedurą, a mimo to firma generowała straty albo nie osiągała zakładanych efektów. I problem nie polegał na tym, że ktoś popełnił oczywisty błąd, tylko na tym, że nikt nie połączył tych elementów w jedną całość i nie sprawdził, jak one faktycznie na siebie wpływają.</p>
+    <p>W praktyce prawdziwy problem bardzo rzadko leży wyłącznie w jednym urządzeniu, jednym parametrze albo jednym człowieku. Najczęściej powstaje na styku technologii, procesu i decyzji biznesowych, czyli dokładnie tam, gdzie kończy się myślenie w silosach, a zaczyna odpowiedzialność za całość. I właśnie tego miejsca wiele analiz nie dotyka, bo łatwiej opisać pojedynczy element niż uczciwie sprawdzić, jak wszystkie elementy wpływają na siebie nawzajem.</p>
+  </section>
+
+  <section class="section">
+    <h2>Dlaczego same dane nie wystarczają</h2>
+    <p>Dane są potrzebne, ale same w sobie nie rozwiązują problemu. Można mieć bardzo dużo danych i nadal nie rozumieć, co naprawdę dzieje się w systemie. Można też mieć raport zbudowany na poprawnych liczbach, który prowadzi do błędnych wniosków, ponieważ nie uwzględnia kontekstu, zależności i tego, jak proces działa poza ekranem, tabelą albo systemem raportowym.</p>
+    <p>Dlatego rzetelna analiza nie polega wyłącznie na zebraniu informacji, tylko na ich sprawdzeniu, zestawieniu z praktyką i oddzieleniu tego, co rzeczywiste, od tego, co tylko dobrze wygląda w modelu. Właśnie tu najczęściej zaczyna się różnica między dokumentem do archiwum a analizą, na podstawie której da się podjąć właściwą decyzję.</p>
+  </section>
+
+  <section class="section">
+    <h2>Co w takim razie działa</h2>
+    <p>Dobra analiza nie zaczyna się od raportu, tylko od próby zrozumienia, co naprawdę się dzieje. Najpierw trzeba skonfrontować założenia z praktyką, zobaczyć system w działaniu, przejść przez obserwację, rozmowę, pomiary i dopiero wtedy składać to w całość. Inaczej bardzo łatwo dojść do eleganckiego, ale błędnego wniosku.</p>
+    <p>Dopiero kiedy technologia, proces i koszt zostaną zestawione razem, zaczyna być widać, gdzie naprawdę powstaje strata, gdzie znika przewaga, gdzie decyzje są podejmowane na podstawie niepełnego obrazu i dlaczego mimo pozornej poprawności wynik końcowy nadal się nie zgadza.</p>
+    <p>To jest moment, w którym analiza przestaje być opisem, a zaczyna być narzędziem do podejmowania decyzji. I właśnie dlatego niektóre raporty dobrze wyglądają, ale niczego nie zmieniają, a inne bywają mniej efektowne, za to prowadzą do realnej poprawy.</p>
+  </section>
+
+  <section class="section">
+    <h2>Co nas wyróżnia</h2>
+    <p>Prawdziwy raport nie jest ładnym bełkotem SI, tylko rzetelną analizą opartą na rzeczywistych danych, obserwacji, pomiarach i konfrontacji z praktyką. Nie chodzi o to, żeby zbudować dokument, który dobrze wygląda na spotkaniu, tylko o to, żeby zrozumieć, gdzie naprawdę leży problem i co faktycznie ma sens zrobić dalej.</p>
+    <p>Dlatego nie zaczynam od potwierdzania założeń. Zaczynam od sprawdzenia, czy one w ogóle mają pokrycie w rzeczywistości.</p>
+  </section>
+
+  <section class="section">
+    <h2>Czy to ma sens w Twoim przypadku</h2>
+    <p>Jeżeli masz poczucie, że raporty są, spotkania się odbywają, decyzje zapadają, a mimo to problem nadal wraca albo wynik końcowy wciąż się nie zgadza, to bardzo możliwe, że nie brakuje już kolejnego opisu sytuacji, tylko uczciwej konfrontacji z tym, co naprawdę dzieje się w praktyce.</p>
+    <p>Właśnie w takich przypadkach ten sposób pracy ma największy sens.</p>
+    <a class="cta-link" href="/#kontakt">Przejdź do kontaktu na stronie głównej →</a>
+  </section>
+
+  <section class="section">
+    <h2>Kontakt</h2>
+    <div class="contact-box">
+      <p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
+      <p>Email: <a href="mailto:mmgress@proton.me">mmgress@proton.me</a></p>
+      <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
+    </div>
+    <p class="footer-note">Jeżeli problem jest realny, ale trudno go jednoznacznie nazwać, to zwykle właśnie od tego miejsca warto zacząć.</p>
+  </section>
+</main>
+
+</body>
+</html>
