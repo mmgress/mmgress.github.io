@@ -7,8 +7,227 @@
 
 <title>Case Study – Energia bierna, która rosła mimo kompensacji</title>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5KZX20JGP7');
+</script>
+
 <style>
-/* ZOSTAWIASZ DOKŁADNIE TEN SAM STYLE CO W INNYCH CASE'ACH */
+:root{
+  --bg:#f3f6fa;
+  --surface:#ffffff;
+  --surface-soft:#f7f9fc;
+  --hero:#edf3f8;
+  --text:#172435;
+  --muted:#4d6075;
+  --line:#d7e0ea;
+  --accent:#204f86;
+  --accent-soft:#e9f1fb;
+  --shadow:0 14px 34px rgba(15, 23, 42, 0.06);
+  --radius:20px;
+  --radius-sm:14px;
+  --container:1180px;
+  --content:860px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.72;
+}
+a{color:var(--accent)}
+.topbar{
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(12px);
+}
+.topbar-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:18px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.brand{
+  color:#26354a;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+.nav a{
+  text-decoration:none;
+  color:#26354a;
+  font-size:15px;
+  font-weight:700;
+}
+.nav a.active,.nav a:hover{color:var(--accent)}
+.hero{
+  background:
+    radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),
+    linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:84px 28px 74px;
+}
+.hero-content{max-width:var(--content)}
+.eyebrow{
+  display:inline-block;
+  margin:0 0 24px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+h1{
+  margin:0 0 24px;
+  color:#152235;
+  letter-spacing:-0.04em;
+}
+.hero-title{
+  font-size:clamp(2.8rem, 5.2vw, 4.8rem);
+  line-height:1.02;
+  font-weight:800;
+  max-width:980px;
+}
+.hero-intro{
+  max-width:980px;
+  font-size:clamp(1.2rem, 1.6vw, 1.5rem);
+  color:#38506c;
+  line-height:1.65;
+  margin:0;
+}
+.main{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:34px 28px 70px;
+}
+.summary{
+  margin-top:-32px;
+  position:relative;
+  z-index:2;
+}
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+.summary-card{
+  min-width:0;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px 26px;
+  box-shadow:var(--shadow);
+}
+.summary-card .label{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:800;
+  color:#68809d;
+  margin:0 0 12px;
+}
+.summary-card .value{
+  margin:0;
+  font-size:clamp(1.35rem, 2vw, 1.95rem);
+  line-height:1.15;
+  font-weight:800;
+  color:var(--accent);
+}
+.section{
+  max-width:var(--content);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:34px 38px;
+  margin:22px 0;
+  box-shadow:var(--shadow);
+}
+.section h2{
+  margin:0 0 18px;
+  font-size:clamp(1.9rem, 2.6vw, 2.5rem);
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:#122133;
+}
+p{
+  margin:0 0 16px;
+  font-size:1.08rem;
+}
+ul,ol{
+  margin:0;
+  padding-left:24px;
+}
+li{
+  margin:0 0 10px;
+  font-size:1.05rem;
+}
+.quote{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+  border-radius:16px;
+  padding:18px 20px;
+  margin:22px 0;
+}
+.result-box{
+  background:#eef8f3;
+  border:1px solid #cfe8d8;
+  border-radius:16px;
+  padding:22px 24px;
+  margin:20px 0;
+}
+.loss-box{
+  background:#fcf6ef;
+  border:1px solid #efd7b8;
+  border-radius:16px;
+  padding:22px 24px;
+  margin:20px 0;
+}
+.footer-note{
+  color:#66788e;
+  font-size:.95rem;
+  margin-top:18px;
+}
+@media (max-width: 1040px){
+  .summary-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media (max-width: 760px){
+  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
+  .nav{gap:18px; flex-wrap:wrap}
+  .hero-inner{padding:56px 18px 52px}
+  .main{padding:22px 18px 50px}
+  .section{padding:26px 22px}
+  .summary{margin-top:0}
+  .summary-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
@@ -29,9 +248,9 @@
   <div class="hero-inner">
     <div class="hero-content">
       <div class="eyebrow">Case study</div>
-      <h1 class="hero-title standard">Energia bierna, która rosła mimo kompensacji</h1>
+      <h1 class="hero-title">Energia bierna, która rosła mimo kompensacji</h1>
       <p class="hero-intro">
-        Zakład produkcyjny z dwoma transformatorami i działającą kompensacją mocy biernej zaczął płacić coraz wyższe opłaty – zarówno za energię indukcyjną, jak i pojemnościową.
+        W dużym zakładzie produkcyjnym, mimo istniejącej kompensacji mocy biernej, zaczęły rosnąć opłaty zarówno za energię bierną indukcyjną w czasie produkcji, jak i pojemnościową w weekendy i okresach postoju.
       </p>
     </div>
   </div>
@@ -41,109 +260,188 @@
 
 <section class="summary">
   <div class="summary-grid">
-    <div class="summary-card"><div class="label">Transformatory</div><div class="value">2 × 850 kVA</div></div>
-    <div class="summary-card"><div class="label">Obciążenie</div><div class="value">~500–700 kVA</div></div>
-    <div class="summary-card"><div class="label">Istniejąca kompensacja</div><div class="value">4 × 350 kVAr</div></div>
-    <div class="summary-card"><div class="label">Zwrot</div><div class="value">~6 miesięcy</div></div>
+    <div class="summary-card">
+      <div class="label">Transformatory</div>
+      <div class="value">2 × 850 kVA</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Obciążenie</div>
+      <div class="value">~500–700 kVA</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Istniejąca kompensacja</div>
+      <div class="value">4 × 350 kVAr</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Zwrot</div>
+      <div class="value">nieco ponad 6 mies.</div>
+    </div>
   </div>
 </section>
 
 <section class="section">
-<h2>Problem</h2>
+  <h2>Problem</h2>
 
-<p>Zakład pracował stabilnie. Dwa transformatory, dwie sekcje rozdzielni, kompensacja mocy biernej – wszystko wyglądało poprawnie.</p>
+  <p>
+    Zakład pracował w układzie dwóch transformatorów po 850 kVA, z dwusekcyjną rozdzielnią niskiego napięcia połączoną sprzęgłem. Obciążenie maksymalne wynosiło około 700 kVA, a stałe około 500 kVA dla obu sekcji łącznie.
+  </p>
 
-<p>A mimo to na fakturach zaczęły rosnąć koszty energii biernej.</p>
+  <p>
+    Każda sekcja miała własny analizator DIRIS Socomec oraz po dwa kompensatory mocy biernej, każdy o mocy 350 kVAr, kondensatorowe, z filtrami odstrajającymi.
+  </p>
 
-<div class="quote">
-W trakcie produkcji pojawiała się energia bierna indukcyjna, a w weekendy – pojemnościowa.
-</div>
+  <div class="quote">
+    W trakcie normalnej produkcji pojawiała się ponadnormatywna energia bierna indukcyjna, a w weekendy i święta — energia bierna pojemnościowa.
+  </div>
 
-<p>Dodatkowo analiza jakości energii wskazała konieczność dołożenia kolejnego kompensatora – około 100 kVAr.</p>
+  <p>
+    Z eLicznika wynikało, że podczas pracy współczynnik tg φ dla energii biernej indukcyjnej przekraczał dopuszczalne wartości i dochodził do poziomu około 0,56–0,68. W czasie postoju zakładu pojawiała się z kolei energia bierna pojemnościowa, która również generowała opłaty.
+  </p>
 
+  <p>
+    Wykonana wcześniej analiza jakości energii wskazała konieczność dołożenia nowego kompensatora dla pojemności o mocy około 100 kVAr. Taki wniosek wzbudził jednak uzasadnione wątpliwości po stronie utrzymania ruchu.
+  </p>
 </section>
 
 <section class="section">
-<h2>Co się nie zgadzało</h2>
+  <h2>Co się nie zgadzało</h2>
 
-<p>Technicznie wszystko wyglądało poprawnie:</p>
+  <p>
+    Na pierwszy rzut oka układ wyglądał poprawnie. Kompensacja była, pomiary były dostępne, analizatory działały, a sam system nie wyglądał na zaniedbany.
+  </p>
 
-<ul>
-<li>kompensacja była,</li>
-<li>analizatory DIRIS działały,</li>
-<li>układ był standardowy.</li>
-</ul>
+  <ul>
+    <li>kompensacja istniała po obu sekcjach,</li>
+    <li>pomiary były dostępne z analizatorów i eLicznika,</li>
+    <li>układ był typowy dla takiego obiektu,</li>
+    <li>a mimo to koszty nadal rosły.</li>
+  </ul>
 
-<p>A mimo to system generował koszt.</p>
-
-<div class="quote">
-To był klasyczny przypadek, gdzie system działa – ale jako całość działa źle.
-</div>
-
+  <div class="quote">
+    To był przypadek, w którym problem nie wynikał z całkowitego braku rozwiązania, tylko z niedopasowania istniejącego układu do rzeczywistych warunków pracy zakładu.
+  </div>
 </section>
 
 <section class="section">
-<h2>Diagnoza</h2>
+  <h2>Diagnoza</h2>
 
-<p>Kluczowy problem nie leżał w braku kompensacji, tylko w:</p>
+  <p>
+    Po analizie danych pomiarowych z eLicznika, oględzinach obiektu oraz sprawdzeniu możliwości technicznych okazało się, że problem nie polegał na tym, że kompensacji jest za mało.
+  </p>
 
-<ul>
-<li>jej przewymiarowaniu,</li>
-<li>zbyt dużych stopniach regulacji,</li>
-<li>pracy dwóch transformatorów przy zbyt małym obciążeniu,</li>
-<li>braku płynnej regulacji.</li>
-</ul>
+  <p>
+    Kluczowe były cztery elementy:
+  </p>
 
-<p>W weekendy, przy braku produkcji, instalacja zaczynała generować nadmiar mocy biernej pojemnościowej.</p>
+  <ul>
+    <li>przewymiarowanie istniejącej kompensacji kondensatorowej względem rzeczywistego obciążenia,</li>
+    <li>zbyt duża moc najmniejszych stopni regulacji,</li>
+    <li>brak płynnej i szybkiej korekty przy zmiennych warunkach pracy,</li>
+    <li>niepotrzebna praca dwóch transformatorów przy stosunkowo niewielkim obciążeniu całego obiektu.</li>
+  </ul>
 
+  <p>
+    W praktyce oznaczało to, że w czasie produkcji układ nie kompensował wystarczająco precyzyjnie części indukcyjnej, a podczas postoju zakładu pozostawiał w systemie nadmiar pojemności, który zaczynał generować opłaty.
+  </p>
 </section>
 
 <section class="section">
-<h2>Rozwiązanie</h2>
+  <h2>Proponowane rozwiązanie</h2>
 
-<p>Zamiast dokładania kolejnego dużego kompensatora:</p>
+  <p>
+    Zamiast dokładania kolejnego dużego kompensatora pojemnościowego zaproponowałem rozwiązanie znacznie bardziej precyzyjne i proporcjonalne do rzeczywistego problemu:
+  </p>
 
-<ul>
-<li>zastosowano SVG 35 kVAr,</li>
-<li>zmniejszono moc istniejących baterii,</li>
-<li>zmniejszono najmniejszy stopień,</li>
-<li>wymieniono sterownik na Lovato DCRG8,</li>
-<li>wyłączono jeden transformator i połączono sekcje.</li>
-</ul>
+  <ul>
+    <li>montaż kompensatora typu SVG o mocy 35 kVAr,</li>
+    <li>modernizację istniejących kompensatorów przez zmniejszenie ich mocy,</li>
+    <li>zmniejszenie mocy najmniejszego stopnia regulacji,</li>
+    <li>wymianę sterownika kompensatora na Lovato DCRG8,</li>
+    <li>wyłączenie jednego transformatora i zasilenie obu sekcji z jednego pracującego transformatora.</li>
+  </ul>
 
+  <div class="quote">
+    Nie chodziło o dokładanie kolejnego dużego urządzenia, tylko o uporządkowanie całej logiki pracy układu.
+  </div>
 </section>
 
 <section class="section">
-<h2>Efekt</h2>
+  <h2>Realizacja</h2>
 
-<div class="result-box">
-<ul>
-<li>zniknęła energia bierna indukcyjna,</li>
-<li>zniknęła energia bierna pojemnościowa,</li>
-<li>spadły koszty energii,</li>
-<li>poprawiono stabilność systemu.</li>
-</ul>
-</div>
+  <p>
+    Zakład zdecydował się wdrożyć dokładnie taki wariant. Po zmianie układu pracy oba pola zostały spięte, jeden transformator pozostał w pracy, a drugi został pozostawiony jako rezerwowy.
+  </p>
 
-<p>Dodatkowo wyeliminowano straty transformatora pracującego bez potrzeby.</p>
+  <p>
+    Dodatkowo wdrożono monitoring oparty o istniejące urządzenia:
+  </p>
 
+  <ul>
+    <li>DIRIS na sekcji z pracującym transformatorem,</li>
+    <li>SVG,</li>
+    <li>zmodernizowany kompensator kondensatorowy ze sterownikiem DCRG8,</li>
+    <li>drugi analizator DIRIS na transformatorze rezerwowym.</li>
+  </ul>
 </section>
 
 <section class="section">
-<h2>Wniosek</h2>
+  <h2>Efekt techniczny</h2>
 
-<p>Problem nie polegał na tym, że kompensacji było za mało.</p>
+  <div class="result-box">
+    <ul>
+      <li>zniknęła energia bierna pojemnościowa w weekendy i okresach postoju,</li>
+      <li>zniknęła ponadnormatywna energia bierna indukcyjna podczas produkcji,</li>
+      <li>układ zaczął pracować stabilniej i bardziej przewidywalnie,</li>
+      <li>kompensacja została dopasowana do rzeczywistego obciążenia, a nie do zbyt ogólnych założeń.</li>
+    </ul>
+  </div>
 
-<div class="quote">
-Problem polegał na tym, że była źle dobrana do rzeczywistej pracy systemu.
-</div>
+  <p>
+    Dodatkową korzyścią było ograniczenie strat transformacji wynikających z pracy drugiego transformatora bez realnej potrzeby.
+  </p>
 
-<p>Dodanie kolejnego urządzenia tylko pogłębiłoby problem.</p>
+  <p>
+    Straty jałowe wyłączonego transformatora wynosiły około 2 kW. Same w sobie nie były największym składnikiem oszczędności, ale były realnym i stałym obciążeniem, którego dało się uniknąć.
+  </p>
+</section>
 
-<p class="footer-note">
-Czasem mniej urządzeń i lepsza logika daje lepszy efekt niż rozbudowa systemu.
-</p>
+<section class="section">
+  <h2>Efekt biznesowy</h2>
 
+  <p>
+    Po wdrożeniu rozwiązania zniknęły opłaty za energię bierną pojemnościową i indukcyjną, a dodatkowo spadło zużycie energii czynnej wynikające z ograniczenia zbędnych strat.
+  </p>
+
+  <div class="loss-box">
+    <strong>Najważniejsze efekty:</strong>
+    <ul>
+      <li>wyeliminowanie opłat za energię bierną pojemnościową,</li>
+      <li>wyeliminowanie opłat za energię bierną indukcyjną ponad normę,</li>
+      <li>ograniczenie strat transformacji,</li>
+      <li>lepsza kontrola nad pracą układu dzięki monitoringowi,</li>
+      <li>czas zwrotu inwestycji: nieco ponad 6 miesięcy.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Wniosek</h2>
+
+  <p>
+    Ten przypadek pokazuje bardzo wyraźnie, że problem nie zawsze polega na braku urządzenia albo na potrzebie dołożenia większej mocy.
+  </p>
+
+  <div class="quote">
+    Czasem system jest po prostu źle dopasowany do rzeczywistego sposobu pracy obiektu — i wtedy dokładanie kolejnych elementów tylko powiększa koszt, zamiast rozwiązać przyczynę.
+  </div>
+
+  <p>
+    Tutaj skuteczne okazało się nie przewymiarowanie układu, lecz jego uporządkowanie: zmiana konfiguracji zasilania, korekta istniejącej kompensacji, dodanie niewielkiego SVG i wdrożenie właściwego sterowania.
+  </p>
+
+  <p class="footer-note">
+    To właśnie dlatego w takich przypadkach najpierw trzeba zrozumieć logikę pracy systemu, a dopiero potem decydować, co rzeczywiście warto dokładać.
+  </p>
 </section>
 
 </main>
