@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CivicArchitect | Systemowa Optymalizacja Energii</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d5e3fc",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary": "#000b05",
+                        "surface-dim": "#d8dadc",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#57657a",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface": "#f7f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-primary-container": "#7b87ab",
+                        "on-primary-fixed-variant": "#3a4666",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c6c6ce",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#009b6b",
+                        "outline": "#75777e",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "secondary-container": "#d5e3fc",
+                        "inverse-primary": "#b9c6ec",
+                        "on-primary-fixed": "#0d1a38",
+                        "secondary": "#515f74",
+                        "on-surface": "#191c1e",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-tint": "#515e7f",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#b9c6ec",
+                        "inverse-surface": "#2d3133",
+                        "on-background": "#191c1e",
+                        "surface-container": "#eceef0",
+                        "on-surface-variant": "#45464e",
+                        "primary-container": "#121f3d",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#002617",
+                        "primary": "#00071f",
+                        "surface-container-highest": "#e0e3e5",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "primary-fixed": "#dae2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-header shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<span class="text-2xl font-bold tracking-tighter text-slate-900 dark:text-white font-headline">CivicArchitect</span>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-headline font-semibold tracking-tight text-sm text-slate-900 dark:text-white border-b-2 border-slate-900 dark:border-white pb-1" href="#">Strona główna</a>
+<a class="font-headline font-semibold tracking-tight text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">O usłudze</a>
+<a class="font-headline font-semibold tracking-tight text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Korzyści</a>
+<a class="font-headline font-semibold tracking-tight text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Wynagrodzenie</a>
+<a class="font-headline font-semibold tracking-tight text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" href="#">Kontakt</a>
+</div>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-full font-headline font-semibold text-sm active:scale-95 transition-all">
+                Darmowy Audyt
+            </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="pt-40 pb-24 px-8 max-w-7xl mx-auto overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed-variant px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+                    Inżynieria Finansowa Energii
+                </span>
+<h1 class="font-headline text-5xl md:text-6xl font-extrabold text-primary leading-tight tracking-tighter mb-8">
+                    Systemowe Zarządzanie i Optymalizacja Kosztów Energii dla Gmin
+                </h1>
+<p class="text-xl text-secondary leading-relaxed mb-10 max-w-xl">
+                    Kluczowe narzędzie kontroli kosztów i bezpieczeństwa finansowego w czasach niestabilności energetycznej. Przekształć wydatki w inwestycje.
+                </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-primary/20 transition-all active:scale-95">
+                        Zamów darmowy audyt
+                    </button>
+<button class="bg-surface-container-high text-primary px-8 py-4 rounded-full font-bold hover:bg-surface-container-highest transition-all active:scale-95">
+                        Poznaj zakres
+                    </button>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-gradient-to-tr from-primary-fixed to-tertiary-fixed opacity-20 blur-2xl rounded-xl"></div>
+<div class="relative bg-surface-container-lowest p-6 rounded-xl shadow-2xl">
+<img alt="Civic Infrastructure" class="rounded-lg w-full h-[450px] object-cover" data-alt="Modern geometric corporate architecture with blue tinted windows and clean lines reflecting the sky at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALY17-oPEsvLLiaIbACNBnk-Xu3FtwVeZTE8Db6F4ulextevAih_6s53B2nobvIJD-FlzWuM0Xt1lANUEz773NCbymbv170lfpVTNsI8kgXO3u_DnOOhlv3VZxIbF7hrAzxr0AqIwZ-37W6L2czTh9I1lCEKGu2HuYGNI3EG-werNVMIOLOE-yrG0_kQ_gyylmC9iGqj2VuqrvgV5EcP7BomOSDQWgYjyWx4j7tJKpYI-O9zKrPt5rqm0fW10jWJHnTJheQOMp2OA"/>
+<div class="absolute bottom-12 left-12 right-12 glass-header p-6 rounded-lg shadow-lg">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-on-tertiary-container rounded-full text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_down</span>
+</div>
+<div>
+<p class="text-xs font-bold text-secondary uppercase tracking-widest">Średnie oszczędności</p>
+<p class="text-2xl font-headline font-bold text-primary">15-25% Rocznie</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Now? Section (Bento Grid Style) -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="mb-16">
+<h2 class="font-headline text-3xl font-bold text-primary tracking-tight mb-4">Dlaczego właśnie teraz?</h2>
+<p class="text-secondary max-w-2xl">Skuteczna optymalizacja to nie tylko niższe rachunki, to przede wszystkim wyeliminowanie systemowych błędów w rozliczeniach z dystrybutorami.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between hover:translate-y-[-8px] transition-transform duration-300">
+<div>
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary">fact_check</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-primary mb-4 leading-snug">Weryfikacja faktur – eliminacja błędów OSD</h3>
+<p class="text-secondary text-sm leading-relaxed">
+                            Aż 12% faktur energetycznych zawiera błędy systemowe. Nasz audyt wyłapuje nadpłaty i zapewnia ich korektę u Operatora Systemu Dystrybucyjnego.
+                        </p>
+</div>
+<div class="mt-8 pt-6 border-t border-surface-container">
+<span class="text-xs font-bold text-on-tertiary-container bg-tertiary-fixed px-3 py-1 rounded-full">NATYCHMIASTOWE</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between hover:translate-y-[-8px] transition-transform duration-300">
+<div>
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary">energy_savings_leaf</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-primary mb-4 leading-snug">Optymalizacja mocy zamówionej</h3>
+<p class="text-secondary text-sm leading-relaxed">
+                            Płać tylko za to, czego faktycznie potrzebujesz. Dopasowujemy parametry techniczne do rzeczywistego zużycia, generując oszczędności od pierwszego dnia.
+                        </p>
+</div>
+<div class="mt-8 pt-6 border-t border-surface-container">
+<span class="text-xs font-bold text-on-tertiary-container bg-tertiary-fixed px-3 py-1 rounded-full">STRATEGICZNE</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between hover:translate-y-[-8px] transition-transform duration-300">
+<div>
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary">query_stats</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-primary mb-4 leading-snug">Wsparcie planowania budżetowego</h3>
+<p class="text-secondary text-sm leading-relaxed">
+                            Precyzyjne prognozy kosztów pozwalają na bezpieczne planowanie wydatków gminy, eliminując ryzyko nagłych deficytów w kasie miejskiej.
+                        </p>
+</div>
+<div class="mt-8 pt-6 border-t border-surface-container">
+<span class="text-xs font-bold text-on-tertiary-container bg-tertiary-fixed px-3 py-1 rounded-full">PLANOWANIE</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Strategic Arguments -->
+<section class="py-24 px-8 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="order-2 lg:order-1">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="p-6 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">gavel</span>
+<h4 class="font-headline font-bold text-primary mb-2">Dyscyplina Finansów</h4>
+<p class="text-xs text-secondary">Pełna ochrona przed zarzutami o naruszenie dyscypliny finansów publicznych poprzez optymalizację kosztów.</p>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">priority_high</span>
+<h4 class="font-headline font-bold text-primary mb-2">Likwidacja "Ukrytych Kar"</h4>
+<p class="text-xs text-secondary">Wykrywamy i eliminujemy opłaty za ponadnormatywny pobór mocy i energię bierną.</p>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">group_work</span>
+<h4 class="font-headline font-bold text-primary mb-2">Odciążenie pracowników</h4>
+<p class="text-xs text-secondary">Automatyzacja procesów kontrolnych pozwala Twojemu zespołowi skupić się na kluczowych zadaniach.</p>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">shield_with_heart</span>
+<h4 class="font-headline font-bold text-primary mb-2">Bezpieczeństwo</h4>
+<p class="text-xs text-secondary">Stały monitoring rynku chroni przed niekorzystnymi zmianami stawek i taryf.</p>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="font-headline text-4xl font-extrabold text-primary mb-8 tracking-tighter leading-tight">Argumentacja strategiczna dla Skarbnika i Wójta</h2>
+<p class="text-lg text-secondary mb-8">Nasz system to nie tylko usługa doradcza. To kompletna infrastruktura monitoringu, która staje się zewnętrznym działem analiz energetycznych Twojej gminy.</p>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container">check_circle</span>
+<span class="font-medium">Redukcja ryzyk budżetowych</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container">check_circle</span>
+<span class="font-medium">Transparentność wydatków publicznych</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container">check_circle</span>
+<span class="font-medium">Wsparcie w przetargach na zakup energii</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Service Phases -->
+<section class="py-24 bg-primary text-white overflow-hidden">
+<div class="max-w-7xl mx-auto px-8">
+<h2 class="font-headline text-3xl font-bold mb-16 text-center">Trzy Etapy Transformacji Energetycznej</h2>
+<div class="relative">
+<!-- Connector Line (Desktop Only) -->
+<div class="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-on-primary-container opacity-20 -translate-y-1/2"></div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12 relative">
+<!-- Phase 1 -->
+<div class="relative z-10 text-center lg:text-left">
+<div class="w-16 h-16 bg-white text-primary rounded-full flex items-center justify-center font-headline text-2xl font-bold mb-8 mx-auto lg:mx-0 shadow-xl">I</div>
+<h3 class="font-headline text-xl font-bold mb-4">Audyt Zerowy i Standaryzacja</h3>
+<p class="text-on-primary-container text-sm leading-relaxed">
+                            Zbieramy dane z ostatnich 24 miesięcy, inwentaryzujemy wszystkie punkty poboru (PPE) i identyfikujemy błędy historyczne.
+                        </p>
+</div>
+<!-- Phase 2 -->
+<div class="relative z-10 text-center lg:text-left">
+<div class="w-16 h-16 bg-white text-primary rounded-full flex items-center justify-center font-headline text-2xl font-bold mb-8 mx-auto lg:mx-0 shadow-xl">II</div>
+<h3 class="font-headline text-xl font-bold mb-4">Aktywna Kontrola i Obsługa Danych</h3>
+<p class="text-on-primary-container text-sm leading-relaxed">
+                            Ciągły monitoring faktur bieżących, weryfikacja poprawności naliczeń i automatyczne alerty o przekroczeniach mocy.
+                        </p>
+</div>
+<!-- Phase 3 -->
+<div class="relative z-10 text-center lg:text-left">
+<div class="w-16 h-16 bg-white text-primary rounded-full flex items-center justify-center font-headline text-2xl font-bold mb-8 mx-auto lg:mx-0 shadow-xl">III</div>
+<h3 class="font-headline text-xl font-bold mb-4">Analiza i Wsparcie Strategiczne</h3>
+<p class="text-on-primary-container text-sm leading-relaxed">
+                            Miesięczne raporty dla Zarządu, prognozowanie budżetu na kolejny rok oraz rekomendacje modernizacyjne.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-24 px-8 max-w-7xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline text-4xl font-extrabold text-primary mb-4 tracking-tighter">Inwestycja, która się zwraca</h2>
+<p class="text-secondary">Przejrzyste zasady współpracy bez ukrytych kosztów.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+<!-- Fixed Fee -->
+<div class="bg-surface-container-lowest p-10 rounded-xl shadow-lg border border-surface-variant/20">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-headline font-bold text-xl text-primary">Abonament Systemowy</h3>
+<p class="text-xs text-secondary uppercase font-bold tracking-widest mt-1">Pełna Obsługa</p>
+</div>
+<span class="bg-primary-fixed text-primary px-3 py-1 rounded-full text-[10px] font-bold">REKOMENDOWANE</span>
+</div>
+<div class="mb-8">
+<span class="text-4xl font-headline font-extrabold text-primary">4 800 PLN</span>
+<span class="text-secondary font-medium">/ miesiąc</span>
+</div>
+<ul class="space-y-4 mb-10 text-sm">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container text-xl">check</span>
+<span>Audyt Zerowy w cenie pierwszego miesiąca</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container text-xl">check</span>
+<span>Stały monitoring wszystkich PPE</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container text-xl">check</span>
+<span>Miesięczne raporty oszczędnościowe</span>
+</li>
+</ul>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-bold active:scale-[0.98] transition-transform">Wybierz Rocznie (57 600 PLN)</button>
+</div>
+<!-- Success Fee -->
+<div class="bg-surface-container-low p-10 rounded-xl flex flex-col">
+<div class="mb-8">
+<h3 class="font-headline font-bold text-xl text-primary">Success Fee</h3>
+<p class="text-xs text-secondary uppercase font-bold tracking-widest mt-1">Wynikowa</p>
+</div>
+<div class="mb-8">
+<span class="text-4xl font-headline font-extrabold text-primary">15%</span>
+<span class="text-secondary font-medium">od oszczędności</span>
+</div>
+<p class="text-sm text-secondary mb-10 leading-relaxed">
+                    Dodatkowy bonus za wygenerowane oszczędności przekraczające założony plan bazowy. Dzielimy się sukcesem – zarabiamy tylko wtedy, gdy Ty oszczędzasz.
+                </p>
+<div class="mt-auto">
+<button class="w-full bg-surface-container-highest text-primary py-4 rounded-xl font-bold active:scale-[0.98] transition-transform">Zapytaj o detale</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 px-8">
+<div class="max-w-7xl mx-auto relative overflow-hidden bg-primary-container rounded-[2rem] p-12 md:p-24 text-center">
+<div class="absolute inset-0 opacity-10">
+<img alt="Data Network" class="w-full h-full object-cover" data-alt="Digital blue network glowing connections representing data management and futuristic urban planning technology" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbsQXlrqeyEOvbWtRaFnUeW5CYzWDFKjGGDv2u7BBytqK8SKaOwkMZATf14NbBS6PGy93YfYpFOTOVj--ZSh6fyLJIU70Dtk2XZbOtKVH4h6zQybApcVVzHXvojnZYqWoUOhyi8geBoZnlFLFinzgvt5jz0A0rVCtyAbNYkZNgIgmahCdU9ixEZ3QGYkS16iBzSSm5JyCioc19bZ9PwUvpunEYEqcpHuicuCVGvlp5hF3PWMJBdBYYbNdAFwZRKTtS07DL_yPcZt4"/>
+</div>
+<div class="relative z-10">
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold text-white mb-8 tracking-tighter">Zabezpiecz budżet swojej gminy już teraz</h2>
+<p class="text-primary-fixed-dim text-xl max-w-2xl mx-auto mb-12">
+                    Niestabilność cen energii to największe ryzyko dla samorządów. Wprowadź systemowy monitoring i odzyskaj kontrolę nad finansami publicznymi.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-6">
+<button class="bg-white text-primary px-10 py-5 rounded-full font-bold text-lg shadow-2xl hover:scale-105 transition-transform">
+                        Umów prezentację systemu
+                    </button>
+<button class="border border-on-primary-container text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-white/10 transition-colors">
+                        Pobierz broszurę PDF
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 mt-20 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 max-w-7xl mx-auto font-['Inter'] text-sm leading-relaxed">
+<div class="col-span-1 md:col-span-1">
+<span class="text-xl font-bold text-slate-900 dark:text-white block mb-4 font-headline">CivicArchitect</span>
+<p class="text-slate-500 dark:text-slate-400">Systemowy Monitoring i Optymalizacja Kosztów Energii dla sektora publicznego.</p>
+</div>
+<div>
+<h5 class="text-slate-900 dark:text-white font-medium mb-4">Usługa</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" href="#">Audyt Zerowy</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" href="#">Monitoring faktur</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" href="#">Analizy OSD</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-slate-900 dark:text-white font-medium mb-4">Zasoby</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" href="#">Regulamin</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" href="#">Polityka prywatności</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" href="#">BIP</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-slate-900 dark:text-white font-medium mb-4">Kontakt</h5>
+<p class="text-slate-500 dark:text-slate-400">ul. Architektów 12<br/>00-001 Warszawa<br/>kontakt@civicarchitect.pl</p>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-slate-500 dark:text-slate-400">© 2024 CivicArchitect Municipal Energy. Wszystkie prawa zastrzeżone.</p>
+</div>
+</footer>
+</body></html>
