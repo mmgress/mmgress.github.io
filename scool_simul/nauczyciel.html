@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Nauczyciela — prowadzenie klasy</title>
+  <meta name="description" content="Nowoczesny panel nauczyciela: plan dnia, klasy, frekwencja, oceny, zadania i wiadomości w jednym miejscu." />
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f8fbff;
+      --text: #1d2736;
+      --muted: #6d7a8c;
+      --border: #dbe4ee;
+      --primary: #1e5eff;
+      --primary-dark: #1648c7;
+      --success: #1f9d61;
+      --warning: #e6a700;
+      --danger: #d64545;
+      --info: #2a7de1;
+      --teacher: #0f766e;
+      --teacher-soft: rgba(15, 118, 110, 0.10);
+      --shadow: 0 10px 30px rgba(19, 39, 69, 0.08);
+      --radius: 18px;
+      --max-width: 1400px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+
+    .sidebar {
+      background: #13243f;
+      color: #eef4ff;
+      padding: 24px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--teacher), #2aa39a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 13px;
+      color: #b7c6df;
+      margin-top: 2px;
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #93a5c4;
+      padding: 0 12px;
+      margin-bottom: 4px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      border-radius: 14px;
+      color: #eaf1fc;
+      transition: 0.2s ease;
+      font-size: 15px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .nav-link .icon {
+      width: 22px;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 16px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      font-size: 14px;
+      color: #cfdaec;
+    }
+
+    .sidebar-footer strong {
+      display: block;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .main { padding: 28px; }
+
+    .topbar {
+      max-width: var(--max-width);
+      margin: 0 auto 24px auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-left h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    .topbar-left p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      min-width: 280px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .search input {
+      border: 0;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn {
+      border: 0;
+      outline: none;
+      cursor: pointer;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--teacher);
+      color: white;
+      box-shadow: 0 10px 20px rgba(15, 118, 110, 0.18);
+    }
+    .btn-primary:hover { filter: brightness(0.95); }
+
+    .btn-soft {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 24px;
+    }
+
+    .left-column,
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 22px 24px 10px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .card-header h2,
+    .card-header h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .card-header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 28px;
+      background:
+        radial-gradient(circle at top right, rgba(15, 118, 110, 0.16), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(30, 94, 255, 0.10), transparent 32%),
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 20px;
+    }
+
+    .hero-main h2 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    .hero-main p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .today-summary {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .mini-stat {
+      background: rgba(255,255,255,0.86);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .mini-stat .label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .mini-stat .value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .mini-stat .hint {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .priority-box {
+      background: #13243f;
+      color: white;
+      border-radius: 20px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: space-between;
+    }
+
+    .priority-box small {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #aac0e5;
+    }
+
+    .priority-box h3 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .priority-box p {
+      margin: 0;
+      color: #d6e2f7;
+      font-size: 14px;
+    }
+
+    .priority-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .class-tabs {
+      padding: 0 24px 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .class-tab {
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      min-width: 180px;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .class-tab.active {
+      border-color: rgba(15, 118, 110, 0.35);
+      background: var(--teacher-soft);
+    }
+
+    .class-tab strong { display: block; font-size: 15px; }
+    .class-tab span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .section-body { padding: 0 24px 24px; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .task-list,
+    .message-list,
+    .grade-list,
+    .schedule-list,
+    .alert-list,
+    .attendance-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .item-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .item h4 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-danger { background: rgba(214, 69, 69, 0.12); color: var(--danger); }
+    .badge-warning { background: rgba(230, 167, 0, 0.14); color: #9f7400; }
+    .badge-success { background: rgba(31, 157, 97, 0.12); color: var(--success); }
+    .badge-info { background: rgba(42, 125, 225, 0.12); color: var(--info); }
+    .badge-teacher { background: rgba(15, 118, 110, 0.12); color: var(--teacher); }
+
+    .grade-row {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .grade-value {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .grade-good { background: var(--success); }
+    .grade-mid { background: var(--warning); color: #3f3000; }
+    .grade-bad { background: var(--danger); }
+    .grade-teacher { background: var(--teacher); }
+
+    .muted-link {
+      color: var(--teacher);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .schedule-row,
+    .attendance-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .time-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-align: center;
+      padding: 12px 8px;
+      font-weight: 700;
+      color: var(--teacher);
+    }
+
+    .alert-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .alert-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .dot-danger { background: var(--danger); }
+    .dot-warning { background: var(--warning); }
+    .dot-success { background: var(--success); }
+    .dot-info { background: var(--info); }
+    .dot-teacher { background: var(--teacher); }
+
+    .progress-card { padding: 24px; }
+    .progress-card h3 { margin: 0 0 8px 0; font-size: 20px; }
+    .progress-card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .progress-bars {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .progress-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-item .label-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .bar {
+      height: 12px;
+      background: #e9eff7;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--teacher), #39bdb2);
+    }
+
+    .footer-note {
+      max-width: var(--max-width);
+      margin: 28px auto 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 1200px) {
+      .container,
+      .hero-grid,
+      .grid-2 { grid-template-columns: 1fr; }
+      .today-summary { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 980px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; }
+      .main { padding: 18px; }
+    }
+
+    @media (max-width: 680px) {
+      .topbar-left h1 { font-size: 24px; }
+      .search { min-width: 100%; }
+      .today-summary { grid-template-columns: 1fr; }
+      .class-tabs { flex-direction: column; }
+      .grade-row { grid-template-columns: 58px 1fr; }
+      .grade-row > div:last-child { grid-column: 2; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">N</div>
+        <div class="brand-text">
+          <strong>Panel Nauczyciela</strong>
+          <span>Prowadzenie klasy bez chaosu</span>
+        </div>
+      </a>
+
+      <div class="nav-group">
+        <div class="nav-title">Główne</div>
+        <a href="#start" class="nav-link active"><span class="icon">🏠</span>Start</a>
+        <a href="#klasy" class="nav-link"><span class="icon">👥</span>Klasy</a>
+        <a href="#plan-dnia" class="nav-link"><span class="icon">📅</span>Plan dnia</a>
+        <a href="#zadania" class="nav-link"><span class="icon">📝</span>Zadania</a>
+        <a href="#oceny" class="nav-link"><span class="icon">⭐</span>Oceny</a>
+        <a href="#wiadomosci" class="nav-link"><span class="icon">✉️</span>Wiadomości</a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-title">Dodatkowe</div>
+        <a href="#frekwencja" class="nav-link"><span class="icon">📋</span>Frekwencja</a>
+        <a href="#postepy" class="nav-link"><span class="icon">📈</span>Postępy</a>
+        <a href="#alerty" class="nav-link"><span class="icon">🔔</span>Uwagi</a>
+        <a href="index.html" class="nav-link"><span class="icon">↩️</span>Powrót</a>
+      </div>
+
+      <div class="sidebar-footer">
+        <strong>Najważniejsza zasada</strong>
+        Nauczyciel ma w kilka sekund wiedzieć, co dziś prowadzi, co sprawdza i gdzie wymagana jest reakcja.
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar" id="start">
+        <div class="topbar-left">
+          <h1>Dzień dobry, Pani Marto</h1>
+          <p>Masz dziś 5 lekcji, 2 klasy do sprawdzenia, 7 wiadomości i 3 sprawy wymagające szybkiej reakcji.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <a href="index.html" class="btn btn-soft">← Wróć do wyboru dostępu</a>
+          <label class="search">
+            <span>🔎</span>
+            <input type="text" placeholder="Szukaj klasy, ucznia, tematu lekcji..." />
+          </label>
+          <button class="btn btn-soft">Eksport dnia</button>
+          <button class="btn btn-primary">Dodaj temat lekcji</button>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="left-column">
+          <section class="card hero">
+            <div class="hero-grid">
+              <div class="hero-main">
+                <h2>Co dzieje się dziś?</h2>
+                <p>
+                  Zamiast przeklikiwać się między frekwencją, ocenami, planem i wiadomościami,
+                  nauczyciel od razu widzi dzisiejsze lekcje, klasy wymagające uwagi i najbliższe zadania organizacyjne.
+                </p>
+
+                <div class="today-summary">
+                  <div class="mini-stat">
+                    <div class="label">Lekcje dziś</div>
+                    <div class="value">5</div>
+                    <div class="hint">od 8:00 do 13:35</div>
+                  </div>
+
+                  <div class="mini-stat">
+                    <div class="label">Do sprawdzenia</div>
+                    <div class="value">24</div>
+                    <div class="hint">kartkówki i zadania</div>
+                  </div>
+
+                  <div class="mini-stat">
+                    <div class="label">Wiadomości</div>
+                    <div class="value">7</div>
+                    <div class="hint">2 pilne od rodziców</div>
+                  </div>
+
+                  <div class="mini-stat">
+                    <div class="label">Nieobecności</div>
+                    <div class="value">4</div>
+                    <div class="hint">wymagają wpisania</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="priority-box">
+                <small>Priorytet dnia</small>
+                <h3>Klasa 4B wymaga dziś domknięcia ocen cząstkowych przed wywiadówką</h3>
+                <p>
+                  Brakuje jeszcze wpisania wyników z dwóch kartkówek i odpowiedzi ustnej u trzech uczniów.
+                </p>
+                <div class="priority-pill">⚠️ Najpierw 4B, potem wiadomości od rodziców</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="klasy">
+            <div class="card-header">
+              <div>
+                <h2>Klasy</h2>
+                <p>Jedno kliknięcie i od razu wiadomo, która klasa jest dziś na pierwszym planie.</p>
+              </div>
+            </div>
+
+            <div class="class-tabs">
+              <div class="class-tab active">
+                <strong>Klasa 4B</strong>
+                <span>dziś najwięcej pracy organizacyjnej</span>
+              </div>
+              <div class="class-tab">
+                <strong>Klasa 5A</strong>
+                <span>spokojny dzień, 1 lekcja</span>
+              </div>
+              <div class="class-tab">
+                <strong>Klasa 6C</strong>
+                <span>kartkówka do omówienia</span>
+              </div>
+            </div>
+
+            <div class="section-body">
+              <div class="grid-2">
+                <div id="zadania">
+                  <h3>Najbliższe zadania nauczyciela</h3>
+                  <div class="task-list">
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Wpisać oceny z kartkówki — 4B</h4>
+                        <span class="badge badge-danger">Dziś</span>
+                      </div>
+                      <p>Matematyka • 24 prace • termin przed końcem dnia</p>
+                    </div>
+
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Przygotować materiały do 6C</h4>
+                        <span class="badge badge-warning">Za 2 godziny</span>
+                      </div>
+                      <p>Temat: ułamki zwykłe i porównywanie wartości</p>
+                    </div>
+
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Wysłać przypomnienie o wycieczce</h4>
+                        <span class="badge badge-info">W tygodniu</span>
+                      </div>
+                      <p>5A • brak odpowiedzi od 6 rodziców</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="wiadomosci">
+                  <h3>Ostatnie wiadomości</h3>
+                  <div class="message-list">
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Rodzic ucznia z 4B</h4>
+                        <span class="badge badge-danger">Pilne</span>
+                      </div>
+                      <p>Prośba o informację w sprawie poprawy pracy klasowej i terminu dodatkowego zaliczenia.</p>
+                    </div>
+
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Dyrekcja</h4>
+                        <span class="badge badge-teacher">Organizacja</span>
+                      </div>
+                      <p>Przypomnienie o zamknięciu ocen przewidywanych do piątku do godziny 15:00.</p>
+                    </div>
+
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Wychowawca 6C</h4>
+                        <span class="badge badge-success">Nowa</span>
+                      </div>
+                      <p>Prośba o krótką informację o postępach dwóch uczniów przed rozmową z rodzicami.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="plan-dnia">
+            <div class="card-header">
+              <div>
+                <h2>Plan dnia</h2>
+                <p>Nauczyciel powinien od razu widzieć swój przebieg dnia i kontekst każdej lekcji.</p>
+              </div>
+              <a href="#start" class="muted-link">Powrót na górę</a>
+            </div>
+
+            <div class="section-body">
+              <div class="schedule-list">
+                <div class="item schedule-row">
+                  <div class="time-box">08:00<br>4B</div>
+                  <div>
+                    <h4>Matematyka — działania pisemne</h4>
+                    <p>Sprawdzenie pracy domowej, krótkie utrwalenie i zapis frekwencji.</p>
+                  </div>
+                </div>
+
+                <div class="item schedule-row">
+                  <div class="time-box">09:45<br>5A</div>
+                  <div>
+                    <h4>Matematyka — kolejność działań</h4>
+                    <p>Ćwiczenia tablicowe, 2 uczniów do dopytania.</p>
+                  </div>
+                </div>
+
+                <div class="item schedule-row">
+                  <div class="time-box">11:30<br>6C</div>
+                  <div>
+                    <h4>Matematyka — ułamki zwykłe</h4>
+                    <p>Kartkówka na wejściu i omówienie błędów z poprzedniej pracy.</p>
+                  </div>
+                </div>
+
+                <div class="item schedule-row">
+                  <div class="time-box">13:15<br>4B</div>
+                  <div>
+                    <h4>Konsultacje</h4>
+                    <p>Uzupełnienie ocen i rozmowy z uczniami wymagającymi poprawy.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="frekwencja">
+            <div class="card-header">
+              <div>
+                <h2>Frekwencja do domknięcia</h2>
+                <p>Nieobecności i spóźnienia, które wymagają odnotowania albo wyjaśnienia.</p>
+              </div>
+            </div>
+
+            <div class="section-body">
+              <div class="attendance-list">
+                <div class="item attendance-row">
+                  <div class="time-box">4B<br>08:00</div>
+                  <div>
+                    <h4>Jan Kowalski — nieobecny</h4>
+                    <p>Brak usprawiedliwienia, wiadomość od rodzica jeszcze nie wpłynęła.</p>
+                  </div>
+                </div>
+
+                <div class="item attendance-row">
+                  <div class="time-box">5A<br>09:45</div>
+                  <div>
+                    <h4>Maria Nowak — spóźnienie</h4>
+                    <p>Wejście 12 minut po dzwonku, do oznaczenia w dzienniku.</p>
+                  </div>
+                </div>
+
+                <div class="item attendance-row">
+                  <div class="time-box">6C<br>11:30</div>
+                  <div>
+                    <h4>2 uczniów — brak statusu</h4>
+                    <p>Frekwencja z lekcji nie została jeszcze zamknięta.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="right-column">
+          <section class="card progress-card" id="postepy">
+            <h3>Szybki przegląd pracy</h3>
+            <p>Bez szukania po modułach. Od razu widać, co jest gotowe, a co jeszcze wymaga domknięcia.</p>
+
+            <div class="progress-bars">
+              <div class="progress-item">
+                <div class="label-row">
+                  <span>Wpisane oceny — 4B</span>
+                  <strong>68%</strong>
+                </div>
+                <div class="bar"><span style="width: 68%;"></span></div>
+              </div>
+
+              <div class="progress-item">
+                <div class="label-row">
+                  <span>Domknięta frekwencja</span>
+                  <strong>74%</strong>
+                </div>
+                <div class="bar"><span style="width: 74%;"></span></div>
+              </div>
+
+              <div class="progress-item">
+                <div class="label-row">
+                  <span>Sprawdzone prace</span>
+                  <strong>52%</strong>
+                </div>
+                <div class="bar"><span style="width: 52%;"></span></div>
+              </div>
+
+              <div class="progress-item">
+                <div class="label-row">
+                  <span>Odpowiedzi na wiadomości</span>
+                  <strong>43%</strong>
+                </div>
+                <div class="bar"><span style="width: 43%;"></span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="oceny">
+            <div class="card-header">
+              <div>
+                <h3>Oceny do wpisania lub omówienia</h3>
+                <p>To ma być czytelne od razu, bez przeklikiwania między klasami.</p>
+              </div>
+            </div>
+
+            <div class="section-body">
+              <div class="grade-list">
+                <div class="item">
+                  <div class="grade-row">
+                    <div class="grade-value grade-teacher">24</div>
+                    <div>
+                      <h4>Kartkówka — 4B</h4>
+                      <p>Prace czekają na sprawdzenie i wpis do dziennika.</p>
+                    </div>
+                    <div><a href="#zadania" class="muted-link">Sprawdź</a></div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="grade-row">
+                    <div class="grade-value grade-mid">3</div>
+                    <div>
+                      <h4>Średnia klasy 6C</h4>
+                      <p>Wynik przeciętny, warto omówić najczęstsze błędy na lekcji.</p>
+                    </div>
+                    <div><a href="#plan-dnia" class="muted-link">Omów dziś</a></div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="grade-row">
+                    <div class="grade-value grade-bad">5</div>
+                    <div>
+                      <h4>Brak ocen u 5 uczniów</h4>
+                      <p>4B • konieczne uzupełnienie przed wywiadówką.</p>
+                    </div>
+                    <div><a href="#alerty" class="muted-link">Zobacz listę</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="alerty">
+            <div class="card-header">
+              <div>
+                <h3>Alerty i uwagi</h3>
+                <p>Jedno miejsce na sprawy wymagające reakcji nauczyciela.</p>
+              </div>
+            </div>
+
+            <div class="section-body">
+              <div class="alert-list">
+                <div class="alert-item">
+                  <div class="alert-dot dot-danger"></div>
+                  <div>
+                    <strong>4B — oceny przewidywane</strong>
+                    <p>Brakuje wpisów dla 5 uczniów. Bez tego nie da się zamknąć zestawienia przed spotkaniem z rodzicami.</p>
+                  </div>
+                </div>
+
+                <div class="alert-item">
+                  <div class="alert-dot dot-warning"></div>
+                  <div>
+                    <strong>6C — słaby wynik kartkówki</strong>
+                    <p>Klasa popełnia powtarzalne błędy w porównywaniu ułamków. Warto wrócić do podstaw.</p>
+                  </div>
+                </div>
+
+                <div class="alert-item">
+                  <div class="alert-dot dot-info"></div>
+                  <div>
+                    <strong>2 wiadomości od rodziców</strong>
+                    <p>Wymagają odpowiedzi jeszcze dziś, bo dotyczą popraw i nieobecności.</p>
+                  </div>
+                </div>
+
+                <div class="alert-item">
+                  <div class="alert-dot dot-teacher"></div>
+                  <div>
+                    <strong>Wniosek organizacyjny</strong>
+                    <p>Dziś najpierw domknij 4B, potem frekwencję i dopiero na końcu korespondencję mniej pilną.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        Projekt demonstracyjny statycznego panelu nauczyciela — układ zaprojektowany pod szybkie prowadzenie klasy, bez chaosu i bez zbędnych ekranów pośrednich.
+      </div>
+    </main>
+  </div>
+</body>
+</html>
