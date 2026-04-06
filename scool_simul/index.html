@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Rodzica — edukacja dziecka</title>
+  <meta name="description" content="Nowoczesny panel rodzica: oceny, zadania, wiadomości i plan dnia dziecka w jednym miejscu." />
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f8fbff;
+      --text: #1d2736;
+      --muted: #6d7a8c;
+      --border: #dbe4ee;
+      --primary: #1e5eff;
+      --primary-dark: #1648c7;
+      --success: #1f9d61;
+      --warning: #e6a700;
+      --danger: #d64545;
+      --info: #2a7de1;
+      --shadow: 0 10px 30px rgba(19, 39, 69, 0.08);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --max-width: 1400px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+
+    .sidebar {
+      background: #13243f;
+      color: #eef4ff;
+      padding: 24px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #4c8dff, #88b6ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 13px;
+      color: #b7c6df;
+      margin-top: 2px;
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #93a5c4;
+      padding: 0 12px;
+      margin-bottom: 4px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      border-radius: 14px;
+      color: #eaf1fc;
+      transition: 0.2s ease;
+      font-size: 15px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .nav-link .icon {
+      width: 22px;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 16px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      font-size: 14px;
+      color: #cfdaec;
+    }
+
+    .sidebar-footer strong {
+      display: block;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .main {
+      padding: 28px;
+    }
+
+    .topbar {
+      max-width: var(--max-width);
+      margin: 0 auto 24px auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-left h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    .topbar-left p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      min-width: 280px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .search input {
+      border: 0;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn {
+      border: 0;
+      outline: none;
+      cursor: pointer;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 10px 20px rgba(30, 94, 255, 0.18);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-soft {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 24px;
+    }
+
+    .left-column,
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 22px 24px 10px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .card-header h2,
+    .card-header h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .card-header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 28px;
+      background:
+        radial-gradient(circle at top right, rgba(30, 94, 255, 0.18), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(42, 125, 225, 0.12), transparent 32%),
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 20px;
+    }
+
+    .hero-main h2 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    .hero-main p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .today-summary {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .mini-stat {
+      background: rgba(255,255,255,0.86);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .mini-stat .label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .mini-stat .value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .mini-stat .hint {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .priority-box {
+      background: #13243f;
+      color: white;
+      border-radius: 20px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: space-between;
+    }
+
+    .priority-box small {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #aac0e5;
+    }
+
+    .priority-box h3 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .priority-box p {
+      margin: 0;
+      color: #d6e2f7;
+      font-size: 14px;
+    }
+
+    .priority-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .children-tabs {
+      padding: 0 24px 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .child-tab {
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      min-width: 180px;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .child-tab.active {
+      border-color: rgba(30, 94, 255, 0.35);
+      background: rgba(30, 94, 255, 0.08);
+    }
+
+    .child-tab strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .child-tab span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .section-body {
+      padding: 0 24px 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .task-list,
+    .message-list,
+    .grade-list,
+    .schedule-list,
+    .alert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .item-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .item h4 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-danger {
+      background: rgba(214, 69, 69, 0.12);
+      color: var(--danger);
+    }
+
+    .badge-warning {
+      background: rgba(230, 167, 0, 0.14);
+      color: #9f7400;
+    }
+
+    .badge-success {
+      background: rgba(31, 157, 97, 0.12);
+      color: var(--success);
+    }
+
+    .badge-info {
+      background: rgba(42, 125, 225, 0.12);
+      color: var(--info);
+    }
+
+    .grade-row {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .grade-value {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .grade-good {
+      background: var(--success);
+    }
+
+    .grade-mid {
+      background: var(--warning);
+      color: #3f3000;
+    }
+
+    .grade-bad {
+      background: var(--danger);
+    }
+
+    .muted-link {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .schedule-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .time-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-align: center;
+      padding: 12px 8px;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .alert-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+    }
+
+    .alert-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .dot-danger { background: var(--danger); }
+    .dot-warning { background: var(--warning); }
+    .dot-success { background: var(--success); }
+    .dot-info { background: var(--info); }
+
+    .progress-card {
+      padding: 24px;
+    }
+
+    .progress-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 20px;
+    }
+
+    .progress-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .progress-bars {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .progress-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-item .label-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .bar {
+      height: 12px;
+      background: #e9eff7;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #1e5eff, #66a3ff);
+    }
+
+    .footer-note {
+      max-width: var(--max-width);
+      margin: 28px auto 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 1200px) {
+      .container,
+      .hero-grid,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .today-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+      }
+
+      .main {
+        padding: 18px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar-left h1 {
+        font-size: 24px;
+      }
+
+      .search {
+        min-width: 100%;
+      }
+
+      .today-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .children-tabs {
+        flex-direction: column;
+      }
+
+      .grade-row {
+        grid-template-columns: 58px 1fr;
+      }
+
+      .grade-row > div:last-child {
+        grid-column: 2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">R</div>
+        <div class="brand-text">
+          <strong>Panel Rodzica</strong>
+          <span>Edukacja bez chaosu</span>
+        </div>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-title">Główne</div>
+        <a href="#" class="nav-link active"><span class="icon">🏠</span>Start</a>
+        <a href="#" class="nav-link"><span class="icon">👦</span>Dzieci</a>
+        <a href="#" class="nav-link"><span class="icon">📝</span>Zadania</a>
+        <a href="#" class="nav-link"><span class="icon">📅</span>Plan lekcji</a>
+        <a href="#" class="nav-link"><span class="icon">⭐</span>Oceny</a>
+        <a href="#" class="nav-link"><span class="icon">✉️</span>Wiadomości</a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-title">Dodatkowe</div>
+        <a href="#" class="nav-link"><span class="icon">📈</span>Postępy</a>
+        <a href="#" class="nav-link"><span class="icon">🔔</span>Powiadomienia</a>
+        <a href="#" class="nav-link"><span class="icon">⚙️</span>Ustawienia</a>
+      </div>
+
+      <div class="sidebar-footer">
+        <strong>Najważniejsza zasada</strong>
+        Rodzic ma w 10 sekund zobaczyć, co dziś wymaga uwagi.
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="topbar-left">
+          <h1>Dzień dobry, Michale</h1>
+          <p>Masz dziś 3 sprawy wymagające uwagi: 1 zadanie pilne, 1 nową ocenę i 1 wiadomość od nauczyciela.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <label class="search">
+            <span>🔎</span>
+            <input type="text" placeholder="Szukaj dziecka, przedmiotu, zadania..." />
+          </label>
+          <button class="btn btn-soft">Eksport tygodnia</button>
+          <button class="btn btn-primary">Dodaj notatkę rodzica</button>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="left-column">
+          <section class="card hero">
+            <div class="hero-grid">
+              <div class="hero-main">
+                <h2>Co dzieje się dziś?</h2>
+                <p>
+                  Zamiast portalu pełnego reklam i rozpraszaczy, tutaj rodzic od razu widzi to, co naprawdę ważne:
+                  zaległości, nowe oceny, wiadomości od nauczycieli i plan dnia dzieci.
+                </p>
+
+                <div class="today-summary">
+                  <div class="mini-stat">
+                    <div class="label">Zadania na dziś</div>
+                    <div class="value">6</div>
+                    <div class="hint">w tym 1 pilne</div>
+                  </div>
+
+                  <div class="mini-stat">
+                    <div class="label">Nowe oceny</div>
+                    <div class="value">3</div>
+                    <div class="hint">ostatnie 24h</div>
+                  </div>
+
+                  <div class="mini-stat">
+                    <div class="label">Wiadomości</div>
+                    <div class="value">2</div>
+                    <div class="hint">1 nieprzeczytana</div>
+                  </div>
+
+                  <div class="mini-stat">
+                    <div class="label">Nieobecności</div>
+                    <div class="value">0</div>
+                    <div class="hint">brak problemów</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="priority-box">
+                <small>Priorytet dnia</small>
+                <h3>Tomek musi dziś poprawić działania pisemne z matematyki</h3>
+                <p>
+                  Ostatnia informacja od nauczyciela wskazuje, że największy problem dotyczy mnożenia i dzielenia pisemnego.
+                </p>
+                <div class="priority-pill">⚠️ Wymaga pracy dziś po południu</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-header">
+              <div>
+                <h2>Dzieci</h2>
+                <p>Jedno kliknięcie i wiadomo, co dzieje się u każdego dziecka.</p>
+              </div>
+            </div>
+
+            <div class="children-tabs">
+              <div class="child-tab active">
+                <strong>Tomasz</strong>
+                <span>Klasa 4 • dziś najwięcej uwagi</span>
+              </div>
+              <div class="child-tab">
+                <strong>Bartosz</strong>
+                <span>Klasa 1 • stabilnie</span>
+              </div>
+              <div class="child-tab">
+                <strong>Natalia</strong>
+                <span>Klasa 0 • brak zaległości</span>
+              </div>
+            </div>
+
+            <div class="section-body">
+              <div class="grid-2">
+                <div>
+                  <h3>Najbliższe zadania</h3>
+                  <div class="task-list">
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Matematyka — działania pisemne</h4>
+                        <span class="badge badge-danger">Dziś</span>
+                      </div>
+                      <p>Tomek • utrwalenie mnożenia i dzielenia pisemnego</p>
+                    </div>
+
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Przyroda — planety Układu Słonecznego</h4>
+                        <span class="badge badge-warning">Jutro</span>
+                      </div>
+                      <p>Bartek • kolejność planet i krótkie powtórzenie</p>
+                    </div>
+
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Ćwiczenie grafomotoryczne</h4>
+                        <span class="badge badge-info">W tygodniu</span>
+                      </div>
+                      <p>Natalia • zapis i staranność pisania</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3>Ostatnie wiadomości</h3>
+                  <div class="message-list">
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Wychowawca Bartka</h4>
+                        <span class="badge badge-info">Nowa</span>
+                      </div>
+                      <p>
+                        Prośba o bieżące śledzenie postępów, utrwalenie nazw planet oraz poprawę zapisu liter pisanych.
+                      </p>
+                    </div>
+
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Nauczycielka matematyki Tomka</h4>
+                        <span class="badge badge-success">Przeczytane</span>
+                      </div>
+                      <p>
+                        Największy problem dotyczy działań pisemnych oraz kolejności wykonywania działań.
+                      </p>
+                    </div>
+
+                    <div class="item">
+                      <div class="item-top">
+                        <h4>Ogłoszenie szkolne</h4>
+                        <span class="badge badge-warning">Ważne</span>
+                      </div>
+                      <p>
+                        Przypomnienie o materiałach potrzebnych na zajęcia po przerwie świątecznej.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-header">
+              <div>
+                <h2>Plan dnia</h2>
+                <p>Rodzic powinien od razu wiedzieć, co dziś czeka dziecko.</p>
+              </div>
+              <a href="#" class="muted-link">Pełny plan tygodnia</a>
+            </div>
+
+            <div class="section-body">
+              <div class="schedule-list">
+                <div class="item schedule-row">
+                  <div class="time-box">08:00</div>
+                  <div>
+                    <h4>Matematyka</h4>
+                    <p>Tomek • ćwiczenia z działań pisemnych</p>
+                  </div>
+                </div>
+
+                <div class="item schedule-row">
+                  <div class="time-box">09:45</div>
+                  <div>
+                    <h4>Przyroda</h4>
+                    <p>Bartek • Układ Słoneczny i nazwy planet</p>
+                  </div>
+                </div>
+
+                <div class="item schedule-row">
+                  <div class="time-box">11:30</div>
+                  <div>
+                    <h4>Język polski</h4>
+                    <p>Tomek • utrwalenie pojęć i ćwiczenia pisemne</p>
+                  </div>
+                </div>
+
+                <div class="item schedule-row">
+                  <div class="time-box">13:15</div>
+                  <div>
+                    <h4>Zajęcia przedszkolne</h4>
+                    <p>Natalia • praca manualna i ćwiczenia przygotowujące do pisania</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="right-column">
+          <section class="card progress-card">
+            <h3>Szybki przegląd postępów</h3>
+            <p>Bez przeklikiwania. Rodzic ma od razu wiedzieć, gdzie jest problem.</p>
+
+            <div class="progress-bars">
+              <div class="progress-item">
+                <div class="label-row">
+                  <span>Matematyka — Tomek</span>
+                  <strong>58%</strong>
+                </div>
+                <div class="bar"><span style="width: 58%;"></span></div>
+              </div>
+
+              <div class="progress-item">
+                <div class="label-row">
+                  <span>Przyroda — Bartek</span>
+                  <strong>71%</strong>
+                </div>
+                <div class="bar"><span style="width: 71%;"></span></div>
+              </div>
+
+              <div class="progress-item">
+                <div class="label-row">
+                  <span>Pisanie — Natalia</span>
+                  <strong>76%</strong>
+                </div>
+                <div class="bar"><span style="width: 76%;"></span></div>
+              </div>
+
+              <div class="progress-item">
+                <div class="label-row">
+                  <span>Systematyczność tygodnia</span>
+                  <strong>82%</strong>
+                </div>
+                <div class="bar"><span style="width: 82%;"></span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-header">
+              <div>
+                <h3>Nowe oceny</h3>
+                <p>To ma być czytelne od razu, bez szukania.</p>
+              </div>
+            </div>
+
+            <div class="section-body">
+              <div class="grade-list">
+                <div class="item">
+                  <div class="grade-row">
+                    <div class="grade-value grade-good">5</div>
+                    <div>
+                      <h4>Matematyka — ułamki dziesiętne</h4>
+                      <p>Adam • dziś • bardzo dobry wynik</p>
+                    </div>
+                    <div><a href="#" class="muted-link">Szczegóły</a></div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="grade-row">
+                    <div class="grade-value grade-mid">3</div>
+                    <div>
+                      <h4>Przyroda — Układ Słoneczny</h4>
+                      <p>Bartek • wymaga powtórzenia nazw planet</p>
+                    </div>
+                    <div><a href="#" class="muted-link">Ćwicz teraz</a></div>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="grade-row">
+                    <div class="grade-value grade-bad">2</div>
+                    <div>
+                      <h4>Dyktando literowe</h4>
+                      <p>Bartek • trening zapisu liter pisanych</p>
+                    </div>
+                    <div><a href="#" class="muted-link">Plan poprawy</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-header">
+              <div>
+                <h3>Alerty i uwagi</h3>
+                <p>Jedno miejsce na sprawy wymagające reakcji.</p>
+              </div>
+            </div>
+
+            <div class="section-body">
+              <div class="alert-list">
+                <div class="alert-item">
+                  <div class="alert-dot dot-danger"></div>
+                  <div>
+                    <strong>Tomek — matematyka</strong>
+                    <p>Największe trudności: mnożenie pisemne, dzielenie pisemne, kolejność działań.</p>
+                  </div>
+                </div>
+
+                <div class="alert-item">
+                  <div class="alert-dot dot-warning"></div>
+                  <div>
+                    <strong>Bartek — przyroda i pismo</strong>
+                    <p>Do utrwalenia: nazwy planet w odpowiedniej kolejności oraz staranność pisma.</p>
+                  </div>
+                </div>
+
+                <div class="alert-item">
+                  <div class="alert-dot dot-success"></div>
+                  <div>
+                    <strong>Natalia — sytuacja stabilna</strong>
+                    <p>Brak pilnych uwag. Można kontynuować spokojną pracę codzienną.</p>
+                  </div>
+                </div>
+
+                <div class="alert-item">
+                  <div class="alert-dot dot-info"></div>
+                  <div>
+                    <strong>Wniosek dla rodzica</strong>
+                    <p>Dziś warto poświęcić czas głównie Tomkowi i Bartkowi. Natalia nie wymaga pilnej interwencji.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        Projekt demonstracyjny statycznego panelu rodzica — układ zaprojektowany pod szybki ogląd sytuacji dziecka, bez reklam i bez chaosu.
+      </div>
+    </main>
+  </div>
+</body>
+</html>
