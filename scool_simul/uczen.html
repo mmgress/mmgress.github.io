@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Ucznia — nauka i plan dnia</title>
+  <meta name="description" content="Nowoczesny panel ucznia: plan dnia, zadania, oceny, terminy i materiały w jednym miejscu." />
+  <style>
+    :root { --bg:#f4f7fb; --surface:#fff; --surface-soft:#f8fbff; --text:#1d2736; --muted:#6d7a8c; --border:#dbe4ee; --student:#c78400; --student-dark:#9c6500; --success:#1f9d61; --warning:#e6a700; --danger:#d64545; --info:#2a7de1; --shadow:0 10px 30px rgba(19,39,69,.08); --radius:18px; --max-width:1400px; }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5} a{color:inherit;text-decoration:none}
+    .app{min-height:100vh;display:grid;grid-template-columns:280px 1fr}
+    .sidebar{background:#13243f;color:#eef4ff;padding:24px 18px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:24px}
+    .brand{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05)}
+    .brand-logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--student),#f0b544);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff}
+    .brand-text strong{display:block;font-size:18px}.brand-text span{display:block;font-size:13px;color:#b7c6df;margin-top:2px}
+    .nav-group{display:flex;flex-direction:column;gap:8px}.nav-title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#93a5c4;padding:0 12px;margin-bottom:4px}
+    .nav-link{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:14px;color:#eaf1fc;font-size:15px}.nav-link:hover,.nav-link.active{background:rgba(255,255,255,.08)} .nav-link .icon{width:22px;text-align:center;opacity:.9}
+    .sidebar-footer{margin-top:auto;padding:16px 14px;border-radius:16px;background:rgba(255,255,255,.05);font-size:14px;color:#cfdaec}.sidebar-footer strong{display:block;color:#fff;margin-bottom:4px}
+    .main{padding:28px}.topbar{max-width:var(--max-width);margin:0 auto 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .topbar-left h1{margin:0;font-size:30px;line-height:1.15}.topbar-left p{margin:8px 0 0;color:var(--muted);font-size:15px}.topbar-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .search{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 14px;min-width:280px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow)} .search input{border:0;outline:none;width:100%;font-size:14px;background:transparent;color:var(--text)}
+    .btn{border:0;cursor:pointer;border-radius:14px;padding:12px 16px;font-weight:600;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn-primary{background:var(--student);color:#fff;box-shadow:0 10px 20px rgba(199,132,0,.20)} .btn-primary:hover{background:var(--student-dark)} .btn-soft{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+    .container{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:1.8fr 1fr;gap:24px}.left-column,.right-column{display:flex;flex-direction:column;gap:24px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .card-header{padding:22px 24px 10px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}.card-header h2,.card-header h3{margin:0;font-size:22px}.card-header p{margin:6px 0 0;color:var(--muted);font-size:14px}
+    .hero{padding:28px;background:radial-gradient(circle at top right, rgba(199,132,0,.16), transparent 28%),radial-gradient(circle at bottom left, rgba(30,94,255,.10), transparent 32%),linear-gradient(180deg,#fff 0%,#fffaf1 100%)} .hero-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
+    .hero-main h2{margin:0;font-size:30px;line-height:1.15}.hero-main p{margin:12px 0 0;color:var(--muted);max-width:760px}.today-summary{margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .mini-stat{background:rgba(255,255,255,.86);border:1px solid var(--border);border-radius:16px;padding:16px}.mini-stat .label{font-size:13px;color:var(--muted);margin-bottom:8px}.mini-stat .value{font-size:28px;font-weight:700;line-height:1}.mini-stat .hint{margin-top:8px;font-size:13px;color:var(--muted)}
+    .priority-box{background:#13243f;color:#fff;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px;justify-content:space-between}.priority-box small{text-transform:uppercase;letter-spacing:.12em;color:#aac0e5}.priority-box h3{margin:0;font-size:22px;line-height:1.2}.priority-box p{margin:0;color:#d6e2f7;font-size:14px}.priority-pill{display:inline-flex;align-items:center;gap:8px;width:fit-content;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:600}
+    .section-body{padding:0 24px 24px}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.task-list,.message-list,.grade-list,.schedule-list,.alert-list,.materials-list{display:flex;flex-direction:column;gap:14px}
+    .item{border:1px solid var(--border);border-radius:16px;padding:16px;background:#fff}.item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}.item h4{margin:0;font-size:16px;line-height:1.25}.item p{margin:0;color:var(--muted);font-size:14px}
+    .badge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}.badge-danger{background:rgba(214,69,69,.12);color:var(--danger)}.badge-warning{background:rgba(230,167,0,.14);color:#9f7400}.badge-success{background:rgba(31,157,97,.12);color:var(--success)}.badge-info{background:rgba(42,125,225,.12);color:var(--info)}.badge-student{background:rgba(199,132,0,.14);color:var(--student-dark)}
+    .grade-row{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center}.grade-value{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff}.grade-good{background:var(--success)}.grade-mid{background:var(--warning);color:#3f3000}.grade-bad{background:var(--danger)}
+    .muted-link{color:var(--student-dark);font-weight:600;font-size:14px}.schedule-row{display:grid;grid-template-columns:80px 1fr;gap:14px;align-items:start}.time-box{background:var(--surface-soft);border:1px solid var(--border);border-radius:14px;text-align:center;padding:12px 8px;font-weight:700;color:var(--student-dark)}
+    .alert-item{display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:16px;border:1px solid var(--border);background:var(--surface-soft)} .alert-dot{width:12px;height:12px;border-radius:50%;margin-top:6px;flex-shrink:0}.dot-danger{background:var(--danger)}.dot-warning{background:var(--warning)}.dot-success{background:var(--success)}.dot-info{background:var(--info)}
+    .progress-card{padding:24px}.progress-card h3{margin:0 0 8px;font-size:20px}.progress-card p{margin:0;color:var(--muted);font-size:14px}.progress-bars{margin-top:20px;display:flex;flex-direction:column;gap:16px}.progress-item{display:flex;flex-direction:column;gap:8px}.progress-item .label-row{display:flex;justify-content:space-between;gap:12px;font-size:14px}.bar{height:12px;background:#e9eff7;border-radius:999px;overflow:hidden}.bar>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--student),#f0b544)}
+    .footer-note{max-width:var(--max-width);margin:28px auto 0;color:var(--muted);font-size:13px;text-align:center}
+    @media (max-width:1200px){.container,.hero-grid,.grid-2{grid-template-columns:1fr}.today-summary{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:980px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.main{padding:18px}}
+    @media (max-width:680px){.topbar-left h1{font-size:24px}.search{min-width:100%}.today-summary{grid-template-columns:1fr}.grade-row{grid-template-columns:58px 1fr}.grade-row>div:last-child{grid-column:2}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">U</div>
+        <div class="brand-text"><strong>Panel Ucznia</strong><span>Nauka bez chaosu</span></div>
+      </a>
+      <div class="nav-group">
+        <div class="nav-title">Główne</div>
+        <a href="#start" class="nav-link active"><span class="icon">🏠</span>Start</a>
+        <a href="#plan-dnia" class="nav-link"><span class="icon">📅</span>Plan dnia</a>
+        <a href="#zadania" class="nav-link"><span class="icon">📝</span>Zadania</a>
+        <a href="#materialy" class="nav-link"><span class="icon">📚</span>Materiały</a>
+        <a href="#oceny" class="nav-link"><span class="icon">⭐</span>Oceny</a>
+        <a href="#wiadomosci" class="nav-link"><span class="icon">✉️</span>Wiadomości</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-title">Dodatkowe</div>
+        <a href="#postepy" class="nav-link"><span class="icon">📈</span>Postępy</a>
+        <a href="#alerty" class="nav-link"><span class="icon">🔔</span>Priorytety</a>
+        <a href="index.html" class="nav-link"><span class="icon">↩️</span>Powrót</a>
+      </div>
+      <div class="sidebar-footer"><strong>Najważniejsza zasada</strong>Uczeń ma od razu wiedzieć, co jest dziś do zrobienia i od czego zacząć.</div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar" id="start">
+        <div class="topbar-left">
+          <h1>Dzień dobry, Tomku</h1>
+          <p>Masz dziś 4 lekcje, 3 zadania do oddania, 1 kartkówkę i 2 sprawy, które warto zrobić najpierw.</p>
+        </div>
+        <div class="topbar-actions">
+          <a href="index.html" class="btn btn-soft">← Wróć do wyboru dostępu</a>
+          <label class="search"><span>🔎</span><input type="text" placeholder="Szukaj zadania, przedmiotu, materiału..." /></label>
+          <button class="btn btn-soft">Mój tydzień</button>
+          <button class="btn btn-primary">Zacznij naukę</button>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="left-column">
+          <section class="card hero">
+            <div class="hero-grid">
+              <div class="hero-main">
+                <h2>Co dzieje się dziś?</h2>
+                <p>Zamiast szukać po różnych modułach, uczeń od razu widzi plan dnia, zadania, terminy, oceny i to, od czego najlepiej zacząć naukę.</p>
+                <div class="today-summary">
+                  <div class="mini-stat"><div class="label">Lekcje dziś</div><div class="value">4</div><div class="hint">pierwsza o 8:00</div></div>
+                  <div class="mini-stat"><div class="label">Zadania</div><div class="value">3</div><div class="hint">1 pilne na jutro</div></div>
+                  <div class="mini-stat"><div class="label">Kartkówki</div><div class="value">1</div><div class="hint">matematyka</div></div>
+                  <div class="mini-stat"><div class="label">Materiały</div><div class="value">5</div><div class="hint">nowe pliki od nauczycieli</div></div>
+                </div>
+              </div>
+              <div class="priority-box">
+                <small>Priorytet dnia</small>
+                <h3>Najpierw matematyka, potem przyroda</h3>
+                <p>Masz jutro zadanie z działań pisemnych i trzeba jeszcze powtórzyć planety Układu Słonecznego.</p>
+                <div class="priority-pill">⚠️ Zacznij od najtrudniejszego przedmiotu</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="zadania">
+            <div class="card-header">
+              <div><h2>Zadania do zrobienia</h2><p>Nie lista wszystkiego, tylko jasne wskazanie, co masz zrobić najpierw.</p></div>
+            </div>
+            <div class="section-body">
+              <div class="grid-2">
+                <div>
+                  <h3>Najbliższe zadania</h3>
+                  <div class="task-list">
+                    <div class="item"><div class="item-top"><h4>Matematyka — działania pisemne</h4><span class="badge badge-danger">Na jutro</span></div><p>Ćwiczenia 4, 5 i 6 ze strony 48.</p></div>
+                    <div class="item"><div class="item-top"><h4>Przyroda — planety Układu Słonecznego</h4><span class="badge badge-warning">Powtórka</span></div><p>Nazwy planet w odpowiedniej kolejności i krótkie utrwalenie.</p></div>
+                    <div class="item"><div class="item-top"><h4>Język polski — ćwiczenie pisemne</h4><span class="badge badge-info">W tygodniu</span></div><p>Krótka odpowiedź pisemna i staranne zapisanie zdań.</p></div>
+                  </div>
+                </div>
+                <div id="wiadomosci">
+                  <h3>Ostatnie wiadomości</h3>
+                  <div class="message-list">
+                    <div class="item"><div class="item-top"><h4>Nauczyciel matematyki</h4><span class="badge badge-danger">Ważne</span></div><p>Przypomnienie o utrwaleniu mnożenia i dzielenia pisemnego przed kartkówką.</p></div>
+                    <div class="item"><div class="item-top"><h4>Wychowawca</h4><span class="badge badge-student">Nowa</span></div><p>Informacja o materiałach potrzebnych na zajęcia po przerwie świątecznej.</p></div>
+                    <div class="item"><div class="item-top"><h4>Nauczyciel przyrody</h4><span class="badge badge-success">Przeczytane</span></div><p>Krótka lista tematów do powtórzenia przed następną lekcją.</p></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="plan-dnia">
+            <div class="card-header">
+              <div><h2>Plan dnia</h2><p>Uczeń powinien od razu widzieć, co dziś ma, w jakiej kolejności i co z tego wynika.</p></div>
+              <a href="#start" class="muted-link">Powrót na górę</a>
+            </div>
+            <div class="section-body">
+              <div class="schedule-list">
+                <div class="item schedule-row"><div class="time-box">08:00</div><div><h4>Matematyka</h4><p>Działania pisemne i krótka kartkówka z poprzedniego tematu.</p></div></div>
+                <div class="item schedule-row"><div class="time-box">09:45</div><div><h4>Przyroda</h4><p>Układ Słoneczny i nazwy planet.</p></div></div>
+                <div class="item schedule-row"><div class="time-box">11:30</div><div><h4>Język polski</h4><p>Ćwiczenie pisemne i utrwalanie pojęć.</p></div></div>
+                <div class="item schedule-row"><div class="time-box">13:15</div><div><h4>Angielski</h4><p>Powtórzenie słówek i krótkie ćwiczenia.</p></div></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="materialy">
+            <div class="card-header">
+              <div><h2>Materiały do nauki</h2><p>Wszystko, czego potrzebujesz do nauki, w jednym miejscu.</p></div>
+            </div>
+            <div class="section-body">
+              <div class="materials-list">
+                <div class="item"><div class="item-top"><h4>Matematyka — przykłady działań pisemnych</h4><span class="badge badge-student">PDF</span></div><p>Krótka ściąga z przykładami krok po kroku.</p></div>
+                <div class="item"><div class="item-top"><h4>Przyroda — planety Układu Słonecznego</h4><span class="badge badge-info">Grafika</span></div><p>Materiał do powtórki przed lekcją i pytaniem ustnym.</p></div>
+                <div class="item"><div class="item-top"><h4>Język polski — karta pracy</h4><span class="badge badge-success">Nowe</span></div><p>Ćwiczenia do samodzielnego rozwiązania w domu.</p></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="right-column">
+          <section class="card progress-card" id="postepy">
+            <h3>Szybki przegląd postępów</h3>
+            <p>Od razu widać, gdzie idzie dobrze, a gdzie trzeba jeszcze poćwiczyć.</p>
+            <div class="progress-bars">
+              <div class="progress-item"><div class="label-row"><span>Matematyka</span><strong>58%</strong></div><div class="bar"><span style="width:58%"></span></div></div>
+              <div class="progress-item"><div class="label-row"><span>Przyroda</span><strong>71%</strong></div><div class="bar"><span style="width:71%"></span></div></div>
+              <div class="progress-item"><div class="label-row"><span>Język polski</span><strong>64%</strong></div><div class="bar"><span style="width:64%"></span></div></div>
+              <div class="progress-item"><div class="label-row"><span>Systematyczność tygodnia</span><strong>82%</strong></div><div class="bar"><span style="width:82%"></span></div></div>
+            </div>
+          </section>
+
+          <section class="card" id="oceny">
+            <div class="card-header">
+              <div><h3>Ostatnie oceny</h3><p>Wyniki widoczne od razu, bez szukania.</p></div>
+            </div>
+            <div class="section-body">
+              <div class="grade-list">
+                <div class="item"><div class="grade-row"><div class="grade-value grade-good">5</div><div><h4>Matematyka — ułamki dziesiętne</h4><p>Bardzo dobry wynik.</p></div><div><a href="#" class="muted-link">Szczegóły</a></div></div></div>
+                <div class="item"><div class="grade-row"><div class="grade-value grade-mid">3</div><div><h4>Przyroda — Układ Słoneczny</h4><p>Trzeba powtórzyć nazwy planet.</p></div><div><a href="#materialy" class="muted-link">Powtórz</a></div></div></div>
+                <div class="item"><div class="grade-row"><div class="grade-value grade-bad">2</div><div><h4>Dyktando literowe</h4><p>Potrzebny trening staranności pisania.</p></div><div><a href="#zadania" class="muted-link">Ćwicz</a></div></div></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" id="alerty">
+            <div class="card-header">
+              <div><h3>Priorytety i uwagi</h3><p>Jedno miejsce na sprawy, które warto zrobić najpierw.</p></div>
+            </div>
+            <div class="section-body">
+              <div class="alert-list">
+                <div class="alert-item"><div class="alert-dot dot-danger"></div><div><strong>Matematyka</strong><p>Największa trudność: mnożenie pisemne, dzielenie pisemne i kolejność działań.</p></div></div>
+                <div class="alert-item"><div class="alert-dot dot-warning"></div><div><strong>Przyroda</strong><p>Do utrwalenia: nazwy planet w odpowiedniej kolejności.</p></div></div>
+                <div class="alert-item"><div class="alert-dot dot-success"></div><div><strong>Co idzie dobrze</strong><p>Systematyczność jest dobra, trzeba tylko mądrze zacząć od najtrudniejszego zadania.</p></div></div>
+                <div class="alert-item"><div class="alert-dot dot-info"></div><div><strong>Plan na dziś</strong><p>Najpierw matematyka, potem przyroda, a na końcu krótsze zadania z polskiego i angielskiego.</p></div></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="footer-note">Projekt demonstracyjny statycznego panelu ucznia — układ zaprojektowany pod szybkie ogarnięcie dnia, zadań i nauki bez chaosu.</div>
+    </main>
+  </div>
+</body>
+</html>
