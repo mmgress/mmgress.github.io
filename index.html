@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="MMGRESS – diagnoza problemów technicznych, procesowych i energetycznych w firmach produkcyjnych. Identyfikuję rzeczywiste przyczyny tam, gdzie wszystko działa, a mimo to pojawiają się straty, błędy lub brak stabilności." />
+<meta name="description" content="MMGRESS – diagnoza problemów technicznych, procesowych i energetycznych w firmach produkcyjnych. Znajduję rzeczywistą przyczynę tam, gdzie wszystko działa, a mimo to pojawiają się straty, błędy albo brak stabilności." />
 <meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
 <meta name="msvalidate.01" content="AB6274E2F07953E7C1810852FA44FB0D" />
 <meta name="robots" content="index, follow" />
 <meta name="author" content="MMGRESS" />
 <title>MMGRESS — diagnoza problemów w firmach produkcyjnych (technika, proces, energia)</title>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
 <script>
@@ -81,6 +82,7 @@ a{color:var(--accent)}
   font-weight:700;
 }
 .nav a.active,.nav a:hover{color:var(--accent)}
+
 .hero{
   background:
     radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),
@@ -116,68 +118,33 @@ h1{
   font-weight:800;
   max-width:980px;
 }
-.hero-title.standard{
-  font-size:clamp(2.8rem, 5.2vw, 4.8rem);
-}
 .hero-intro{
   max-width:980px;
   font-size:clamp(1.2rem, 1.6vw, 1.5rem);
   color:#38506c;
-  line-height:1.65;
-  margin:0;
+  line-height:1.55;
+  margin:0 0 18px;
 }
 .hero-lead{
   max-width:900px;
-  margin:22px 0 0;
+  margin:18px 0 0;
   color:var(--muted);
   font-size:clamp(1.02rem, 1.3vw, 1.16rem);
 }
-.hero-accent {
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+.hero-accent{
+  display:block;
+  font-size:clamp(2.2rem, 4.5vw, 3.8rem);
 }
-
-.hero-rest {
-  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
-  font-weight: 600;
+.hero-rest{
+  display:block;
+  font-size:clamp(1.45rem, 2.5vw, 2.2rem);
+  font-weight:600;
+  margin-top:8px;
 }
 .main{
   max-width:var(--container);
   margin:0 auto;
   padding:34px 28px 70px;
-}
-.summary{
-  margin-top:-32px;
-  position:relative;
-  z-index:2;
-}
-.summary-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:18px;
-}
-.summary-grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.summary-card{
-  min-width:0;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:22px 26px;
-  box-shadow:var(--shadow);
-}
-.summary-card .label{
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  font-weight:800;
-  color:#68809d;
-  margin:0 0 12px;
-}
-.summary-card .value{
-  margin:0;
-  font-size:clamp(1.5rem, 2.1vw, 2.1rem);
-  line-height:1.15;
-  font-weight:800;
-  color:var(--accent);
 }
 .section{
   max-width:var(--content);
@@ -212,20 +179,6 @@ li{margin:0 0 10px;font-size:1.05rem}
   border-radius:16px;
   padding:18px 20px;
   margin:22px 0;
-}
-.result-box{
-  background:#eef8f3;
-  border:1px solid #cfe8d8;
-  border-radius:16px;
-  padding:22px 24px;
-  margin:20px 0;
-}
-.loss-box{
-  background:#fcf6ef;
-  border:1px solid #efd7b8;
-  border-radius:16px;
-  padding:22px 24px;
-  margin:20px 0;
 }
 .cards-grid{
   display:grid;
@@ -301,24 +254,9 @@ li{margin:0 0 10px;font-size:1.05rem}
   border-radius:16px;
   padding:24px;
 }
-@media (max-width: 1040px){
-  .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .summary-grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cards-grid{grid-template-columns:1fr}
-}
-@media (max-width: 760px){
-  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
-  .nav{gap:18px; flex-wrap:wrap}
-  .hero-inner{padding:56px 18px 52px}
-  .main{padding:22px 18px 50px}
-  .section{padding:26px 22px}
-  .summary{margin-top:0}
-  .summary-grid,.summary-grid.cols-3{grid-template-columns:1fr}
-  .hero-accent{margin-bottom:8px}
-}
-  .cta-btn{
+.cta-btn{
   display:inline-block;
-  margin-top:28px;
+  margin-top:20px;
   background:#204f86;
   color:#fff;
   padding:14px 22px;
@@ -327,13 +265,24 @@ li{margin:0 0 10px;font-size:1.05rem}
   text-decoration:none;
   font-size:16px;
   box-shadow:0 10px 20px rgba(0,0,0,0.08);
+  transition:opacity .16s ease, transform .16s ease;
 }
-
 .cta-btn:hover{
   opacity:0.92;
   transform:translateY(-1px);
 }
+@media (max-width: 1040px){
+  .cards-grid{grid-template-columns:1fr}
+}
+@media (max-width: 760px){
+  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
+  .nav{gap:18px; flex-wrap:wrap}
+  .hero-inner{padding:56px 18px 52px}
+  .main{padding:22px 18px 50px}
+  .section{padding:26px 22px}
+}
 </style>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -351,6 +300,7 @@ li{margin:0 0 10px;font-size:1.05rem}
 </script>
 </head>
 <body>
+
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="/">MMGRESS</a>
@@ -367,44 +317,68 @@ li{margin:0 0 10px;font-size:1.05rem}
   <div class="hero-inner">
     <div class="hero-content">
       <div class="eyebrow">Diagnoza problemów</div>
+
       <h1 class="hero-title">
-        <span class="hero-accent">W wielu firmach wszystko działa,</span>
-        <span class="hero-rest">a mimo to coś się nie spina, coś niepotrzebnie kosztuje i coś blokuje wejście poziom wyżej.</span>
+        <span class="hero-accent">W wielu firmach wszystko działa.</span>
+        <span class="hero-rest">A mimo to coś się nie spina, kosztuje pieniądze i blokuje wejście poziom wyżej.</span>
       </h1>
-      <p>
-MMGRESS zajmuje się diagnozą złożonych problemów w firmach produkcyjnych – szczególnie tam, gdzie system działa, ale jego wynik jest niestabilny, nieprzewidywalny lub generuje straty.
-</p>
-<p>
-To nie jest usługa montażu ani standardowej analizy – to identyfikacja rzeczywistych przyczyn na styku techniki, procesu i organizacji.
-</p>
+
       <p class="hero-intro">
-        Właśnie od takich sytuacji zaczynam, bo na pierwszy rzut oka zwykle nie ma się do czego przyczepić, maszyny pracują, ludzie robią swoje, proces idzie dalej i nic spektakularnego się nie dzieje, tylko że bardzo często właśnie w tym miejscu zaczyna się problem, którego nie widać od razu.
+        Znajduję przyczynę — zanim ktoś dołoży kolejne rozwiązanie.
       </p>
+
+      <p>
+        MMGRESS zajmuje się diagnozą złożonych problemów w firmach produkcyjnych — szczególnie tam, gdzie system działa, ale jego wynik jest niestabilny, nieprzewidywalny albo generuje straty.
+      </p>
+
+      <p>
+        To nie jest usługa montażu ani standardowej analizy. To identyfikacja rzeczywistej przyczyny problemu na styku techniki, procesu i organizacji.
+      </p>
+
       <div class="quote">
         Najczęściej problem nie jest tam, gdzie wszyscy go szukają.
       </div>
-     <p class="hero-lead">
-  Pomagam diagnozować złożone problemy techniczne, technologiczne, procesowe i organizacyjne. Nie zajmuję się leczeniem objawów ani potwierdzaniem pierwszej hipotezy. Szukam rzeczywistej przyczyny problemu, porządkuję sytuację i dopiero wtedy wskazuję, co naprawdę ma sens zrobić dalej.
-</p>
 
-<a href="/diagnoza-problemow.html" class="cta-btn">
-  Opisz problem → zobaczę, czy mogę pomóc
-</a>
+      <p class="hero-lead">
+        Nie dokładam rozwiązań na ślepo. Najpierw sprawdzam, czy problem został dobrze zrozumiany, porządkuję sytuację i dopiero wtedy wskazuję, co naprawdę ma sens zrobić dalej.
+      </p>
+
+      <a href="/diagnoza-problemow.html" class="cta-btn">
+        Opisz problem
+      </a>
     </div>
   </div>
 </section>
 
 <main class="main">
+
   <section class="section">
     <h2>Ta strona jest dla Ciebie, jeśli</h2>
     <ul>
-      <li>masz poczucie, że wszystko niby działa, ale coś wyraźnie ucieka i nikt nie umie tego jasno nazwać,</li>
-      <li>kolejne osoby proponują działania, ale nie docierają do rzeczywistej przyczyny,</li>
-      <li>projekt utknął i nie wiadomo, czy problem jest techniczny, organizacyjny, czy leży pomiędzy,</li>
+      <li>projekt utknął i nie wiadomo dlaczego,</li>
+      <li>system działa, ale generuje straty,</li>
+      <li>dane się zgadzają, a wynik się nie zgadza,</li>
       <li>koszty rosną, parametry nie są osiągane albo proces działa gorzej, niż powinien,</li>
-      <li>potrzebujesz świeżego spojrzenia i rzetelnej analizy zamiast kolejnych założeń,</li>
+      <li>ktoś już próbował wszystko, a problem nadal wraca,</li>
       <li>szukasz kogoś, kto łączy praktykę elektroniki, informatyki, elektroenergetyki i myślenia procesowego.</li>
     </ul>
+
+    <a href="/diagnoza-problemow.html" class="cta-btn">
+      Masz taką sytuację? Opisz ją
+    </a>
+  </section>
+
+  <section class="section">
+    <h2>Jak wygląda współpraca</h2>
+    <ol>
+      <li>Opisujesz problem krótko i konkretnie — najlepiej tak, jak wygląda w praktyce.</li>
+      <li>Sprawdzam, czy temat mieści się w moim zakresie pracy i czy widzę sens dalszej analizy.</li>
+      <li>Jeżeli tak, ustalamy pierwszy krok: rozmowę, oględziny, pomiary albo analizę danych.</li>
+      <li>Po uporządkowaniu sytuacji wskazuję, gdzie leży rzeczywista przyczyna i co faktycznie ma sens zrobić dalej.</li>
+    </ol>
+    <p>
+      Nie każdy temat podejmuję. Jeżeli sprawa nie pasuje do mojego sposobu pracy albo do zakresu doświadczenia, mówię to wprost.
+    </p>
   </section>
 
   <section class="section">
@@ -427,7 +401,7 @@ To nie jest usługa montażu ani standardowej analizy – to identyfikacja rzecz
       <li>procesy, w których wiadomo, że coś jest nie tak, ale nie wiadomo jeszcze co dokładnie,</li>
       <li>sytuacje, w których realna strata nie wynika z jednej awarii, tylko z układu zależności między ludźmi, technologią i organizacją.</li>
     </ul>
-    <a href="/diagnoza-problemow.html" class="btn">Opisz problem</a>
+    <a href="/diagnoza-problemow.html" class="cta-btn">Opisz problem</a>
   </section>
 
   <section class="section">
@@ -476,21 +450,23 @@ To nie jest usługa montażu ani standardowej analizy – to identyfikacja rzecz
     <p>Jeżeli natomiast wszystko jest jasne, przyczyna jest znana i potrzebujesz tylko wykonania konkretnego zadania, to prawdopodobnie nie jest to właściwe miejsce.</p>
   </section>
 
- <section class="section">
-  <h2>Kontakt</h2>
+  <section class="section">
+    <h2>Kontakt</h2>
 
-  <p><strong>Masz podobny problem?</strong></p>
-  <p>
-    Opisz go w 2–3 zdaniach.
-    Powiem Ci wprost, gdzie leży problem i czy ma to sens ruszać.
-  </p>
+    <p><strong>Masz sytuację, w której wszystko działa, ale coś się nie spina?</strong></p>
+    <p>
+      Opisz ją krótko.
+      Sprawdzę, czy ma sens i gdzie może być problem.
+    </p>
 
-  <div class="contact-box">
-    <p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
-    <p>Email: <a href="mailto:mmgress@proton.me" id="cta-mail">mmgress@proton.me</a></p>
-    <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
-  </div>
-</section>
+    <div class="contact-box">
+      <p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
+      <p>Email: <a href="mailto:mmgress@proton.me" id="cta-mail">mmgress@proton.me</a></p>
+      <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
+    </div>
+  </section>
+
+</main>
 
 <script>
 document.getElementById('cta-mail')?.addEventListener('click', function() {
@@ -502,7 +478,6 @@ document.getElementById('cta-mail')?.addEventListener('click', function() {
   }
 });
 </script>
-</main>
 
 </body>
 </html>
