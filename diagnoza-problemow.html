@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="MMGRESS – diagnoza problemów technicznych, procesowych i energetycznych w firmach produkcyjnych. Gdy wszystko wygląda dobrze, a wynik się nie zgadza, trzeba znaleźć prawdziwą przyczynę." />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="MMGRESS" />
+<title>MMGRESS — diagnoza problemów, których nie widać na pierwszy rzut oka</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);} 
+  gtag('js', new Date());
+  gtag('config', 'G-5KZX20JGP7');
+</script>
+<style>
+:root{
+  --bg:#f3f6fa;
+  --surface:#ffffff;
+  --surface-soft:#f7f9fc;
+  --hero:#edf3f8;
+  --text:#172435;
+  --muted:#4d6075;
+  --line:#d7e0ea;
+  --accent:#204f86;
+  --accent-soft:#e9f1fb;
+  --ok:#eef8f3;
+  --ok-line:#cfe8d8;
+  --shadow:0 14px 34px rgba(15,23,42,.06);
+  --radius:20px;
+  --container:1180px;
+  --content:860px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.72;
+}
+a{color:var(--accent)}
+.topbar{
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(12px);
+}
+.topbar-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:18px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.brand{
+  color:#26354a;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+.nav a{
+  text-decoration:none;
+  color:#26354a;
+  font-size:15px;
+  font-weight:700;
+}
+.nav a.active,.nav a:hover{color:var(--accent)}
+.hero{
+  background:
+    radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),
+    linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:84px 28px 74px;
+}
+.hero-content{max-width:980px}
+.eyebrow{
+  display:inline-block;
+  margin:0 0 24px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+h1{
+  margin:0 0 22px;
+  color:#152235;
+  letter-spacing:-0.04em;
+  font-size:clamp(2.8rem, 5.2vw, 5rem);
+  line-height:1.02;
+}
+.hero-intro{
+  max-width:920px;
+  font-size:clamp(1.16rem, 1.55vw, 1.38rem);
+  color:#38506c;
+  line-height:1.66;
+  margin:0 0 28px;
+}
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+.btn{
+  display:inline-block;
+  padding:14px 18px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:800;
+  border:1px solid transparent;
+}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+}
+.btn-secondary{
+  background:#fff;
+  color:var(--accent);
+  border-color:var(--line);
+}
+.main{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:34px 28px 70px;
+}
+.summary{
+  margin-top:-32px;
+  position:relative;
+  z-index:2;
+}
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+.summary-card, .section, .card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.summary-card{
+  padding:22px 26px;
+}
+.summary-card .label{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:800;
+  color:#68809d;
+  margin:0 0 12px;
+}
+.summary-card .value{
+  margin:0;
+  font-size:clamp(1.4rem,2vw,1.95rem);
+  line-height:1.15;
+  font-weight:800;
+  color:var(--accent);
+}
+.section{
+  max-width:var(--content);
+  padding:34px 38px;
+  margin:22px 0;
+}
+.section.wide{max-width:none}
+.section h2{
+  margin:0 0 18px;
+  font-size:clamp(1.9rem,2.6vw,2.5rem);
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:#122133;
+}
+.section h3{
+  margin:0 0 12px;
+  font-size:1.35rem;
+  line-height:1.2;
+  color:#122133;
+}
+p{margin:0 0 16px;font-size:1.08rem}
+.note-box,.quote,.result-box{
+  border-radius:16px;
+  padding:18px 20px;
+  margin:22px 0;
+}
+.note-box,.quote{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+}
+.result-box{
+  background:var(--ok);
+  border:1px solid var(--ok-line);
+}
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.card{
+  padding:24px;
+}
+.card h3{margin:0 0 12px;font-size:1.35rem}
+.tag{
+  display:inline-block;
+  margin:0 0 12px;
+  color:var(--accent);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.steps{display:grid;gap:14px}
+.step{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px 20px;
+}
+.step strong{display:block;margin-bottom:6px;color:#122133}
+.contact-box{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px;
+}
+.footer-note{color:#66788e;font-size:.95rem;margin-top:18px}
+@media (max-width:1040px){
+  .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards-grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
+  .nav{gap:18px; flex-wrap:wrap}
+  .hero-inner{padding:56px 18px 52px}
+  .main{padding:22px 18px 50px}
+  .section{padding:26px 22px}
+  .summary{margin-top:0}
+  .summary-grid{grid-template-columns:1fr}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "MMGRESS — diagnoza problemów, których nie widać na pierwszy rzut oka",
+  "url": "https://mmgress.github.io/diagnoza-problemow.html",
+  "description": "Landing MMGRESS dla firm, w których wszystko wygląda dobrze, a wynik się nie zgadza. Diagnoza problemów technicznych, procesowych i energetycznych.",
+  "inLanguage": "pl-PL",
+  "about": {
+    "@type": "Service",
+    "name": "Diagnoza problemów technicznych, procesowych i energetycznych",
+    "provider": {
+      "@type": "Person",
+      "name": "Michał Grzesiczak",
+      "url": "https://mmgress.github.io/about.html"
+    }
+  }
+}
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">MMGRESS</a>
+    <nav class="nav">
+      <a href="/">Strona główna</a>
+      <a href="/case-studies.html">Case studies</a>
+      <a href="/about.html">O mnie</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="eyebrow">Diagnoza zamiast zgadywania</div>
+      <h1>Gdy wszystko wygląda dobrze, a wynik się nie zgadza, problem zwykle leży głębiej</h1>
+      <p class="hero-intro">
+        Są sytuacje, w których maszyny działają, raporty świecą się na zielono, harmonogram wygląda poprawnie, a firma mimo to traci czas, pieniądze albo stabilność. W takich przypadkach problem rzadko leży w jednym urządzeniu. Najczęściej powstaje na styku technologii, procesu, energii i decyzji organizacyjnych.
+      </p>
+      <p class="hero-intro">
+        Właśnie tym zajmuje się MMGRESS: diagnozą rzeczywistej przyczyny, zanim ktoś wyda pieniądze na niewłaściwe rozwiązanie.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#kontakt">Opisz problem</a>
+        <a class="btn btn-secondary" href="/case-studies.html">Zobacz case studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+  <section class="summary">
+    <div class="summary-grid">
+      <div class="summary-card"><div class="label">Punkt startu</div><div class="value">Rzeczywisty problem</div></div>
+      <div class="summary-card"><div class="label">Podejście</div><div class="value">Diagnoza przyczyny</div></div>
+      <div class="summary-card"><div class="label">Zakres</div><div class="value">Technika + proces + energia</div></div>
+      <div class="summary-card"><div class="label">Cel</div><div class="value">Decyzja, która ma sens</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Kiedy taki sposób pracy ma sens</h2>
+    <p>Najczęściej wtedy, gdy firma już coś zrobiła, coś sprawdziła, ma już jakieś dane, raporty albo wnioski, a mimo to problem wraca, wynik nadal się nie zgadza albo koszty rosną bez jasnej przyczyny.</p>
+    <div class="steps">
+      <div class="step"><strong>Maszyny pracują, ale wydajność spada</strong>System pokazuje aktywność, ale produkcja nie potwierdza tego w liczbach.</div>
+      <div class="step"><strong>Raport wygląda dobrze, ale decyzje nie działają</strong>Dane są, tylko nie opisują tego, co naprawdę dzieje się w praktyce.</div>
+      <div class="step"><strong>Problem wygląda na losowy</strong>Zdarzenie trwa sekundy, ale skutki ciągną się godzinami albo dniami.</div>
+      <div class="step"><strong>Rozwiązanie „na wszystko” jest zbyt drogie</strong>Trzeba znaleźć punkt krytyczny, a nie pompować budżet w całość.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Na czym polega moja rola</h2>
+    <p>Nie zaczynam od sprzedaży urządzenia. Nie zaczynam od potwierdzania pierwszej hipotezy. Najpierw sprawdzam, czy problem został właściwie nazwany i czy to, co firma mierzy, rzeczywiście opisuje rzeczywistość.</p>
+    <div class="quote">Najdroższe błędy bardzo często nie polegają na awarii. Polegają na fałszywym poczuciu, że wszystko jest pod kontrolą.</div>
+    <p>To może oznaczać analizę techniczną, wywiad z załogą, sprawdzenie zasilania, logiki procesu, punktów pomiarowych albo przyjętych założeń organizacyjnych. Chodzi o to, żeby dojść do przyczyny, a nie tylko opisać skutek.</p>
+  </section>
+
+  <section class="section wide">
+    <h2>Jak wygląda to w praktyce</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="tag">Krok 1</div>
+        <h3>Rozpoznanie sytuacji</h3>
+        <p>Krótki opis problemu, kontekst obiektu, dotychczasowe działania i to, co według firmy „się nie spina”.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Krok 2</div>
+        <h3>Oddzielenie faktów od pozorów</h3>
+        <p>Sprawdzenie, czy pomiary, raporty i obserwacje rzeczywiście opisują stan procesu, czy tylko jego uproszczony obraz.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Krok 3</div>
+        <h3>Wskazanie przyczyny i kierunku działania</h3>
+        <p>Nie ogólna opinia, tylko konkret: gdzie leży problem, co ma sens zrobić, czego nie warto robić i dlaczego.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wide">
+    <h2>Jakie problemy już zostały rozwiązane</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="tag">Pomiar / produkcja</div>
+        <h3>Wtryskarki „pracowały”, ale produkcja spadała</h3>
+        <p>System mierzył zasilanie maszyny, a nie jej rzeczywistą pracę. Dopiero właściwy sygnał pokazał, gdzie naprawdę znika wydajność.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Proces / organizacja</div>
+        <h3>Setki minut odzyskanych w jednej dobie</h3>
+        <p>Po poprawnym pomiarze wyszły zbyt długie precykle, zbyt długie cykle i czas martwy, który wcześniej był traktowany jak normalny.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Energia / odporność systemu</div>
+        <h3>Sekundowy zanik napięcia rozwalał cały dzień pracy</h3>
+        <p>Źródło problemu było poza zakładem. Rozwiązaniem nie był ogromny UPS na całą halę, tylko lokalne podtrzymanie krytycznej elektroniki.</p>
+      </div>
+    </div>
+    <p class="footer-note">Więcej przykładów znajdziesz w sekcji <a href="/case-studies.html">Case studies</a>.</p>
+  </section>
+
+  <section class="section">
+    <h2>Co dostajesz na końcu</h2>
+    <div class="result-box">
+      <p><strong>Jasną odpowiedź, co jest rzeczywistą przyczyną problemu</strong></p>
+      <p><strong>Wskazanie, co ma sens robić dalej, a czego nie warto ruszać</strong></p>
+      <p><strong>Podstawę do decyzji technicznej, organizacyjnej albo inwestycyjnej</strong></p>
+    </div>
+    <p>To nie musi od razu oznaczać dużego wdrożenia. Czasem wystarczy zmiana jednego punktu pomiarowego. Czasem korekta procesu. Czasem zabezpieczenie tylko jednego fragmentu układu. Najpierw jednak trzeba wiedzieć, gdzie naprawdę leży problem.</p>
+  </section>
+
+  <section class="section" id="kontakt">
+    <h2>Opisz problem w 2–3 zdaniach</h2>
+    <p>Jeżeli masz sytuację, w której wszystko teoretycznie działa, ale wynik się nie zgadza, opisz ją krótko. Bez prezentacji, bez wielkiego wstępu. Wystarczy kilka zdań: co miało działać, co się nie zgadza i co było już sprawdzane.</p>
+    <div class="contact-box">
+      <p><strong>Kontakt</strong></p>
+      <p>Email: <a href="mailto:mmgress@proton.me" id="cta-mail">mmgress@proton.me</a></p>
+      <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
+    </div>
+    <p class="footer-note">Jeżeli temat ma sens, wrócę z konkretem: gdzie leży problem i czy warto to ruszać.</p>
+  </section>
+</main>
+
+<script>
+document.getElementById('cta-mail')?.addEventListener('click', function() {
+  if (typeof gtag === 'function') {
+    gtag('event', 'kontakt_mail', {
+      'event_category': 'kontakt',
+      'event_label': 'klik_mail_landing'
+    });
+  }
+});
+</script>
+</body>
+</html>
