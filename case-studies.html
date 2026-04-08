@@ -26,6 +26,8 @@ body{
   color:var(--text);
 }
 
+a{color:var(--accent)}
+
 .topbar{
   background:#fff;
   border-bottom:1px solid var(--line);
@@ -37,6 +39,9 @@ body{
   padding:18px 28px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
+  gap:24px;
+  flex-wrap:wrap;
 }
 
 .brand{
@@ -45,11 +50,21 @@ body{
   color:#26354a;
 }
 
+.nav{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
 .nav a{
-  margin-left:20px;
   text-decoration:none;
   color:#26354a;
   font-weight:700;
+}
+
+.nav a.active,
+.nav a:hover{
+  color:var(--accent);
 }
 
 .hero{
@@ -67,6 +82,7 @@ h1{
   font-size:1.2rem;
   color:var(--muted);
   max-width:800px;
+  line-height:1.65;
 }
 
 .grid{
@@ -86,7 +102,7 @@ h1{
   box-shadow:var(--shadow);
   text-decoration:none;
   color:inherit;
-  transition:0.2s;
+  transition:transform .2s ease;
 }
 
 .card:hover{
@@ -98,16 +114,20 @@ h1{
   font-weight:800;
   color:var(--accent);
   margin-bottom:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
 }
 
 .card h3{
   margin:0 0 10px;
   font-size:1.6rem;
+  line-height:1.2;
 }
 
 .card p{
   color:var(--muted);
   line-height:1.6;
+  margin:0;
 }
 
 @media(max-width:800px){
@@ -125,7 +145,7 @@ h1{
     <a class="brand" href="/">MMGRESS</a>
     <nav class="nav">
       <a href="/">Strona główna</a>
-      <a href="/case-studies.html">Case studies</a>
+      <a href="/case-studies.html" class="active">Case studies</a>
       <a href="/about.html">O mnie</a>
       <a href="/diagnoza-problemow.html">Diagnoza</a>
     </nav>
@@ -136,7 +156,7 @@ h1{
   <h1>Case studies</h1>
   <p>
     Rzeczywiste problemy z produkcji, energii i systemów technicznych.
-    Nie teoria. Nie raporty. Tylko to, co faktycznie przestaje działać – i co naprawdę to naprawia.
+    Nie teoria. Nie raporty. Tylko to, co faktycznie przestaje działać — i co naprawdę to naprawia.
   </p>
 </section>
 
@@ -149,13 +169,12 @@ h1{
   </a>
 
   <a href="/case-study-wtryskarki-falszywy-odczyt-pracy.html" class="card">
-    
     <div class="tag">Pomiar</div>
     <h3>Maszyny „pracowały”, ale nie produkowały</h3>
     <p>System pokazywał aktywność, ale mierzył zasilanie zamiast realnej pracy.</p>
   </a>
 
-  <a href="/case-study-wtryskarki-straty-czasu.html" class="card">
+  <a href="/case-study-wtryskarki-odzysk-czasu-cykli.html" class="card">
     <div class="tag">Optymalizacja</div>
     <h3>Setki minut strat dziennie</h3>
     <p>Dopiero poprawny pomiar ujawnił zbyt długie cykle, precykle i czas martwy.</p>
@@ -164,13 +183,19 @@ h1{
   <a href="/case-study-wtryskarki-zanik-napiecia-ups-lokalny.html" class="card">
     <div class="tag">Zasilanie</div>
     <h3>Zanik napięcia rozwalał produkcję</h3>
-    <p>Krótkie spadki napięcia z linii kolejowej powodowały 12h przestoje. Rozwiązanie: lokalne UPS-y.</p>
+    <p>Krótkie spadki napięcia powodowały wielogodzinne postoje. Rozwiązanie: lokalne UPS-y dla krytycznej elektroniki.</p>
   </a>
 
-  <a href="/case-study-energia-bierna-transformator-svg.html" class="card">
-    <div class="tag">Energetyka</div>
-    <h3>Energia bierna mimo kompensacji</h3>
-    <p>Problem nie leżał w braku urządzeń, tylko w złej konfiguracji całego układu.</p>
+  <a href="/Case-study-precyzja-ciecia-profili.html" class="card">
+    <div class="tag">Proces</div>
+    <h3>Precyzja cięcia profili zamkniętych</h3>
+    <p>Modernizacja pomiaru i napędu pozwoliła zejść z odchyłki około ±500 mm do około 1,5 mm.</p>
+  </a>
+
+  <a href="/Case-study-wymiana-rozdzielni-bez-wylaczania-obiektu.html" class="card">
+    <div class="tag">Modernizacja</div>
+    <h3>Wymiana rozdzielni bez wyłączania obiektu</h3>
+    <p>Dwa miesiące planowania, 42 obwody i pełna przerwa krótsza niż 15 minut.</p>
   </a>
 
 </section>
