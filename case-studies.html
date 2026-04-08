@@ -391,6 +391,32 @@ li{margin:0 0 10px;font-size:1.05rem}
     </div>
     <p class="footer-note">Kolejne case studies będą dodawane stopniowo. Każde z nich opisuje problem, tok analizy, sposób działania oraz efekt techniczny i praktyczny.</p>
   </section>
+  <section class="section">
+  <h2>Kontakt</h2>
+
+  <p><strong>Masz podobny problem?</strong></p>
+  <p>
+    Opisz go w 2–3 zdaniach.
+    Powiem Ci wprost, gdzie leży problem i czy ma to sens ruszać.
+  </p>
+
+  <div class="contact-box">
+    <p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
+    <p>Email: <a href="mailto:mmgress@proton.me" id="cta-mail">mmgress@proton.me</a></p>
+    <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
+  </div>
+</section>
+
+<script>
+document.getElementById('cta-mail')?.addEventListener('click', function() {
+  if (typeof gtag === 'function') {
+    gtag('event', 'kontakt_mail', {
+      'event_category': 'kontakt',
+      'event_label': 'klik_mail'
+    });
+  }
+});
+</script>
 </main>
 
 </body>
