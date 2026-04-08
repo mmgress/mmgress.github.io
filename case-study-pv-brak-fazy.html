@@ -382,6 +382,32 @@ li{margin:0 0 10px;font-size:1.05rem}
 <p>W takich sytuacjach sama znajomość przepisów i procedur nie wystarcza. Kluczowe są doświadczenie, umiejętność prowadzenia wywiadu, kojarzenia faktów i sprawdzenia rzeczy prostych, które bywają pomijane właśnie dlatego, że wydają się zbyt oczywiste.</p>
 <p class="footer-note">Jeśli w Twojej instalacji problem trwa zbyt długo, a kolejne działania nie przynoszą efektu, najczęściej potrzeba nie kolejnej wymiany podzespołu, ale właściwej diagnozy przyczyny.</p>
 </section>
+  <section class="section">
+  <h2>Kontakt</h2>
+
+  <p><strong>Masz podobny problem?</strong></p>
+  <p>
+    Opisz go w 2–3 zdaniach.
+    Powiem Ci wprost, gdzie leży problem i czy ma to sens ruszać.
+  </p>
+
+  <div class="contact-box">
+    <p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
+    <p>Email: <a href="mailto:mmgress@proton.me" id="cta-mail">mmgress@proton.me</a></p>
+    <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
+  </div>
+</section>
+
+<script>
+document.getElementById('cta-mail')?.addEventListener('click', function() {
+  if (typeof gtag === 'function') {
+    gtag('event', 'kontakt_mail', {
+      'event_category': 'kontakt',
+      'event_label': 'klik_mail'
+    });
+  }
+});
+</script>
 </main>
 
 </body>
