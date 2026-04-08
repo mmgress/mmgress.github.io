@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Case study MMGRESS: krótkie zaniki napięcia wyłączały niemal 100 wtryskarek i powodowały wielogodzinne postoje. Przyczyną okazało się zasilanie powiązane z linią kolejową, a rozwiązaniem nie był wielki UPS na całą halę, lecz lokalne podtrzymanie elektroniki sterującej." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="MMGRESS" />
+  <title>Case Study – Krótki zanik napięcia, wielogodzinny przestój i rozwiązanie tańsze niż wszyscy zakładali | MMGRESS</title>
+
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #0f172a;
+      --accent-2: #2563eb;
+      --soft: #eef4ff;
+      --max: 980px;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    a {
+      color: var(--accent-2);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .topbar {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.96rem;
+    }
+
+    .nav a.active,
+    .nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 52px 20px 26px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      max-width: 900px;
+    }
+
+    .lead {
+      max-width: 840px;
+      font-size: 1.16rem;
+      color: #374151;
+      margin: 0;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 10px 20px 70px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-top: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .mini {
+      padding: 20px;
+      border-radius: 16px;
+      background: #fafafa;
+      border: 1px solid var(--line);
+    }
+
+    .mini h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .mini p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.97rem;
+    }
+
+    section h2 {
+      margin: 0 0 16px;
+      font-size: 1.45rem;
+      line-height: 1.25;
+      color: var(--accent);
+    }
+
+    section p {
+      margin: 0 0 16px;
+    }
+
+    .highlight {
+      background: var(--soft);
+      border: 1px solid #dbeafe;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 22px 0;
+    }
+
+    .highlight strong {
+      color: var(--accent);
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      background: #fcfcfd;
+    }
+
+    .step-title {
+      margin: 0 0 8px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .quote {
+      font-size: 1.18rem;
+      line-height: 1.65;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .cta {
+      background: linear-gradient(180deg, #ffffff 0%, #f3f7ff 100%);
+      border: 1px solid #dbeafe;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 18px;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      text-decoration: none;
+      opacity: 0.95;
+    }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px 50px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 780px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .lead {
+        font-size: 1.04rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">MMGRESS</a>
+      <nav class="nav">
+        <a href="/">Strona główna</a>
+        <a href="/case-studies.html" class="active">Case studies</a>
+        <a href="/about.html">O mnie</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow">Case Study MMGRESS</div>
+      <h1>Krótki zanik napięcia, wielogodzinny przestój i rozwiązanie tańsze niż wszyscy zakładali</h1>
+      <p class="lead">
+        W tej firmie problem nie leżał ani w organizacji pracy, ani w ustawieniach procesu.
+        Produkcja na wtryskarkach była dopracowana bardzo dokładnie. Mimo to zakład regularnie
+        doświadczał krótkich zaników napięcia, które trwały sekundy, ale skutki odczuwane były
+        przez wiele godzin. Kluczowe okazało się nie tylko ustalenie przyczyny, lecz także znalezienie
+        rozwiązania, które miało sens ekonomiczny.
+      </p>
+    </div>
+
+    <div class="wrap">
+
+      <section class="card">
+        <div class="grid-2">
+          <div class="mini">
+            <h3>Sytuacja wyjściowa</h3>
+            <p>
+              Produkcja na wtryskarkach była dopracowana bardzo precyzyjnie. Cykle były zgrane,
+              organizacja hali działała dobrze, a proces był ustawiony niemal co do sekundy.
+            </p>
+          </div>
+          <div class="mini">
+            <h3>Widoczny problem</h3>
+            <p>
+              Sporadycznie pojawiały się bardzo krótkie zaniki napięcia. Trwały mniej niż 2 sekundy,
+              czasem nawet mniej niż 1 sekundę, ale wystarczały, by zatrzymać niemal całą halę.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Problem był krótki w czasie, ale bardzo długi w skutkach</h2>
+        <p>
+          Jedno takie zdarzenie powodowało natychmiastowe wyłączenie wszystkich wtryskarek.
+          Na hali pracowało ich kilkadziesiąt, niewiele mniej niż sto. Po takim wyłączeniu
+          zaczynał się cały łańcuch problemów: blokady, czyszczenie, ponowne uruchamianie,
+          błędy komputerów sterujących, zakłócenia w całym procesie.
+        </p>
+        <p>
+          Sam zanik trwał chwilę. Przestój po nim trwał zwykle od 8 do 12 godzin, czasami dłużej.
+          A takich zdarzeń potrafiło być 2–3 w miesiącu.
+        </p>
+
+        <div class="highlight">
+          <strong>To nie była drobna niedogodność energetyczna. To był problem, który regularnie niszczył pełny dzień pracy.</strong>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Nikt nie wiedział, skąd to się bierze</h2>
+        <p>
+          Najtrudniejsze w tym przypadku było to, że zjawisko wyglądało na losowe.
+          Krótkie zaniki napięcia nie zostawiały po sobie od razu prostego, oczywistego śladu,
+          a jednocześnie ich skutki były bardzo kosztowne.
+        </p>
+        <p>
+          Ustalenie przyczyny wymagało czasu, cierpliwości i spojrzenia szerzej niż tylko
+          na samą halę produkcyjną.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Prawdziwa przyczyna była poza zakładem</h2>
+        <p>
+          Ostatecznie okazało się, że zakład był zasilany z PKP Energetyka, czyli z układu,
+          który zasilał również pobliską linię kolejową. I właśnie tam znajdowało się źródło problemu.
+        </p>
+        <p>
+          Zanik napięcia następował wtedy, gdy dwa szybkie pociągi znajdowały się mniej więcej
+          na tym samym odcinku linii i jednocześnie pobierały bardzo duży prąd.
+          Gdy obciążenie było pojedyncze, wszystko mieściło się w normie. Gdy nałożyły się dwa
+          dynamiczne pobory naraz, pojawiał się krótki spadek lub zanik napięcia.
+        </p>
+
+        <p class="quote">
+          Z perspektywy hali wyglądało to jak przypadkowy incydent.<br />
+          W rzeczywistości był to powtarzalny efekt zewnętrznego obciążenia sieci.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Sam moment zrozumienia przyczyny był przełomowy</h2>
+        <p>
+          To był prawdziwy game changer. Dopiero wtedy można było przestać gasić skutki
+          i zacząć myśleć o rozwiązaniu, które rzeczywiście trafia w źródło problemu.
+        </p>
+        <p>
+          Stało się jasne, że nie ma sensu oczekiwać, iż zewnętrzny dostawca energii zmieni
+          sposób działania całej infrastruktury tylko pod jeden zakład. Trzeba było zabezpieczyć
+          proces po stronie firmy.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Standardowe rozwiązanie było możliwe, ale ekonomicznie absurdalne</h2>
+        <p>
+          Naturalnym pomysłem był duży UPS obejmujący całą halę. Tyle że przy niemal stu wtryskarkach,
+          z których każda miała moc rzędu kilkudziesięciu kilowatów, koszt takiego rozwiązania
+          robił się bardzo wysoki.
+        </p>
+        <p>
+          Analizy tego typu były wykonywane. Technicznie dało się to zrobić. Problem polegał na tym,
+          że taki system byłby bardzo drogi i zwracałby się zbyt długo.
+        </p>
+
+        <div class="highlight">
+          <strong>To był klasyczny przykład sytuacji, w której rozwiązanie „na wszystko” istnieje, ale nie ma sensu biznesowego.</strong>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Rozwiązanie polegało na zabezpieczeniu tylko tego, co naprawdę krytyczne</h2>
+        <p>
+          Zastosowane podejście było inne. Zamiast podtrzymywać całą moc wszystkich wtryskarek,
+          zabezpieczona została wyłącznie elektronika sterująca.
+        </p>
+        <p>
+          Na poszczególne maszyny trafiły lokalne UPS-y o mocy około 2 kW i czasie podtrzymania
+          kilku minut. W niektórych miejscach możliwe było również grupowanie zasilania i zabezpieczanie
+          kilku wtryskarek jednym odpowiednio dobranym urządzeniem.
+        </p>
+        <p>
+          Dlaczego to wystarczyło? Bo problemem nie była bezwładność hydrauliki czy grzałek.
+          Problemem było to, że przy zaniku napięcia gasł komputer i sterowanie maszyny.
+          To właśnie ten element wymagał podtrzymania.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-title">Krok 1</div>
+            <div>Ustalenie, że źródło zaniku napięcia leży poza zakładem i ma charakter zewnętrzny.</div>
+          </div>
+          <div class="step">
+            <div class="step-title">Krok 2</div>
+            <div>Odrzucenie przewymiarowanego rozwiązania obejmującego całą halę.</div>
+          </div>
+          <div class="step">
+            <div class="step-title">Krok 3</div>
+            <div>Skupienie zabezpieczenia tylko na elektronice sterującej, czyli rzeczywistym punkcie krytycznym.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Efekt</h2>
+        <p>
+          Problem został rozwiązany. Krótkie zaniki napięcia przestały wywoływać lawinę skutków
+          w postaci wyłączeń, czyszczenia i wielogodzinnych restartów procesu.
+        </p>
+        <p>
+          W praktyce oznaczało to odzyskanie stabilności pracy bez konieczności budowy ogromnego
+          systemu podtrzymania zasilania dla całego zakładu.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Co zostało na stałe</h2>
+        <p>
+          Takie rozwiązanie wymaga później normalnej dyscypliny eksploatacyjnej: przede wszystkim
+          regularnej wymiany akumulatorów i pilnowania sprawności lokalnych UPS-ów.
+        </p>
+        <p>
+          Najważniejsze jest jednak to, że przy kolejnych zamówieniach wtryskarek temat został już
+          wpisany do wymagań. Innymi słowy: doświadczenie z jednego problemu zostało zamienione
+          w standard dla kolejnych inwestycji.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Najważniejszy wniosek</h2>
+        <p>
+          Nie każdy problem produkcyjny da się rozwiązać przez poprawianie samego procesu.
+          Czasem proces jest dobry, a niestabilność pochodzi z zewnątrz.
+        </p>
+        <p>
+          Wtedy kluczowe nie jest największe możliwe zabezpieczenie, tylko zrozumienie,
+          który element naprawdę trzeba ochronić.
+        </p>
+
+        <div class="highlight">
+          <strong>Najlepsze rozwiązania nie zawsze są największe. Najlepsze rozwiązania trafiają dokładnie w punkt krytyczny.</strong>
+        </div>
+      </section>
+
+      <section class="card cta">
+        <h2>Masz podobny przypadek?</h2>
+        <p>
+          Jeżeli w Twojej firmie problem wygląda na losowy, powraca mimo różnych działań
+          i trudno jednoznacznie wskazać jego przyczynę, warto sprawdzić, czy źródło zakłócenia
+          nie leży poza samą linią produkcyjną.
+        </p>
+        <a class="btn" href="/">Wróć na stronę główną</a>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    MMGRESS — diagnoza problemów technicznych, procesowych i organizacyjnych.
+  </footer>
+</body>
+</html>
