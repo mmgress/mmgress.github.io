@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formularz przyjęcia tematu v01</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --line: #d9e1ec;
+      --text: #1d2733;
+      --muted: #617285;
+      --accent: #0f62fe;
+      --accent-2: #eaf1ff;
+      --ok: #1f8f4e;
+      --warn: #c58400;
+      --bad: #b42318;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .wrap {
+      width: min(1200px, calc(100% - 24px));
+      margin: 24px auto 40px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .section + .section {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 13px;
+      font-size: 15px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 108px;
+      resize: vertical;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .inline-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
+    }
+
+    .inline-options label {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fff;
+    }
+
+    .summary-box {
+      position: sticky;
+      top: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .b-ok { background: #e8f7ee; color: var(--ok); }
+    .b-warn { background: #fff5de; color: var(--warn); }
+    .b-bad { background: #fdecec; color: var(--bad); }
+
+    .summary-title {
+      font-size: 22px;
+      margin: 0 0 8px;
+    }
+
+    .price {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1;
+      margin: 6px 0 14px;
+    }
+
+    .mini {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .summary-list {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .summary-list li {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fff;
+    }
+
+    .summary-list strong {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .decision {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--accent-2);
+      border: 1px solid #cfe0ff;
+    }
+
+    .decision h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .decision p {
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .foot {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 920px) {
+      .grid { grid-template-columns: 1fr; }
+      .summary-box { position: static; }
+    }
+
+    @media (max-width: 680px) {
+      .fields { grid-template-columns: 1fr; }
+      h1 { font-size: 24px; }
+      .price { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1>Formularz przyjęcia tematu v01</h1>
+        <p class="lead">Prosty formularz do szybkiej kwalifikacji podczas rozmowy. Wpisujesz dane, wybierasz etap, cenę i od razu masz podsumowanie do odczytania lub skopiowania.</p>
+      </div>
+      <div class="actions">
+        <button class="btn" type="button" onclick="window.print()">Drukuj / PDF</button>
+        <button class="btn primary" type="button" id="copyBtn">Kopiuj podsumowanie</button>
+        <button class="btn" type="button" id="resetBtn">Wyczyść</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <form class="card" id="intakeForm">
+        <div class="section">
+          <h2>1. Dane podstawowe</h2>
+          <div class="fields">
+            <div class="field">
+              <label for="company">Firma</label>
+              <input id="company" name="company" type="text" placeholder="np. ABC Produkcja" />
+            </div>
+            <div class="field">
+              <label for="person">Osoba kontaktowa</label>
+              <input id="person" name="person" type="text" placeholder="Imię i nazwisko" />
+            </div>
+            <div class="field">
+              <label for="phone">Telefon</label>
+              <input id="phone" name="phone" type="text" placeholder="Numer telefonu" />
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" placeholder="adres@email.pl" />
+            </div>
+            <div class="field full">
+              <label for="location">Lokalizacja problemu</label>
+              <input id="location" name="location" type="text" placeholder="Miasto / zakład / obiekt" />
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>2. Problem i pilność</h2>
+          <div class="fields">
+            <div class="field full">
+              <label for="problem">Opis problemu</label>
+              <textarea id="problem" name="problem" placeholder="Co dokładnie się dzieje, od kiedy, jakie są objawy?"></textarea>
+            </div>
+            <div class="field">
+              <label for="impact">Skutek biznesowy / techniczny</label>
+              <input id="impact" name="impact" type="text" placeholder="np. przestoje, błędy, koszty" />
+            </div>
+            <div class="field">
+              <label for="history">Co już było robione</label>
+              <input id="history" name="history" type="text" placeholder="np. serwis, wymiana, pomiary" />
+            </div>
+            <div class="field">
+              <label for="urgency">Pilność</label>
+              <select id="urgency" name="urgency">
+                <option value="standard">Standardowe</option>
+                <option value="high">Wysokie</option>
+                <option value="critical">Krytyczne</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="shutdown">Czy można testować / wyłączać?</label>
+              <select id="shutdown" name="shutdown">
+                <option value="tak">Tak</option>
+                <option value="częściowo">Częściowo</option>
+                <option value="nie">Nie</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>3. Kwalifikacja</h2>
+          <div class="fields">
+            <div class="field">
+              <label for="classification">Typ tematu</label>
+              <select id="classification" name="classification">
+                <option value="diagnostyka">Diagnostyka</option>
+                <option value="interwencja">Interwencja</option>
+                <option value="projekt">Projekt</option>
+                <option value="nadzór">Nadzór</option>
+                <option value="chaos">Temat chaotyczny / niepełny</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="decision">Decyzja</label>
+              <select id="decision" name="decision">
+                <option value="analiza">Kwalifikacja do płatnej analizy</option>
+                <option value="doprecyzowanie">Potrzeba doprecyzowania</option>
+                <option value="odrzucenie">Odrzucenie</option>
+                <option value="realizacja">Możliwa realizacja po analizie</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="notes">Notatki własne</label>
+              <textarea id="notes" name="notes" placeholder="Twoje uwagi z rozmowy, ryzyka, braki danych, odczucie co do klienta."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>4. Etap i cena</h2>
+          <div class="fields">
+            <div class="field">
+              <label for="stage">Wybrany etap</label>
+              <select id="stage" name="stage">
+                <option value="Kwalifikacja bezpłatna" data-default-price="0">Kwalifikacja bezpłatna</option>
+                <option value="Konsultacja wstępna" data-default-price="800">Konsultacja wstępna</option>
+                <option value="Analiza zdalna" data-default-price="2500">Analiza zdalna</option>
+                <option value="Analiza z wizją lokalną" data-default-price="4500">Analiza z wizją lokalną</option>
+                <option value="Analiza rozszerzona z pomiarami" data-default-price="8500">Analiza rozszerzona z pomiarami</option>
+                <option value="Raport i rekomendacje" data-default-price="2000">Raport i rekomendacje</option>
+                <option value="Projekt rozwiązania" data-default-price="6000">Projekt rozwiązania</option>
+                <option value="Realizacja / wsparcie dzienne" data-default-price="2200">Realizacja / wsparcie dzienne</option>
+                <option value="Nadzór miesięczny" data-default-price="4000">Nadzór miesięczny</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="price">Cena netto [PLN]</label>
+              <input id="price" name="price" type="number" min="0" step="100" value="0" />
+            </div>
+            <div class="field">
+              <label for="travel">Dojazd / koszty dodatkowe [PLN]</label>
+              <input id="travel" name="travel" type="number" min="0" step="50" value="0" />
+            </div>
+            <div class="field">
+              <label for="vat">VAT</label>
+              <select id="vat" name="vat">
+                <option value="23">23%</option>
+                <option value="8">8%</option>
+                <option value="0">0%</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="stageScope">Zakres etapu</label>
+              <textarea id="stageScope" name="stageScope" placeholder="Co dokładnie obejmuje ten etap?"></textarea>
+              <div class="hint">Przykład: rozmowa, analiza danych, wizja lokalna, wnioski, rekomendacja dalszych działań.</div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="card summary-box">
+        <div id="badge" class="badge b-ok">Temat rokujący</div>
+        <h2 class="summary-title">Podsumowanie</h2>
+        <p class="mini" id="summaryLead">Wypełnij formularz po lewej stronie. Podsumowanie aktualizuje się automatycznie.</p>
+        <div class="price" id="grossPrice">0,00 zł brutto</div>
+
+        <ul class="summary-list">
+          <li><strong>Firma / kontakt</strong><span id="sumCompany">—</span></li>
+          <li><strong>Lokalizacja</strong><span id="sumLocation">—</span></li>
+          <li><strong>Typ tematu</strong><span id="sumClassification">—</span></li>
+          <li><strong>Decyzja</strong><span id="sumDecision">—</span></li>
+          <li><strong>Etap</strong><span id="sumStage">—</span></li>
+          <li><strong>Cena netto + dodatki</strong><span id="sumNet">—</span></li>
+        </ul>
+
+        <div class="decision">
+          <h3>Tekst do odczytania klientowi</h3>
+          <p id="decisionText">—</p>
+        </div>
+
+        <div class="foot">
+          Ten formularz działa lokalnie, bez backendu. Możesz go wrzucić jako osobną stronę HTML na GitHub Pages.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('intakeForm');
+    const stageSelect = document.getElementById('stage');
+    const priceInput = document.getElementById('price');
+    const travelInput = document.getElementById('travel');
+    const vatInput = document.getElementById('vat');
+    const copyBtn = document.getElementById('copyBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function setDefaultPrice() {
+      const selected = stageSelect.options[stageSelect.selectedIndex];
+      const defaultPrice = selected.getAttribute('data-default-price') || '0';
+      priceInput.value = defaultPrice;
+      updateSummary();
+    }
+
+    function money(value) {
+      const n = Number(value || 0);
+      return n.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' zł';
+    }
+
+    function decisionLabel(value) {
+      const map = {
+        analiza: 'Kwalifikacja do płatnej analizy',
+        doprecyzowanie: 'Potrzeba doprecyzowania',
+        odrzucenie: 'Odrzucenie',
+        realizacja: 'Możliwa realizacja po analizie'
+      };
+      return map[value] || value;
+    }
+
+    function urgencyLabel(value) {
+      const map = { standard: 'standardowa', high: 'wysoka', critical: 'krytyczna' };
+      return map[value] || value;
+    }
+
+    function updateSummary() {
+      const data = new FormData(form);
+      const company = data.get('company') || '';
+      const person = data.get('person') || '';
+      const phone = data.get('phone') || '';
+      const email = data.get('email') || '';
+      const location = data.get('location') || '';
+      const classification = data.get('classification') || '';
+      const decision = data.get('decision') || '';
+      const stage = data.get('stage') || '';
+      const priceNet = Number(data.get('price') || 0);
+      const travel = Number(data.get('travel') || 0);
+      const vat = Number(data.get('vat') || 0);
+      const problem = data.get('problem') || '';
+      const impact = data.get('impact') || '';
+      const urgency = data.get('urgency') || '';
+      const shutdown = data.get('shutdown') || '';
+      const stageScope = data.get('stageScope') || '';
+
+      const totalNet = priceNet + travel;
+      const gross = totalNet * (1 + vat / 100);
+
+      document.getElementById('sumCompany').textContent = [company, person, phone || email].filter(Boolean).join(' | ') || '—';
+      document.getElementById('sumLocation').textContent = location || '—';
+      document.getElementById('sumClassification').textContent = classification || '—';
+      document.getElementById('sumDecision').textContent = decisionLabel(decision);
+      document.getElementById('sumStage').textContent = stage || '—';
+      document.getElementById('sumNet').textContent = money(totalNet) + ' netto';
+      document.getElementById('grossPrice').textContent = money(gross) + ' brutto';
+
+      const badge = document.getElementById('badge');
+      badge.className = 'badge';
+      if (decision === 'odrzucenie') {
+        badge.classList.add('b-bad');
+        badge.textContent = 'Temat do odrzucenia';
+      } else if (decision === 'doprecyzowanie') {
+        badge.classList.add('b-warn');
+        badge.textContent = 'Brakuje danych';
+      } else {
+        badge.classList.add('b-ok');
+        badge.textContent = 'Temat rokujący';
+      }
+
+      const text = buildDecisionText({
+        company, person, location, classification, decision, stage,
+        priceNet, travel, vat, totalNet, gross, problem, impact, urgency, shutdown, stageScope
+      });
+      document.getElementById('decisionText').textContent = text;
+
+      document.getElementById('summaryLead').textContent =
+        problem
+          ? 'Masz już gotowe robocze podsumowanie rozmowy i wstępną decyzję.'
+          : 'Wypełnij formularz po lewej stronie. Podsumowanie aktualizuje się automatycznie.';
+    }
+
+    function buildDecisionText(d) {
+      if (d.decision === 'odrzucenie') {
+        return 'Na ten moment nie wchodzę w ten temat w obecnej formule. Żeby wrócić do rozmowy, potrzebuję pełniejszych danych wejściowych albo doprecyzowania zakresu.';
+      }
+
+      if (d.decision === 'doprecyzowanie') {
+        return 'Na ten moment widzę potencjał, ale nie mam jeszcze kompletu danych. Żeby przejść dalej, potrzebuję doprecyzowania problemu, dotychczasowych działań i warunków pracy na obiekcie.';
+      }
+
+      return 'Na podstawie obecnych informacji kwalifikuję temat jako: ' + d.classification + '. Proponuję etap: ' + d.stage + '. Zakres: ' + (d.stageScope || 'do doprecyzowania w ofercie') + '. Szacunkowa cena: ' + money(d.totalNet) + ' netto, czyli ' + money(d.gross) + ' brutto. Pilność: ' + urgencyLabel(d.urgency) + '. Możliwość testów / wyłączeń: ' + d.shutdown + '. Dalej decydujemy po zakończeniu tego etapu.';
+    }
+
+    function buildCopyText() {
+      const data = new FormData(form);
+      const priceNet = Number(data.get('price') || 0);
+      const travel = Number(data.get('travel') || 0);
+      const vat = Number(data.get('vat') || 0);
+      const totalNet = priceNet + travel;
+      const gross = totalNet * (1 + vat / 100);
+
+      return [
+        'FORMULARZ PRZYJĘCIA TEMATU V01',
+        '',
+        'Firma: ' + (data.get('company') || '—'),
+        'Osoba kontaktowa: ' + (data.get('person') || '—'),
+        'Telefon: ' + (data.get('phone') || '—'),
+        'E-mail: ' + (data.get('email') || '—'),
+        'Lokalizacja: ' + (data.get('location') || '—'),
+        '',
+        'Opis problemu: ' + (data.get('problem') || '—'),
+        'Skutek: ' + (data.get('impact') || '—'),
+        'Co już było robione: ' + (data.get('history') || '—'),
+        'Pilność: ' + urgencyLabel(data.get('urgency') || ''),
+        'Czy można testować / wyłączać: ' + (data.get('shutdown') || '—'),
+        '',
+        'Typ tematu: ' + (data.get('classification') || '—'),
+        'Decyzja: ' + decisionLabel(data.get('decision') || ''),
+        'Wybrany etap: ' + (data.get('stage') || '—'),
+        'Zakres etapu: ' + (data.get('stageScope') || '—'),
+        'Cena netto: ' + money(priceNet),
+        'Dodatki: ' + money(travel),
+        'Razem netto: ' + money(totalNet),
+        'Razem brutto: ' + money(gross),
+        '',
+        'Notatki własne: ' + (data.get('notes') || '—'),
+        '',
+        'Tekst dla klienta:',
+        document.getElementById('decisionText').textContent
+      ].join('\n');
+    }
+
+    form.addEventListener('input', updateSummary);
+    form.addEventListener('change', updateSummary);
+    stageSelect.addEventListener('change', setDefaultPrice);
+
+    copyBtn.addEventListener('click', async function () {
+      const text = buildCopyText();
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = 'Skopiowano';
+        setTimeout(() => { copyBtn.textContent = 'Kopiuj podsumowanie'; }, 1400);
+      } catch (error) {
+        alert('Nie udało się skopiować automatycznie. Spróbuj ponownie albo wydrukuj formularz.');
+      }
+    });
+
+    resetBtn.addEventListener('click', function () {
+      form.reset();
+      setDefaultPrice();
+      document.getElementById('notes').value = '';
+      document.getElementById('problem').value = '';
+      document.getElementById('stageScope').value = '';
+      updateSummary();
+    });
+
+    setDefaultPrice();
+    updateSummary();
+  </script>
+</body>
+</html>
