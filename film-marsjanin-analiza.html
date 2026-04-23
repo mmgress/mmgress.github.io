@@ -25,8 +25,10 @@
   --container:1180px;
   --content:860px;
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
@@ -34,7 +36,9 @@ body{
   color:var(--text);
   line-height:1.72;
 }
+
 a{color:var(--accent)}
+
 .topbar{
   background:rgba(255,255,255,.92);
   border-bottom:1px solid var(--line);
@@ -43,6 +47,7 @@ a{color:var(--accent)}
   z-index:20;
   backdrop-filter:blur(12px);
 }
+
 .topbar-inner{
   max-width:var(--container);
   margin:0 auto;
@@ -52,6 +57,7 @@ a{color:var(--accent)}
   justify-content:space-between;
   gap:24px;
 }
+
 .brand{
   color:#26354a;
   text-decoration:none;
@@ -59,30 +65,42 @@ a{color:var(--accent)}
   font-weight:800;
   letter-spacing:.12em;
 }
+
 .nav{
   display:flex;
   align-items:center;
   gap:34px;
 }
+
 .nav a{
   text-decoration:none;
   color:#26354a;
   font-size:15px;
   font-weight:700;
 }
-.nav a.active,.nav a:hover{color:var(--accent)}
+
+.nav a.active,
+.nav a:hover{
+  color:var(--accent);
+}
+
 .hero{
   background:
     radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),
     linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
   border-bottom:1px solid var(--line);
 }
+
 .hero-inner{
   max-width:var(--container);
   margin:0 auto;
   padding:84px 28px 74px;
 }
-.hero-content{max-width:var(--content)}
+
+.hero-content{
+  max-width:var(--content);
+}
+
 .eyebrow{
   display:inline-block;
   margin:0 0 24px;
@@ -95,88 +113,32 @@ a{color:var(--accent)}
   letter-spacing:.12em;
   text-transform:uppercase;
 }
+
 h1{
   margin:0 0 24px;
   color:#152235;
   letter-spacing:-0.04em;
-}
-.hero-title{
   font-size:clamp(2.6rem, 5vw, 5rem);
   line-height:1.02;
   font-weight:800;
   max-width:980px;
 }
-.hero-title.standard{
-  font-size:clamp(2.8rem, 5.2vw, 4.8rem);
-}
-.hero-intro{
+
+.lead{
   max-width:980px;
   font-size:clamp(1.2rem, 1.6vw, 1.5rem);
   color:#38506c;
   line-height:1.65;
   margin:0;
 }
-.hero-lead{
-  max-width:900px;
-  margin:22px 0 0;
-  color:var(--muted);
-  font-size:clamp(1.02rem, 1.3vw, 1.16rem);
-}
-.hero-accent{
-  display:block;
-  font-size:clamp(2.9rem, 6vw, 5.2rem);
-  line-height:.98;
-  font-weight:800;
-  margin-bottom:10px;
-}
-.hero-rest{
-  display:block;
-  font-size:clamp(1.95rem, 3.25vw, 3.45rem);
-  line-height:1.08;
-  font-weight:700;
-  letter-spacing:-0.035em;
-  max-width:980px;
-}
-.main{
+
+.wrap{
   max-width:var(--container);
   margin:0 auto;
   padding:34px 28px 70px;
 }
-.summary{
-  margin-top:-32px;
-  position:relative;
-  z-index:2;
-}
-.summary-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:18px;
-}
-.summary-grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.summary-card{
-  min-width:0;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:22px 26px;
-  box-shadow:var(--shadow);
-}
-.summary-card .label{
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  font-weight:800;
-  color:#68809d;
-  margin:0 0 12px;
-}
-.summary-card .value{
-  margin:0;
-  font-size:clamp(1.5rem, 2.1vw, 2.1rem);
-  line-height:1.15;
-  font-weight:800;
-  color:var(--accent);
-}
-.section{
+
+.card{
   max-width:var(--content);
   background:var(--surface);
   border:1px solid var(--line);
@@ -185,24 +147,42 @@ h1{
   margin:22px 0;
   box-shadow:var(--shadow);
 }
-.section.wide{max-width:none}
-.section h2{
+
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+
+.mini{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:22px 24px;
+}
+
+.mini h3{
+  margin:0 0 10px;
+  font-size:1.15rem;
+  line-height:1.2;
+  color:#122133;
+}
+
+.card h2{
   margin:0 0 18px;
   font-size:clamp(1.9rem, 2.6vw, 2.5rem);
   line-height:1.1;
   letter-spacing:-0.03em;
   color:#122133;
 }
-.section h3{
-  margin:0 0 12px;
-  font-size:1.5rem;
-  line-height:1.2;
-  color:#122133;
+
+p{
+  margin:0 0 16px;
+  font-size:1.08rem;
 }
-p{margin:0 0 16px;font-size:1.08rem}
-ul,ol{margin:0;padding-left:24px}
-li{margin:0 0 10px;font-size:1.05rem}
-.note-box,.quote{
+
+.highlight,
+.quote{
   background:var(--surface-soft);
   border:1px solid var(--line);
   border-left:4px solid var(--accent);
@@ -210,101 +190,83 @@ li{margin:0 0 10px;font-size:1.05rem}
   padding:18px 20px;
   margin:22px 0;
 }
-.result-box{
-  background:#eef8f3;
-  border:1px solid #cfe8d8;
-  border-radius:16px;
-  padding:22px 24px;
-  margin:20px 0;
-}
-.loss-box{
-  background:#fcf6ef;
-  border:1px solid #efd7b8;
-  border-radius:16px;
-  padding:22px 24px;
-  margin:20px 0;
-}
-.cards-grid{
+
+.steps{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
+  gap:14px;
 }
-.case-card{
-  display:block;
-  text-decoration:none;
-  color:inherit;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:26px;
-  box-shadow:var(--shadow);
-  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-}
-.case-card:hover{
-  transform:translateY(-3px);
-  border-color:#c7d5e4;
-  box-shadow:0 18px 40px rgba(15,23,42,.09);
-}
-.case-tag{
-  display:inline-block;
-  margin:0 0 14px;
-  color:var(--accent);
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-.case-card h3{
-  margin:0 0 14px;
-  font-size:1.7rem;
-  line-height:1.15;
-}
-.meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:16px;
-}
-.meta span{
-  display:inline-block;
-  padding:8px 12px;
-  background:var(--surface-soft);
-  border:1px solid var(--line);
-  border-radius:999px;
-  font-size:13px;
-  color:#42566c;
-}
-.cta-link{
-  display:inline-block;
-  margin-top:16px;
-  color:var(--accent);
-  font-weight:700;
-  text-decoration:none;
-}
-.footer-note{color:#66788e;font-size:.95rem;margin-top:18px}
-.contact-box{
+
+.step{
   background:var(--surface-soft);
   border:1px solid var(--line);
   border-radius:16px;
-  padding:24px;
+  padding:18px 20px;
 }
-@media (max-width: 1040px){
-  .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .summary-grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cards-grid{grid-template-columns:1fr}
+
+.step-title{
+  margin:0 0 8px;
+  font-weight:800;
+  color:#122133;
 }
+
+.cta{
+  background:linear-gradient(180deg, #ffffff 0%, #f4f8fd 100%);
+}
+
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:12px 18px;
+  border-radius:12px;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  transition:opacity .16s ease;
+}
+
+.btn:hover{
+  opacity:.92;
+  text-decoration:none;
+}
+
+footer{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 28px 48px;
+  color:#66788e;
+  font-size:.95rem;
+}
+
 @media (max-width: 760px){
-  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
-  .nav{gap:18px; flex-wrap:wrap}
-  .hero-inner{padding:56px 18px 52px}
-  .main{padding:22px 18px 50px}
-  .section{padding:26px 22px}
-  .summary{margin-top:0}
-  .summary-grid,.summary-grid.cols-3{grid-template-columns:1fr}
-  .hero-accent{margin-bottom:8px}
+  .topbar-inner{
+    padding:16px 18px;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .nav{
+    gap:18px;
+    flex-wrap:wrap;
+  }
+
+  .hero-inner{
+    padding:56px 18px 52px;
+  }
+
+  .wrap{
+    padding:22px 18px 50px;
+  }
+
+  .card{
+    padding:26px 22px;
+  }
+
+  .grid-2{
+    grid-template-columns:1fr;
+  }
 }
 </style>
-
 </head>
 
 <body>
@@ -322,163 +284,163 @@ li{margin:0 0 10px;font-size:1.05rem}
 
 <main>
 
-<div class="hero">
-  <div class="eyebrow">Case Study MMGRESS</div>
-  <h1>Botanika wysłali na Marsa… ale nie dali mu świata do pracy</h1>
-  <p class="lead">
-    W filmie wszystko wygląda spójnie. Jest misja, jest załoga, jest specjalista.
-    A mimo to już na samym początku coś nie gra.
-    Nie w fizyce. Nie w Marsie. Tylko w jednej decyzji, która zapadła dużo wcześniej.
-  </p>
-</div>
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="eyebrow">Case Study MMGRESS</div>
+        <h1>Botanika wysłali na Marsa… ale nie dali mu świata do pracy</h1>
+        <p class="lead">
+          W filmie wszystko wygląda spójnie. Jest misja, jest załoga, jest specjalista.
+          A mimo to już na samym początku coś nie gra.
+          Nie w fizyce. Nie w Marsie. Tylko w jednej decyzji, która zapadła dużo wcześniej.
+        </p>
+      </div>
+    </div>
+  </div>
 
-<div class="wrap">
+  <div class="wrap">
 
-<section class="card">
-  <div class="grid-2">
-    <div class="mini">
-      <h3>Sytuacja wyjściowa</h3>
+    <section class="card">
+      <div class="grid-2">
+        <div class="mini">
+          <h3>Sytuacja wyjściowa</h3>
+          <p>
+            Misja na Marsa. Załoga dobrana specjalistycznie.
+            Wśród nich botanik – człowiek, który ma wiedzę, kompetencje i konkretną rolę.
+          </p>
+        </div>
+        <div class="mini">
+          <h3>Pierwsze wrażenie</h3>
+          <p>
+            Wszystko wygląda logicznie.
+            Dopóki nie zaczniesz się zastanawiać, co ten botanik tak naprawdę ma tam robić.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Na pierwszy rzut oka wszystko się zgadza</h2>
       <p>
-        Misja na Marsa. Załoga dobrana specjalistycznie.
-        Wśród nich botanik – człowiek, który ma wiedzę, kompetencje i konkretną rolę.
+        Jest specjalista. Jest środowisko misji. Jest cel.
+        Film nie zatrzymuje się na tym etapie – po prostu idzie dalej.
       </p>
-    </div>
-    <div class="mini">
-      <h3>Pierwsze wrażenie</h3>
       <p>
-        Wszystko wygląda logicznie.
-        Dopóki nie zaczniesz się zastanawiać, co ten botanik tak naprawdę ma tam robić.
+        Ale jeśli na chwilę się zatrzymać, pojawia się coś, co zaczyna uwierać.
       </p>
-    </div>
+
+      <div class="highlight">
+        <strong>Botanik jest na miejscu. Ale nie ma świata, w którym jego rola ma sens.</strong>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Co właściwie było problemem</h2>
+      <p>
+        Nie było przygotowanego systemu uprawy.
+        Nie było zestawu roślin do testów.
+        Nie było środowiska do prowadzenia eksperymentów.
+      </p>
+      <p>
+        Była rola – ale nie było infrastruktury tej roli.
+      </p>
+      <div class="quote">
+        <strong>To nie był problem tego, że botanik nie wiedział, co robić.</strong><br />
+        To był problem tego, że nie miał gdzie tego robić.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Moment przełomowy</h2>
+      <p>
+        Cała jego „praca” zaczyna się dopiero wtedy, kiedy wszystko się sypie.
+        Kiedy przestaje działać system, który miał działać.
+      </p>
+      <p>
+        Dopiero w chaosie pojawia się przestrzeń, żeby wykorzystać jego kompetencje.
+      </p>
+
+      <div class="highlight">
+        <strong>System zaczął działać dopiero wtedy, kiedy przestał udawać, że działa.</strong>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Dlaczego to nie jest tylko film</h2>
+      <p>
+        To nie jest uproszczenie scenariusza.
+        To jest bardzo dokładne odwzorowanie tego, co dzieje się w firmach.
+      </p>
+      <p>
+        Tworzysz stanowisko. Nadajesz mu nazwę. Przypisujesz odpowiedzialność.
+      </p>
+      <p>
+        Ale nie budujesz środowiska, które pozwala tę odpowiedzialność realizować.
+      </p>
+      <p>
+        I przez długi czas wszystko „działa”. Aż do momentu, kiedy przestaje.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Jak to wygląda w rzeczywistości biznesowej</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-title">Rola istnieje na papierze</div>
+          <div>Stanowisko jest zdefiniowane, obowiązki opisane, KPI ustawione.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-title">Środowisko nie istnieje w praktyce</div>
+          <div>Brakuje narzędzi, procesów, danych albo decyzji, które umożliwiają działanie.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-title">System działa… do czasu</div>
+          <div>Wyniki jakoś się spinają, ale tylko dlatego, że ktoś „łata rzeczywistość”.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-title">Pierwsza awaria pokazuje prawdę</div>
+          <div>Wtedy wychodzi, że rola nigdy nie była realnie osadzona w systemie.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Najważniejszy wniosek</h2>
+      <p>
+        Problem rzadko leży w ludziach.
+      </p>
+      <p>
+        Dużo częściej leży w tym, że rola została zaprojektowana w oderwaniu od świata,
+        w którym ma funkcjonować.
+      </p>
+
+      <div class="highlight">
+        <strong>Najdroższe błędy nie wynikają z braku kompetencji. Wynikają z braku warunków do ich użycia.</strong>
+      </div>
+    </section>
+
+    <section class="card cta">
+      <h2>Masz podobny przypadek?</h2>
+      <p>
+        Jeśli masz w firmie ludzi, którzy „powinni dowozić”,
+        ale coś się nie spina mimo że wszystko wygląda dobrze —
+        bardzo często problem zaczyna się właśnie tutaj.
+      </p>
+      <p>
+        Nie w nich. Tylko w świecie, który został wokół nich zbudowany.
+      </p>
+      <a class="btn" href="/">Wróć na stronę główną</a>
+    </section>
+
   </div>
-</section>
-
-<section class="card">
-  <h2>Na pierwszy rzut oka wszystko się zgadza</h2>
-  <p>
-    Jest specjalista. Jest środowisko misji. Jest cel.
-    Film nie zatrzymuje się na tym etapie – po prostu idzie dalej.
-  </p>
-  <p>
-    Ale jeśli na chwilę się zatrzymać, pojawia się coś, co zaczyna uwierać.
-  </p>
-
-  <div class="highlight">
-    <strong>Botanik jest na miejscu. Ale nie ma świata, w którym jego rola ma sens.</strong>
-  </div>
-</section>
-
-<section class="card">
-  <h2>Co właściwie było problemem</h2>
-  <p>
-    Nie było przygotowanego systemu uprawy.
-    Nie było zestawu roślin do testów.
-    Nie było środowiska do prowadzenia eksperymentów.
-  </p>
-  <p>
-    Była rola – ale nie było infrastruktury tej roli.
-  </p>
-  <p class="quote">
-    To nie był problem tego, że botanik nie wiedział, co robić.<br />
-    To był problem tego, że nie miał gdzie tego robić.
-  </p>
-</section>
-
-<section class="card">
-  <h2>Moment przełomowy</h2>
-  <p>
-    Cała jego „praca” zaczyna się dopiero wtedy, kiedy wszystko się sypie.
-    Kiedy przestaje działać system, który miał działać.
-  </p>
-  <p>
-    Dopiero w chaosie pojawia się przestrzeń, żeby wykorzystać jego kompetencje.
-  </p>
-
-  <div class="highlight">
-    <strong>System zaczął działać dopiero wtedy, kiedy przestał udawać, że działa.</strong>
-  </div>
-</section>
-
-<section class="card">
-  <h2>Dlaczego to nie jest tylko film</h2>
-  <p>
-    To nie jest uproszczenie scenariusza.
-    To jest bardzo dokładne odwzorowanie tego, co dzieje się w firmach.
-  </p>
-  <p>
-    Tworzysz stanowisko. Nadajesz mu nazwę.
-    Przypisujesz odpowiedzialność.
-  </p>
-  <p>
-    Ale nie budujesz środowiska, które pozwala tę odpowiedzialność realizować.
-  </p>
-  <p>
-    I przez długi czas wszystko „działa”.
-  </p>
-  <p>
-    Aż do momentu, kiedy przestaje.
-  </p>
-</section>
-
-<section class="card">
-  <h2>Jak to wygląda w rzeczywistości biznesowej</h2>
-
-  <div class="steps">
-    <div class="step">
-      <div class="step-title">Rola istnieje na papierze</div>
-      <div>Stanowisko jest zdefiniowane, obowiązki opisane, KPI ustawione.</div>
-    </div>
-
-    <div class="step">
-      <div class="step-title">Środowisko nie istnieje w praktyce</div>
-      <div>Brakuje narzędzi, procesów, danych albo decyzji, które umożliwiają działanie.</div>
-    </div>
-
-    <div class="step">
-      <div class="step-title">System działa… do czasu</div>
-      <div>Wyniki jakoś się spinają, ale tylko dlatego, że ktoś „łata rzeczywistość”.</div>
-    </div>
-
-    <div class="step">
-      <div class="step-title">Pierwsza awaria pokazuje prawdę</div>
-      <div>Wtedy wychodzi, że rola nigdy nie była realnie osadzona w systemie.</div>
-    </div>
-  </div>
-</section>
-
-<section class="card">
-  <h2>Najważniejszy wniosek</h2>
-  <p>
-    Problem rzadko leży w ludziach.
-  </p>
-  <p>
-    Dużo częściej leży w tym, że rola została zaprojektowana w oderwaniu od świata,
-    w którym ma funkcjonować.
-  </p>
-
-  <div class="highlight">
-    <strong>Najdroższe błędy nie wynikają z braku kompetencji. Wynikają z braku warunków do ich użycia.</strong>
-  </div>
-</section>
-
-<section class="card cta">
-  <h2>Masz podobny przypadek?</h2>
-  <p>
-    Jeśli masz w firmie ludzi, którzy „powinni dowozić”…
-    ale coś się nie spina mimo że wszystko wygląda dobrze —
-    bardzo często problem zaczyna się właśnie tutaj.
-  </p>
-  <p>
-    Nie w nich. Tylko w świecie, który został wokół nich zbudowany.
-  </p>
-  <a class="btn" href="/">Wróć na stronę główną</a>
-</section>
-
-</div>
 </main>
 
 <footer>
-MMGRESS — diagnoza problemów technicznych, procesowych i organizacyjnych.
+  MMGRESS — diagnoza problemów technicznych, procesowych i organizacyjnych.
 </footer>
 
 </body>
