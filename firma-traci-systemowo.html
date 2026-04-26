@@ -1,93 +1,607 @@
-<h1>Firma nie traci punktowo. Firma traci systemowo.</h1>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Analiza MMGRESS: firma nie traci punktowo, lecz systemowo. Ukryte koszty, awarie, przestoje i problemy operacyjne często są skutkiem wcześniejszych decyzji zarządczych, procesowych i technicznych." />
 
-<p class="lead">
-W wielu firmach problem widoczny jest dopiero na końcu procesu:
-w kosztach, awarii, reklamacji, przestoju albo spadku rentowności.
-Ale jego źródło bardzo często znajduje się dużo wcześniej — w decyzjach,
-założeniach i zależnościach, których nikt już nie łączy z obecnym skutkiem.
-</p>
+<title>Firma nie traci punktowo. Firma traci systemowo | MMGRESS</title>
 
-<h2>Problem techniczny często nie zaczyna się w technice</h2>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5KZX20JGP7');
+</script>
 
-<p>
-Z perspektywy zarządu problem wygląda zwykle prosto: pojawił się koszt,
-więc trzeba go obniżyć; pojawiła się awaria, więc trzeba ją usunąć;
-pojawił się przestój, więc trzeba znaleźć winnego albo dostawcę rozwiązania.
-</p>
+<style>
+:root{
+  --bg:#f3f6fa;
+  --surface:#ffffff;
+  --surface-soft:#f7f9fc;
+  --hero:#edf3f8;
+  --text:#172435;
+  --muted:#4d6075;
+  --line:#d7e0ea;
+  --accent:#204f86;
+  --accent-soft:#e9f1fb;
+  --shadow:0 14px 34px rgba(15, 23, 42, 0.06);
+  --radius:20px;
+  --radius-sm:14px;
+  --container:1180px;
+  --content:860px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.72;
+}
+a{color:var(--accent)}
+.topbar{
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(12px);
+}
+.topbar-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:18px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.brand{
+  color:#26354a;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+.nav a{
+  text-decoration:none;
+  color:#26354a;
+  font-size:15px;
+  font-weight:700;
+}
+.nav a.active,.nav a:hover{color:var(--accent)}
+.hero{
+  background:
+    radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),
+    linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:84px 28px 74px;
+}
+.hero-content{max-width:var(--content)}
+.eyebrow{
+  display:inline-block;
+  margin:0 0 24px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+h1{
+  margin:0 0 24px;
+  color:#152235;
+  letter-spacing:-0.04em;
+}
+.hero-title{
+  font-size:clamp(2.6rem, 5vw, 5rem);
+  line-height:1.02;
+  font-weight:800;
+  max-width:980px;
+}
+.hero-title.standard{
+  font-size:clamp(2.8rem, 5.2vw, 4.8rem);
+}
+.hero-intro{
+  max-width:980px;
+  font-size:clamp(1.2rem, 1.6vw, 1.5rem);
+  color:#38506c;
+  line-height:1.65;
+  margin:0;
+}
+.hero-lead{
+  max-width:900px;
+  margin:22px 0 0;
+  color:var(--muted);
+  font-size:clamp(1.02rem, 1.3vw, 1.16rem);
+}
+.main{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:34px 28px 70px;
+}
+.summary{
+  margin-top:-32px;
+  position:relative;
+  z-index:2;
+}
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+.summary-grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.summary-card{
+  min-width:0;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px 26px;
+  box-shadow:var(--shadow);
+}
+.summary-card .label{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:800;
+  color:#68809d;
+  margin:0 0 12px;
+}
+.summary-card .value{
+  margin:0;
+  font-size:clamp(1.35rem, 1.9vw, 1.9rem);
+  line-height:1.15;
+  font-weight:800;
+  color:var(--accent);
+}
+.section{
+  max-width:var(--content);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:34px 38px;
+  margin:22px 0;
+  box-shadow:var(--shadow);
+}
+.section.wide{max-width:none}
+.section h2{
+  margin:0 0 18px;
+  font-size:clamp(1.9rem, 2.6vw, 2.5rem);
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:#122133;
+}
+.section h3{
+  margin:0 0 12px;
+  font-size:1.5rem;
+  line-height:1.2;
+  color:#122133;
+}
+p{margin:0 0 16px;font-size:1.08rem}
+ul,ol{margin:0;padding-left:24px}
+li{margin:0 0 10px;font-size:1.05rem}
+.note-box,.quote{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+  border-radius:16px;
+  padding:18px 20px;
+  margin:22px 0;
+}
+.result-box{
+  background:#eef8f3;
+  border:1px solid #cfe8d8;
+  border-radius:16px;
+  padding:22px 24px;
+  margin:20px 0;
+}
+.loss-box{
+  background:#fcf6ef;
+  border:1px solid #efd7b8;
+  border-radius:16px;
+  padding:22px 24px;
+  margin:20px 0;
+}
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.case-card{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px;
+  box-shadow:var(--shadow);
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.case-card:hover{
+  transform:translateY(-3px);
+  border-color:#c7d5e4;
+  box-shadow:0 18px 40px rgba(15,23,42,.09);
+}
+.case-tag{
+  display:inline-block;
+  margin:0 0 14px;
+  color:var(--accent);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.case-card h3{
+  margin:0 0 14px;
+  font-size:1.7rem;
+  line-height:1.15;
+}
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+.meta span{
+  display:inline-block;
+  padding:8px 12px;
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:13px;
+  color:#42566c;
+}
+.cta-link{
+  display:inline-block;
+  margin-top:16px;
+  color:var(--accent);
+  font-weight:700;
+  text-decoration:none;
+}
+.footer-note{color:#66788e;font-size:.95rem;margin-top:18px}
+.contact-box{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px;
+}
+@media (max-width: 1040px){
+  .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .summary-grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards-grid{grid-template-columns:1fr}
+}
+@media (max-width: 760px){
+  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
+  .nav{gap:18px; flex-wrap:wrap}
+  .hero-inner{padding:56px 18px 52px}
+  .main{padding:22px 18px 50px}
+  .section{padding:26px 22px}
+  .summary{margin-top:0}
+  .summary-grid,.summary-grid.cols-3{grid-template-columns:1fr}
+}
+</style>
 
-<p>
-Tylko że w praktyce wiele takich sytuacji nie jest osobnym problemem,
-lecz skutkiem działania całego układu firmy. Decyzja inwestycyjna,
-sposób zakupu, brak standardu, źle ustawiona odpowiedzialność,
-niedopowiedziany proces albo techniczne założenie przyjęte kilka lat wcześniej
-mogą po czasie wyglądać jak bieżący problem operacyjny.
-</p>
+</head>
+<body>
 
-<h2>Największe straty powstają na styku obszarów</h2>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">MMGRESS</a>
+    <nav class="nav">
+      <a href="/" class="">Strona główna</a>
+      <a href="/case-studies.html" class="active">Case studies</a>
+      <a href="/about.html" class="">O mnie</a>
+    </nav>
+  </div>
+</header>
 
-<p>
-Najciekawsze rzeczy w firmach rzadko znajdują się w jednym dziale.
-Nie są wyłącznie techniczne, wyłącznie procesowe ani wyłącznie zarządcze.
-Najczęściej powstają pomiędzy nimi.
-</p>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="eyebrow">Analiza zarządcza</div>
+      <h1 class="hero-title standard">Firma nie traci punktowo. Firma traci systemowo.</h1>
+      <p class="hero-intro">
+        W wielu firmach problem widoczny jest dopiero na końcu procesu:
+        w kosztach, awarii, reklamacji, przestoju albo spadku rentowności.
+        Ale jego źródło bardzo często znajduje się dużo wcześniej — w decyzjach,
+        założeniach i zależnościach, których nikt już nie łączy z obecnym skutkiem.
+      </p>
+    </div>
+  </div>
+</section>
 
-<p>
-Technika działa, ale proces jej nie wspiera.
-Proces istnieje, ale nikt nie mierzy jego skutków.
-Decyzje zapadają, ale bez informacji z miejsca, w którym te decyzje
-zamieniają się w realny koszt.
-</p>
+<main class="main">
 
-<p>
-Właśnie tam pojawia się przestrzeń, w której firma może przez długi czas
-tracić pieniądze, energię, czas i stabilność — nie dlatego, że ktoś popełnia
-jeden wielki błąd, ale dlatego, że nikt nie widzi całego układu.
-</p>
+  <section class="summary">
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="label">Poziom problemu</div>
+        <div class="value">Zarządzanie</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Objaw</div>
+        <div class="value">Koszt / chaos</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Źródło</div>
+        <div class="value">Decyzje i procesy</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Cel diagnozy</div>
+        <div class="value">Kontrola</div>
+      </div>
+    </div>
+  </section>
 
-<h2>Diagnoza nie polega na szukaniu winnego</h2>
+  <section class="section">
+    <h2>Problem widoczny jest na końcu, ale zwykle nie zaczyna się na końcu</h2>
 
-<p>
-Dobra diagnoza nie zaczyna się od pytania: kto zawinił?
-Zaczyna się od pytania: jaki mechanizm doprowadził do tego skutku?
-</p>
+    <p>
+      Z perspektywy zarządu wiele problemów wygląda na początku bardzo prosto.
+      Pojawia się koszt, więc trzeba go obniżyć. Pojawia się awaria, więc trzeba ją usunąć.
+      Pojawia się przestój, więc trzeba sprawdzić, kto zawinił albo jaki element wymaga wymiany.
+    </p>
 
-<p>
-To zasadnicza różnica. Szukanie winnego zamyka temat na poziomie reakcji.
-Szukanie mechanizmu otwiera możliwość realnej zmiany.
-</p>
+    <p>
+      Tylko że w praktyce wiele takich sytuacji nie jest osobnym problemem.
+      To często końcowy objaw działania całego układu firmy.
+    </p>
 
-<p>
-Dlatego w MMGRESS patrzę na problemy firmowe nie tylko przez pryzmat
-urządzenia, instalacji, procesu albo pojedynczej decyzji, ale przez zależność
-między nimi. Dopiero wtedy można zobaczyć, czy firma ma problem techniczny,
-czy raczej problem decyzyjny, który tylko technicznie się objawił.
-</p>
+    <p>
+      Decyzja inwestycyjna sprzed dwóch lat, sposób zakupów, brak jasnej odpowiedzialności,
+      niedopowiedziany proces, źle przyjęte założenie techniczne albo brak informacji zwrotnej
+      z produkcji mogą po czasie wyglądać jak bieżący problem operacyjny.
+    </p>
 
-<h2>Kontrola zaczyna się od zrozumienia zależności</h2>
+    <div class="quote">
+      Firma rzadko traci pieniądze dlatego, że jeden element nagle przestał działać.
+      Dużo częściej traci dlatego, że kilka elementów działa osobno, bez wspólnego zrozumienia skutku.
+    </div>
+  </section>
 
-<p>
-Zarząd nie potrzebuje kolejnej listy objawów. Potrzebuje wiedzieć,
-co naprawdę steruje wynikiem firmy.
-</p>
+  <section class="section">
+    <h2>Problem techniczny często nie zaczyna się w technice</h2>
 
-<p>
-Jeżeli koszt pojawia się co miesiąc, awaria wraca mimo napraw,
-a poprawki nie zmieniają sytuacji, to bardzo możliwe, że problem nie leży
-tam, gdzie wszyscy go szukają.
-</p>
+    <p>
+      To, że problem ujawnia się na maszynie, instalacji, fakturze za energię albo w jakości produkcji,
+      nie oznacza jeszcze, że jego źródło znajduje się dokładnie tam.
+    </p>
 
-<p>
-Wtedy potrzebna jest nie kolejna szybka reakcja, ale spokojna diagnoza:
-co jest skutkiem, co jest przyczyną, a co jedynie miejscem, w którym problem
-stał się widoczny.
-</p>
+    <p>
+      Bardzo często technika jest tylko miejscem, w którym decyzje zarządcze i procesowe
+      stają się widoczne. Maszyna pokazuje skutek. Instalacja pokazuje skutek.
+      Faktura pokazuje skutek. Reklamacja pokazuje skutek.
+    </p>
 
-<div class="cta-box">
-  <h2>Masz w firmie temat, który „niby działa”, ale coś się nie spina?</h2>
-  <p>
-    Możemy zacząć od krótkiej rozmowy i uporządkowania sytuacji:
-    co widać, jakie są skutki, co już było robione i gdzie prawdopodobnie
-    znajduje się rzeczywisty mechanizm problemu.
-  </p>
-  <a href="mailto:biuro@elspect.pl" class="btn">Napisz do mnie</a>
-</div>
+    <p>
+      Źródło może być jednak zupełnie gdzie indziej: w sposobie podejmowania decyzji,
+      w założeniach przyjętych przy zakupie, w braku pomiaru, w rozdzieleniu odpowiedzialności
+      między działy albo w tym, że nikt nie ma pełnego obrazu sytuacji.
+    </p>
+
+    <div class="loss-box">
+      <strong>Dlatego szybka reakcja często nie wystarcza.</strong>
+      <p>
+        Można naprawić objaw, wymienić element, zamówić kolejne urządzenie albo wdrożyć nową procedurę,
+        a mimo to po pewnym czasie problem wraca, tylko pod inną postacią.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Największe straty powstają na styku obszarów</h2>
+
+    <p>
+      Najciekawsze rzeczy w firmach rzadko znajdują się w jednym dziale.
+      Nie są wyłącznie techniczne, wyłącznie procesowe ani wyłącznie zarządcze.
+      Najczęściej powstają pomiędzy nimi.
+    </p>
+
+    <p>
+      Technika działa, ale proces jej nie wspiera.
+      Proces istnieje, ale nikt nie mierzy jego skutków.
+      Decyzje zapadają, ale bez informacji z miejsca, w którym te decyzje zamieniają się
+      w realny koszt.
+    </p>
+
+    <p>
+      Właśnie tam pojawia się przestrzeń, w której firma może przez długi czas tracić pieniądze,
+      energię, czas i stabilność — nie dlatego, że ktoś popełnia jeden wielki błąd,
+      ale dlatego, że nikt nie widzi całego układu.
+    </p>
+
+    <div class="quote">
+      Największy problem często nie leży w tym, że firma nie ma danych.
+      Problem leży w tym, że dane, decyzje i skutki nie są połączone w jeden obraz.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Reagowanie punktowe daje poczucie działania, ale nie zawsze daje kontrolę</h2>
+
+    <p>
+      W wielu firmach reakcja jest szybka. Ktoś zgłasza problem, ktoś zamawia serwis,
+      ktoś szuka dostawcy, ktoś przygotowuje zakup, ktoś próbuje ograniczyć koszt.
+      Na pierwszy rzut oka wszystko wygląda poprawnie.
+    </p>
+
+    <p>
+      Ale szybkie działanie nie zawsze oznacza dobre działanie.
+      Jeżeli organizacja reaguje wyłącznie na objawy, może być bardzo zajęta,
+      a jednocześnie nie zbliżać się do rzeczywistego rozwiązania.
+    </p>
+
+    <p>
+      To jest szczególnie niebezpieczne na poziomie zarządu i właścicieli,
+      ponieważ wtedy firma zaczyna zarządzać skutkami, a nie mechanizmami.
+      A mechanizmy dalej działają w tle.
+    </p>
+
+    <div class="result-box">
+      <strong>Kontrola zaczyna się dopiero wtedy, gdy zarząd rozumie mechanizm.</strong>
+      <p>
+        Nie tylko to, co się wydarzyło, ale dlaczego to się wydarzyło,
+        jakie decyzje do tego doprowadziły i gdzie trzeba zmienić układ,
+        żeby problem nie wracał.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Diagnoza nie polega na szukaniu winnego</h2>
+
+    <p>
+      Dobra diagnoza nie zaczyna się od pytania: kto zawinił?
+      Zaczyna się od pytania: jaki mechanizm doprowadził do tego skutku?
+    </p>
+
+    <p>
+      To zasadnicza różnica. Szukanie winnego zamyka temat na poziomie reakcji.
+      Szukanie mechanizmu otwiera możliwość realnej zmiany.
+    </p>
+
+    <p>
+      W MMGRESS patrzę na problemy firmowe nie tylko przez pryzmat urządzenia,
+      instalacji, procesu albo pojedynczej decyzji, ale przez zależność między nimi.
+      Dopiero wtedy można zobaczyć, czy firma ma problem techniczny,
+      czy raczej problem decyzyjny, który tylko technicznie się objawił.
+    </p>
+
+    <div class="note-box">
+      <strong>To podejście jest szczególnie ważne dla zarządu.</strong>
+      <p>
+        Bo zarząd nie potrzebuje kolejnej listy objawów.
+        Potrzebuje wiedzieć, co naprawdę steruje kosztem, ryzykiem i stabilnością firmy.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Co warto sprawdzić, zanim firma wyda kolejne pieniądze</h2>
+
+    <p>
+      Zanim zapadnie decyzja o kolejnej inwestycji, zakupie, modernizacji albo zmianie dostawcy,
+      warto zatrzymać się na chwilę i sprawdzić, czy problem został właściwie nazwany.
+    </p>
+
+    <ul>
+      <li>Czy widzimy przyczynę, czy tylko miejsce, w którym problem się objawił?</li>
+      <li>Czy koszt jest jednorazowy, czy powtarza się cyklicznie?</li>
+      <li>Czy problem wraca mimo wcześniejszych napraw, zakupów albo korekt?</li>
+      <li>Czy odpowiedzialność za problem jest rozbita między kilka działów?</li>
+      <li>Czy decyzje zarządcze są podejmowane na podstawie pełnego obrazu, czy tylko fragmentu danych?</li>
+      <li>Czy obecne rozwiązanie usuwa mechanizm problemu, czy tylko jego aktualny objaw?</li>
+    </ul>
+
+    <p>
+      To nie są pytania techniczne w wąskim znaczeniu.
+      To są pytania o sposób zarządzania firmą jako systemem.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Firma jako system decyzji</h2>
+
+    <p>
+      Każda firma jest układem decyzji, procesów, ludzi, technologii i pieniędzy.
+      Jeżeli jeden z tych elementów jest analizowany w oderwaniu od pozostałych,
+      bardzo łatwo dojść do błędnych wniosków.
+    </p>
+
+    <p>
+      Można uznać, że problemem jest maszyna, choć prawdziwym źródłem jest sposób planowania produkcji.
+      Można uznać, że problemem jest energia, choć prawdziwym źródłem jest sposób pracy zakładu.
+      Można uznać, że problemem jest człowiek, choć prawdziwym źródłem jest brak jasnego procesu.
+    </p>
+
+    <p>
+      Dlatego najważniejsze pytanie nie brzmi: co się zepsuło?
+      Najważniejsze pytanie brzmi: jaki układ doprowadził do tego, że ten skutek w ogóle powstał?
+    </p>
+
+    <div class="quote">
+      Firma zaczyna odzyskiwać kontrolę wtedy, gdy przestaje widzieć pojedyncze problemy,
+      a zaczyna widzieć zależności, które te problemy produkują.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Wniosek</h2>
+
+    <p>
+      Jeżeli koszt pojawia się co miesiąc, awaria wraca mimo napraw,
+      produkcja traci stabilność, a kolejne działania nie zmieniają sytuacji,
+      to bardzo możliwe, że problem nie leży tam, gdzie wszyscy go szukają.
+    </p>
+
+    <p>
+      Wtedy potrzebna jest nie kolejna szybka reakcja, ale spokojna diagnoza:
+      co jest skutkiem, co jest przyczyną, a co jedynie miejscem, w którym problem
+      stał się widoczny.
+    </p>
+
+    <p>
+      To właśnie w tym miejscu technika spotyka się z zarządzaniem.
+      I bardzo często dopiero tam zaczyna się realna rozmowa o kontroli nad firmą.
+    </p>
+
+    <p class="footer-note">
+      MMGRESS pomaga spojrzeć na problem z poziomu całego układu:
+      techniki, procesu, kosztu i decyzji. Nie po to, żeby szukać winnych,
+      ale po to, żeby znaleźć mechanizm, który naprawdę steruje wynikiem.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Kontakt</h2>
+
+    <p><strong>Masz w firmie temat, który „niby działa”, ale coś się nie spina?</strong></p>
+
+    <p>
+      Opisz sytuację w kilku zdaniach. Co widać, jaki jest skutek, co już było robione
+      i dlaczego temat wraca albo nadal nie daje spokoju.
+    </p>
+
+    <p>
+      Na tej podstawie można wstępnie ocenić, czy mówimy o problemie technicznym,
+      procesowym, organizacyjnym, czy o decyzji, która tylko technicznie się objawiła.
+    </p>
+
+    <div class="contact-box">
+      <p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
+      <p>Email: <a href="mailto:mmgress@proton.me" id="cta-mail">mmgress@proton.me</a></p>
+      <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
+    </div>
+  </section>
+
+<script>
+document.getElementById('cta-mail')?.addEventListener('click', function() {
+  if (typeof gtag === 'function') {
+    gtag('event', 'kontakt_mail', {
+      'event_category': 'kontakt',
+      'event_label': 'klik_mail_firma_traci_systemowo'
+    });
+  }
+});
+</script>
+
+</main>
+
+</body>
+</html>
