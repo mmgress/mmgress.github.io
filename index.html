@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="MMGRESS – diagnoza problemów technicznych, procesowych i energetycznych w firmach produkcyjnych. Znajduję rzeczywistą przyczynę tam, gdzie wszystko działa, a mimo to pojawiają się straty, błędy albo brak stabilności." />
+<meta name="description" content="MMGRESS – diagnoza problemów technicznych, procesowych i energetycznych w firmach produkcyjnych. Pomagam ustalić, czy problem został dobrze zrozumiany, zanim firma wyda pieniądze na niewłaściwe rozwiązanie." />
 <meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
 <meta name="msvalidate.01" content="AB6274E2F07953E7C1810852FA44FB0D" />
 <meta name="robots" content="index, follow" />
 <meta name="author" content="MMGRESS" />
-<title>MMGRESS — firma nie traci punktowo, firma traci systemowo</title>
-<meta property="og:title" content="Firma nie traci punktowo. Firma traci systemowo | MMGRESS" />
-<meta property="og:description" content="Ukryte koszty, awarie, przestoje i problemy operacyjne często są skutkiem wcześniejszych decyzji zarządczych, procesowych i technicznych." />
+<title>MMGRESS — diagnoza problemów przed inwestycją</title>
+<meta property="og:title" content="MMGRESS — diagnoza problemów przed inwestycją" />
+<meta property="og:description" content="W wielu firmach problem nie polega na braku rozwiązań. Problem polega na tym, że rozwiązanie pojawia się zbyt wcześnie." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://mmgress.github.io/" />
 <meta name="twitter:card" content="summary" />
@@ -35,7 +35,11 @@
   --line:#d7e0ea;
   --accent:#204f86;
   --accent-soft:#e9f1fb;
-  --shadow:0 14px 34px rgba(15, 23, 42, 0.06);
+  --ok:#eef8f3;
+  --ok-line:#cfe8d8;
+  --warn:#fcf6ef;
+  --warn-line:#efd7b8;
+  --shadow:0 14px 34px rgba(15,23,42,.06);
   --radius:20px;
   --radius-sm:14px;
   --container:1180px;
@@ -79,6 +83,7 @@ a{color:var(--accent)}
   display:flex;
   align-items:center;
   gap:34px;
+  flex-wrap:wrap;
 }
 .nav a{
   text-decoration:none;
@@ -87,19 +92,18 @@ a{color:var(--accent)}
   font-weight:700;
 }
 .nav a.active,.nav a:hover{color:var(--accent)}
-
 .hero{
   background:
-    radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),
+    radial-gradient(circle at left top, rgba(255,255,255,.88), rgba(255,255,255,0) 34%),
     linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
   border-bottom:1px solid var(--line);
 }
 .hero-inner{
   max-width:var(--container);
   margin:0 auto;
-  padding:84px 28px 74px;
+  padding:86px 28px 78px;
 }
-.hero-content{max-width:var(--content)}
+.hero-content{max-width:980px}
 .eyebrow{
   display:inline-block;
   margin:0 0 24px;
@@ -118,33 +122,41 @@ h1{
   letter-spacing:-0.04em;
 }
 .hero-title{
-  font-size:clamp(2.6rem, 5vw, 5rem);
+  font-size:clamp(2.6rem,5vw,5rem);
   line-height:1.02;
   font-weight:800;
-  max-width:980px;
+  max-width:1040px;
+}
+.hero-accent{
+  display:block;
+  font-size:clamp(2.55rem,5.3vw,4.9rem);
+  line-height:1;
+}
+.hero-rest{
+  display:block;
+  font-size:clamp(1.45rem,2.6vw,2.3rem);
+  font-weight:650;
+  margin-top:10px;
+  letter-spacing:-0.035em;
 }
 .hero-intro{
-  max-width:980px;
-  font-size:clamp(1.2rem, 1.6vw, 1.5rem);
+  max-width:930px;
+  font-size:clamp(1.2rem,1.6vw,1.46rem);
   color:#38506c;
-  line-height:1.55;
+  line-height:1.58;
   margin:0 0 18px;
 }
 .hero-lead{
   max-width:900px;
   margin:18px 0 0;
   color:var(--muted);
-  font-size:clamp(1.02rem, 1.3vw, 1.16rem);
+  font-size:clamp(1.02rem,1.3vw,1.16rem);
 }
-.hero-accent{
-  display:block;
-  font-size:clamp(2.2rem, 4.5vw, 3.8rem);
-}
-.hero-rest{
-  display:block;
-  font-size:clamp(1.45rem, 2.5vw, 2.2rem);
-  font-weight:600;
-  margin-top:8px;
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:28px;
 }
 .main{
   max-width:var(--container);
@@ -163,7 +175,7 @@ h1{
 .section.wide{max-width:none}
 .section h2{
   margin:0 0 18px;
-  font-size:clamp(1.9rem, 2.6vw, 2.5rem);
+  font-size:clamp(1.9rem,2.6vw,2.5rem);
   line-height:1.1;
   letter-spacing:-0.03em;
   color:#122133;
@@ -184,6 +196,20 @@ li{margin:0 0 10px;font-size:1.05rem}
   border-radius:16px;
   padding:18px 20px;
   margin:22px 0;
+}
+.result-box{
+  background:var(--ok);
+  border:1px solid var(--ok-line);
+  border-radius:16px;
+  padding:22px 24px;
+  margin:20px 0;
+}
+.loss-box{
+  background:var(--warn);
+  border:1px solid var(--warn-line);
+  border-radius:16px;
+  padding:22px 24px;
+  margin:20px 0;
 }
 .cards-grid{
   display:grid;
@@ -217,7 +243,7 @@ li{margin:0 0 10px;font-size:1.05rem}
 }
 .case-card h3{
   margin:0 0 14px;
-  font-size:1.7rem;
+  font-size:1.62rem;
   line-height:1.15;
 }
 .meta{
@@ -235,23 +261,36 @@ li{margin:0 0 10px;font-size:1.05rem}
   font-size:13px;
   color:#42566c;
 }
-.cta-link{
+.cta-btn{
   display:inline-block;
-  margin-top:16px;
-  color:var(--accent);
-  font-weight:700;
+  background:var(--accent);
+  color:#fff;
+  padding:14px 22px;
+  border-radius:14px;
+  font-weight:800;
   text-decoration:none;
+  font-size:16px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+  transition:opacity .16s ease, transform .16s ease;
+}
+.cta-btn:hover{
+  opacity:.92;
+  transform:translateY(-1px);
+}
+.cta-btn.secondary{
+  background:#fff;
+  color:var(--accent);
+  border:1px solid var(--line);
+  box-shadow:none;
 }
 .text-link{
   display:inline-block;
   margin-top:8px;
-  font-weight:700;
+  font-weight:800;
   text-decoration:none;
   color:var(--accent);
 }
-.text-link:hover{
-  text-decoration:underline;
-}
+.text-link:hover{text-decoration:underline}
 .footer-note{color:#66788e;font-size:.95rem;margin-top:18px}
 .contact-box{
   background:var(--surface-soft);
@@ -259,27 +298,9 @@ li{margin:0 0 10px;font-size:1.05rem}
   border-radius:16px;
   padding:24px;
 }
-.cta-btn{
-  display:inline-block;
-  margin-top:20px;
-  background:#204f86;
-  color:#fff;
-  padding:14px 22px;
-  border-radius:14px;
-  font-weight:700;
-  text-decoration:none;
-  font-size:16px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.08);
-  transition:opacity .16s ease, transform .16s ease;
-}
-.cta-btn:hover{
-  opacity:0.92;
-  transform:translateY(-1px);
-}
-
 .featured-link{
   max-width:var(--container);
-  background:linear-gradient(180deg, #ffffff 0%, #f7fafe 100%);
+  background:linear-gradient(180deg,#ffffff 0%,#f7fafe 100%);
   border:1px solid var(--line);
   border-radius:var(--radius);
   padding:34px 38px;
@@ -288,21 +309,65 @@ li{margin:0 0 10px;font-size:1.05rem}
   position:relative;
   z-index:3;
 }
-.featured-link .label{display:inline-block;margin:0 0 14px;color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
-.featured-link h2{margin:0 0 14px;font-size:clamp(2rem, 3vw, 3rem);line-height:1.08;letter-spacing:-0.035em;color:#122133;}
-.featured-link p{max-width:900px;color:var(--muted);}
-.featured-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:18px;}
-.featured-actions .text-link{margin-top:0}
-
-@media (max-width: 1040px){
-  .cards-grid{grid-template-columns:1fr}
+.featured-link .label{
+  display:inline-block;
+  margin:0 0 14px;
+  color:var(--accent);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
 }
-@media (max-width: 760px){
-  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
-  .nav{gap:18px; flex-wrap:wrap}
+.featured-link h2{
+  margin:0 0 14px;
+  font-size:clamp(2rem,3vw,3rem);
+  line-height:1.08;
+  letter-spacing:-0.035em;
+  color:#122133;
+}
+.featured-link p{max-width:920px;color:var(--muted)}
+.featured-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  align-items:center;
+  margin-top:20px;
+}
+.featured-actions .text-link{margin-top:0}
+.split-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.mini-card{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:22px 24px;
+}
+.mini-card h3{margin:0 0 10px;font-size:1.25rem}
+.mini-card p{color:var(--muted)}
+.cta-band{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+}
+.cta-band h2{margin-bottom:10px}
+.cta-band p{margin-bottom:0;color:var(--muted)}
+@media (max-width:1040px){
+  .cards-grid{grid-template-columns:1fr}
+  .split-grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .topbar-inner{padding:16px 18px;gap:16px;flex-wrap:wrap}
+  .nav{gap:18px;flex-wrap:wrap}
   .hero-inner{padding:56px 18px 52px}
   .main{padding:22px 18px 50px}
   .section{padding:26px 22px}
+  .featured-link{margin:0 0 22px;padding:26px 22px}
+  .hero-actions{gap:10px}
 }
 </style>
 
@@ -312,7 +377,7 @@ li{margin:0 0 10px;font-size:1.05rem}
   "@type": "WebSite",
   "name": "MMGRESS",
   "url": "https://mmgress.github.io/",
-  "description": "MMGRESS – diagnoza problemów technicznych, procesowych i energetycznych w firmach produkcyjnych.",
+  "description": "MMGRESS – diagnoza problemów technicznych, procesowych i energetycznych w firmach produkcyjnych. Diagnoza przed inwestycją, przetargiem i wdrożeniem.",
   "inLanguage": "pl-PL",
   "publisher": {
     "@type": "Person",
@@ -339,69 +404,112 @@ li{margin:0 0 10px;font-size:1.05rem}
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="eyebrow">Diagnoza problemów</div>
+      <div class="eyebrow">Diagnoza przed inwestycją</div>
 
       <h1 class="hero-title">
-        <span class="hero-accent">W wielu firmach wszystko działa.</span>
-        <span class="hero-rest">A mimo to coś się nie spina, kosztuje pieniądze i blokuje wejście poziom wyżej.</span>
+        <span class="hero-accent">Problem często nie polega na braku rozwiązania.</span>
+        <span class="hero-rest">Problem polega na tym, że rozwiązanie pojawia się za wcześnie.</span>
       </h1>
 
       <p class="hero-intro">
-        Pomagam zobaczyć, gdzie ukryty koszt, awaria albo chaos operacyjny jest skutkiem decyzji, procesu i techniki działających bez wspólnego obrazu.
+        W wielu firmach najpierw powstaje przetarg, zapytanie albo decyzja zakupowa, a dopiero później pojawia się pytanie, czy problem rzeczywiście został dobrze zrozumiany.
       </p>
 
       <p>
-        MMGRESS zajmuje się diagnozą złożonych problemów w firmach produkcyjnych — szczególnie tam, gdzie system działa, ale jego wynik jest niestabilny, nieprzewidywalny albo generuje straty.
-      </p>
-
-      <p>
-        To nie jest usługa montażu ani standardowej analizy. To identyfikacja rzeczywistej przyczyny problemu na styku techniki, procesu i organizacji.
+        MMGRESS pomaga uporządkować sytuacje, w których firma widzi koszt, awarię, stratę, problem energetyczny albo niestabilność procesu — ale nie ma pewności, czy proponowane rozwiązanie naprawdę trafia w przyczynę.
       </p>
 
       <div class="quote">
-        Najczęściej problem nie jest tam, gdzie wszyscy go szukają.
+        Najdroższe błędy nie zawsze powstają przy realizacji. Często powstają wcześniej — na etapie założeń.
       </div>
 
       <p class="hero-lead">
-        Nie dokładam rozwiązań na ślepo. Najpierw sprawdzam, czy problem został dobrze zrozumiany, porządkuję sytuację i dopiero wtedy wskazuję, co naprawdę ma sens zrobić dalej.
+        Nie zaczynam od montażu urządzenia ani od potwierdzania gotowej tezy. Najpierw sprawdzam, czy problem został właściwie nazwany, jakie dane są potrzebne i czy inwestycja ma sens techniczny oraz ekonomiczny.
       </p>
 
-      <a href="/diagnoza-problemow.html" class="cta-btn">
-        Opisz problem
-      </a>
+      <div class="hero-actions">
+        <a href="/dlaczego-inwestycje-techniczne-nie-dzialaja.html" class="cta-btn">Czytaj analizę</a>
+        <a href="/diagnoza-problemow.html" class="cta-btn secondary">Opisz problem</a>
+      </div>
     </div>
   </div>
 </section>
 
 <main class="main">
 
-  <section class="featured-link" id="firma-traci-systemowo">
-    <div class="label">Nowa analiza dla zarządów i właścicieli</div>
-    <h2>Firma nie traci punktowo. Firma traci systemowo.</h2>
+  <section class="featured-link">
+    <div class="label">Jeżeli trafiasz tu z LinkedIna</div>
+
+    <h2>Dlaczego inwestycje techniczne często nie rozwiązują problemu</h2>
+
     <p>
-      Jeżeli trafiasz tu po wpisie z LinkedIna, zacznij od tego tekstu. To punkt wyjścia do mojego sposobu pracy:
-      nie szukania pojedynczej awarii, tylko mechanizmu, który produkuje koszt, przestój, chaos albo decyzje bez pełnego obrazu.
+      W wielu firmach rozwiązanie pojawia się zbyt wcześnie — zanim problem zostanie dobrze zrozumiany. W efekcie powstają przetargi, analizy i inwestycje, które są poprawne technicznie, ale nie rozwiązują realnego problemu biznesowego.
     </p>
+
     <div class="featured-actions">
-      <a href="/firma-traci-systemowo.html" class="cta-btn">Czytaj analizę</a>
-      <a href="/diagnoza-problemow.html" class="text-link">Od razu opisz problem →</a>
+      <a href="/dlaczego-inwestycje-techniczne-nie-dzialaja.html" class="cta-btn">Czytaj analizę</a>
+      <a href="/case-studies.html" class="text-link">Zobacz realne przypadki →</a>
     </div>
   </section>
 
   <section class="section">
     <h2>Ta strona jest dla Ciebie, jeśli</h2>
     <ul>
-      <li>projekt utknął i nie wiadomo dlaczego,</li>
-      <li>system działa, ale generuje straty,</li>
-      <li>dane się zgadzają, a wynik się nie zgadza,</li>
-      <li>koszty rosną, parametry nie są osiągane albo proces działa gorzej, niż powinien,</li>
-      <li>ktoś już próbował wszystko, a problem nadal wraca,</li>
-      <li>szukasz kogoś, kto łączy praktykę elektroniki, informatyki, elektroenergetyki i myślenia procesowego.</li>
+      <li>firma przygotowuje przetarg, ale założenia nie wynikają z pełnej diagnozy,</li>
+      <li>ktoś zaproponował rozwiązanie, ale nie jest jasne, czy rozwiązuje właściwy problem,</li>
+      <li>koszty rosną, a standardowe działania nie przynoszą efektu,</li>
+      <li>raporty, pomiary albo dane istnieją, ale wnioski nadal są niepewne,</li>
+      <li>problem wygląda technicznie, ale jego skutki są ekonomiczne i organizacyjne,</li>
+      <li>chcesz podjąć decyzję inwestycyjną na podstawie rzeczywistej przyczyny, a nie domysłu.</li>
     </ul>
 
-    <a href="/diagnoza-problemow.html" class="cta-btn">
-      Masz taką sytuację? Opisz ją
-    </a>
+    <a href="/diagnoza-problemow.html" class="cta-btn" style="margin-top:18px;">Masz taką sytuację? Opisz ją</a>
+  </section>
+
+  <section class="section">
+    <h2>Najpierw diagnoza. Potem przetarg.</h2>
+
+    <p>
+      W praktyce bardzo często wygląda to odwrotnie. Firma widzi objaw, zakłada rozwiązanie i dopiero na końcu próbuje zebrać dane, które mają uzasadnić decyzję.
+    </p>
+
+    <p>
+      Tak powstają zapytania na kompensację mocy biernej bez pełnej analizy struktury zasilania, przetargi na urządzenia bez sprawdzenia miejsca pomiaru, albo inwestycje w systemy, które rozwiązują tylko część problemu.
+    </p>
+
+    <div class="loss-box">
+      <strong>Ryzyko nie polega tylko na tym, że urządzenie będzie za drogie.</strong>
+      <p>
+        Ryzyko polega na tym, że firma wyda pieniądze, a rzeczywisty mechanizm kosztu nadal zostanie w układzie.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Co zwykle trzeba sprawdzić przed decyzją</h2>
+
+    <p>
+      Zanim firma wybierze rozwiązanie, trzeba często uporządkować kilka elementów, które pojedynczo wyglądają niewinnie, ale razem decydują o wyniku.
+    </p>
+
+    <div class="split-grid">
+      <div class="mini-card">
+        <h3>Dane i pomiary</h3>
+        <p>Nie tylko pojedynczy odczyt, ale kontekst pracy układu, zmienność obciążenia, historia faktur, piętnastominutówki, e-licznik albo pomiary lokalne.</p>
+      </div>
+      <div class="mini-card">
+        <h3>Struktura techniczna</h3>
+        <p>Transformator, miejsce pomiaru, podział sekcji, istniejące urządzenia, automatyka, źródła własne i sposób pracy instalacji w czasie produkcji oraz postoju.</p>
+      </div>
+      <div class="mini-card">
+        <h3>Proces i organizacja</h3>
+        <p>Kto widzi dane, kto podejmuje decyzję, gdzie powstaje koszt i czy techniczny objaw nie jest skutkiem wcześniejszego procesu lub błędnego założenia.</p>
+      </div>
+      <div class="mini-card">
+        <h3>Ekonomia rozwiązania</h3>
+        <p>Czy proponowane rozwiązanie ma sens kosztowy, czy jest proporcjonalne do problemu i czy nie rozwiązuje objawu zamiast przyczyny.</p>
+      </div>
+    </div>
   </section>
 
   <section class="section">
@@ -418,88 +526,131 @@ li{margin:0 0 10px;font-size:1.05rem}
   </section>
 
   <section class="section">
-    <h2>Jak wygląda pierwszy kontakt</h2>
-    <ol>
-      <li>wysyłasz krótki opis sytuacji,</li>
-      <li>zostawiasz kontakt do siebie — email lub telefon,</li>
-      <li>sprawdzam, czy temat mieści się w moim zakresie pracy,</li>
-      <li>jeżeli tak, ustalamy, jakie dane są potrzebne i jaki może być kolejny krok.</li>
-    </ol>
-  </section>
-
-  <section class="section">
     <h2>Najczęstsze obszary pracy</h2>
     <ul>
       <li>problemy w instalacjach energetycznych i elektrycznych,</li>
-      <li>trudne przypadki techniczne na styku elektroniki, automatyki i informatyki,</li>
+      <li>kompensacja mocy biernej i analiza opłat za energię,</li>
+      <li>układy zasilania z kilkoma transformatorami albo pomiarem po stronie średniego napięcia,</li>
       <li>systemy i urządzenia, które działają niestabilnie albo nie osiągają założonych parametrów,</li>
-      <li>projekty, które zatrzymały się na etapie wdrożenia, uruchomienia albo diagnozy,</li>
-      <li>procesy, w których wiadomo, że coś jest nie tak, ale nie wiadomo jeszcze co dokładnie,</li>
-      <li>sytuacje, w których realna strata nie wynika z jednej awarii, tylko z układu zależności między ludźmi, technologią i organizacją.</li>
+      <li>procesy produkcyjne, w których wynik nie zgadza się z tym, co pokazuje system,</li>
+      <li>sytuacje, w których realna strata nie wynika z jednej awarii, tylko z układu zależności między techniką, procesem i decyzją.</li>
     </ul>
-    <a href="/diagnoza-problemow.html" class="cta-btn">Opisz problem</a>
+    <a href="/diagnoza-problemow.html" class="cta-btn" style="margin-top:18px;">Opisz problem</a>
   </section>
 
   <section class="section">
     <h2>Jak pracuję</h2>
-    <p>Nie zaczynam od gotowego rozwiązania ani od sprzedaży konkretnego urządzenia. Najpierw trzeba zobaczyć całość, zrozumieć, gdzie naprawdę powstaje strata albo błąd, i oddzielić to, co jest objawem, od tego, co jest przyczyną.</p>
-    <p>Czasem problem okazuje się czysto techniczny. Czasem organizacyjny. Czasem procesowy. A bardzo często leży dokładnie pomiędzy tym wszystkim i dlatego tak długo pozostaje nierozwiązany.</p>
-    <p>Właśnie w takich przypadkach sama teoria zwykle nie wystarcza. Potrzebne są oględziny, wywiad, pomiary, porównanie założeń z rzeczywistością i spokojne uporządkowanie całego układu.</p>
+    <p>
+      Nie zaczynam od gotowego rozwiązania ani od sprzedaży konkretnego urządzenia. Najpierw trzeba zobaczyć całość, zrozumieć, gdzie naprawdę powstaje strata albo błąd, i oddzielić to, co jest objawem, od tego, co jest przyczyną.
+    </p>
+    <p>
+      Czasem problem okazuje się czysto techniczny. Czasem organizacyjny. Czasem procesowy. A bardzo często leży dokładnie pomiędzy tym wszystkim i dlatego tak długo pozostaje nierozwiązany.
+    </p>
+    <p>
+      Właśnie w takich przypadkach sama teoria zwykle nie wystarcza. Potrzebne są oględziny, wywiad, pomiary, porównanie założeń z rzeczywistością i spokojne uporządkowanie całego układu.
+    </p>
   </section>
 
   <section class="section">
     <h2>Dlaczego wiele raportów nie działa</h2>
-    <p>Większość raportów wygląda dobrze. Są w nich dane, wykresy, logicznie ułożone wnioski i całość sprawia wrażenie przemyślanej, uporządkowanej analizy, która powinna prowadzić do rozwiązania problemu. Na poziomie prezentacji wszystko się zgadza i trudno się do czegoś przyczepić.</p>
-    <p>Problem zaczyna się w momencie, gdy okazuje się, że raport opiera się nie na tym, co faktycznie dzieje się w systemie, tylko na tym, co według założeń powinno się dziać. Dane pochodzą z systemów, które same są uproszczeniem rzeczywistości, dochodzą do tego deklaracje, przyjęte modele, uśrednienia i różnego rodzaju założenia, które mają uporządkować obraz, ale jednocześnie go spłaszczają.</p>
-    <p>To wszystko brzmi dobrze i często jest spójne wewnętrznie, dopóki nie zostanie skonfrontowane z praktyką. A rzeczywistość ma jedną cechę, która regularnie rozwala nawet najlepiej przygotowane analizy — nie interesuje jej model.</p>
+    <p>
+      Większość raportów wygląda dobrze. Są w nich dane, wykresy, logicznie ułożone wnioski i całość sprawia wrażenie przemyślanej analizy.
+    </p>
+    <p>
+      Problem zaczyna się w momencie, gdy dokument opiera się nie na tym, co faktycznie dzieje się w systemie, tylko na tym, co według założeń powinno się dziać.
+    </p>
+    <p>
+      Raport może być poprawny formalnie i jednocześnie prowadzić do złej decyzji, jeśli nie uwzględnia kontekstu, zależności i rzeczywistego sposobu pracy układu.
+    </p>
     <a class="text-link" href="/dlaczego-raporty-nie-dzialaja.html">Czytaj dalej: dlaczego raporty nie działają →</a>
+  </section>
+
+  <section class="section wide">
+    <h2>Przykłady z praktyki</h2>
+    <p>
+      Poniższe przypadki pokazują, dlaczego samo wskazanie rozwiązania rzadko wystarcza. W każdym z nich problem był widoczny w technice, ale właściwa decyzja wymagała zrozumienia całego układu.
+    </p>
+
+    <div class="cards-grid">
+      <a href="/case-study-energia-bierna-transformator-svg.html" class="case-card">
+        <div class="case-tag">Energia bierna</div>
+        <h3>Kompensacja, która była — a koszty dalej rosły</h3>
+        <p>Problem nie polegał na braku urządzenia, tylko na niedopasowaniu układu do rzeczywistych warunków pracy zakładu.</p>
+        <div class="meta"><span>SVG</span><span>transformatory</span><span>diagnostyka</span></div>
+      </a>
+
+      <a href="/case-study-wtryskarki-falszywy-odczyt-pracy.html" class="case-card">
+        <div class="case-tag">Pomiar</div>
+        <h3>Maszyny „pracowały”, ale produkcja spadała</h3>
+        <p>System mierzył zasilanie maszyny, a nie jej rzeczywistą pracę. Dane były, ale pokazywały niewłaściwą rzecz.</p>
+        <div class="meta"><span>wtryskarki</span><span>pomiar</span><span>proces</span></div>
+      </a>
+
+      <a href="/case-study-wtryskarki-zanik-napiecia-ups-lokalny.html" class="case-card">
+        <div class="case-tag">Zasilanie</div>
+        <h3>Sekundowy zanik napięcia rozwalał cały dzień pracy</h3>
+        <p>Rozwiązaniem nie był wielki UPS na całą halę, tylko lokalne zabezpieczenie krytycznej elektroniki.</p>
+        <div class="meta"><span>UPS</span><span>zasilanie</span><span>ekonomia</span></div>
+      </a>
+    </div>
+
+    <a href="/case-studies.html" class="text-link">Zobacz wszystkie case studies →</a>
   </section>
 
   <section class="section">
     <h2>Nie wszystkie tematy podejmuję</h2>
-    <p>Wybieram projekty, w których widzę możliwość realnego zrozumienia problemu i sensownego dojścia do rozwiązania.</p>
-    <p>Nie zajmuję się wszystkim i nie wchodzę w każdy temat. Jeżeli sprawa nie będzie pasowała do mojego sposobu pracy albo do zakresu doświadczenia, powiem to wprost.</p>
-    <p>Jeżeli szukasz szybkiej odpowiedzi, potwierdzenia z góry przyjętej tezy albo kogoś, kto po prostu zrobi dokładnie to, co już zostało założone, to prawdopodobnie nie jest dobre miejsce.</p>
-    <p>Jeżeli natomiast masz poczucie, że coś się nie zgadza, ale nie do końca wiadomo co, wtedy taki sposób pracy ma sens.</p>
-  </section>
-
-  <section class="section">
-    <h2>Case studies</h2>
-    <p>Jeżeli chcesz zobaczyć, jak takie problemy wyglądają w praktyce i co tak naprawdę było ich przyczyną, przejdź do sekcji <a href="/case-studies.html"><strong>Case studies</strong></a>.</p>
-    <p>Każdy z opisanych tam przypadków zaczynał się od sytuacji, w której coś było już sprawdzane, analizowane albo poprawiane, a mimo to problem nadal istniał.</p>
-    <p>To właśnie tam najlepiej widać nie tylko efekt końcowy, ale również sposób myślenia, prowadzenia analizy i dochodzenia do rzeczywistej przyczyny.</p>
+    <p>
+      Wybieram projekty, w których widzę możliwość realnego zrozumienia problemu i sensownego dojścia do rozwiązania.
+    </p>
+    <p>
+      Jeżeli szukasz jedynie potwierdzenia z góry przyjętej tezy albo kogoś, kto po prostu wykona dokładnie to, co już zostało założone, to prawdopodobnie nie jest dobre miejsce.
+    </p>
+    <p>
+      Jeżeli natomiast masz poczucie, że coś się nie zgadza, ale nie do końca wiadomo co, wtedy taki sposób pracy ma sens.
+    </p>
   </section>
 
   <section class="section">
     <h2>O mnie</h2>
     <p>Nazywam się Michał Grzesiczak.</p>
-    <p>Od ponad 20 lat pracuję na styku elektroniki, informatyki i zagadnień technicznych związanych z diagnozą oraz rozwiązywaniem problemów w praktyce.</p>
-    <p>Pracę zawodową zacząłem wcześnie, a przez kolejne lata przechodziłem przez obszary serwisu, projektowania urządzeń elektronicznych, systemów teleinformatycznych oraz branży elektroenergetycznej. Dzisiaj najczęściej trafiają do mnie sytuacje, w których projekt utknął, system działa nieprawidłowo albo koszty rosną i nikt nie potrafi jasno powiedzieć dlaczego.</p>
-    <p>Najczęściej trafiam do firm w momencie, w którym kilka osób wcześniej próbowało już rozwiązać problem i każda z nich miała rację, tylko żadna nie widziała całości.</p>
-    <p>Więcej informacji znajdziesz na stronie <a href="/about.html">O mnie</a>.</p>
+    <p>
+      Od ponad 20 lat pracuję na styku elektroniki, informatyki i zagadnień technicznych związanych z diagnozą oraz rozwiązywaniem problemów w praktyce.
+    </p>
+    <p>
+      Przechodziłem przez serwis, projektowanie urządzeń elektronicznych, systemy teleinformatyczne oraz branżę elektroenergetyczną. Dzisiaj najczęściej trafiają do mnie sytuacje, w których projekt utknął, system działa nieprawidłowo albo koszty rosną i nikt nie potrafi jasno powiedzieć dlaczego.
+    </p>
+    <p>
+      Więcej informacji znajdziesz na stronie <a href="/about.html">O mnie</a>.
+    </p>
   </section>
 
-  <section class="section">
-    <h2>Czy to ma sens w Twoim przypadku</h2>
-    <p>Jeżeli zastanawiasz się, czy ten sposób pracy ma zastosowanie u Ciebie, to zwykle odpowiedź jest prosta.</p>
-    <p>Jeżeli masz poczucie, że coś działa nie tak, jak powinno, ale nie jesteś w stanie jednoznacznie wskazać przyczyny, albo kolejne działania nie przynoszą efektu, to bardzo możliwe, że właśnie tu zaczyna się właściwy moment na diagnozę.</p>
-    <p>Jeżeli natomiast wszystko jest jasne, przyczyna jest znana i potrzebujesz tylko wykonania konkretnego zadania, to prawdopodobnie nie jest to właściwe miejsce.</p>
+  <section class="section wide">
+    <div class="cta-band">
+      <div>
+        <h2>Masz przetarg, zakup albo problem, który wydaje się oczywisty?</h2>
+        <p>Najpierw sprawdź, czy na pewno właściwie nazwano problem.</p>
+      </div>
+      <a href="/diagnoza-problemow.html" class="cta-btn">Opisz problem</a>
+    </div>
   </section>
 
- <section class="section" id="kontakt">
-  <h2>Kontakt</h2>
+  <section class="section" id="kontakt">
+    <h2>Kontakt</h2>
 
     <p><strong>Masz sytuację, w której wszystko działa, ale coś się nie spina?</strong></p>
     <p>
-      Opisz ją krótko.
-      Sprawdzę, czy ma sens i gdzie może być problem.
+      Opisz ją krótko. Sprawdzę, czy temat ma sens i gdzie może być problem.
     </p>
 
     <div class="contact-box">
-      <p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
-      <p>Email: <a href="mailto:mmgress@proton.me" id="cta-mail">mmgress@proton.me</a></p>
+      <p><strong>Najprościej: napisz 2–3 zdania.</strong></p>
+      <p>Email: <a href="mailto:mmgress@proton.me?subject=Opis%20problemu%20-%20MMGRESS&body=Dzie%C5%84%20dobry,%0A%0Aopisuj%C4%99%20kr%C3%B3tko%20sytuacj%C4%99:%0A1.%20Co%20mia%C5%82o%20dzia%C5%82a%C4%87:%0A2.%20Co%20si%C4%99%20nie%20zgadza:%0A3.%20Co%20by%C5%82o%20ju%C5%BC%20sprawdzane:%0A%0AKontakt%20do%20mnie:%0A" id="cta-mail">mmgress@proton.me</a></p>
       <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
     </div>
+
+    <p class="footer-note">
+      Jeżeli temat nie będzie pasował do mojego sposobu pracy, powiem to wprost.
+    </p>
   </section>
 
 </main>
@@ -509,7 +660,7 @@ document.getElementById('cta-mail')?.addEventListener('click', function() {
   if (typeof gtag === 'function') {
     gtag('event', 'kontakt_mail', {
       'event_category': 'kontakt',
-      'event_label': 'klik_mail'
+      'event_label': 'klik_mail_index_inwestycje'
     });
   }
 });
