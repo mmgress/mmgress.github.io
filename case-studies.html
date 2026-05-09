@@ -3,226 +3,539 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Case studies MMGRESS – rzeczywiste przypadki diagnozy problemów technicznych, energetycznych i procesowych w firmach produkcyjnych." />
-<title>Analizy i case studies – MMGRESS</title>
-<meta property="og:title" content="Analizy i case studies | MMGRESS" />
-<meta property="og:description" content="Zacznij od analizy: firma nie traci punktowo, firma traci systemowo. Potem zobacz rzeczywiste przypadki diagnozy problemów." />
+<meta name="description" content="Case studies MMGRESS – rzeczywiste przypadki diagnozy problemów technicznych, energetycznych i procesowych: energia bierna, PV, wtryskarki, zaniki napięcia, rozdzielnie i proces produkcyjny." />
+<meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
+<meta name="msvalidate.01" content="AB6274E2F07953E7C1810852FA44FB0D" />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="MMGRESS" />
+<title>Case studies – diagnoza problemów technicznych i energetycznych | MMGRESS</title>
+<meta property="og:title" content="Case studies | MMGRESS" />
+<meta property="og:description" content="Rzeczywiste przypadki diagnozy problemów technicznych, energetycznych i procesowych. Konkretne obiekty, dane, objawy, przyczyny i decyzje." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://mmgress.github.io/case-studies.html" />
 <meta name="twitter:card" content="summary" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5KZX20JGP7');
+</script>
 
 <style>
 :root{
   --bg:#f3f6fa;
   --surface:#ffffff;
+  --surface-soft:#f7f9fc;
+  --hero:#edf3f8;
   --text:#172435;
   --muted:#4d6075;
   --line:#d7e0ea;
   --accent:#204f86;
-  --shadow:0 14px 34px rgba(15, 23, 42, 0.06);
+  --accent-dark:#173f6b;
+  --accent-soft:#e9f1fb;
+  --ok:#eef8f3;
+  --ok-line:#cfe8d8;
+  --warn:#fcf6ef;
+  --warn-line:#efd7b8;
+  --shadow:0 14px 34px rgba(15,23,42,.06);
+  --shadow-strong:0 22px 54px rgba(15,23,42,.10);
   --radius:20px;
+  --radius-sm:14px;
   --container:1180px;
+  --content:860px;
 }
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
   background:var(--bg);
   color:var(--text);
+  line-height:1.72;
 }
-
 a{color:var(--accent)}
-
 .topbar{
-  background:#fff;
+  background:rgba(255,255,255,.92);
   border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(12px);
 }
-
 .topbar-inner{
   max-width:var(--container);
   margin:0 auto;
   padding:18px 28px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:24px;
-  flex-wrap:wrap;
 }
-
 .brand{
-  font-weight:800;
-  text-decoration:none;
   color:#26354a;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.12em;
+  white-space:nowrap;
 }
-
 .nav{
   display:flex;
-  gap:20px;
+  align-items:center;
+  gap:30px;
   flex-wrap:wrap;
 }
-
 .nav a{
   text-decoration:none;
   color:#26354a;
+  font-size:15px;
   font-weight:700;
 }
-
-.nav a.active,
-.nav a:hover{
-  color:var(--accent);
-}
-
+.nav a.active,.nav a:hover{color:var(--accent)}
 .hero{
+  background:
+    radial-gradient(circle at left top, rgba(255,255,255,.9), rgba(255,255,255,0) 34%),
+    linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
   max-width:var(--container);
   margin:0 auto;
-  padding:60px 28px 30px;
+  padding:82px 28px 72px;
 }
-
+.hero-content{max-width:980px}
+.eyebrow{
+  display:inline-block;
+  margin:0 0 24px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
 h1{
-  font-size:3rem;
-  margin:0 0 20px;
+  margin:0 0 24px;
+  color:#152235;
+  letter-spacing:-0.04em;
+  font-size:clamp(2.55rem,5vw,5rem);
+  line-height:1.02;
+  font-weight:800;
+  max-width:1040px;
 }
-
-.hero p{
-  font-size:1.2rem;
+.hero-intro{
+  max-width:930px;
+  font-size:clamp(1.18rem,1.58vw,1.44rem);
+  color:#38506c;
+  line-height:1.62;
+  margin:0 0 18px;
+}
+.hero-lead{
+  max-width:900px;
+  margin:18px 0 0;
   color:var(--muted);
-  max-width:800px;
-  line-height:1.65;
+  font-size:clamp(1.02rem,1.3vw,1.16rem);
 }
-
-.grid{
+p{margin:0 0 16px;font-size:1.08rem}
+.main{
   max-width:var(--container);
   margin:0 auto;
-  padding:20px 28px 60px;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:24px;
+  padding:34px 28px 70px;
 }
-
-.card{
+.section,
+.case-card,
+.note-box,
+.cta-box{
   background:var(--surface);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:26px;
   box-shadow:var(--shadow);
-  text-decoration:none;
-  color:inherit;
-  transition:transform .2s ease;
 }
-
-.card:hover{
-  transform:translateY(-4px);
+.section{
+  max-width:var(--content);
+  padding:34px 38px;
+  margin:22px 0;
 }
-
+.section.wide{max-width:none}
+.section h2{
+  margin:0 0 18px;
+  font-size:clamp(1.9rem,2.6vw,2.5rem);
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:#122133;
+}
+.section h3{
+  margin:0 0 12px;
+  font-size:1.45rem;
+  line-height:1.2;
+  color:#122133;
+}
+.kicker,
 .tag{
+  display:inline-block;
+  margin:0 0 14px;
+  color:var(--accent);
   font-size:12px;
   font-weight:800;
-  color:var(--accent);
-  margin-bottom:10px;
+  letter-spacing:.12em;
   text-transform:uppercase;
-  letter-spacing:.08em;
 }
-
-.card h3{
-  margin:0 0 10px;
-  font-size:1.6rem;
-  line-height:1.2;
+.note-box{
+  max-width:var(--content);
+  background:var(--surface-soft);
+  border-left:4px solid var(--accent);
+  box-shadow:none;
+  padding:22px 24px;
+  margin:-34px 0 30px;
+  position:relative;
+  z-index:2;
 }
-
-.card p{
+.note-box p{color:var(--muted);font-size:1rem}
+.btn{
+  display:inline-block;
+  background:var(--accent);
+  color:#fff;
+  padding:14px 22px;
+  border-radius:14px;
+  font-weight:800;
+  text-decoration:none;
+  font-size:16px;
+  border:1px solid transparent;
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+  transition:opacity .16s ease, transform .16s ease, border-color .16s ease;
+}
+.btn:hover{
+  opacity:.94;
+  transform:translateY(-1px);
+}
+.btn.secondary{
+  background:#fff;
+  color:var(--accent);
+  border-color:var(--line);
+  box-shadow:none;
+}
+.hero-actions,
+.section-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  align-items:center;
+  margin-top:26px;
+}
+.featured-case{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);
+  gap:18px;
+  align-items:stretch;
+}
+.featured-panel{
+  background:linear-gradient(180deg,#ffffff 0%,#f7fafe 100%);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:30px;
+}
+.featured-panel h2{
+  margin:0 0 14px;
+  font-size:clamp(2rem,3vw,3rem);
+  line-height:1.05;
+  letter-spacing:-.035em;
+}
+.featured-panel p{color:var(--muted)}
+.featured-facts{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+.fact{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:20px 22px;
+  box-shadow:var(--shadow);
+}
+.fact .label{
+  display:block;
+  font-size:12px;
+  font-weight:800;
+  color:#68809d;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.fact .value{
+  display:block;
+  color:#122133;
+  font-size:1.12rem;
+  font-weight:800;
+  line-height:1.28;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.case-card{
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+  padding:26px;
+  text-decoration:none;
+  color:inherit;
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.case-card:hover{
+  transform:translateY(-3px);
+  border-color:#c7d5e4;
+  box-shadow:var(--shadow-strong);
+}
+.case-card h3{
+  margin:0 0 14px;
+  font-size:1.5rem;
+  line-height:1.15;
+  color:#122133;
+}
+.case-card p{
   color:var(--muted);
-  line-height:1.6;
-  margin:0;
+  font-size:1rem;
+  margin-bottom:18px;
 }
-
-
-.featured-card{max-width:var(--container);margin:0 auto 4px;padding:0 28px;}
-.featured-card .card{border:2px solid rgba(32,79,134,.22);background:linear-gradient(180deg, #ffffff 0%, #f7fafe 100%);}
-.featured-card .card h3{font-size:2rem;}
-
-@media(max-width:800px){
-  .grid{
-    grid-template-columns:1fr;
-  }
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:auto;
+}
+.meta span{
+  display:inline-block;
+  padding:8px 12px;
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:13px;
+  color:#42566c;
+}
+.cta-box{
+  margin-top:22px;
+  padding:30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+}
+.cta-box h2{
+  margin:0 0 10px;
+  font-size:clamp(1.7rem,2.3vw,2.2rem);
+  line-height:1.1;
+}
+.cta-box p{
+  color:var(--muted);
+  margin-bottom:0;
+}
+.site-footer{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 28px 36px;
+  color:#66788e;
+  font-size:.95rem;
+}
+@media (max-width:1040px){
+  .featured-case{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .topbar-inner{padding:16px 18px;gap:16px;flex-wrap:wrap}
+  .nav{gap:18px;flex-wrap:wrap}
+  .hero-inner{padding:56px 18px 54px}
+  .main{padding:22px 18px 50px}
+  .section,.case-card,.featured-panel,.cta-box{padding:26px 22px}
+  .note-box{margin-top:0;padding:20px}
+  .site-footer{padding:0 18px 30px}
 }
 </style>
-</head>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Case studies MMGRESS",
+  "url": "https://mmgress.github.io/case-studies.html",
+  "description": "Rzeczywiste przypadki diagnozy problemów technicznych, energetycznych i procesowych w firmach.",
+  "inLanguage": "pl-PL",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "MMGRESS",
+    "url": "https://mmgress.github.io/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Michał Grzesiczak",
+    "url": "https://mmgress.github.io/about.html"
+  }
+}
+</script>
+</head>
 <body>
 
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="/">MMGRESS</a>
-    <nav class="nav">
-      <a href="/">Strona główna</a>
+    <nav class="nav" aria-label="Główna nawigacja">
+      <a href="/">Start</a>
+      <a href="/diagnoza-problemow.html">Diagnoza</a>
+      <a href="/#analizy">Analizy</a>
       <a href="/case-studies.html" class="active">Case studies</a>
       <a href="/about.html">O mnie</a>
-      <a href="/diagnoza-problemow.html">Diagnoza</a>
+      <a href="/diagnoza-problemow.html#kontakt">Kontakt</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
-  <h1>Analizy i case studies</h1>
-  <p>
-    Jeżeli trafiasz tu po wpisie z LinkedIna, zacznij od analizy o tym, dlaczego firma nie traci punktowo, tylko systemowo.
-    Potem przejdź do konkretnych przypadków, w których problem był widoczny w technice, ale jego źródło leżało głębiej.
-  </p>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="eyebrow">Przypadki z praktyki</div>
+      <h1>Case studies: konkretne objawy, dane i przyczyny.</h1>
+      <p class="hero-intro">
+        Ta sekcja została uporządkowana wyłącznie pod rzeczywiste przypadki: obiekty, instalacje, pomiary, procesy produkcyjne, zasilanie, energię bierną i decyzje techniczne, które wymagały diagnozy przed działaniem.
+      </p>
+      <p class="hero-lead">
+        Analizy systemowe są osobną linią treści. Tutaj zostają tylko sytuacje, w których problem miał praktyczny przebieg: był objaw, były dane, była hipoteza, była diagnoza i decyzja, co zrobić dalej.
+      </p>
+      <div class="hero-actions">
+        <a href="/diagnoza-problemow.html" class="btn">Opisz podobny problem</a>
+        <a href="/#analizy" class="btn secondary">Przejdź do analiz systemowych</a>
+      </div>
+    </div>
+  </div>
 </section>
 
+<main class="main">
 
-<section class="featured-card">
-  <a href="/firma-traci-systemowo.html" class="card">
-    <div class="tag">Zacznij tutaj</div>
-    <h3>Firma nie traci punktowo. Firma traci systemowo.</h3>
-    <p>Analiza dla właścicieli i zarządów: ukryte koszty, awarie, przestoje i problemy operacyjne często są skutkiem wcześniejszych decyzji, procesów i zależności, których nikt nie widzi jako całości.</p>
-  </a>
-</section>
+  <div class="note-box">
+    <strong>Porządek treści na stronie:</strong>
+    <p>
+      Case studies pokazują praktyczne przypadki z firm i obiektów. Teksty o szerszych zjawiskach, takie jak inwestycje techniczne, raporty, systemowe straty czy AI, są traktowane jako analizy systemowe i prowadzą z menu do osobnej sekcji na stronie głównej.
+    </p>
+  </div>
 
-<section class="grid">
+  <section class="section wide">
+    <span class="kicker">Najmocniejszy przykład energetyczny</span>
+    <div class="featured-case">
+      <div class="featured-panel">
+        <h2>Energia bierna w zakładzie produkcyjnym</h2>
+        <p>
+          Zakład miał dwie linie transformatorowe, baterie kondensatorów i układ, który formalnie wyglądał poprawnie, a mimo to pojawiały się koszty zarówno energii biernej indukcyjnej, jak i pojemnościowej.
+        </p>
+        <p>
+          Problem nie polegał na prostym braku kompensacji. Kluczowe było zrozumienie sposobu pracy transformatorów, sekcji rozdzielni, profilu obciążenia i zachowania istniejących stopni kompensacji.
+        </p>
+        <div class="section-actions">
+          <a href="/case-study-energia-bierna-transformator-svg.html" class="btn">Czytaj case study</a>
+        </div>
+      </div>
 
-  <a href="/case-study-pv-brak-fazy.html" class="card">
-    <div class="tag">Diagnoza</div>
-    <h3>Fotowoltaika, która nie działała</h3>
-    <p>8 miesięcy bez produkcji mimo braku błędów. Przyczyna: brak jednej fazy po modernizacji sieci.</p>
-  </a>
+      <div class="featured-facts" aria-label="Najważniejsze elementy przypadku">
+        <div class="fact">
+          <span class="label">Obiekt</span>
+          <span class="value">Zakład produkcyjny, 2×850 kVA, dwie sekcje rozdzielni nN</span>
+        </div>
+        <div class="fact">
+          <span class="label">Objaw</span>
+          <span class="value">Opłaty za energię bierną indukcyjną i pojemnościową</span>
+        </div>
+        <div class="fact">
+          <span class="label">Kierunek</span>
+          <span class="value">Diagnoza profilu pracy, korekta kompensacji i mały SVG zamiast dokładania dużego urządzenia</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <a href="/case-study-wtryskarki-falszywy-odczyt-pracy.html" class="card">
-    <div class="tag">Pomiar</div>
-    <h3>Maszyny „pracowały”, ale nie produkowały</h3>
-    <p>System pokazywał aktywność, ale mierzył zasilanie zamiast realnej pracy.</p>
-  </a>
+  <section class="section wide">
+    <span class="kicker">Lista przypadków</span>
+    <h2>Rzeczywiste case studies</h2>
+    <p>
+      Każdy z poniższych przykładów pokazuje tę samą zasadę: objaw był widoczny w technice, ale dopiero sprawdzenie kontekstu pokazało, czy źródło problemu leży w zasilaniu, pomiarze, procesie, organizacji pracy czy błędnym założeniu inwestycyjnym.
+    </p>
 
-  <a href="/case-study-wtryskarki-odzysk-czasu-cykli.html" class="card">
-    <div class="tag">Optymalizacja</div>
-    <h3>Setki minut strat dziennie</h3>
-    <p>Dopiero poprawny pomiar ujawnił zbyt długie cykle, precykle i czas martwy.</p>
-  </a>
+    <div class="grid">
+      <a href="/case-study-pv-brak-fazy.html" class="case-card">
+        <span class="tag">Fotowoltaika</span>
+        <h3>Fotowoltaika, która nie działała</h3>
+        <p>Instalacja 6 kW przez wiele miesięcy nie produkowała energii mimo braku oczywistych błędów. Przyczyna okazała się prosta, ale długo niewidoczna: brak jednej fazy po modernizacji sieci.</p>
+        <div class="meta"><span>PV</span><span>zasilanie</span><span>diagnoza</span></div>
+      </a>
 
-  <a href="/case-study-wtryskarki-zanik-napiecia-ups-lokalny.html" class="card">
-    <div class="tag">Zasilanie</div>
-    <h3>Zanik napięcia rozwalał produkcję</h3>
-    <p>Krótkie spadki napięcia powodowały wielogodzinne postoje. Rozwiązanie: lokalne UPS-y dla krytycznej elektroniki.</p>
-  </a>
+      <a href="/case-study-wtryskarki-falszywy-odczyt-pracy.html" class="case-card">
+        <span class="tag">Pomiar</span>
+        <h3>Maszyny „pracowały”, ale nie produkowały</h3>
+        <p>System pokazywał aktywność wtryskarek, ale mierzył niewłaściwy sygnał. Formalnie dane wyglądały dobrze, praktycznie zaciemniały rzeczywisty obraz produkcji.</p>
+        <div class="meta"><span>wtryskarki</span><span>dane</span><span>pomiar</span></div>
+      </a>
 
-  <a href="/Case-study-precyzja-ciecia-profili.html" class="card">
-    <div class="tag">Proces</div>
-    <h3>Precyzja cięcia profili zamkniętych</h3>
-    <p>Modernizacja pomiaru i napędu pozwoliła zejść z odchyłki około ±500 mm do około 1,5 mm.</p>
-  </a>
+      <a href="/case-study-wtryskarki-odzysk-czasu-cykli.html" class="case-card">
+        <span class="tag">Optymalizacja</span>
+        <h3>Setki minut strat dziennie</h3>
+        <p>Dopiero poprawny pomiar ujawnił zbyt długie precykle, za długie cykle i czas martwy pomiędzy cyklami. Problem nie był jedną awarią, tylko codzienną stratą procesu.</p>
+        <div class="meta"><span>czas cyklu</span><span>produkcja</span><span>OEE</span></div>
+      </a>
 
-  <a href="/Case-study-wymiana-rozdzielni-bez-wylaczania-obiektu.html" class="card">
-    <div class="tag">Modernizacja</div>
-    <h3>Wymiana rozdzielni bez wyłączania obiektu</h3>
-    <p>Dwa miesiące planowania, 42 obwody i pełna przerwa krótsza niż 15 minut.</p>
-  </a>
-<a href="/film-marsjanin-analiza.html" class="card">
-  <div class="tag">Analiza</div>
-  <h3>Botanik na Marsie… bez świata do pracy</h3>
-  <p>Rola była dobrze dobrana. Problem w tym, że nikt nie zbudował warunków, żeby mogła działać.</p>
-</a>
+      <a href="/case-study-wtryskarki-zanik-napiecia-ups-lokalny.html" class="case-card">
+        <span class="tag">Zasilanie</span>
+        <h3>Krótki zanik napięcia, wielogodzinny przestój</h3>
+        <p>Krótkie spadki napięcia wyłączały niemal 100 wtryskarek i powodowały wielogodzinne postoje. Rozwiązaniem nie był wielki UPS na całą halę, tylko lokalne podtrzymanie krytycznej elektroniki.</p>
+        <div class="meta"><span>zaniki napięcia</span><span>UPS</span><span>produkcja</span></div>
+      </a>
 
-</section>
+      <a href="/Case-study-precyzja-ciecia-profili.html" class="case-card">
+        <span class="tag">Proces</span>
+        <h3>Precyzja cięcia profili zamkniętych</h3>
+        <p>Modernizacja sposobu pomiaru i prowadzenia procesu pozwoliła zejść z odchyłki około ±500 mm do około ±1,5 mm oraz uprościć obsługę maszyny.</p>
+        <div class="meta"><span>pomiar</span><span>napęd</span><span>jakość</span></div>
+      </a>
+
+      <a href="/Case-study-wymiana-rozdzielni-bez-wylaczania-obiektu.html" class="case-card">
+        <span class="tag">Modernizacja</span>
+        <h3>Wymiana rozdzielni bez wyłączania obiektu</h3>
+        <p>Dwa miesiące planowania, 42 obwody i przerwa krótsza niż 15 minut. Kluczem nie była sama wymiana, tylko przygotowanie sekwencji prac i ryzyk.</p>
+        <div class="meta"><span>rozdzielnia</span><span>ciągłość pracy</span><span>planowanie</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="kicker">Wspólny mianownik</span>
+    <h2>To nie są historie o „sprytnych naprawach”.</h2>
+    <p>
+      W każdym z tych przypadków najważniejsze było zatrzymanie się przed oczywistym rozwiązaniem. Zanim ktoś dołożył większe urządzenie, wymienił element, zmienił harmonogram albo kupił kolejny system, trzeba było sprawdzić, czy firma patrzy na właściwy parametr i czy problem został dobrze nazwany.
+    </p>
+    <p>
+      To jest powód, dla którego case studies są oddzielone od analiz. Tutaj pokazuję praktykę: jak wygląda droga od objawu do przyczyny w konkretnym układzie technicznym albo procesowym.
+    </p>
+  </section>
+
+  <section class="cta-box">
+    <div>
+      <h2>Masz problem, który „niby działa”, ale kosztuje?</h2>
+      <p>
+        Opisz sytuację krótko: co widać, co już sprawdzono, jakie są koszty albo ryzyka i dlaczego standardowe rozwiązania nie dały pewności.
+      </p>
+    </div>
+    <a href="/diagnoza-problemow.html" class="btn">Przejdź do diagnozy</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  © MMGRESS — diagnoza problemów technicznych, procesowych i energetycznych.
+</footer>
 
 </body>
 </html>
