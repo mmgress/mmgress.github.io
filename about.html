@@ -3,8 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Michał Grzesiczak – praktyk zajmujący się diagnozą złożonych problemów technicznych, procesowych i energetycznych w firmach produkcyjnych. Elektronika, informatyka i elektroenergetyka w praktyce." />
-<title>Michał Grzesiczak – diagnoza problemów technicznych i energetycznych | MMGRESS</title>
+<meta name="description" content="Michał Grzesiczak / MMGRESS – praktyk diagnozy problemów technicznych, procesowych i energetycznych. Elektronika, informatyka, elektroenergetyka i myślenie systemowe w praktyce." />
+<meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
+<meta name="msvalidate.01" content="AB6274E2F07953E7C1810852FA44FB0D" />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="MMGRESS" />
+<title>O mnie — Michał Grzesiczak | MMGRESS</title>
+<meta property="og:title" content="O mnie — Michał Grzesiczak | MMGRESS" />
+<meta property="og:description" content="Nie zaczynam od urządzenia ani gotowej tezy. Najpierw sprawdzam, czy problem został właściwie zrozumiany." />
+<meta property="og:type" content="profile" />
+<meta property="og:url" content="https://mmgress.github.io/about.html" />
+<meta name="twitter:card" content="summary" />
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
 <script>
@@ -13,7 +23,6 @@
   gtag('js', new Date());
   gtag('config', 'G-5KZX20JGP7');
 </script>
-
 
 <style>
 :root{
@@ -26,7 +35,11 @@
   --line:#d7e0ea;
   --accent:#204f86;
   --accent-soft:#e9f1fb;
-  --shadow:0 14px 34px rgba(15, 23, 42, 0.06);
+  --ok:#eef8f3;
+  --ok-line:#cfe8d8;
+  --warn:#fcf6ef;
+  --warn-line:#efd7b8;
+  --shadow:0 14px 34px rgba(15,23,42,.06);
   --radius:20px;
   --radius-sm:14px;
   --container:1180px;
@@ -70,6 +83,7 @@ a{color:var(--accent)}
   display:flex;
   align-items:center;
   gap:34px;
+  flex-wrap:wrap;
 }
 .nav a{
   text-decoration:none;
@@ -80,16 +94,16 @@ a{color:var(--accent)}
 .nav a.active,.nav a:hover{color:var(--accent)}
 .hero{
   background:
-    radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),
+    radial-gradient(circle at left top, rgba(255,255,255,.88), rgba(255,255,255,0) 34%),
     linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
   border-bottom:1px solid var(--line);
 }
 .hero-inner{
   max-width:var(--container);
   margin:0 auto;
-  padding:84px 28px 74px;
+  padding:86px 28px 78px;
 }
-.hero-content{max-width:var(--content)}
+.hero-content{max-width:1000px}
 .eyebrow{
   display:inline-block;
   margin:0 0 24px;
@@ -108,57 +122,75 @@ h1{
   letter-spacing:-0.04em;
 }
 .hero-title{
-  font-size:clamp(2.6rem, 5vw, 5rem);
+  font-size:clamp(2.6rem,5vw,5rem);
   line-height:1.02;
   font-weight:800;
-  max-width:980px;
-}
-.hero-title.standard{
-  font-size:clamp(2.8rem, 5.2vw, 4.8rem);
-}
-.hero-intro{
-  max-width:980px;
-  font-size:clamp(1.2rem, 1.6vw, 1.5rem);
-  color:#38506c;
-  line-height:1.65;
-  margin:0;
-}
-.hero-lead{
-  max-width:900px;
-  margin:22px 0 0;
-  color:var(--muted);
-  font-size:clamp(1.02rem, 1.3vw, 1.16rem);
+  max-width:1040px;
 }
 .hero-accent{
   display:block;
-  font-size:clamp(2.9rem, 6vw, 5.2rem);
-  line-height:.98;
-  font-weight:800;
-  margin-bottom:10px;
+  font-size:clamp(2.55rem,5.3vw,4.9rem);
+  line-height:1;
 }
 .hero-rest{
   display:block;
-  font-size:clamp(1.95rem, 3.25vw, 3.45rem);
-  line-height:1.08;
-  font-weight:700;
+  font-size:clamp(1.45rem,2.6vw,2.3rem);
+  font-weight:650;
+  margin-top:10px;
   letter-spacing:-0.035em;
-  max-width:980px;
+}
+.hero-intro{
+  max-width:930px;
+  font-size:clamp(1.2rem,1.6vw,1.46rem);
+  color:#38506c;
+  line-height:1.58;
+  margin:0 0 18px;
+}
+.hero-lead{
+  max-width:900px;
+  margin:18px 0 0;
+  color:var(--muted);
+  font-size:clamp(1.02rem,1.3vw,1.16rem);
+}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:28px;
 }
 .main{
   max-width:var(--container);
   margin:0 auto;
   padding:34px 28px 70px;
 }
-.summary{
-  margin-top:-32px;
-  position:relative;
-  z-index:2;
+.section{
+  max-width:var(--content);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:34px 38px;
+  margin:22px 0;
+  box-shadow:var(--shadow);
 }
-.summary-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:18px;
+.section.wide{max-width:none}
+.section h2{
+  margin:0 0 18px;
+  font-size:clamp(1.9rem,2.6vw,2.5rem);
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:#122133;
 }
+.section h3{
+  margin:0 0 12px;
+  font-size:1.35rem;
+  line-height:1.2;
+  color:#122133;
+}
+p{margin:0 0 16px;font-size:1.08rem}
+ul,ol{margin:0;padding-left:24px}
+li{margin:0 0 10px;font-size:1.05rem}
+.summary{margin-top:-32px;position:relative;z-index:2}
+.summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .summary-grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .summary-card{
   min-width:0;
@@ -178,38 +210,12 @@ h1{
 }
 .summary-card .value{
   margin:0;
-  font-size:clamp(1.5rem, 2.1vw, 2.1rem);
+  font-size:clamp(1.35rem,2vw,1.95rem);
   line-height:1.15;
   font-weight:800;
   color:var(--accent);
 }
-.section{
-  max-width:var(--content);
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:34px 38px;
-  margin:22px 0;
-  box-shadow:var(--shadow);
-}
-.section.wide{max-width:none}
-.section h2{
-  margin:0 0 18px;
-  font-size:clamp(1.9rem, 2.6vw, 2.5rem);
-  line-height:1.1;
-  letter-spacing:-0.03em;
-  color:#122133;
-}
-.section h3{
-  margin:0 0 12px;
-  font-size:1.5rem;
-  line-height:1.2;
-  color:#122133;
-}
-p{margin:0 0 16px;font-size:1.08rem}
-ul,ol{margin:0;padding-left:24px}
-li{margin:0 0 10px;font-size:1.05rem}
-.note-box,.quote{
+.quote,.note-box{
   background:var(--surface-soft);
   border:1px solid var(--line);
   border-left:4px solid var(--accent);
@@ -218,53 +224,55 @@ li{margin:0 0 10px;font-size:1.05rem}
   margin:22px 0;
 }
 .result-box{
-  background:#eef8f3;
-  border:1px solid #cfe8d8;
+  background:var(--ok);
+  border:1px solid var(--ok-line);
   border-radius:16px;
   padding:22px 24px;
   margin:20px 0;
 }
-.loss-box{
-  background:#fcf6ef;
-  border:1px solid #efd7b8;
+.warn-box{
+  background:var(--warn);
+  border:1px solid var(--warn-line);
   border-radius:16px;
   padding:22px 24px;
   margin:20px 0;
+}
+.split-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  margin-top:22px;
 }
 .cards-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:18px;
+  margin-top:22px;
 }
-.case-card{
+.mini-card,.path-card{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  padding:22px;
+}
+.path-card{
   display:block;
   text-decoration:none;
   color:inherit;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:26px;
-  box-shadow:var(--shadow);
   transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
-.case-card:hover{
+.path-card:hover{
   transform:translateY(-3px);
   border-color:#c7d5e4;
-  box-shadow:0 18px 40px rgba(15,23,42,.09);
+  box-shadow:0 18px 40px rgba(15,23,42,.08);
 }
-.case-tag{
+.path-card h3{font-size:1.45rem;margin:0 0 12px}
+.path-card p{color:var(--muted);margin:0 0 14px}
+.path-card .path-link{
   display:inline-block;
-  margin:0 0 14px;
   color:var(--accent);
-  font-size:12px;
   font-weight:800;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-.case-card h3{
-  margin:0 0 14px;
-  font-size:1.7rem;
-  line-height:1.15;
+  text-decoration:none;
 }
 .meta{
   display:flex;
@@ -275,54 +283,74 @@ li{margin:0 0 10px;font-size:1.05rem}
 .meta span{
   display:inline-block;
   padding:8px 12px;
-  background:var(--surface-soft);
+  background:#fff;
   border:1px solid var(--line);
   border-radius:999px;
   font-size:13px;
   color:#42566c;
 }
-.cta-link{
+.cta-btn{
+  display:inline-block;
+  padding:14px 18px;
+  border-radius:14px;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  border:1px solid var(--accent);
+  transition:.16s ease;
+}
+.cta-btn:hover{transform:translateY(-1px)}
+.cta-btn.secondary{
+  background:#fff;
+  color:var(--accent);
+  border-color:var(--line);
+}
+.text-link{
   display:inline-block;
   margin-top:16px;
   color:var(--accent);
-  font-weight:700;
+  font-weight:800;
   text-decoration:none;
 }
-.footer-note{color:#66788e;font-size:.95rem;margin-top:18px}
 .contact-box{
   background:var(--surface-soft);
   border:1px solid var(--line);
   border-radius:16px;
   padding:24px;
 }
-@media (max-width: 1040px){
-  .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .summary-grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+.footer-note{color:#66788e;font-size:.95rem;margin-top:18px}
+@media (max-width:1040px){
+  .summary-grid,.summary-grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cards-grid{grid-template-columns:1fr}
 }
-@media (max-width: 760px){
-  .topbar-inner{padding:16px 18px; gap:16px; flex-wrap:wrap}
-  .nav{gap:18px; flex-wrap:wrap}
+@media (max-width:860px){
+  .split-grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .topbar-inner{padding:16px 18px;gap:16px;flex-wrap:wrap}
+  .nav{gap:18px;flex-wrap:wrap}
   .hero-inner{padding:56px 18px 52px}
   .main{padding:22px 18px 50px}
   .section{padding:26px 22px}
   .summary{margin-top:0}
   .summary-grid,.summary-grid.cols-3{grid-template-columns:1fr}
-  .hero-accent{margin-bottom:8px}
+  .hero-actions{gap:10px}
 }
 </style>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
   "url": "https://mmgress.github.io/about.html",
-  "name": "O mnie – Michał Grzesiczak | MMGRESS",
+  "name": "O mnie — Michał Grzesiczak | MMGRESS",
   "inLanguage": "pl-PL",
   "mainEntity": {
     "@type": "Person",
     "name": "Michał Grzesiczak",
-    "jobTitle": "Diagnosta problemów technicznych, procesowych i energetycznych",
-    "description": "Praktyk zajmujący się diagnozą złożonych problemów technicznych, procesowych i energetycznych w firmach produkcyjnych.",
+    "jobTitle": "Praktyk diagnozy problemów technicznych, procesowych i energetycznych",
+    "description": "Praktyk zajmujący się diagnozą problemów na styku elektroniki, informatyki, elektroenergetyki, procesów i decyzji biznesowych.",
     "url": "https://mmgress.github.io/about.html",
     "worksFor": {
       "@type": "Organization",
@@ -334,13 +362,15 @@ li{margin:0 0 10px;font-size:1.05rem}
 </script>
 </head>
 <body>
+
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="/">MMGRESS</a>
     <nav class="nav">
-      <a href="/" class="">Strona główna</a>
-      <a href="/case-studies.html" class="">Case studies</a>
+      <a href="/">Strona główna</a>
+      <a href="/case-studies.html">Case studies</a>
       <a href="/about.html" class="active">O mnie</a>
+      <a href="/diagnoza-problemow.html">Diagnoza</a>
     </nav>
   </div>
 </header>
@@ -349,87 +379,229 @@ li{margin:0 0 10px;font-size:1.05rem}
   <div class="hero-inner">
     <div class="hero-content">
       <div class="eyebrow">O mnie</div>
-      <h1 class="hero-title standard">Michał Grzesiczak</h1>
 
-      <p>
-        Michał Grzesiczak – praktyk zajmujący się diagnozą złożonych problemów technicznych, procesowych i energetycznych w firmach produkcyjnych.
-      </p>
-      <p>
-        Łączę doświadczenie z elektroniki, informatyki i elektroenergetyki, żeby identyfikować rzeczywiste przyczyny strat, niestabilności i błędów tam, gdzie standardowe podejście nie wystarcza.
+      <h1 class="hero-title">
+        <span class="hero-accent">Nazywam się Michał Grzesiczak.</span>
+        <span class="hero-rest">Pomagam zrozumieć problemy, które nie mieszczą się w jednej szufladce.</span>
+      </h1>
+
+      <p class="hero-intro">
+        Pracuję na styku elektroniki, informatyki, elektroenergetyki, procesów i decyzji biznesowych. Interesują mnie szczególnie te sytuacje, w których każdy fragment systemu wygląda poprawnie, ale całość nadal nie daje właściwego wyniku.
       </p>
 
-      <p class="hero-intro">Od ponad 20 lat zajmuję się rozwiązywaniem problemów technicznych na styku elektroniki, informatyki i elektroenergetyki.</p>
+      <p class="hero-lead">
+        Nie zaczynam od urządzenia, gotowej technologii ani potwierdzania założonej tezy. Najpierw sprawdzam, czy problem został właściwie nazwany, co rzeczywiście pokazują dane i gdzie w systemie powstaje strata.
+      </p>
+
+      <div class="hero-actions">
+        <a href="/case-studies.html" class="cta-btn">Zobacz case studies</a>
+        <a href="/diagnoza-problemow.html" class="cta-btn secondary">Opisz problem</a>
+      </div>
     </div>
   </div>
 </section>
 
 <main class="main">
+
   <section class="summary">
     <div class="summary-grid cols-3">
-      <div class="summary-card"><div class="label">Doświadczenie</div><div class="value">20+ lat</div></div>
-      <div class="summary-card"><div class="label">Obszary</div><div class="value">Elektronika, IT, energia</div></div>
-      <div class="summary-card"><div class="label">Podejście</div><div class="value">Diagnoza przyczyny</div></div>
+      <div class="summary-card">
+        <div class="label">Doświadczenie</div>
+        <div class="value">20+ lat praktyki</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Zakres</div>
+        <div class="value">Technika, proces, energia</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Podejście</div>
+        <div class="value">Najpierw przyczyna</div>
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <h2>Droga zawodowa</h2>
-    <p>Pracę w branży technicznej rozpocząłem w wieku 15 lat jako praktykant. Od tamtego czasu niemal nieprzerwanie zajmuję się diagnozowaniem, projektowaniem i naprawą systemów technicznych.</p>
-    <p>Z wykształcenia jestem elektronikiem. Ukończyłem szkołę zawodową w kierunku naprawy urządzeń RTV, a następnie technikum elektroniczne w Technicznych Zakładach Naukowych Górnictwa Rud im. gen. Władysława Sikorskiego w Częstochowie.</p>
-    <p>Później ukończyłem dwuletnie studium informatyczne w zakresie programowania relacyjnych baz danych. Studia informatyczne na Politechnice Częstochowskiej rozpocząłem, jednak po dwóch semestrach zdecydowałem się skoncentrować na pracy zawodowej i zdobywaniu doświadczenia praktycznego.</p>
+    <h2>Nie jestem od jednego pudełka</h2>
+
+    <p>
+      W wielu firmach problem jest zbyt techniczny, żeby traktować go wyłącznie biznesowo, ale jednocześnie zbyt systemowy, żeby rozwiązać go samą wymianą urządzenia.
+    </p>
+
+    <p>
+      Dlatego najczęściej trafiają do mnie sytuacje, w których ktoś już coś sprawdzał, ktoś już coś mierzył, ktoś już coś proponował, ale mimo tego nadal nie ma pewności, czy firma patrzy na właściwą przyczynę.
+    </p>
+
+    <div class="quote">
+      Najbardziej interesują mnie problemy, które formalnie wyglądają jak awaria, koszt albo brak urządzenia, ale po bliższym sprawdzeniu okazują się skutkiem zależności między techniką, procesem, danymi i decyzją.
+    </div>
   </section>
 
   <section class="section">
-    <h2>Doświadczenie techniczne</h2>
-    <p>Przez ponad 15 lat pracowałem w firmie zajmującej się serwisem oraz projektowaniem urządzeń elektronicznych. W tym czasie zajmowałem się m.in. projektowaniem urządzeń elektronicznych oraz budową systemów teleinformatycznych dla przedsiębiorstw i instytucji publicznych.</p>
-    <p>W kolejnej firmie z branży elektroenergetycznej uczestniczyłem w projektowaniu specjalistycznych systemów do szybkiej kompensacji mocy biernej opartych o układy tyrystorowe, z pomiarami wykonywanymi przy użyciu cewek Rogowskiego oraz zdalną transmisją danych.</p>
+    <h2>Skąd się bierze mój sposób patrzenia</h2>
+
+    <p>
+      Pracę w branży technicznej zaczynałem bardzo wcześnie, od praktyki i realnego kontaktu ze sprzętem. Z wykształcenia jestem elektronikiem, a zawodowo przechodziłem przez serwis, projektowanie urządzeń elektronicznych, systemy teleinformatyczne, energetykę, pomiary, automatykę i rozwiązywanie problemów na obiektach.
+    </p>
+
+    <p>
+      Ukończyłem szkołę zawodową w kierunku naprawy urządzeń RTV, technikum elektroniczne oraz dwuletnie studium informatyczne w zakresie programowania relacyjnych baz danych. Studia informatyczne na Politechnice Częstochowskiej rozpocząłem, ale po dwóch semestrach wybrałem praktykę zawodową, bo to ona najszybciej pokazywała, jak naprawdę zachowują się systemy poza papierem.
+    </p>
+
+    <p>
+      Przez lata pracowałem przy urządzeniach, instalacjach i systemach, w których teoria była ważna, ale dopiero zderzenie jej z obiektem, pomiarem, użytkownikiem i organizacją pracy pokazywało, gdzie leży rzeczywisty problem.
+    </p>
+  </section>
+
+  <section class="section wide">
+    <h2>Obszary, które łączę</h2>
+
+    <p>
+      MMGRESS nie jest zbudowany wokół jednej branży albo jednego produktu. Jest zbudowany wokół sposobu diagnozowania sytuacji, w których lokalnie wszystko może wyglądać poprawnie, a wynik systemu nadal się nie zgadza.
+    </p>
+
+    <div class="cards-grid">
+      <div class="mini-card">
+        <h3>Elektronika i urządzenia</h3>
+        <p>Serwis, projektowanie, sygnały, pomiary, sterowanie, zachowanie urządzeń w realnym środowisku pracy.</p>
+        <div class="meta"><span>urządzenia</span><span>sygnały</span><span>pomiary</span></div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Energia i instalacje</h3>
+        <p>Zasilanie, kompensacja mocy biernej, transformatory, struktura pomiaru, stabilność układów i ekonomia energii.</p>
+        <div class="meta"><span>energia</span><span>moc bierna</span><span>zasilanie</span></div>
+      </div>
+
+      <div class="mini-card">
+        <h3>Dane i procesy</h3>
+        <p>Systemy, które pokazują liczby, ale nie zawsze pokazują właściwą rzeczywistość. Procesy, które tracą wynik między działami.</p>
+        <div class="meta"><span>dane</span><span>proces</span><span>decyzje</span></div>
+      </div>
+    </div>
   </section>
 
   <section class="section">
-    <h2>Działalność własna</h2>
-    <p>Od ponad 10 lat prowadzę własną działalność gospodarczą, zajmując się diagnozą problemów technicznych w instalacjach energetycznych, systemach przemysłowych oraz projektach na styku elektroniki, informatyki i automatyki.</p>
-    <p>W wielu przypadkach problem nie wynika z pojedynczego elementu systemu, ale z interakcji wielu czynników: technologii, organizacji pracy, infrastruktury technicznej czy błędnych założeń projektowych.</p>
+    <h2>Jak pracuję</h2>
+
+    <p>
+      Najpierw trzeba oddzielić objaw od przyczyny. Jeżeli zakład płaci za energię bierną, to nie znaczy automatycznie, że brakuje większego kompensatora. Jeżeli maszyna według systemu pracuje, to nie znaczy automatycznie, że produkuje. Jeżeli raport wygląda profesjonalnie, to nie znaczy, że opisuje rzeczywisty mechanizm straty.
+    </p>
+
+    <p>
+      W praktyce oznacza to rozmowę, oględziny, analizę danych, pomiary, sprawdzenie założeń i bardzo często powrót do prostego pytania: co tu naprawdę miało działać, co faktycznie działa, a gdzie wynik zaczyna się rozjeżdżać?
+    </p>
+
+    <div class="result-box">
+      <strong>Nie chodzi o to, żeby od razu znaleźć efektowne rozwiązanie.</strong>
+      <p>
+        Chodzi o to, żeby nie wydać pieniędzy na rozwiązanie, które jest poprawne technicznie, ale nie trafia w rzeczywistą przyczynę problemu.
+      </p>
+    </div>
   </section>
 
   <section class="section">
-    <h2>Podejście do pracy</h2>
-    <p>Nie zajmuję się sprzedażą gotowych rozwiązań ani konkretnych urządzeń. Moją rolą jest zrozumienie problemu, znalezienie jego rzeczywistej przyczyny oraz wskazanie możliwych kierunków działania.</p>
-    <p>Czasami rozwiązanie polega na zmianie jednego elementu instalacji. Czasami na zmianie sposobu pomiaru, organizacji procesu lub podejścia do projektu.</p>
-    <div class="note-box">Najważniejsze jest zrozumienie przyczyny problemu — dopiero potem można mówić o jego trwałym rozwiązaniu.</div>
+    <h2>Czego nie udaję</h2>
+
+    <p>
+      Nie jestem działem handlowym producenta urządzeń i nie zaczynam od tego, co można sprzedać. Nie jestem też konsultantem od prezentacji, która ma ładnie wyglądać, ale omija trudne szczegóły techniczne.
+    </p>
+
+    <p>
+      Jeżeli problem jest prosty, warto rozwiązać go prosto. Jeżeli temat nie pasuje do mojego doświadczenia, mówię to wprost. Jeżeli dane nie pozwalają jeszcze na wniosek, nie udaję pewności.
+    </p>
+
+    <div class="warn-box">
+      <strong>Najgorsza diagnoza to taka, która tylko wzmacnia cudze założenie.</strong>
+      <p>
+        W wielu sprawach trzeba najpierw sprawdzić, czy pytanie zostało dobrze postawione, zanim zacznie się szukać odpowiedzi.
+      </p>
+    </div>
+  </section>
+
+  <section class="section wide">
+    <h2>Jak czytać tę stronę</h2>
+
+    <p>
+      Po przebudowie MMGRESS ma trzy wyraźne warstwy. Każda z nich pokazuje ten sam sposób myślenia, ale z innej strony.
+    </p>
+
+    <div class="cards-grid">
+      <a href="/diagnoza-problemow.html" class="path-card">
+        <h3>Diagnoza problemu</h3>
+        <p>Dla firm, które mają konkretną sytuację: koszt, awarię, niestabilność, przetarg albo inwestycję, której założenia trzeba sprawdzić.</p>
+        <span class="path-link">Przejdź do diagnozy →</span>
+      </a>
+
+      <a href="/case-studies.html" class="path-card">
+        <h3>Case studies</h3>
+        <p>Praktyczne przypadki z obiektów, instalacji i procesów. Tu widać, jak objaw prowadził do przyczyny i decyzji.</p>
+        <span class="path-link">Zobacz przypadki →</span>
+      </a>
+
+      <a href="/dlaczego-inwestycje-techniczne-nie-dzialaja.html" class="path-card">
+        <h3>Analizy systemowe</h3>
+        <p>Szersze komentarze o technologii, energetyce, AI, przemyśle i decyzjach, które pokazują ten sam sposób patrzenia na większej skali.</p>
+        <span class="path-link">Czytaj pierwszą analizę →</span>
+      </a>
+    </div>
   </section>
 
   <section class="section">
-    <h2>Dalej</h2>
-    <p>Jeżeli chcesz zobaczyć przykłady problemów, które udało się rozwiązać w praktyce, przejdź do sekcji <strong>Case studies</strong>.</p>
-    <p class="footer-note">Każdy opis przedstawia rzeczywisty przypadek, tok analizy oraz rzeczywistą przyczynę problemu.</p>
+    <h2>Dlaczego to jest ważne dla zarządu i właściciela</h2>
+
+    <p>
+      Właściciel albo zarząd bardzo często nie potrzebuje kolejnego szczegółu technicznego. Potrzebuje odpowiedzi, czy firma dobrze rozumie problem, zanim wyda pieniądze, podpisze umowę albo przyjmie założenia do przetargu.
+    </p>
+
+    <p>
+      To jest właśnie miejsce, w którym technika spotyka się z decyzją biznesową. Zły dobór urządzenia, błędny pomiar, źle zinterpretowane dane albo za wąsko opisany problem potrafią później kosztować znacznie więcej niż sama analiza wykonana wcześniej.
+    </p>
+
+    <p>
+      Dlatego coraz częściej patrzę na problemy nie tylko jako technik, ale jako ktoś, kto pomaga nazwać ryzyko przed decyzją.
+    </p>
   </section>
+
   <section class="section">
-  <h2>Kontakt</h2>
+    <h2>Kontakt</h2>
 
-  <p><strong>Masz podobny problem?</strong></p>
-  <p>
-    Opisz go w 2–3 zdaniach.
-    Powiem Ci wprost, gdzie leży problem i czy ma to sens ruszać.
-  </p>
+    <p><strong>Masz sytuację, w której wszystko działa, ale coś się nie spina?</strong></p>
+    <p>
+      Opisz ją krótko. Wystarczy 2–3 zdania: co miało działać, co się nie zgadza i co było już sprawdzane.
+    </p>
 
-  <div class="contact-box">
-    <p><strong>Opisz sytuację i wyślij wiadomość.</strong></p>
-    <p>Email: <a href="mailto:mmgress@proton.me" id="cta-mail">mmgress@proton.me</a></p>
-    <p>Telefon: <a href="tel:+48881585906">+48 881 585 906</a></p>
-  </div>
-</section>
+    <div class="contact-box">
+      <p><strong>Najprościej: wyślij krótki opis problemu.</strong></p>
+      <p>Email: <a href="mailto:mmgress@proton.me?subject=Opis%20problemu%20-%20MMGRESS&body=Dzie%C5%84%20dobry,%0A%0Aopisuj%C4%99%20kr%C3%B3tko%20sytuacj%C4%99:%0A1.%20Co%20mia%C5%82o%20dzia%C5%82a%C4%87:%0A2.%20Co%20si%C4%99%20nie%20zgadza:%0A3.%20Co%20by%C5%82o%20ju%C5%BC%20sprawdzane:%0A%0AKontakt%20do%20mnie:%0A" id="cta-mail">mmgress@proton.me</a></p>
+      <p>Telefon: <a href="tel:+48881585906" id="cta-phone">+48 881 585 906</a></p>
+    </div>
+
+    <p class="footer-note">
+      Jeżeli temat nie będzie pasował do mojego sposobu pracy, powiem to wprost.
+    </p>
+  </section>
+
+</main>
 
 <script>
 document.getElementById('cta-mail')?.addEventListener('click', function() {
   if (typeof gtag === 'function') {
     gtag('event', 'kontakt_mail', {
       'event_category': 'kontakt',
-      'event_label': 'klik_mail'
+      'event_label': 'klik_mail_about'
+    });
+  }
+});
+
+document.getElementById('cta-phone')?.addEventListener('click', function() {
+  if (typeof gtag === 'function') {
+    gtag('event', 'kontakt_phone', {
+      'event_category': 'kontakt',
+      'event_label': 'klik_phone_about'
     });
   }
 });
 </script>
-</main>
 
 </body>
 </html>
