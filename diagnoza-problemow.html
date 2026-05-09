@@ -6,11 +6,15 @@
 <meta name="description" content="MMGRESS – diagnoza problemów technicznych, procesowych i energetycznych w firmach produkcyjnych. Gdy wszystko wygląda dobrze, a wynik się nie zgadza, trzeba znaleźć prawdziwą przyczynę." />
 <meta name="robots" content="index, follow" />
 <meta name="author" content="MMGRESS" />
+<meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
+<meta name="msvalidate.01" content="AB6274E2F07953E7C1810852FA44FB0D" />
+<link rel="canonical" href="https://mmgress.github.io/diagnoza-problemow.html" />
 <title>Diagnoza problemów w firmach produkcyjnych | MMGRESS</title>
 <meta property="og:title" content="Diagnoza problemów w firmach produkcyjnych | MMGRESS" />
 <meta property="og:description" content="Gdy wszystko wygląda dobrze, a wynik się nie zgadza, problem często leży na styku technologii, procesu, energii i organizacji." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://mmgress.github.io/diagnoza-problemow.html" />
+<meta property="og:site_name" content="MMGRESS" />
 <meta name="twitter:card" content="summary" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
 <script>
@@ -53,7 +57,7 @@ a{color:var(--accent)}
 .hero-inner{max-width:var(--container);margin:0 auto;padding:84px 28px 74px}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:24px;align-items:start}
 .eyebrow{display:inline-block;margin:0 0 24px;padding:10px 16px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-h1{margin:0 0 22px;color:#152235;letter-spacing:-0.04em;font-size:clamp(2.8rem, 5.2vw, 5rem);line-height:1.02}
+h1{margin:0 0 22px;color:#152235;letter-spacing:-0.04em;font-size:clamp(2.25rem, 5.2vw, 4.7rem);line-height:1.04}
 .hero-intro{max-width:920px;font-size:clamp(1.16rem, 1.55vw, 1.38rem);color:#38506c;line-height:1.66;margin:0 0 22px}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
 .btn{display:inline-block;padding:14px 18px;border-radius:14px;text-decoration:none;font-weight:800;border:1px solid transparent;transition:.16s ease}
@@ -139,7 +143,7 @@ p{margin:0 0 16px;font-size:1.08rem}
       <a href="/case-studies.html">Case studies</a>
       <a href="/#analizy-systemowe">Analizy</a>
       <a href="/about.html">O mnie</a>
-      <a href="/#kontakt">Kontakt</a>
+      <a href="#kontakt">Kontakt</a>
     </nav>
   </div>
 </header>
@@ -157,7 +161,7 @@ p{margin:0 0 16px;font-size:1.08rem}
           Właśnie tym zajmuje się MMGRESS: znalezieniem rzeczywistej przyczyny, zanim ktoś wyda pieniądze na niewłaściwe rozwiązanie.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#kontakt">Opisz problem w 2–3 zdaniach</a>
+          <a class="btn btn-primary" id="cta-hero-contact" href="#kontakt">Opisz problem w 2–3 zdaniach</a>
           <a class="btn btn-secondary" href="/case-studies.html">Najpierw pokaż przykłady</a>
         </div>
       </div>
@@ -235,7 +239,7 @@ p{margin:0 0 16px;font-size:1.08rem}
         <h2 style="margin-bottom:10px;">Masz podobny przypadek?</h2>
         <p style="margin-bottom:0;">Nie zaczynaj od prezentacji. Zacznij od prostego opisu sytuacji.</p>
       </div>
-      <a class="btn btn-primary" href="#kontakt">Opisz problem teraz</a>
+      <a class="btn btn-primary" id="cta-mid-contact" href="#kontakt">Opisz problem teraz</a>
     </div>
   </section>
 
@@ -313,6 +317,15 @@ function trackKontakt(eventName, label) {
     });
   }
 }
+
+
+document.getElementById('cta-hero-contact')?.addEventListener('click', function() {
+  trackKontakt('kontakt_cta', 'klik_hero_opisz_problem_diagnoza_landing');
+});
+
+document.getElementById('cta-mid-contact')?.addEventListener('click', function() {
+  trackKontakt('kontakt_cta', 'klik_mid_opisz_problem_diagnoza_landing');
+});
 
 document.getElementById('cta-mail')?.addEventListener('click', function() {
   trackKontakt('kontakt_mail', 'klik_mail_diagnoza_landing');
