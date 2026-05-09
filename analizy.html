@@ -9,7 +9,9 @@
 <meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
 <meta name="msvalidate.01" content="AB6274E2F07953E7C1810852FA44FB0D" />
 <link rel="canonical" href="https://mmgress.github.io/analizy.html" />
+
 <title>Analizy systemowe – MMGRESS</title>
+
 <meta property="og:title" content="Analizy systemowe | MMGRESS" />
 <meta property="og:description" content="Teksty o technologii, energetyce, procesach i decyzjach. Ten sam sposób diagnozowania, ale zastosowany do szerszych zjawisk." />
 <meta property="og:type" content="website" />
@@ -17,7 +19,6 @@
 <meta property="og:site_name" content="MMGRESS" />
 <meta name="twitter:card" content="summary" />
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -34,9 +35,14 @@
   --muted:#4d6075;
   --line:#d7e0ea;
   --accent:#204f86;
+  --accent-soft:#e9f1fb;
   --shadow:0 14px 34px rgba(15, 23, 42, 0.06);
   --radius:20px;
   --container:1180px;
+}
+
+*{
+  box-sizing:border-box;
 }
 
 body{
@@ -44,9 +50,12 @@ body{
   font-family:Arial, Helvetica, sans-serif;
   background:var(--bg);
   color:var(--text);
+  line-height:1.72;
 }
 
-a{color:var(--accent)}
+a{
+  color:var(--accent);
+}
 
 .topbar{
   background:#fff;
@@ -68,9 +77,15 @@ a{color:var(--accent)}
   font-weight:800;
   text-decoration:none;
   color:#26354a;
+  letter-spacing:.08em;
 }
 
-.nav{display:flex;flex-wrap:wrap;align-items:center;gap:22px;flex-wrap:wrap}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+}
 
 .nav a{
   text-decoration:none;
@@ -86,78 +101,125 @@ a{color:var(--accent)}
 .hero{
   max-width:var(--container);
   margin:0 auto;
-  padding:60px 28px 30px;
+  padding:64px 28px 42px;
 }
 
 h1{
-  font-size:3rem;
-  margin:0 0 20px;
+  font-size:clamp(2.6rem, 5vw, 4.2rem);
+  line-height:1.05;
+  margin:0 0 22px;
+  letter-spacing:-0.04em;
+  color:#152235;
 }
 
 .hero p{
-  font-size:1.2rem;
+  font-size:1.22rem;
   color:var(--muted);
-  max-width:800px;
-  line-height:1.65;
+  max-width:860px;
+  line-height:1.68;
+  margin:0;
+}
+
+.featured-card{
+  max-width:var(--container);
+  margin:0 auto 30px;
+  padding:0 28px;
 }
 
 .grid{
   max-width:var(--container);
   margin:0 auto;
-  padding:20px 28px 60px;
+  padding:0 28px 70px;
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(2, minmax(0, 1fr));
   gap:24px;
 }
 
 .card{
+  display:block;
+  width:100%;
   background:var(--surface);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:26px;
+  padding:28px;
   box-shadow:var(--shadow);
   text-decoration:none;
   color:inherit;
-  transition:transform .2s ease;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 
 .card:hover{
   transform:translateY(-4px);
+  border-color:#c5d4e5;
+  box-shadow:0 18px 40px rgba(15,23,42,.09);
+}
+
+.featured-card .card{
+  border:2px solid rgba(32,79,134,.22);
+  background:linear-gradient(180deg, #ffffff 0%, #f7fafe 100%);
+  padding:32px;
 }
 
 .tag{
+  display:inline-block;
   font-size:12px;
   font-weight:800;
   color:var(--accent);
-  margin-bottom:10px;
+  margin:0 0 12px;
   text-transform:uppercase;
-  letter-spacing:.08em;
+  letter-spacing:.10em;
 }
 
 .card h3{
-  margin:0 0 10px;
+  margin:0 0 12px;
   font-size:1.6rem;
   line-height:1.2;
+  color:#10233d;
+}
+
+.featured-card .card h3{
+  font-size:clamp(1.9rem, 3vw, 2.45rem);
+  max-width:980px;
 }
 
 .card p{
   color:var(--muted);
-  line-height:1.6;
+  line-height:1.65;
   margin:0;
+  font-size:1.04rem;
 }
 
-
-.featured-card{max-width:var(--container);margin:0 auto 4px;padding:0 28px;}
-.featured-card .card{border:2px solid rgba(32,79,134,.22);background:linear-gradient(180deg, #ffffff 0%, #f7fafe 100%);}
-.featured-card .card h3{font-size:2rem;}
-
 @media(max-width:800px){
+  .topbar-inner{
+    padding:16px 18px;
+  }
+
+  .nav{
+    gap:16px;
+  }
+
+  .hero{
+    padding:46px 18px 30px;
+  }
+
+  .featured-card{
+    padding:0 18px;
+    margin-bottom:22px;
+  }
+
   .grid{
     grid-template-columns:1fr;
+    padding:0 18px 50px;
+  }
+
+  .card,
+  .featured-card .card{
+    padding:24px;
   }
 }
 </style>
 </head>
+
 <body>
 
 <header class="topbar">
@@ -178,7 +240,9 @@ h1{
 <section class="hero">
   <h1>Analizy systemowe</h1>
   <p>
-    To nie są case studies z jednego obiektu. To teksty pokazujące sposób myślenia MMGRESS na szerszych przykładach: technologia, energetyka, dane, AI, organizacja, raporty i decyzje inwestycyjne. Wspólny mianownik jest ten sam: zanim dołożysz rozwiązanie, sprawdź, czy naprawdę rozumiesz system.
+    To nie są case studies z jednego obiektu. To teksty pokazujące sposób myślenia MMGRESS
+    na szerszych przykładach: technologia, energetyka, dane, AI, organizacja, raporty i decyzje inwestycyjne.
+    Wspólny mianownik jest ten sam: zanim dołożysz rozwiązanie, sprawdź, czy naprawdę rozumiesz system.
   </p>
 </section>
 
@@ -186,7 +250,10 @@ h1{
   <a href="/dlaczego-inwestycje-techniczne-nie-dzialaja.html" class="card">
     <div class="tag">Zacznij tutaj</div>
     <h3>Dlaczego inwestycje techniczne często nie rozwiązują problemu</h3>
-    <p>W wielu firmach rozwiązanie pojawia się zbyt wcześnie — zanim problem zostanie dobrze nazwany, zanim dane zostaną osadzone w kontekście i zanim ktoś sprawdzi, czy inwestycja trafia w przyczynę.</p>
+    <p>
+      W wielu firmach rozwiązanie pojawia się zbyt wcześnie — zanim problem zostanie dobrze nazwany,
+      zanim dane zostaną osadzone w kontekście i zanim ktoś sprawdzi, czy inwestycja trafia w przyczynę.
+    </p>
   </a>
 </section>
 
@@ -194,19 +261,28 @@ h1{
   <a href="/firma-traci-systemowo.html" class="card">
     <div class="tag">Zarządzanie</div>
     <h3>Firma nie traci punktowo. Firma traci systemowo.</h3>
-    <p>Ukryte koszty, awarie i przestoje często są skutkiem wcześniejszych decyzji, procesów i zależności, których nikt nie widzi jako całości.</p>
+    <p>
+      Ukryte koszty, awarie i przestoje często są skutkiem wcześniejszych decyzji,
+      procesów i zależności, których nikt nie widzi jako całości.
+    </p>
   </a>
 
   <a href="/dlaczego-raporty-nie-dzialaja.html" class="card">
     <div class="tag">Raporty i dane</div>
     <h3>Dlaczego wiele raportów nie działa</h3>
-    <p>Raport może być poprawny formalnie i jednocześnie prowadzić do złej decyzji, jeżeli opisuje założenia zamiast rzeczywistości.</p>
+    <p>
+      Raport może być poprawny formalnie i jednocześnie prowadzić do złej decyzji,
+      jeżeli opisuje założenia zamiast rzeczywistości.
+    </p>
   </a>
 
   <a href="/film-marsjanin-analiza.html" class="card">
     <div class="tag">Analogia systemowa</div>
     <h3>Botanika wysłali na Marsa… ale nie dali mu świata do pracy</h3>
-    <p>To nie tekst o filmie. To analiza problemu, który regularnie pojawia się w firmach: dobrze dobrana rola bez środowiska do działania.</p>
+    <p>
+      To nie tekst o filmie. To analiza problemu, który regularnie pojawia się w firmach:
+      dobrze dobrana rola bez środowiska do działania.
+    </p>
   </a>
 </section>
 
