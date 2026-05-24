@@ -2,116 +2,100 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mmgress.github.io/</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/diagnoza-problemow.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
-
+  <url>
+    <loc>https://mmgress.github.io/diagnoza-problemow-w-firmie.html</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
   <url>
     <loc>https://mmgress.github.io/case-studies.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/analizy.html</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <priority>0.88</priority>
   </url>
-
-  <url>
-    <loc>https://mmgress.github.io/cpk-gospodarka-orbitalna.html</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.84</priority>
-  </url>
-
-  <url>
-    <loc>https://mmgress.github.io/dlaczego-inwestycje-techniczne-nie-dzialaja.html</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.82</priority>
-  </url>
-
   <url>
     <loc>https://mmgress.github.io/about.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/case-study-energia-bierna-transformator-svg.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/case-study-wtryskarki-zanik-napiecia-ups-lokalny.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/case-study-wtryskarki-falszywy-odczyt-pracy.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.76</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/case-study-wtryskarki-odzysk-czasu-cykli.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.76</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/case-study-pv-brak-fazy.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.72</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/Case-study-precyzja-ciecia-profili.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.72</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/Case-study-wymiana-rozdzielni-bez-wylaczania-obiektu.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.72</priority>
   </url>
-
+  <url>
+    <loc>https://mmgress.github.io/dlaczego-inwestycje-techniczne-nie-dzialaja.html</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
   <url>
     <loc>https://mmgress.github.io/firma-traci-systemowo.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/dlaczego-raporty-nie-dzialaja.html</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.76</priority>
   </url>
-
   <url>
     <loc>https://mmgress.github.io/film-marsjanin-analiza.html</loc>
     <lastmod>2026-05-09</lastmod>
