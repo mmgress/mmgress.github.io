@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="author" content="MMGRESS" />
+<title>MMGRESS / panel rozmowy i wstępnej wyceny</title>
+<meta name="description" content="Wewnętrzny panel roboczy MMGRESS do prowadzenia rozmowy i wstępnej wyceny diagnozy problemu." />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5KZX20JGP7');
+</script>
+
+<style>
+:root{
+  --bg:#f3f6fa;
+  --surface:#ffffff;
+  --surface-soft:#f7f9fc;
+  --text:#172435;
+  --muted:#4d6075;
+  --line:#d7e0ea;
+  --accent:#204f86;
+  --accent-soft:#e9f1fb;
+  --ok:#eef8f3;
+  --ok-line:#cfe8d8;
+  --warn:#fcf6ef;
+  --warn-line:#efd7b8;
+  --danger:#fff1f2;
+  --danger-line:#fecdd3;
+  --shadow:0 14px 34px rgba(15,23,42,.06);
+  --radius:20px;
+  --container:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial, Helvetica, sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+button,input,select,textarea{font:inherit}
+a{color:var(--accent)}
+.topbar{background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
+.topbar-inner{max-width:var(--container);margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{color:#26354a;text-decoration:none;font-size:18px;font-weight:800;letter-spacing:.12em}
+.badge{display:inline-block;padding:8px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.hero{background:radial-gradient(circle at left top, rgba(255,255,255,.88), rgba(255,255,255,0) 34%),linear-gradient(180deg,#f2f6fb 0%,#eaf0f6 100%);border-bottom:1px solid var(--line)}
+.hero-inner{max-width:var(--container);margin:0 auto;padding:52px 28px}
+h1{margin:16px 0 14px;color:#152235;letter-spacing:-0.04em;font-size:clamp(2.1rem,4vw,4rem);line-height:1.04}
+.hero p{max-width:900px;margin:0;color:#38506c;font-size:1.12rem}
+.layout{max-width:var(--container);margin:0 auto;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start}
+.panel,.result-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.panel{padding:28px}
+.result-panel{position:sticky;top:92px;padding:24px}
+.step{border-top:1px solid var(--line);padding:26px 0}
+.step:first-child{border-top:0;padding-top:0}
+.step-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.step-no{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:var(--accent);color:#fff;font-size:.95rem;font-weight:800}
+h2{margin:0;color:#122133;font-size:1.45rem;line-height:1.2;letter-spacing:-0.02em}
+.hint{margin:6px 0 0;color:var(--muted);font-size:.96rem}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{display:grid;gap:7px}
+label,.group-label{font-weight:800;color:#24364c;font-size:.95rem}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);padding:12px 13px;outline:none}
+textarea{min-height:112px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:#a9bfd8;box-shadow:0 0 0 3px rgba(32,79,134,.1)}
+.checks,.radios{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.choice{display:flex;align-items:flex-start;gap:10px;padding:12px 13px;border:1px solid var(--line);border-radius:14px;background:var(--surface-soft);cursor:pointer}
+.choice input{width:auto;margin-top:5px;flex:0 0 auto}
+.choice span{font-size:.98rem;color:#26354a}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.btn{border:1px solid transparent;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:48px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-secondary{background:#fff;color:var(--accent);border-color:var(--line)}
+.btn-soft{background:var(--accent-soft);color:var(--accent);border-color:#d6e5f7}
+.btn:hover{transform:translateY(-1px)}
+.result-level{font-size:1.5rem;line-height:1.15;font-weight:800;color:var(--accent);margin:4px 0 10px}
+.result-box{background:var(--surface-soft);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.result-box.warn{background:var(--warn);border-color:var(--warn-line)}
+.result-box.danger{background:var(--danger);border-color:var(--danger-line)}
+.result-box.ok{background:var(--ok);border-color:var(--ok-line)}
+.result-box h3{margin:0 0 8px;font-size:1.02rem;color:#122133}
+.result-box p{margin:0;color:var(--muted)}
+.price-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.status{margin-top:12px;color:#66788e;font-size:.92rem;min-height:1.4em}
+.summary-preview{white-space:pre-wrap;max-height:280px;overflow:auto;font-size:.92rem;line-height:1.5}
+.footer-note{max-width:var(--container);margin:0 auto 30px;padding:0 28px;color:#66788e;font-size:.92rem}
+@media (max-width:1020px){
+  .layout{grid-template-columns:1fr}
+  .result-panel{position:static}
+}
+@media (max-width:720px){
+  .topbar-inner,.hero-inner,.layout{padding-left:18px;padding-right:18px}
+  .layout{padding-top:20px}
+  .panel,.result-panel{padding:22px}
+  .grid,.checks,.radios{grid-template-columns:1fr}
+  h1{font-size:2rem}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">MMGRESS</a>
+    <span class="badge">Panel wewnętrzny</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="badge">Rozmowa / kwalifikacja / wycena</span>
+    <h1>Panel rozmowy i wstępnej wyceny diagnozy problemu</h1>
+    <p>Narzędzie robocze do uporządkowania rozmowy z firmą, oceny złożoności tematu i przygotowania notatki do dalszej decyzji.</p>
+  </div>
+</section>
+
+<main class="layout">
+  <form class="panel" id="talkForm">
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">1</span>
+        <div>
+          <h2>Dane klienta</h2>
+          <p class="hint">Podstawowe dane do notatki i późniejszego kontaktu.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="field"><label for="company">Nazwa firmy</label><input id="company" name="company" autocomplete="organization" /></div>
+        <div class="field"><label for="person">Imię osoby</label><input id="person" name="person" autocomplete="name" /></div>
+        <div class="field"><label for="role">Stanowisko / rola</label><input id="role" name="role" /></div>
+        <div class="field"><label for="phone">Telefon</label><input id="phone" name="phone" autocomplete="tel" /></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" /></div>
+        <div class="field"><label for="industry">Branża</label><input id="industry" name="industry" /></div>
+        <div class="field"><label for="location">Lokalizacja</label><input id="location" name="location" /></div>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">2</span>
+        <div>
+          <h2>Typ problemu</h2>
+          <p class="hint">Zaznacz wszystko, co pojawia się w rozmowie.</p>
+        </div>
+      </div>
+      <div class="checks" data-group="problemTypes">
+        <label class="choice"><input type="checkbox" name="problemTypes" value="problem techniczny" data-score="1" /><span>problem techniczny</span></label>
+        <label class="choice"><input type="checkbox" name="problemTypes" value="problem procesowy" data-score="1" /><span>problem procesowy</span></label>
+        <label class="choice"><input type="checkbox" name="problemTypes" value="problem energetyczny" data-score="1" /><span>problem energetyczny</span></label>
+        <label class="choice"><input type="checkbox" name="problemTypes" value="problem organizacyjny" data-score="1" /><span>problem organizacyjny</span></label>
+        <label class="choice"><input type="checkbox" name="problemTypes" value="problem z danymi / raportami" data-score="1" /><span>problem z danymi / raportami</span></label>
+        <label class="choice"><input type="checkbox" name="problemTypes" value="przestoje" data-score="2" /><span>przestoje</span></label>
+        <label class="choice"><input type="checkbox" name="problemTypes" value="awarie" data-score="2" /><span>awarie</span></label>
+        <label class="choice"><input type="checkbox" name="problemTypes" value="ukryte koszty" data-score="2" /><span>ukryte koszty</span></label>
+        <label class="choice"><input type="checkbox" name="problemTypes" value="problem wraca mimo napraw" data-score="3" /><span>problem wraca mimo napraw</span></label>
+        <label class="choice"><input type="checkbox" name="problemTypes" value="firma nie wie, gdzie jest przyczyna" data-score="3" /><span>firma nie wie, gdzie jest przyczyna</span></label>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">3</span>
+        <div>
+          <h2>Objaw</h2>
+          <p class="hint">Tu warto zapisać język klienta, nie tylko własną interpretację.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="field"><label for="whatHappens">Co się dzieje</label><textarea id="whatHappens" name="whatHappens"></textarea></div>
+        <div class="field"><label for="whenReturns">Kiedy problem wraca</label><textarea id="whenReturns" name="whenReturns"></textarea></div>
+        <div class="field"><label for="sinceWhen">Od kiedy trwa</label><textarea id="sinceWhen" name="sinceWhen"></textarea></div>
+        <div class="field"><label for="tried">Co już próbowano zrobić</label><textarea id="tried" name="tried"></textarea></div>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">4</span>
+        <div>
+          <h2>Skala problemu</h2>
+          <p class="hint">Skala mocno wpływa na poziom wejścia i ryzyko niedoszacowania.</p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="scale">Skala</label>
+        <select id="scale" name="scale">
+          <option value="">wybierz</option>
+          <option value="mała, lokalna sprawa" data-score="0">mała, lokalna sprawa</option>
+          <option value="problem w jednym obszarze" data-score="1">problem w jednym obszarze</option>
+          <option value="problem wpływa na produkcję / koszty" data-score="3">problem wpływa na produkcję / koszty</option>
+          <option value="problem dotyczy kilku działów" data-score="4">problem dotyczy kilku działów</option>
+          <option value="problem ma znaczenie strategiczne" data-score="5">problem ma znaczenie strategiczne</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">5</span>
+        <div>
+          <h2>Pilność</h2>
+          <p class="hint">Im większa presja czasu, tym ostrożniej trzeba szacować zakres.</p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="urgency">Pilność</label>
+        <select id="urgency" name="urgency">
+          <option value="">wybierz</option>
+          <option value="spokojnie, rozpoznawczo" data-score="0">spokojnie, rozpoznawczo</option>
+          <option value="w tym miesiącu" data-score="1">w tym miesiącu</option>
+          <option value="pilne" data-score="3">pilne</option>
+          <option value="bardzo pilne, firma już traci pieniądze" data-score="5">bardzo pilne, firma już traci pieniądze</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">6</span>
+        <div>
+          <h2>Dane dostępne</h2>
+          <p class="hint">Brak danych nie przekreśla tematu, ale zwykle podnosi niepewność.</p>
+        </div>
+      </div>
+      <div class="checks" data-group="availableData">
+        <label class="choice"><input type="checkbox" name="availableData" value="faktury" data-score="-1" /><span>faktury</span></label>
+        <label class="choice"><input type="checkbox" name="availableData" value="raporty" data-score="-1" /><span>raporty</span></label>
+        <label class="choice"><input type="checkbox" name="availableData" value="pomiary" data-score="-1" /><span>pomiary</span></label>
+        <label class="choice"><input type="checkbox" name="availableData" value="zrzuty z systemów" data-score="-1" /><span>zrzuty z systemów</span></label>
+        <label class="choice"><input type="checkbox" name="availableData" value="dane z produkcji" data-score="-1" /><span>dane z produkcji</span></label>
+        <label class="choice"><input type="checkbox" name="availableData" value="zdjęcia / filmy" data-score="-1" /><span>zdjęcia / filmy</span></label>
+        <label class="choice"><input type="checkbox" name="availableData" value="brak danych, tylko opis sytuacji" data-score="4" /><span>brak danych, tylko opis sytuacji</span></label>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">7</span>
+        <div>
+          <h2>Czy potrzebny wyjazd</h2>
+          <p class="hint">Wyjazd zwykle oznacza inny próg ceny i lepsze doprecyzowanie oczekiwań.</p>
+        </div>
+      </div>
+      <div class="radios">
+        <label class="choice"><input type="radio" name="visit" value="raczej nie" data-score="0" /><span>raczej nie</span></label>
+        <label class="choice"><input type="radio" name="visit" value="możliwe" data-score="1" /><span>możliwe</span></label>
+        <label class="choice"><input type="radio" name="visit" value="prawdopodobnie tak" data-score="3" /><span>prawdopodobnie tak</span></label>
+        <label class="choice"><input type="radio" name="visit" value="koniecznie tak" data-score="5" /><span>koniecznie tak</span></label>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">8</span>
+        <div>
+          <h2>Poziom ryzyka i złożoności</h2>
+          <p class="hint">Ocena własna po rozmowie, nie deklaracja klienta.</p>
+        </div>
+      </div>
+      <div class="radios">
+        <label class="choice"><input type="radio" name="risk" value="niski" data-score="0" /><span>niski</span></label>
+        <label class="choice"><input type="radio" name="risk" value="średni" data-score="2" /><span>średni</span></label>
+        <label class="choice"><input type="radio" name="risk" value="wysoki" data-score="4" /><span>wysoki</span></label>
+        <label class="choice"><input type="radio" name="risk" value="bardzo wysoki" data-score="6" /><span>bardzo wysoki</span></label>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">9</span>
+        <div>
+          <h2>Notatki moje</h2>
+          <p class="hint">Miejsce na ocenę rozmowy, realną intencję klienta i hipotezę przyczyny.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="field"><label for="myImpression">Moje wrażenie</label><textarea id="myImpression" name="myImpression"></textarea></div>
+        <div class="field"><label for="clientUnderstands">Czy klient rozumie problem</label><textarea id="clientUnderstands" name="clientUnderstands"></textarea></div>
+        <div class="field"><label for="freeAdvice">Czy klient szuka diagnozy czy darmowej porady</label><textarea id="freeAdvice" name="freeAdvice"></textarea></div>
+        <div class="field"><label for="budget">Czy ma budżet</label><textarea id="budget" name="budget"></textarea></div>
+        <div class="field"><label for="decisionMaker">Czy jest decyzyjny</label><textarea id="decisionMaker" name="decisionMaker"></textarea></div>
+        <div class="field"><label for="realCause">Co może być prawdziwą przyczyną</label><textarea id="realCause" name="realCause"></textarea></div>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-header">
+        <span class="step-no">10</span>
+        <div>
+          <h2>Ręczna korekta ceny</h2>
+          <p class="hint">Kwoty robocze, widoczne tylko w panelu wewnętrznym i notatce.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="field"><label for="priceMin">Cena minimalna</label><input id="priceMin" name="priceMin" placeholder="np. 1500 zł" /></div>
+        <div class="field"><label for="priceProposed">Cena proponowana</label><input id="priceProposed" name="priceProposed" placeholder="np. 3500 zł" /></div>
+        <div class="field"><label for="priceTarget">Cena docelowa</label><input id="priceTarget" name="priceTarget" placeholder="np. 6000 zł" /></div>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="calculateBtn">Przelicz</button>
+        <button type="button" class="btn btn-secondary" id="copyBtn">Kopiuj podsumowanie</button>
+        <button type="button" class="btn btn-soft" id="mailBtn">Wyślij notatkę mailem</button>
+      </div>
+      <p class="status" id="status"></p>
+    </section>
+  </form>
+
+  <aside class="result-panel" aria-live="polite">
+    <span class="badge">Wynik</span>
+    <div class="result-level" id="resultLevel">Poziom A — szybka konsultacja</div>
+    <div class="result-box ok">
+      <h3>Sugerowany typ wejścia</h3>
+      <p id="entryType">Krótka rozmowa porządkująca i decyzja, czy temat wymaga diagnozy.</p>
+    </div>
+    <div class="result-box">
+      <h3>Sugerowany zakres</h3>
+      <p id="scopeText">Opis problemu, szybkie doprecyzowanie i wskazanie najbliższego sensownego kroku.</p>
+    </div>
+    <div class="result-box">
+      <h3>Sugerowany poziom ceny</h3>
+      <p id="priceText">Niski próg wejścia. Ręcznie dopisz kwoty po rozmowie.</p>
+      <div class="price-grid">
+        <p><strong>Min:</strong> <span id="priceMinOut">-</span></p>
+        <p><strong>Proponowana:</strong> <span id="priceProposedOut">-</span></p>
+        <p><strong>Docelowa:</strong> <span id="priceTargetOut">-</span></p>
+      </div>
+    </div>
+    <div class="result-box warn" id="warningBox">
+      <h3>Ostrzeżenie</h3>
+      <p id="warningText">Brak ostrzeżenia. Temat wygląda na możliwy do wstępnego rozpoznania.</p>
+    </div>
+    <div class="result-box">
+      <h3>Następny krok</h3>
+      <p id="nextStep">Poprosić o krótki opis sytuacji i ustalić, czy wystarczy konsultacja, czy potrzebna jest analiza danych.</p>
+    </div>
+    <div class="result-box">
+      <h3>Podsumowanie</h3>
+      <p class="summary-preview" id="summaryPreview"></p>
+    </div>
+  </aside>
+</main>
+
+<p class="footer-note">Dane zapisują się lokalnie w tej przeglądarce. Panel nie wysyła nic do backendu i nie korzysta z zewnętrznych bibliotek.</p>
+
+<script>
+const form = document.getElementById('talkForm');
+const storageKey = 'mmgress_panel_rozmowy_7q4_last_note';
+const statusEl = document.getElementById('status');
+
+const levels = [
+  {
+    max: 6,
+    level: 'Poziom A — szybka konsultacja',
+    entry: 'Krótka rozmowa porządkująca i decyzja, czy temat wymaga diagnozy.',
+    scope: 'Opis problemu, szybkie doprecyzowanie i wskazanie najbliższego sensownego kroku.',
+    price: 'Niski próg wejścia. Dobre, gdy problem jest lokalny, mało pilny i są podstawowe dane.',
+    next: 'Poprosić o krótki opis sytuacji i ustalić, czy wystarczy konsultacja, czy potrzebna jest analiza danych.'
+  },
+  {
+    max: 12,
+    level: 'Poziom B — analiza wstępna',
+    entry: 'Analiza wstępna na podstawie opisu, danych i krótkiego doprecyzowania.',
+    scope: 'Uporządkowanie objawu, sprawdzenie założeń, wskazanie brakujących danych i hipotez przyczyny.',
+    price: 'Średni próg wejścia. Cena powinna uwzględniać czas na przejrzenie materiałów i przygotowanie wniosku.',
+    next: 'Poprosić o dostępne raporty, faktury, pomiary lub zrzuty i ustalić zakres analizy wstępnej.'
+  },
+  {
+    max: 19,
+    level: 'Poziom C — diagnoza rozszerzona',
+    entry: 'Rozszerzona diagnoza problemu z analizą układu, zależności i ryzyk decyzyjnych.',
+    scope: 'Analiza danych, procesu, odpowiedzialności, pomiarów i wpływu problemu na koszty lub produkcję.',
+    price: 'Wyższy poziom ceny. Temat nie powinien być sprzedawany jako tania konsultacja.',
+    next: 'Ustalić listę danych, osoby po stronie klienta i ramę diagnozy przed podaniem ceny.'
+  },
+  {
+    max: 26,
+    level: 'Poziom D — wizyta diagnostyczna',
+    entry: 'Diagnoza z dużym prawdopodobieństwem wymaga wyjazdu, oględzin lub rozmów z kilkoma osobami.',
+    scope: 'Przygotowanie przed wizytą, oględziny, rozmowy, weryfikacja danych i wskazanie mechanizmu problemu.',
+    price: 'Wysoki poziom ceny. Wycena powinna obejmować przygotowanie, wyjazd, czas na miejscu i wnioski.',
+    next: 'Ustalić lokalizację, osoby do rozmowy, dostęp do danych i minimalny zakres wizyty diagnostycznej.'
+  },
+  {
+    max: Infinity,
+    level: 'Poziom E — pełna diagnoza z raportem',
+    entry: 'Pełna diagnoza z raportem i wnioskiem decyzyjnym dla problemu szerokiego, pilnego albo strategicznego.',
+    scope: 'Diagnoza techniczna, procesowa i organizacyjna z opisem mechanizmu, ryzyk, decyzji i rekomendowanego następnego kroku.',
+    price: 'Najwyższy poziom ceny. Wymaga jasnej granicy zakresu, harmonogramu i potwierdzenia decyzyjności.',
+    next: 'Nie zaczynać od taniej konsultacji. Zaproponować płatny etap rozpoznawczy albo pełną diagnozę z raportem.'
+  }
+];
+
+function selectedValues(name) {
+  return [...form.querySelectorAll(`[name="${name}"]:checked`)].map(input => input.value);
+}
+
+function fieldValue(name) {
+  const el = form.elements[name];
+  if (!el) return '';
+  if (el instanceof RadioNodeList) {
+    return el.value || '';
+  }
+  return el.value || '';
+}
+
+function scoreSelect(name) {
+  const select = form.elements[name];
+  const option = select?.selectedOptions?.[0];
+  return Number(option?.dataset?.score || 0);
+}
+
+function scoreChecked(name) {
+  return [...form.querySelectorAll(`[name="${name}"]:checked`)]
+    .reduce((sum, input) => sum + Number(input.dataset.score || 0), 0);
+}
+
+function scoreRadio(name) {
+  const input = form.querySelector(`[name="${name}"]:checked`);
+  return Number(input?.dataset?.score || 0);
+}
+
+function calculate() {
+  let score = 0;
+  score += scoreChecked('problemTypes');
+  score += scoreSelect('scale');
+  score += scoreSelect('urgency');
+  score += scoreChecked('availableData');
+  score += scoreRadio('visit');
+  score += scoreRadio('risk');
+  score = Math.max(0, score);
+
+  const level = levels.find(item => score <= item.max);
+  const problemTypes = selectedValues('problemTypes');
+  const availableData = selectedValues('availableData');
+  const broadTopic = problemTypes.length >= 5 || score >= 20;
+  const noData = availableData.includes('brak danych, tylko opis sytuacji');
+  const highUrgency = fieldValue('urgency').includes('bardzo pilne') || fieldValue('urgency') === 'pilne';
+  const productionImpact = fieldValue('scale').includes('produkcję') || fieldValue('scale').includes('kilku działów') || fieldValue('scale').includes('strategiczne');
+  const visitLikely = ['prawdopodobnie tak', 'koniecznie tak'].includes(fieldValue('visit'));
+
+  document.getElementById('resultLevel').textContent = level.level;
+  document.getElementById('entryType').textContent = level.entry;
+  document.getElementById('scopeText').textContent = level.scope;
+  document.getElementById('priceText').textContent = level.price;
+  document.getElementById('nextStep').textContent = level.next;
+  document.getElementById('priceMinOut').textContent = fieldValue('priceMin') || '-';
+  document.getElementById('priceProposedOut').textContent = fieldValue('priceProposed') || '-';
+  document.getElementById('priceTargetOut').textContent = fieldValue('priceTarget') || '-';
+
+  const warningBox = document.getElementById('warningBox');
+  const warningText = document.getElementById('warningText');
+  if (broadTopic && (highUrgency || productionImpact || visitLikely || noData)) {
+    warningBox.className = 'result-box danger';
+    warningText.textContent = 'Temat jest zbyt szeroki albo zbyt ryzykowny na tanią konsultację. Najpierw trzeba ograniczyć zakres, ustalić dane wejściowe i potwierdzić, kto podejmuje decyzję.';
+  } else if (noData || highUrgency || productionImpact) {
+    warningBox.className = 'result-box warn';
+    warningText.textContent = 'Wycena wymaga ostrożności. Jest ryzyko, że opis nie pokaże rzeczywistej złożoności, więc lepiej zaproponować etap wstępny niż obiecywać prostą odpowiedź.';
+  } else {
+    warningBox.className = 'result-box ok';
+    warningText.textContent = 'Brak mocnego ostrzeżenia. Temat wygląda na możliwy do wstępnego rozpoznania.';
+  }
+
+  const summary = buildSummary(score, warningText.textContent);
+  document.getElementById('summaryPreview').textContent = summary;
+  saveState();
+  return { score, summary };
+}
+
+function buildSummary(score, warning) {
+  const lines = [
+    'MMGRESS / notatka z rozmowy',
+    '',
+    'DANE KLIENTA',
+    `Firma: ${fieldValue('company') || '-'}`,
+    `Osoba: ${fieldValue('person') || '-'}`,
+    `Rola: ${fieldValue('role') || '-'}`,
+    `Telefon: ${fieldValue('phone') || '-'}`,
+    `Email: ${fieldValue('email') || '-'}`,
+    `Branża: ${fieldValue('industry') || '-'}`,
+    `Lokalizacja: ${fieldValue('location') || '-'}`,
+    '',
+    'TYP PROBLEMU',
+    selectedValues('problemTypes').join(', ') || '-',
+    '',
+    'OBJAW',
+    `Co się dzieje: ${fieldValue('whatHappens') || '-'}`,
+    `Kiedy problem wraca: ${fieldValue('whenReturns') || '-'}`,
+    `Od kiedy trwa: ${fieldValue('sinceWhen') || '-'}`,
+    `Co próbowano zrobić: ${fieldValue('tried') || '-'}`,
+    '',
+    'SKALA / PILNOŚĆ / DANE',
+    `Skala: ${fieldValue('scale') || '-'}`,
+    `Pilność: ${fieldValue('urgency') || '-'}`,
+    `Dane dostępne: ${selectedValues('availableData').join(', ') || '-'}`,
+    `Wyjazd: ${fieldValue('visit') || '-'}`,
+    `Ryzyko i złożoność: ${fieldValue('risk') || '-'}`,
+    '',
+    'NOTATKI MOJE',
+    `Moje wrażenie: ${fieldValue('myImpression') || '-'}`,
+    `Czy klient rozumie problem: ${fieldValue('clientUnderstands') || '-'}`,
+    `Diagnoza czy darmowa porada: ${fieldValue('freeAdvice') || '-'}`,
+    `Budżet: ${fieldValue('budget') || '-'}`,
+    `Decyzyjność: ${fieldValue('decisionMaker') || '-'}`,
+    `Możliwa prawdziwa przyczyna: ${fieldValue('realCause') || '-'}`,
+    '',
+    'WYNIK',
+    `Punktacja robocza: ${score}`,
+    `Sugerowany poziom: ${document.getElementById('resultLevel').textContent}`,
+    `Typ wejścia: ${document.getElementById('entryType').textContent}`,
+    `Zakres: ${document.getElementById('scopeText').textContent}`,
+    `Poziom ceny: ${document.getElementById('priceText').textContent}`,
+    `Ostrzeżenie: ${warning}`,
+    `Następny krok: ${document.getElementById('nextStep').textContent}`,
+    '',
+    'RĘCZNA KOREKTA CENY',
+    `Cena minimalna: ${fieldValue('priceMin') || '-'}`,
+    `Cena proponowana: ${fieldValue('priceProposed') || '-'}`,
+    `Cena docelowa: ${fieldValue('priceTarget') || '-'}`
+  ];
+  return lines.join('\n');
+}
+
+function formDataObject() {
+  const data = {};
+  [...form.elements].forEach(el => {
+    if (!el.name) return;
+    if (el.type === 'checkbox') {
+      data[el.name] = selectedValues(el.name);
+    } else if (el.type === 'radio') {
+      data[el.name] = fieldValue(el.name);
+    } else {
+      data[el.name] = el.value;
+    }
+  });
+  return data;
+}
+
+function restoreState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    Object.entries(saved).forEach(([name, value]) => {
+      if (Array.isArray(value)) {
+        form.querySelectorAll(`[name="${name}"]`).forEach(input => {
+          input.checked = value.includes(input.value);
+        });
+      } else {
+        const fields = form.querySelectorAll(`[name="${name}"]`);
+        fields.forEach(input => {
+          if (input.type === 'radio') input.checked = input.value === value;
+          else input.value = value;
+        });
+      }
+    });
+  } catch (error) {
+    statusEl.textContent = 'Nie udało się odczytać ostatniej notatki z localStorage.';
+  }
+}
+
+function saveState() {
+  localStorage.setItem(storageKey, JSON.stringify(formDataObject()));
+}
+
+function setStatus(text) {
+  statusEl.textContent = text;
+  window.clearTimeout(setStatus.timeout);
+  setStatus.timeout = window.setTimeout(() => {
+    statusEl.textContent = '';
+  }, 3200);
+}
+
+document.getElementById('calculateBtn').addEventListener('click', () => {
+  calculate();
+  setStatus('Przeliczono wynik i zapisano notatkę lokalnie.');
+});
+
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  const { summary } = calculate();
+  try {
+    await navigator.clipboard.writeText(summary);
+    setStatus('Podsumowanie skopiowane do schowka.');
+  } catch (error) {
+    setStatus('Nie udało się skopiować automatycznie. Zaznacz tekst podsumowania ręcznie.');
+  }
+});
+
+document.getElementById('mailBtn').addEventListener('click', () => {
+  const { summary } = calculate();
+  const company = fieldValue('company') || 'bez nazwy firmy';
+  const subject = `MMGRESS / notatka z rozmowy / ${company}`;
+  const href = `mailto:mmgress@proton.me?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary)}`;
+  window.location.href = href;
+});
+
+form.addEventListener('input', () => {
+  saveState();
+  calculate();
+});
+
+form.addEventListener('change', () => {
+  saveState();
+  calculate();
+});
+
+restoreState();
+calculate();
+</script>
+</body>
+</html>
