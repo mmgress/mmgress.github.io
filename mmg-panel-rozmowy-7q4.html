@@ -84,6 +84,8 @@ input:focus,select:focus,textarea:focus{border-color:#a9bfd8;box-shadow:0 0 0 3p
 .result-box h3{margin:0 0 8px;font-size:1.02rem;color:#122133}
 .result-box p{margin:0;color:var(--muted)}
 .price-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.calc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0}
+.small-note{margin:8px 0 0;color:#66788e;font-size:.9rem}
 .status{margin-top:12px;color:#66788e;font-size:.92rem;min-height:1.4em}
 .summary-preview{white-space:pre-wrap;max-height:280px;overflow:auto;font-size:.92rem;line-height:1.5}
 .footer-note{max-width:var(--container);margin:0 auto 30px;padding:0 28px;color:#66788e;font-size:.92rem}
@@ -96,6 +98,7 @@ input:focus,select:focus,textarea:focus{border-color:#a9bfd8;box-shadow:0 0 0 3p
   .layout{padding-top:20px}
   .panel,.result-panel{padding:22px}
   .grid,.checks,.radios{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
   h1{font-size:2rem}
 }
 </style>
@@ -289,10 +292,16 @@ input:focus,select:focus,textarea:focus{border-color:#a9bfd8;box-shadow:0 0 0 3p
       <div class="step-header">
         <span class="step-no">10</span>
         <div>
-          <h2>Ręczna korekta ceny</h2>
-          <p class="hint">Kwoty robocze, widoczne tylko w panelu wewnętrznym i notatce.</p>
+          <h2>Wycena i dojazd</h2>
+          <p class="hint">Panel liczy propozycję ceny netto oraz orientacyjny koszt dojazdu z Katowic. Kwoty ręczne zostają jako korekta robocza.</p>
         </div>
       </div>
+      <div class="calc-grid">
+        <div class="field"><label for="manualKmOneWay">Km w jedną stronę, jeśli miasto nieznane</label><input id="manualKmOneWay" name="manualKmOneWay" type="number" min="0" step="1" placeholder="np. 85" /></div>
+        <div class="field"><label for="manualDriveHoursOneWay">Godziny w jedną stronę, opcjonalnie</label><input id="manualDriveHoursOneWay" name="manualDriveHoursOneWay" type="number" min="0" step="0.25" placeholder="np. 1.5" /></div>
+        <div class="field"><label for="priceAdjustment">Korekta ceny bazowej netto</label><input id="priceAdjustment" name="priceAdjustment" type="number" step="100" placeholder="np. 500 lub -300" /></div>
+      </div>
+      <p class="small-note">Dojazd: km w jedną stronę × 2 × 1,50 zł netto. Czas: każda rozpoczęta godzina dojazdu i powrotu × 75 zł netto.</p>
       <div class="grid">
         <div class="field"><label for="priceMin">Cena minimalna</label><input id="priceMin" name="priceMin" placeholder="np. 1500 zł" /></div>
         <div class="field"><label for="priceProposed">Cena proponowana</label><input id="priceProposed" name="priceProposed" placeholder="np. 3500 zł" /></div>
@@ -321,6 +330,15 @@ input:focus,select:focus,textarea:focus{border-color:#a9bfd8;box-shadow:0 0 0 3p
     <div class="result-box">
       <h3>Sugerowany poziom ceny</h3>
       <p id="priceText">Niski próg wejścia. Ręcznie dopisz kwoty po rozmowie.</p>
+      <div class="price-grid">
+        <p><strong>Baza netto:</strong> <span id="autoBaseOut">-</span></p>
+        <p><strong>Dojazd netto:</strong> <span id="travelCostOut">-</span></p>
+        <p><strong>Sugerowana suma netto:</strong> <span id="autoTotalOut">-</span></p>
+        <p><strong>Odległość:</strong> <span id="distanceOut">-</span></p>
+      </div>
+    </div>
+    <div class="result-box">
+      <h3>Ręczna korekta ceny</h3>
       <div class="price-grid">
         <p><strong>Min:</strong> <span id="priceMinOut">-</span></p>
         <p><strong>Proponowana:</strong> <span id="priceProposedOut">-</span></p>
@@ -356,6 +374,7 @@ const levels = [
     entry: 'Krótka rozmowa porządkująca i decyzja, czy temat wymaga diagnozy.',
     scope: 'Opis problemu, szybkie doprecyzowanie i wskazanie najbliższego sensownego kroku.',
     price: 'Niski próg wejścia. Dobre, gdy problem jest lokalny, mało pilny i są podstawowe dane.',
+    base: { min: 750, proposed: 1200, target: 1800 },
     next: 'Poprosić o krótki opis sytuacji i ustalić, czy wystarczy konsultacja, czy potrzebna jest analiza danych.'
   },
   {
@@ -364,6 +383,7 @@ const levels = [
     entry: 'Analiza wstępna na podstawie opisu, danych i krótkiego doprecyzowania.',
     scope: 'Uporządkowanie objawu, sprawdzenie założeń, wskazanie brakujących danych i hipotez przyczyny.',
     price: 'Średni próg wejścia. Cena powinna uwzględniać czas na przejrzenie materiałów i przygotowanie wniosku.',
+    base: { min: 1500, proposed: 2500, target: 3500 },
     next: 'Poprosić o dostępne raporty, faktury, pomiary lub zrzuty i ustalić zakres analizy wstępnej.'
   },
   {
@@ -372,6 +392,7 @@ const levels = [
     entry: 'Rozszerzona diagnoza problemu z analizą układu, zależności i ryzyk decyzyjnych.',
     scope: 'Analiza danych, procesu, odpowiedzialności, pomiarów i wpływu problemu na koszty lub produkcję.',
     price: 'Wyższy poziom ceny. Temat nie powinien być sprzedawany jako tania konsultacja.',
+    base: { min: 3500, proposed: 5500, target: 8000 },
     next: 'Ustalić listę danych, osoby po stronie klienta i ramę diagnozy przed podaniem ceny.'
   },
   {
@@ -380,6 +401,7 @@ const levels = [
     entry: 'Diagnoza z dużym prawdopodobieństwem wymaga wyjazdu, oględzin lub rozmów z kilkoma osobami.',
     scope: 'Przygotowanie przed wizytą, oględziny, rozmowy, weryfikacja danych i wskazanie mechanizmu problemu.',
     price: 'Wysoki poziom ceny. Wycena powinna obejmować przygotowanie, wyjazd, czas na miejscu i wnioski.',
+    base: { min: 5500, proposed: 8500, target: 12000 },
     next: 'Ustalić lokalizację, osoby do rozmowy, dostęp do danych i minimalny zakres wizyty diagnostycznej.'
   },
   {
@@ -388,9 +410,46 @@ const levels = [
     entry: 'Pełna diagnoza z raportem i wnioskiem decyzyjnym dla problemu szerokiego, pilnego albo strategicznego.',
     scope: 'Diagnoza techniczna, procesowa i organizacyjna z opisem mechanizmu, ryzyk, decyzji i rekomendowanego następnego kroku.',
     price: 'Najwyższy poziom ceny. Wymaga jasnej granicy zakresu, harmonogramu i potwierdzenia decyzyjności.',
+    base: { min: 9000, proposed: 14000, target: 22000 },
     next: 'Nie zaczynać od taniej konsultacji. Zaproponować płatny etap rozpoznawczy albo pełną diagnozę z raportem.'
   }
 ];
+
+const originCity = { name: 'Katowice', lat: 50.2649, lon: 19.0238 };
+const cityCoords = {
+  'katowice': [50.2649, 19.0238],
+  'chorzow': [50.2976, 18.9546],
+  'sosnowiec': [50.2863, 19.1041],
+  'gliwice': [50.2945, 18.6714],
+  'zabrze': [50.3249, 18.7857],
+  'tychy': [50.1372, 18.9664],
+  'bytom': [50.3480, 18.9328],
+  'dabrowa gornicza': [50.3217, 19.1949],
+  'krakow': [50.0647, 19.9450],
+  'czestochowa': [50.8118, 19.1203],
+  'bielsko biala': [49.8224, 19.0584],
+  'opole': [50.6751, 17.9213],
+  'wroclaw': [51.1079, 17.0385],
+  'lodz': [51.7592, 19.4560],
+  'warszawa': [52.2297, 21.0122],
+  'poznan': [52.4064, 16.9252],
+  'gdansk': [54.3520, 18.6466],
+  'gdynia': [54.5189, 18.5305],
+  'szczecin': [53.4285, 14.5528],
+  'rzeszow': [50.0412, 21.9991],
+  'kielce': [50.8661, 20.6286],
+  'lublin': [51.2465, 22.5684],
+  'bialystok': [53.1325, 23.1688],
+  'olsztyn': [53.7784, 20.4801],
+  'torun': [53.0138, 18.5984],
+  'bydgoszcz': [53.1235, 18.0084],
+  'zielona gora': [51.9356, 15.5062],
+  'radom': [51.4027, 21.1471],
+  'plock': [52.5463, 19.7065],
+  'tarnow': [50.0121, 20.9858],
+  'nowy sacz': [49.6175, 20.7153],
+  'zakopane': [49.2992, 19.9496]
+};
 
 function selectedValues(name) {
   return [...form.querySelectorAll(`[name="${name}"]:checked`)].map(input => input.value);
@@ -421,6 +480,114 @@ function scoreRadio(name) {
   return Number(input?.dataset?.score || 0);
 }
 
+function money(value) {
+  return `${Math.round(value).toLocaleString('pl-PL')} zł netto`;
+}
+
+function normalizeText(value) {
+  return (value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/ł/g, 'l')
+    .replace(/[^a-z0-9\s-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function findDestination(locationText) {
+  const normalized = normalizeText(locationText);
+  if (!normalized) return null;
+  const cityName = Object.keys(cityCoords)
+    .sort((a, b) => b.length - a.length)
+    .find(city => normalized.includes(city));
+  if (!cityName) return null;
+  const [lat, lon] = cityCoords[cityName];
+  return { cityName, lat, lon };
+}
+
+function distanceKm(from, to) {
+  const r = 6371;
+  const toRad = value => value * Math.PI / 180;
+  const dLat = toRad(to.lat - from.lat);
+  const dLon = toRad(to.lon - from.lon);
+  const lat1 = toRad(from.lat);
+  const lat2 = toRad(to.lat);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+  return 2 * r * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function calculateTravel() {
+  const manualKm = Number(fieldValue('manualKmOneWay'));
+  const manualHours = Number(fieldValue('manualDriveHoursOneWay'));
+  const destination = findDestination(fieldValue('location'));
+  let kmOneWay = manualKm > 0 ? manualKm : 0;
+  let source = manualKm > 0 ? 'ręcznie' : '';
+
+  if (!kmOneWay && destination) {
+    kmOneWay = Math.round(distanceKm(originCity, destination) * 1.18);
+    source = `orientacyjnie: Katowice - ${destination.cityName}`;
+  }
+
+  if (!kmOneWay) {
+    return {
+      known: false,
+      kmOneWay: 0,
+      roundTripKm: 0,
+      driveHoursTotal: 0,
+      billableHours: 0,
+      kmCost: 0,
+      timeCost: 0,
+      total: 0,
+      source: 'brak rozpoznanego miasta lub ręcznie wpisanych km'
+    };
+  }
+
+  const roundTripKm = Math.round(kmOneWay * 2);
+  const driveHoursOneWay = manualHours > 0 ? manualHours : Math.max(0.25, kmOneWay / 65);
+  const driveHoursTotal = driveHoursOneWay * 2;
+  const billableHours = Math.ceil(driveHoursTotal);
+  const kmCost = roundTripKm * 1.5;
+  const timeCost = billableHours * 75;
+  return {
+    known: true,
+    kmOneWay: Math.round(kmOneWay),
+    roundTripKm,
+    driveHoursTotal,
+    billableHours,
+    kmCost,
+    timeCost,
+    total: kmCost + timeCost,
+    source
+  };
+}
+
+function calculateAutoPrice(level, travel) {
+  const adjustment = Number(fieldValue('priceAdjustment')) || 0;
+  const visitValue = fieldValue('visit');
+  const includeTravel = travel.known && ['możliwe', 'prawdopodobnie tak', 'koniecznie tak'].includes(visitValue);
+  const travelCost = includeTravel ? travel.total : 0;
+  const base = {
+    min: Math.max(0, level.base.min + adjustment),
+    proposed: Math.max(0, level.base.proposed + adjustment),
+    target: Math.max(0, level.base.target + adjustment)
+  };
+  return {
+    base,
+    includeTravel,
+    travelCost,
+    total: {
+      min: base.min + travelCost,
+      proposed: base.proposed + travelCost,
+      target: base.target + travelCost
+    }
+  };
+}
+
+function priceRangeText(price) {
+  return `min ${money(price.min)} / proponowana ${money(price.proposed)} / docelowa ${money(price.target)}`;
+}
+
 function calculate() {
   let score = 0;
   score += scoreChecked('problemTypes');
@@ -445,6 +612,18 @@ function calculate() {
   document.getElementById('scopeText').textContent = level.scope;
   document.getElementById('priceText').textContent = level.price;
   document.getElementById('nextStep').textContent = level.next;
+  const travel = calculateTravel();
+  const autoPrice = calculateAutoPrice(level, travel);
+  document.getElementById('autoBaseOut').textContent = priceRangeText(autoPrice.base);
+  document.getElementById('travelCostOut').textContent = travel.known
+    ? `${money(travel.total)} (${Math.round(travel.kmCost).toLocaleString('pl-PL')} zł km + ${Math.round(travel.timeCost).toLocaleString('pl-PL')} zł czas)`
+    : 'brak danych do obliczenia';
+  document.getElementById('autoTotalOut').textContent = autoPrice.includeTravel
+    ? priceRangeText(autoPrice.total)
+    : `${priceRangeText(autoPrice.total)} (bez doliczonego dojazdu)`;
+  document.getElementById('distanceOut').textContent = travel.known
+    ? `${travel.kmOneWay} km w jedną stronę, ${travel.roundTripKm} km razem, ok. ${travel.driveHoursTotal.toFixed(1).replace('.', ',')} h jazdy, ${travel.billableHours} h rozliczeniowo; ${travel.source}`
+    : travel.source;
   document.getElementById('priceMinOut').textContent = fieldValue('priceMin') || '-';
   document.getElementById('priceProposedOut').textContent = fieldValue('priceProposed') || '-';
   document.getElementById('priceTargetOut').textContent = fieldValue('priceTarget') || '-';
@@ -462,13 +641,13 @@ function calculate() {
     warningText.textContent = 'Brak mocnego ostrzeżenia. Temat wygląda na możliwy do wstępnego rozpoznania.';
   }
 
-  const summary = buildSummary(score, warningText.textContent);
+  const summary = buildSummary(score, warningText.textContent, travel, autoPrice);
   document.getElementById('summaryPreview').textContent = summary;
   saveState();
-  return { score, summary };
+  return { score, summary, travel, autoPrice };
 }
 
-function buildSummary(score, warning) {
+function buildSummary(score, warning, travel, autoPrice) {
   const lines = [
     'MMGRESS / notatka z rozmowy',
     '',
@@ -511,10 +690,18 @@ function buildSummary(score, warning) {
     `Typ wejścia: ${document.getElementById('entryType').textContent}`,
     `Zakres: ${document.getElementById('scopeText').textContent}`,
     `Poziom ceny: ${document.getElementById('priceText').textContent}`,
+    `Automatyczna baza netto: ${priceRangeText(autoPrice.base)}`,
+    `Odległość: ${travel.known ? `${travel.kmOneWay} km w jedną stronę / ${travel.roundTripKm} km razem / ${travel.billableHours} h rozliczeniowo / ${travel.source}` : travel.source}`,
+    `Koszt dojazdu netto: ${travel.known ? money(travel.total) : '-'}`,
+    `Czy doliczono dojazd do sumy: ${autoPrice.includeTravel ? 'tak' : 'nie'}`,
+    `Sugerowana suma netto: ${priceRangeText(autoPrice.total)}`,
     `Ostrzeżenie: ${warning}`,
     `Następny krok: ${document.getElementById('nextStep').textContent}`,
     '',
     'RĘCZNA KOREKTA CENY',
+    `Km w jedną stronę ręcznie: ${fieldValue('manualKmOneWay') || '-'}`,
+    `Godziny w jedną stronę ręcznie: ${fieldValue('manualDriveHoursOneWay') || '-'}`,
+    `Korekta ceny bazowej netto: ${fieldValue('priceAdjustment') || '-'}`,
     `Cena minimalna: ${fieldValue('priceMin') || '-'}`,
     `Cena proponowana: ${fieldValue('priceProposed') || '-'}`,
     `Cena docelowa: ${fieldValue('priceTarget') || '-'}`
