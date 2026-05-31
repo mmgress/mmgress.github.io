@@ -1,1 +1,254 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Testowa strona Auralion: ciche systemy PVT i pompy ciepla bez jednostki zewnetrznej, projektowane od problemu klienta.">
+    <title>Auralion | Cieplo, ktore nie przeszkadza w zyciu</title>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="Auralion - poczatek strony">
+        <span class="brand-mark">A</span>
+        <span>
+          <strong>Auralion</strong>
+          <small>systemy ciepla PVT</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" data-nav>
+        <a href="#dla-kogo">Dla kogo</a>
+        <a href="#diagnoza">Diagnoza</a>
+        <a href="#proces">Proces</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </header>
 
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-image" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=2100&q=82" alt="Panele na dachu domu jednorodzinnego">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Auralion / koncepcja testowa Elspect</p>
+          <h1 id="hero-title">Nowoczesne ogrzewanie, ktore nie przeszkadza w zyciu</h1>
+          <p class="hero-lead">Bez halasu na elewacji. Bez wymuszonych odwiertow tam, gdzie nie maja sensu. System projektowany od tego, co Ciebie realnie blokuje: kosztow, ograniczen dzialki, komfortu, zabytku albo odpowiedzialnosci za duzy obiekt.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#diagnoza">Sprawdz swoj przypadek</a>
+            <a class="button ghost" href="#proces">Zobacz jak pracujemy</a>
+          </div>
+          <div class="hero-facts" aria-label="Najwazniejsze cechy">
+            <span>Pompa bez jednostki zewnetrznej</span>
+            <span>PVT jako dolne zrodlo lub wsparcie</span>
+            <span>Audyt techniczny przed obietnica</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro-band" aria-label="Problem klienta">
+        <div class="container intro-grid">
+          <div>
+            <p class="eyebrow">Nie zaczynamy od urzadzenia</p>
+            <h2>Zaczynamy od pytania: co dzisiaj nie daje Ci spokoju?</h2>
+          </div>
+          <p>Inaczej rozmawia sie z wlascicielem domu, ktory nie zniesie halasu jednostki zewnetrznej. Inaczej z inwestorem, ktory chcial gruntowa pompe ciepla, ale geologia albo konserwator zabraly mu prosta droge. Inaczej z zakladem, w ktorym koszt energii albo przestoj szybko robi sie problemem zarzadu.</p>
+        </div>
+      </section>
+
+      <section id="dla-kogo" class="section">
+        <div class="container section-head">
+          <p class="eyebrow">Kohorty zamiast sredniego klienta</p>
+          <h2>Wybierz sytuacje, ktora jest najblizej Twojej</h2>
+          <p>Nie musisz znac technologii PVT. Wystarczy, ze rozpoznajesz swoj problem. Reszta zaczyna sie od diagnozy.</p>
+        </div>
+
+        <div class="container cohort-layout">
+          <div class="cohort-list" role="listbox" aria-label="Lista kohort klientow" data-cohort-list></div>
+          <article class="cohort-panel" data-cohort-panel aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section id="diagnoza" class="section diagnostic-section">
+        <div class="container diagnostic-grid">
+          <div class="diagnostic-copy">
+            <p class="eyebrow">Krotka diagnoza przed rozmowa</p>
+            <h2>Powiedz, gdzie jest Twoj noz na gardle</h2>
+            <p>Ten formularz nie udaje wyceny. Pomaga nam nie zaczynac rozmowy od katalogu, tylko od ograniczen, ktore decyduja o sensie systemu.</p>
+            <div class="mini-proof">
+              <strong>Po wyslaniu wiemy:</strong>
+              <span>czy rozmawiamy o redukcji kosztow, braku halasu, braku odwiertow, premium komforcie czy ciaglosci pracy obiektu.</span>
+            </div>
+          </div>
+
+          <form class="diagnostic-card" data-diagnostic-form>
+            <label>
+              Co najlepiej opisuje Twoja sytuacje?
+              <select name="case" data-case-select required></select>
+            </label>
+
+            <fieldset>
+              <legend>Co jest najwiekszym ograniczeniem?</legend>
+              <label class="check"><input type="checkbox" name="limits" value="Nie chce halasu ani jednostki zewnetrznej"> Nie chce halasu ani jednostki zewnetrznej</label>
+              <label class="check"><input type="checkbox" name="limits" value="Odwierty sa niemozliwe lub ograniczone"> Odwierty sa niemozliwe lub ograniczone</label>
+              <label class="check"><input type="checkbox" name="limits" value="Obecne rachunki sa za wysokie"> Obecne rachunki sa za wysokie</label>
+              <label class="check"><input type="checkbox" name="limits" value="Obiekt ma wymogi formalne lub konserwatorskie"> Obiekt ma wymogi formalne lub konserwatorskie</label>
+            </fieldset>
+
+            <div class="range-row">
+              <label for="urgency">Pilnosc tematu</label>
+              <input id="urgency" name="urgency" type="range" min="1" max="5" value="3" data-urgency>
+              <output data-urgency-output>3 / 5</output>
+            </div>
+
+            <label>
+              Krotko opisz obiekt
+              <textarea name="message" rows="4" placeholder="Dom 180 m2, obecnie pompa gruntowa, 2 odwierty, rachunki rosna..."></textarea>
+            </label>
+
+            <label>
+              E-mail lub telefon
+              <input name="contact" type="text" placeholder="np. biuro@firma.pl lub numer telefonu" required>
+            </label>
+
+            <button class="button primary wide" type="submit">Przygotuj wiadomosc do audytu</button>
+            <p class="form-note">Po kliknieciu otworzy sie gotowa wiadomosc e-mail. Na stronie testowej nie zapisujemy danych.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section solution-section">
+        <div class="container split">
+          <div>
+            <p class="eyebrow">Logika systemu</p>
+            <h2>Dach, pompa, magazyn i monitoring maja pracowac jako jedna decyzja</h2>
+            <p>System PVT ma sens wtedy, gdy poprawia prace ogrzewania, stabilizuje koszty i usuwa konkretna przeszkode inwestora. Nie sprzedajemy go jako drozszej fotowoltaiki.</p>
+          </div>
+          <div class="flow" aria-label="Schemat systemu">
+            <div class="flow-node roof">Dach PVT</div>
+            <div class="flow-line"></div>
+            <div class="flow-node pump">Pompa ciepla</div>
+            <div class="flow-line"></div>
+            <div class="flow-node home">Komfort w obiekcie</div>
+            <div class="flow-side">
+              <span>Magazyn energii</span>
+              <span>Taryfy dynamiczne</span>
+              <span>Monitoring Elspect</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="proces" class="section process-section">
+        <div class="container section-head">
+          <p class="eyebrow">Proces zamiast obietnicy</p>
+          <h2>Od rozmowy do decyzji technicznej</h2>
+          <p>Przy drogich systemach klient nie potrzebuje presji. Potrzebuje pewnosci, ze ktos dobrze rozumie jego sytuacje.</p>
+        </div>
+        <div class="container process-grid">
+          <article>
+            <span>01</span>
+            <h3>Rozpoznanie problemu</h3>
+            <p>Pytamy o rachunki, zrodlo ciepla, dach, dzialke, halas, formalnosci i cel inwestycji. To filtruje przypadki, w ktorych system nie ma sensu.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Audyt i ograniczenia</h3>
+            <p>Sprawdzamy miejsce montazu, hydraulike, elektryke, mozliwosc rozbudowy, magazyn energii i warunki pracy pompy.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Dwa warianty decyzji</h3>
+            <p>Pokazujemy wariant startowy i wariant pelny. Klient widzi, co dostaje teraz, co mozna rozbudowac i gdzie lezy ryzyko.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Realizacja z checklistami</h3>
+            <p>Listy kontrolne, zdjecia przed/po, odbior, ppoz. tam gdzie trzeba, monitoring i serwis. Porzadek jest czescia produktu.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section compare-section">
+        <div class="container compare-grid">
+          <div>
+            <p class="eyebrow">Kiedy to ma sens</p>
+            <h2>Nie dla kazdego domu. Dla konkretnych sytuacji.</h2>
+          </div>
+          <div class="compare-table" role="table" aria-label="Porownanie sytuacji">
+            <div role="row" class="table-head">
+              <span role="columnheader">Jesli dzisiaj...</span>
+              <span role="columnheader">Szukasz raczej...</span>
+            </div>
+            <div role="row">
+              <span>Masz gruntowa pompe, ale koszty sa za wysokie</span>
+              <span>Wsparcia dolnego zrodla, pomiarow i optymalizacji pracy</span>
+            </div>
+            <div role="row">
+              <span>Nie mozesz wykonac odwiertow</span>
+              <span>Alternatywy dla klasycznej gruntowki bez jednostki zewnetrznej</span>
+            </div>
+            <div role="row">
+              <span>Nie chcesz powietrznej pompy ciepla</span>
+              <span>Cichego systemu, ktory nie psuje elewacji i komfortu</span>
+            </div>
+            <div role="row">
+              <span>Zarzadzasz hotelem, basenem, SPA, przemyslem lub obiektem publicznym</span>
+              <span>Audytu kosztow, ciaglosci pracy i sterowania energia jako procesem</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq-section">
+        <div class="container section-head">
+          <p class="eyebrow">Bez wciskania</p>
+          <h2>Pytania, ktore zwykle padaja na poczatku</h2>
+        </div>
+        <div class="container faq-list" data-faq-list>
+          <details open>
+            <summary>Czy to jest lepsza fotowoltaika?</summary>
+            <p>Nie w tej narracji. PVT traktujemy jako element systemu grzewczego i energetycznego: ma wspierac prace pompy, komfort i przewidywalnosc kosztow. Sama produkcja pradu nie jest glownym powodem wyboru.</p>
+          </details>
+          <details>
+            <summary>Czy mozna obiecac oszczednosci przed audytem?</summary>
+            <p>Nie uczciwie. Mozna wskazac kierunek i potencjal, ale skala zalezy od obiektu, obecnego zrodla ciepla, izolacji, taryf, magazynu energii i sposobu uzytkowania.</p>
+          </details>
+          <details>
+            <summary>Co jesli mam malo miejsca na odwierty?</summary>
+            <p>To jeden z przypadkow, dla ktorych warto rozmawiac. Sprawdzamy, czy PVT moze ograniczyc potrzebe klasycznego dolnego zrodla albo dac sensowna alternatywe dla ukladu gruntowego.</p>
+          </details>
+          <details>
+            <summary>Czy obiekty zabytkowe sa dobrym kierunkiem?</summary>
+            <p>Moga byc, bo halas, wyglad elewacji i formalnosci czesto sa tam wazniejsze niz sama cena urzadzenia. W takim przypadku zaczynamy od ograniczen konserwatorskich i estetyki.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="kontakt" class="section contact-section">
+        <div class="container contact-panel">
+          <div>
+            <p class="eyebrow">Pierwszy krok</p>
+            <h2>Nie wysylaj zapytania “ile kosztuje pompa”. Wyslij problem, ktory ma zniknac.</h2>
+            <p>Najlepsza rozmowa zaczyna sie od diagnozy: co masz, czego nie mozesz zrobic, czego nie chcesz zaakceptowac i jaki wynik ma byc widoczny po sezonie.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="button primary" href="mailto:biuro@elspect.pl?subject=Auralion%20-%20audyt%20systemu%20PVT">Napisz do Elspect</a>
+            <a class="button ghost dark" href="https://elspect.pl" target="_blank" rel="noreferrer">Elspect.pl</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <p><strong>Auralion</strong> - strona testowa do walidacji komunikacji i kohort.</p>
+        <p>Technologia, zakres i parametry wymagaja potwierdzenia w audycie technicznym.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
