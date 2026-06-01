@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="pl" data-theme="day">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ELSPECT Group — moc bierna, kompensacja, monitoring, wykonawstwo techniczne</title>
+  <meta name="description" content="ELSPECT Group pomaga firmom rozwiązywać problemy z mocą bierną, kosztami energii, jakością zasilania, kompensacją, monitoringiem, wykonawstwem technicznym i przygotowaniem założeń do przetargów.">
+  <meta name="theme-color" content="#eaf7ff">
+
+  <style>
+    :root {
+      --bg: #f4fbff;
+      --bg2: #ffffff;
+      --card: #ffffff;
+      --text: #112033;
+      --muted: #607086;
+      --soft: #e7f1f8;
+      --line: rgba(17, 32, 51, .11);
+      --primary: #157ea8;
+      --primary2: #34b6d4;
+      --green: #2ab884;
+      --yellow: #f2b84b;
+      --shadow: 0 18px 50px rgba(17, 32, 51, .09);
+      --radius: 24px;
+      --max: 1180px;
+      --font: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    html[data-theme="night"] {
+      --bg: #081421;
+      --bg2: #0d1d2e;
+      --card: #10263a;
+      --text: #f1f8ff;
+      --muted: #b8c9d9;
+      --soft: rgba(255,255,255,.07);
+      --line: rgba(255,255,255,.12);
+      --primary: #5dd4ff;
+      --primary2: #8bffd7;
+      --green: #8bffd7;
+      --yellow: #ffd27a;
+      --shadow: 0 18px 50px rgba(0,0,0,.28);
+    }
+
+    html[data-weather="cloudy"] {
+      --bg: #eef5f8;
+      --bg2: #f9fcfd;
+      --primary: #267fa0;
+      --primary2: #7fc7d8;
+    }
+
+    html[data-theme="night"][data-weather="cloudy"] {
+      --bg: #0a111b;
+      --bg2: #101b27;
+      --primary: #8fc6e8;
+      --primary2: #aec8d8;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(52,182,212,.20), transparent 32rem),
+        radial-gradient(circle at 90% 10%, rgba(42,184,132,.13), transparent 30rem),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      font-size: 14px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.45);
+      backdrop-filter: blur(12px);
+    }
+    html[data-theme="night"] .topbar { background: rgba(8,20,33,.7); }
+    .topbar .wrap { min-height: 42px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .topbar__items { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+    .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--green); box-shadow: 0 0 18px var(--green); }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+    html[data-theme="night"] .header { background: rgba(8,20,33,.84); }
+    .nav { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .03em; }
+    .brand__mark { width: 42px; height: 42px; border-radius: 15px; display: grid; place-items: center; background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; box-shadow: var(--shadow); }
+    .brand__text span { display: block; font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .07em; margin-top: -3px; }
+    .links { display: flex; gap: 20px; color: var(--muted); font-size: 15px; }
+    .links a:hover { color: var(--primary); }
+    .nav__right { display: flex; gap: 10px; align-items: center; }
+    .menu { display: none; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn--primary { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; box-shadow: var(--shadow); }
+    .btn--ghost { background: var(--soft); color: var(--text); border-color: var(--line); }
+    .btn--dark { background: var(--text); color: var(--bg2); }
+    html[data-theme="night"] .btn--dark { background: #fff; color: #081421; }
+
+    .theme-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .hero { padding: 76px 0 68px; }
+    .hero__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(350px, .95fr); gap: 44px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--muted); font-weight: 800; font-size: 14px; }
+    h1, h2, h3 { margin: 0; line-height: 1.08; letter-spacing: -.04em; }
+    h1 { margin-top: 22px; font-size: clamp(40px, 6vw, 72px); }
+    .lead { margin: 24px 0 0; max-width: 760px; font-size: clamp(18px, 2vw, 22px); color: var(--muted); }
+    .lead strong { color: var(--text); }
+    .hero__actions { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .proofs { margin-top: 34px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .proof { padding: 17px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .proof strong { display: block; font-size: 24px; color: var(--primary); }
+    .proof span { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.35; }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 22px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .panel__top { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+    .traffic { display: flex; gap: 7px; }
+    .traffic i { width: 10px; height: 10px; border-radius: 50%; background: var(--primary2); }
+    .traffic i:nth-child(1) { background: #ff7777; }
+    .traffic i:nth-child(2) { background: var(--yellow); }
+    .panel__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .metric { padding: 18px; border-radius: 22px; background: var(--soft); border: 1px solid var(--line); min-height: 140px; }
+    .metric--wide { grid-column: 1 / -1; }
+    .metric small { display: flex; justify-content: space-between; color: var(--muted); font-weight: 800; gap: 10px; }
+    .metric strong { display: block; margin-top: 16px; font-size: 30px; line-height: 1; }
+    .metric p { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+    .badge { display: inline-flex; padding: 6px 9px; border-radius: 999px; font-size: 12px; font-weight: 900; background: rgba(42,184,132,.14); color: var(--green); white-space: nowrap; }
+    .badge--warn { background: rgba(242,184,75,.16); color: var(--yellow); }
+    .bars { height: 58px; margin-top: 16px; display: flex; align-items: end; gap: 7px; }
+    .bars i { flex: 1; border-radius: 999px 999px 5px 5px; background: linear-gradient(180deg, var(--primary), rgba(21,126,168,.18)); }
+
+    .section { padding: 78px 0; }
+    .section--white { background: rgba(255,255,255,.52); }
+    html[data-theme="night"] .section--white { background: rgba(255,255,255,.03); }
+    .head { display: grid; grid-template-columns: minmax(0, .85fr) minmax(300px, .65fr); gap: 34px; align-items: end; margin-bottom: 34px; }
+    .kicker { margin: 0 0 12px; color: var(--primary); font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    h2 { font-size: clamp(32px, 4.5vw, 56px); }
+    .section__text { margin: 0; color: var(--muted); font-size: 18px; }
+
+    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { padding: 25px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .icon { width: 44px; height: 44px; border-radius: 15px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(21,126,168,.15), rgba(42,184,132,.14)); color: var(--primary); font-weight: 900; }
+    .card h3 { margin-top: 18px; font-size: 24px; }
+    .card p { color: var(--muted); margin: 13px 0 0; }
+    .tags { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag { padding: 7px 10px; border-radius: 999px; background: var(--soft); color: var(--primary); font-weight: 800; font-size: 13px; }
+
+    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service { min-height: 290px; display: flex; flex-direction: column; }
+    .service .tags { margin-top: auto; }
+
+    .integrator { display: grid; grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr); gap: 28px; align-items: center; }
+    .steps { display: grid; gap: 12px; }
+    .step { display: grid; grid-template-columns: 54px 1fr; gap: 14px; padding: 16px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .step b { width: 54px; height: 54px; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, var(--primary), var(--primary2)); color: white; }
+    .step strong { display: block; line-height: 1.25; }
+    .step span { display: block; color: var(--muted); margin-top: 4px; }
+
+    .process { display: grid; gap: 14px; counter-reset: p; }
+    .process-row { counter-increment: p; display: grid; grid-template-columns: 80px minmax(0,.55fr) minmax(0,.8fr); gap: 20px; align-items: center; padding: 22px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .process-row:before { content: counter(p, decimal-leading-zero); width: 60px; height: 60px; border-radius: 20px; display: grid; place-items: center; background: var(--soft); color: var(--primary); font-weight: 950; font-size: 22px; }
+    .process-row h3 { font-size: 25px; }
+    .process-row p { margin: 0; color: var(--muted); }
+
+    .contact-grid { display: grid; grid-template-columns: minmax(0,.85fr) minmax(360px,1fr); gap: 24px; align-items: start; }
+    .contact-list { display: grid; gap: 12px; margin-top: 22px; }
+    .contact-list a, .contact-list div { display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: 17px; background: var(--soft); color: var(--muted); }
+    .form { display: grid; gap: 14px; margin-top: 18px; }
+    .field { display: grid; gap: 7px; }
+    .field label { font-size: 14px; font-weight: 900; }
+    .field input, .field select, .field textarea { width: 100%; border: 1px solid var(--line); border-radius: 16px; padding: 14px; background: var(--bg2); color: var(--text); outline: none; }
+    .field textarea { min-height: 125px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(21,126,168,.13); }
+    .note { color: var(--muted); font-size: 13px; margin: 0; }
+    .status { display: none; padding: 12px 14px; border-radius: 14px; background: rgba(42,184,132,.13); color: var(--green); font-weight: 800; }
+
+    .footer { padding: 30px 0; border-top: 1px solid var(--line); color: var(--muted); }
+    .footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1020px) {
+      .hero__grid, .integrator, .contact-grid { grid-template-columns: 1fr; }
+      .problem-grid, .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .head { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 780px) {
+      .links { position: fixed; top: 119px; left: 20px; right: 20px; display: none; flex-direction: column; padding: 12px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); box-shadow: var(--shadow); }
+      .links.open { display: flex; }
+      .links a { padding: 12px; border-radius: 14px; }
+      .menu { display: inline-flex; }
+      .nav__right .btn { display: none; }
+      .proofs, .problem-grid, .service-grid, .panel__grid { grid-template-columns: 1fr; }
+      .metric--wide { grid-column: auto; }
+      .process-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 540px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      .hero { padding: 54px 0; }
+      .section { padding: 60px 0; }
+      .brand__text span { display: none; }
+      .hero__actions .btn { width: 100%; }
+      .topbar .wrap { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="topbar__items"><span class="dot"></span><span>Moc bierna • kompensacja • monitoring • wykonawstwo techniczne</span></div>
+      <div class="topbar__items">
+        <a href="tel:+48697568747">+48 697 568 747</a>
+        <a href="mailto:biuro@elspect.pl">biuro@elspect.pl</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="wrap nav">
+      <a class="brand" href="#start" aria-label="ELSPECT Group">
+        <span class="brand__mark">E</span>
+        <span class="brand__text">ELSPECT GROUP <span>technika • energia • wykonawstwo</span></span>
+      </a>
+
+      <nav class="links" id="links" aria-label="Nawigacja">
+        <a href="#problemy">Problemy</a>
+        <a href="#uslugi">Usługi</a>
+        <a href="#integrator">Integrator</a>
+        <a href="#proces">Proces</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <div class="nav__right">
+        <button class="theme-btn" id="themeBtn" type="button" title="Zmień tryb jasny/nocny">☀</button>
+        <a class="btn btn--primary" href="#kontakt">Opisz problem</a>
+        <button class="btn btn--ghost menu" id="menuBtn" type="button">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="start">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Najpierw dane, pomiar i obliczenia. Potem urządzenie.</div>
+          <h1>Moc bierna, kompensacja, monitoring i wykonawstwo techniczne dla firm.</h1>
+          <p class="lead">Chcecie kupić kompensator, zrobić przetarg, ograniczyć opłaty za energię bierną albo wyjaśnić problemy z jakością zasilania? <strong>Najpierw sprawdzamy dane, liczymy, mierzymy i określamy zasady techniczne.</strong> Dopiero później dobieramy urządzenia, organizujemy wykonanie i odbieramy efekt.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#kontakt">Wyślij problem techniczny</a>
+            <a class="btn btn--ghost" href="#uslugi">Zobacz zakres</a>
+          </div>
+          <div class="proofs">
+            <div class="proof"><strong>Analiza</strong><span>faktury, profile 15-minutowe, moc umowna, energia bierna</span></div>
+            <div class="proof"><strong>Pomiary</strong><span>jakość energii, harmoniczne, obciążenie, zdarzenia</span></div>
+            <div class="proof"><strong>Wdrożenie</strong><span>kompensacja, monitoring, modernizacja, odbiór techniczny</span></div>
+          </div>
+        </div>
+
+        <aside class="panel" aria-label="Panel diagnostyczny">
+          <div class="panel__top">
+            <div class="traffic"><i></i><i></i><i></i></div>
+            <span>ELSPECT / analiza techniczna</span>
+          </div>
+          <div class="panel__grid">
+            <div class="metric">
+              <small><span>moc bierna</span><span class="badge badge--warn">sprawdzić</span></small>
+              <strong>ind. + poj.</strong>
+              <p>Nie każdy kompensator rozwiąże problem. Czasem najpierw trzeba ustalić, skąd bierze się koszt.</p>
+            </div>
+            <div class="metric">
+              <small><span>profil obciążenia</span><span class="badge">15 min</span></small>
+              <strong>dane</strong>
+              <p>Profile pracy obiektu mówią więcej niż pojedyncza faktura albo oględziny rozdzielni.</p>
+            </div>
+            <div class="metric metric--wide">
+              <small><span>monitoring / alarmy / raport</span><span class="badge">ciągłość</span></small>
+              <div class="bars" aria-hidden="true">
+                <i style="height:26%"></i><i style="height:46%"></i><i style="height:38%"></i><i style="height:78%"></i><i style="height:55%"></i><i style="height:88%"></i><i style="height:49%"></i><i style="height:68%"></i><i style="height:34%"></i>
+              </div>
+              <p>Stała obserwacja pozwala reagować wcześniej, a nie dopiero po awarii lub kolejnej fakturze.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section--white" id="problemy">
+      <div class="wrap">
+        <div class="head reveal">
+          <div>
+            <p class="kicker">Konkretne problemy</p>
+            <h2>Klient ma od razu widzieć, że dobrze trafił.</h2>
+          </div>
+          <p class="section__text">Strona główna prowadzi po sytuacjach, które klient realnie rozpoznaje: opłaty za energię bierną, dobór kompensatora, przetarg techniczny, pomiary jakości zasilania, monitoring obiektu albo modernizacja instalacji.</p>
+        </div>
+
+        <div class="problem-grid">
+          <article class="card reveal"><div class="icon">Q</div><h3>Macie opłaty za moc bierną?</h3><p>Sprawdzamy faktury, profile pracy i miejsce pomiaru. Dopiero potem określamy, czy potrzebny jest kompensator, regulacja czy inna zmiana.</p></article>
+          <article class="card reveal"><div class="icon">Σ</div><h3>Chcecie kupić kompensator?</h3><p>Najpierw trzeba ustalić, czy problem jest indukcyjny, pojemnościowy, mieszany, okresowy, związany z PV, transformatorem albo pracą urządzeń.</p></article>
+          <article class="card reveal"><div class="icon">∴</div><h3>Robicie przetarg?</h3><p>Przygotowujemy założenia techniczne, zakres, wymagania pomiarowe i sposób weryfikacji efektu, żeby przetarg nie był zakupem w ciemno.</p></article>
+          <article class="card reveal"><div class="icon">↯</div><h3>Są zaniki, zapady lub dziwne awarie?</h3><p>Rejestrujemy jakość energii, obciążenie i zdarzenia. Szukamy przyczyny, a nie tylko objawu zgłoszonego przez użytkowników.</p></article>
+          <article class="card reveal"><div class="icon">24</div><h3>Potrzebujecie monitoringu?</h3><p>Monitorujemy kompensację, obciążenia, przekroczenia mocy, rozdzielnie i wybrane parametry sieci. Alerty i raporty są podstawą decyzji.</p></article>
+          <article class="card reveal"><div class="icon">✓</div><h3>Trzeba uporządkować instalację?</h3><p>Modernizacja, wymiana, nastawy, dokumentacja, odbiór, koordynacja wykonawców i techniczne prowadzenie tematu od początku do końca.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="uslugi">
+      <div class="wrap">
+        <div class="head reveal">
+          <div>
+            <p class="kicker">Co dostajesz</p>
+            <h2>Techniczny zakres prac, który prowadzi do decyzji.</h2>
+          </div>
+          <p class="section__text">Nie zaczynamy od sprzedaży urządzenia. Zaczynamy od danych, pomiaru i celu klienta. Efektem ma być konkretny zakres działania, oferta lub decyzja, że dana inwestycja nie ma sensu.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="card service reveal"><div class="icon">01</div><h3>Analiza faktur i profili</h3><p>Energia czynna, bierna indukcyjna, bierna pojemnościowa, moc umowna, przekroczenia, profile 15-minutowe i wzorzec pracy obiektu.</p><div class="tags"><span class="tag">faktury</span><span class="tag">profile</span><span class="tag">koszty</span></div></article>
+          <article class="card service reveal"><div class="icon">02</div><h3>Pomiary jakości energii</h3><p>Napięcia, prądy, harmoniczne, asymetria, zapady, zaniki, obciążenia, rejestracja zdarzeń i raport z wnioskami.</p><div class="tags"><span class="tag">THD</span><span class="tag">zapady</span><span class="tag">obciążenie</span></div></article>
+          <article class="card service reveal"><div class="icon">03</div><h3>Kompensacja mocy biernej</h3><p>Dobór baterii, SVG, hybrydy, przekładników, regulatora, miejsca montażu, sposobu sterowania i weryfikacji efektu.</p><div class="tags"><span class="tag">SVG</span><span class="tag">baterie</span><span class="tag">tg φ</span></div></article>
+          <article class="card service reveal"><div class="icon">04</div><h3>Monitoring energetyczny</h3><p>Stała obserwacja parametrów pracy obiektu, kompensacji, przekroczeń mocy, alarmów i trendów eksploatacyjnych.</p><div class="tags"><span class="tag">alerty</span><span class="tag">raporty</span><span class="tag">24/7</span></div></article>
+          <article class="card service reveal"><div class="icon">05</div><h3>Założenia do przetargów</h3><p>Opis wymagań technicznych, minimalnych parametrów, pomiarów odbiorczych, gwarancji efektu i kryteriów porównania ofert.</p><div class="tags"><span class="tag">SIWZ</span><span class="tag">zakres</span><span class="tag">odbiór</span></div></article>
+          <article class="card service reveal"><div class="icon">06</div><h3>Wykonawstwo i koordynacja</h3><p>Organizacja prac, dobór specjalistów, nadzór, harmonogram, dokumentacja, uruchomienie i przekazanie rozwiązania do eksploatacji.</p><div class="tags"><span class="tag">nadzór</span><span class="tag">montaż</span><span class="tag">odbiór</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white" id="integrator">
+      <div class="wrap integrator">
+        <div class="reveal">
+          <p class="kicker">ELSPECT Group</p>
+          <h2>Jesteśmy firmą wykonawczo-integratorską. Prowadzimy temat od analizy do odbioru.</h2>
+          <p class="section__text" style="margin-top:18px">ELSPECT Group pozostaje firmą techniczną. Naszą rolą jest zrozumieć problem, policzyć go, dobrać rozwiązanie, ustalić wymagania i poprowadzić wdrożenie. Część prac wykonujemy bezpośrednio, część przez sprawdzonych specjalistów i partnerów, ale klient dostaje jeden techniczny punkt prowadzenia tematu: analizę, dobór, koordynację, nadzór i odbiór.</p>
+        </div>
+        <div class="steps reveal">
+          <div class="step"><b>1</b><div><strong>Rozpoznajemy problem techniczny</strong><span>Ustalamy, czy przyczyną są opłaty, układ pomiarowy, kompensacja, jakość zasilania, obciążenie, nastawy czy eksploatacja.</span></div></div>
+          <div class="step"><b>2</b><div><strong>Liczymy i mierzymy</strong><span>Faktury, profile, pomiary, dobór, warianty, sens ekonomiczny i ryzyko techniczne.</span></div></div>
+          <div class="step"><b>3</b><div><strong>Organizujemy wykonanie</strong><span>Dobór urządzeń, wykonawców, harmonogram, dokumentacja, nadzór i odbiór techniczny.</span></div></div>
+          <div class="step"><b>4</b><div><strong>Zostawiamy efekt i dokumentację</strong><span>Raport, zalecenia, historia pomiarów, potwierdzenie działania i jasny następny krok.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proces">
+      <div class="wrap">
+        <div class="head reveal">
+          <div>
+            <p class="kicker">Jak pracujemy</p>
+            <h2>Prosty proces techniczny bez kupowania w ciemno.</h2>
+          </div>
+          <p class="section__text">Klient ma wiedzieć, co dostaje na każdym etapie. Nie zaczynamy od „proszę kupić urządzenie”, tylko od ustalenia, czy urządzenie rzeczywiście rozwiązuje właściwy problem.</p>
+        </div>
+        <div class="process">
+          <div class="process-row reveal"><h3>Rozmowa techniczna</h3><p>Krótko ustalamy objawy, koszty, obiekt, historię problemu i cel decyzji.</p></div>
+          <div class="process-row reveal"><h3>Dane i dokumenty</h3><p>Faktury, profile 15-minutowe, zdjęcia rozdzielni, schematy, informacje o transformatorach, PV i istniejącej kompensacji.</p></div>
+          <div class="process-row reveal"><h3>Pomiar lub analiza</h3><p>Rejestrujemy pracę obiektu albo wykonujemy analizę danych, jeśli pomiar nie jest jeszcze konieczny.</p></div>
+          <div class="process-row reveal"><h3>Dobór i zakres</h3><p>Przygotowujemy rozwiązanie, warianty, wymagania techniczne, budżet i sposób potwierdzenia efektu.</p></div>
+          <div class="process-row reveal"><h3>Wdrożenie i odbiór</h3><p>Organizujemy wykonanie, uruchomienie, pomiary sprawdzające, dokumentację i zalecenia eksploatacyjne.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white" id="kontakt">
+      <div class="wrap contact-grid">
+        <div class="card reveal">
+          <p class="kicker">Kontakt</p>
+          <h2>Opisz problem albo wyślij faktury do wstępnej oceny.</h2>
+          <p class="section__text" style="margin-top:16px">Najlepiej napisz, co się dzieje, od kiedy, jakie są koszty lub objawy, czy masz faktury, profile 15-minutowe, zdjęcia rozdzielni, raporty z pomiarów albo informacje o istniejącej kompensacji.</p>
+          <div class="contact-list">
+            <a href="tel:+48697568747"><span class="icon">☎</span><span>+48 697 568 747</span></a>
+            <a href="mailto:biuro@elspect.pl"><span class="icon">@</span><span>biuro@elspect.pl</span></a>
+            <div><span class="icon">⌂</span><span>ul. Małopanewska 18, 54-212 Wrocław</span></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3>Formularz szybkiego opisu</h3>
+          <form class="form" id="contactForm" data-email="biuro@elspect.pl">
+            <div class="field"><label for="name">Imię i firma</label><input id="name" name="name" placeholder="np. Jan Kowalski, Zakład Produkcyjny" required></div>
+            <div class="field"><label for="contact">E-mail lub telefon</label><input id="contact" name="contact" placeholder="np. jan@firma.pl / +48 ..." required></div>
+            <div class="field"><label for="topic">Temat</label><select id="topic" name="topic"><option>Opłaty za moc bierną</option><option>Dobór kompensatora</option><option>Pomiary jakości energii</option><option>Monitoring obiektu</option><option>Założenia do przetargu</option><option>Modernizacja / wykonawstwo</option><option>Inny problem techniczny</option></select></div>
+            <div class="field"><label for="message">Co się dzieje?</label><textarea id="message" name="message" placeholder="Opisz objawy, koszty, miejsce, historię problemu i co już było sprawdzane." required></textarea></div>
+            <p class="note">Formularz statyczny otwiera gotową wiadomość e-mail. Na serwerze można później podłączyć normalną wysyłkę.</p>
+            <div class="status" id="formStatus">Przygotowuję wiadomość e-mail...</div>
+            <button class="btn btn--dark" type="submit">Przygotuj wiadomość</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="brand"><span class="brand__mark">E</span><span class="brand__text">ELSPECT GROUP <span>technika • energia • wykonawstwo</span></span></div>
+      <div>© <span id="year"></span> ELSPECT Group Sp. z o.o. · <a href="mailto:biuro@elspect.pl">biuro@elspect.pl</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const menuBtn = document.getElementById('menuBtn');
+    const links = document.getElementById('links');
+    const year = document.getElementById('year');
+    const form = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+
+    year.textContent = new Date().getFullYear();
+
+    function setInitialTheme() {
+      const saved = localStorage.getItem('elspectTheme');
+      const hour = new Date().getHours();
+      const theme = saved || (hour >= 7 && hour < 19 ? 'day' : 'night');
+      html.dataset.theme = theme;
+      themeBtn.textContent = theme === 'night' ? '☾' : '☀';
+      const weather = hour >= 7 && hour < 19 ? 'clear' : 'night';
+      html.dataset.weather = weather;
+    }
+
+    setInitialTheme();
+
+    themeBtn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'night' ? 'day' : 'night';
+      html.dataset.theme = next;
+      localStorage.setItem('elspectTheme', next);
+      themeBtn.textContent = next === 'night' ? '☾' : '☀';
+    });
+
+    menuBtn.addEventListener('click', () => {
+      links.classList.toggle('open');
+      menuBtn.textContent = links.classList.contains('open') ? 'Zamknij' : 'Menu';
+    });
+
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        links.classList.remove('open');
+        menuBtn.textContent = 'Menu';
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const recipientEmail = form.dataset.email || 'biuro@elspect.pl';
+      const subject = encodeURIComponent('Zapytanie ze strony ELSPECT — ' + data.get('topic'));
+      const body = encodeURIComponent(
+        'Imię i firma: ' + data.get('name') + '\n' +
+        'Kontakt: ' + data.get('contact') + '\n' +
+        'Temat: ' + data.get('topic') + '\n\n' +
+        'Opis sytuacji:\n' + data.get('message') + '\n\n' +
+        'Wysłane ze strony ELSPECT.'
+      );
+      formStatus.style.display = 'block';
+      window.location.href = 'mailto:' + recipientEmail + '?subject=' + subject + '&body=' + body;
+    });
+  </script>
+</body>
+</html>
