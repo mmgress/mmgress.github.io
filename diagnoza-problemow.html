@@ -3,26 +3,29 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="MMGRESS – diagnoza problemów technicznych, procesowych i energetycznych w firmach produkcyjnych. Gdy wszystko wygląda dobrze, a wynik się nie zgadza, trzeba znaleźć prawdziwą przyczynę." />
+<meta name="description" content="Rozpoznanie MMGRESS – sprawdzenie rzeczywistych przyczyn strat, kosztów, awarii i problemów w obszarze energii, zasilania oraz infrastruktury technicznej, zanim firma wyda pieniądze na niewłaściwe rozwiązanie." />
 <meta name="robots" content="index, follow" />
 <meta name="author" content="MMGRESS" />
 <meta name="msvalidate.01" content="DDE4A69FE43DC7B1E971D9ED36974FBC" />
 <meta name="msvalidate.01" content="AB6274E2F07953E7C1810852FA44FB0D" />
 <link rel="canonical" href="https://mmgress.github.io/diagnoza-problemow.html" />
-<title>Diagnoza problemów w firmach produkcyjnych | MMGRESS</title>
-<meta property="og:title" content="Diagnoza problemów w firmach produkcyjnych | MMGRESS" />
-<meta property="og:description" content="Gdy wszystko wygląda dobrze, a wynik się nie zgadza, problem często leży na styku technologii, procesu, energii i organizacji." />
+<title>Rozpoznanie MMGRESS – sprawdzenie przyczyn strat i problemów technicznych</title>
+<meta property="og:title" content="Rozpoznanie MMGRESS – sprawdzenie przyczyn strat i problemów technicznych" />
+<meta property="og:description" content="Zanim firma kupi rozwiązanie, warto sprawdzić, czy problem został dobrze nazwany. Rozpoznanie przyczyn w obszarze energii, zasilania i infrastruktury technicznej." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://mmgress.github.io/diagnoza-problemow.html" />
 <meta property="og:site_name" content="MMGRESS" />
 <meta name="twitter:card" content="summary" />
+
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KZX20JGP7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);} 
+  function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-5KZX20JGP7');
 </script>
+
 <style>
 :root{
   --bg:#f3f6fa;
@@ -40,95 +43,362 @@
   --warn-line:#efd7b8;
   --shadow:0 14px 34px rgba(15,23,42,.06);
   --radius:20px;
+  --radius-sm:14px;
   --container:1180px;
-  --content:860px;
+  --content:880px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial, Helvetica, sans-serif;background:var(--bg);color:var(--text);line-height:1.72}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.72;
+}
 a{color:var(--accent)}
-.topbar{background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
-.topbar-inner{max-width:var(--container);margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{color:#26354a;text-decoration:none;font-size:18px;font-weight:800;letter-spacing:.12em}
-.nav{display:flex;flex-wrap:wrap;align-items:center;gap:22px;flex-wrap:wrap}
-.nav a{text-decoration:none;color:#26354a;font-size:15px;font-weight:700}
+.topbar{
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(12px);
+}
+.topbar-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:18px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.brand{
+  color:#26354a;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+.nav{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.nav a{
+  text-decoration:none;
+  color:#26354a;
+  font-size:15px;
+  font-weight:700;
+}
 .nav a.active,.nav a:hover{color:var(--accent)}
-.hero{background:radial-gradient(circle at left top, rgba(255,255,255,.85), rgba(255,255,255,0) 34%),linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);border-bottom:1px solid var(--line)}
-.hero-inner{max-width:var(--container);margin:0 auto;padding:84px 28px 74px}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:24px;align-items:start}
-.eyebrow{display:inline-block;margin:0 0 24px;padding:10px 16px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-h1{margin:0 0 22px;color:#152235;letter-spacing:-0.04em;font-size:clamp(2.25rem, 5.2vw, 4.7rem);line-height:1.04}
-.hero-intro{max-width:920px;font-size:clamp(1.16rem, 1.55vw, 1.38rem);color:#38506c;line-height:1.66;margin:0 0 22px}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
-.btn{display:inline-block;padding:14px 18px;border-radius:14px;text-decoration:none;font-weight:800;border:1px solid transparent;transition:.16s ease}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-secondary{background:#fff;color:var(--accent);border-color:var(--line)}
-.hero-panel,.summary-card,.section,.card,.faq-item{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-.hero-panel{padding:24px}
-.hero-panel h2{margin:0 0 12px;font-size:1.35rem;line-height:1.2}
-.hero-panel p{margin:0 0 10px;font-size:1rem;color:var(--muted)}
-.hero-panel ul{margin:14px 0 0;padding-left:20px}
-.hero-panel li{margin:0 0 10px;font-size:.98rem}
-.main{max-width:var(--container);margin:0 auto;padding:34px 28px 70px}
-.summary{margin-top:-32px;position:relative;z-index:2}
-.summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.summary-card{padding:22px 26px}
-.summary-card .label{font-size:13px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#68809d;margin:0 0 12px}
-.summary-card .value{margin:0;font-size:clamp(1.35rem,2vw,1.95rem);line-height:1.15;font-weight:800;color:var(--accent)}
-.section{max-width:var(--content);padding:34px 38px;margin:22px 0}
+.hero{
+  background:
+    radial-gradient(circle at left top, rgba(255,255,255,.88), rgba(255,255,255,0) 34%),
+    linear-gradient(180deg, #f2f6fb 0%, #eaf0f6 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:84px 28px 72px;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);
+  gap:24px;
+  align-items:start;
+}
+.eyebrow{
+  display:inline-block;
+  margin:0 0 24px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+h1{
+  margin:0 0 22px;
+  color:#152235;
+  letter-spacing:-0.04em;
+  font-size:clamp(2.35rem,5.1vw,4.85rem);
+  line-height:1.04;
+  overflow-wrap:break-word;
+}
+.hero-intro{
+  max-width:920px;
+  font-size:clamp(1.15rem,1.55vw,1.38rem);
+  color:#38506c;
+  line-height:1.62;
+  margin:0 0 18px;
+}
+.hero-note{
+  max-width:850px;
+  color:var(--muted);
+  font-size:1.08rem;
+}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:28px;
+}
+.cta-btn{
+  display:inline-block;
+  background:var(--accent);
+  color:#fff;
+  padding:14px 22px;
+  border-radius:14px;
+  font-weight:800;
+  text-decoration:none;
+  font-size:16px;
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+  transition:opacity .16s ease, transform .16s ease;
+}
+.cta-btn:hover{opacity:.92;transform:translateY(-1px)}
+.cta-btn.secondary{
+  background:#fff;
+  color:var(--accent);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+.hero-panel,.section,.card,.step,.contact-box,.footer{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.hero-panel{
+  padding:24px;
+}
+.hero-panel h2{
+  margin:0 0 12px;
+  font-size:1.35rem;
+  line-height:1.2;
+  color:#122133;
+}
+.hero-panel p{
+  margin:0 0 12px;
+  color:var(--muted);
+}
+.hero-panel ul{
+  margin:14px 0 0;
+  padding-left:22px;
+}
+.hero-panel li{
+  margin:0 0 10px;
+  font-size:1rem;
+}
+.main{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:34px 28px 70px;
+}
+.summary{
+  margin-top:-32px;
+  position:relative;
+  z-index:2;
+}
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+.summary-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px 26px;
+  box-shadow:var(--shadow);
+}
+.summary-card .label{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:800;
+  color:#68809d;
+  margin:0 0 12px;
+}
+.summary-card .value{
+  margin:0;
+  font-size:clamp(1.25rem,1.8vw,1.75rem);
+  line-height:1.15;
+  font-weight:800;
+  color:var(--accent);
+}
+.section{
+  max-width:var(--content);
+  padding:34px 38px;
+  margin:22px 0;
+}
 .section.wide{max-width:none}
-.section h2{margin:0 0 18px;font-size:clamp(1.9rem,2.6vw,2.5rem);line-height:1.1;letter-spacing:-0.03em;color:#122133}
-.section h3{margin:0 0 12px;font-size:1.35rem;line-height:1.2;color:#122133}
+.section h2{
+  margin:0 0 18px;
+  font-size:clamp(1.85rem,2.6vw,2.5rem);
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:#122133;
+}
+.section h3{
+  margin:0 0 12px;
+  font-size:1.32rem;
+  line-height:1.2;
+  color:#122133;
+}
 p{margin:0 0 16px;font-size:1.08rem}
-.note-box,.quote,.result-box,.warn-box{border-radius:16px;padding:18px 20px;margin:22px 0}
-.note-box,.quote{background:var(--surface-soft);border:1px solid var(--line);border-left:4px solid var(--accent)}
-.result-box{background:var(--ok);border:1px solid var(--ok-line)}
-.warn-box{background:var(--warn);border:1px solid var(--warn-line)}
-.cards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.card{padding:24px}
-.card h3{margin:0 0 12px;font-size:1.35rem}
-.tag{display:inline-block;margin:0 0 12px;color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.steps{display:grid;gap:14px}
-.step{background:var(--surface-soft);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
-.step strong{display:block;margin-bottom:6px;color:#122133}
-.cta-band{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
-.cta-band .btn{margin-top:0}
-.contact-box{background:var(--surface-soft);border:1px solid var(--line);border-radius:16px;padding:24px}
-.contact-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.faq-grid{display:grid;gap:14px}
-.faq-item{padding:20px 22px}
-.faq-item h3{margin:0 0 8px;font-size:1.08rem}
-.footer-note{color:#66788e;font-size:.95rem;margin-top:18px}
+p,li{overflow-wrap:break-word}
+ul,ol{margin:0;padding-left:24px}
+li{margin:0 0 10px;font-size:1.05rem}
+.note-box,.result-box,.warn-box{
+  border-radius:16px;
+  padding:20px 22px;
+  margin:22px 0;
+}
+.note-box{
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+}
+.result-box{
+  background:var(--ok);
+  border:1px solid var(--ok-line);
+}
+.warn-box{
+  background:var(--warn);
+  border:1px solid var(--warn-line);
+}
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.cards-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{
+  padding:24px;
+}
+.card h3{
+  margin:0 0 12px;
+  font-size:1.42rem;
+}
+.card p:last-child{margin-bottom:0}
+.tag{
+  display:inline-block;
+  margin:0 0 12px;
+  color:var(--accent);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.price-note{
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+  color:#53677f;
+  font-size:.98rem;
+}
+.steps{
+  display:grid;
+  gap:14px;
+  counter-reset:workstep;
+}
+.step{
+  padding:20px 22px;
+  background:var(--surface-soft);
+  box-shadow:none;
+  counter-increment:workstep;
+}
+.step h3{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:8px;
+}
+.step h3::before{
+  content:counter(workstep);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  font-size:.95rem;
+}
+.text-link{
+  display:inline-block;
+  margin-top:8px;
+  font-weight:800;
+  text-decoration:none;
+  color:var(--accent);
+}
+.text-link:hover{text-decoration:underline}
+.cta-band{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+}
+.cta-band h2{margin-bottom:10px}
+.cta-band p{margin-bottom:0;color:var(--muted)}
+.contact-box{
+  padding:24px;
+  background:var(--surface-soft);
+  box-shadow:none;
+}
+.contact-list{margin:18px 0 22px}
+.footer{
+  max-width:var(--container);
+  margin:0 auto 28px;
+  padding:22px 28px;
+  box-shadow:none;
+  color:#66788e;
+  font-size:.95rem;
+}
+.footer-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-top:10px;
+}
+.footer-nav a{text-decoration:none;font-weight:700}
 @media (max-width:1040px){
   .hero-grid{grid-template-columns:1fr}
   .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cards-grid{grid-template-columns:1fr}
+  .cards-grid,.cards-grid.two{grid-template-columns:1fr}
 }
 @media (max-width:760px){
   .topbar-inner{padding:16px 18px;gap:16px;flex-wrap:wrap}
-  .nav{gap:18px;flex-wrap:wrap}
-  .hero-inner{padding:56px 18px 52px}
+  .nav{gap:16px}
+  .hero-inner{padding:56px 18px 50px}
   .main{padding:22px 18px 50px}
+  h1{font-size:2rem;line-height:1.08}
   .section{padding:26px 22px}
   .summary{margin-top:0}
   .summary-grid{grid-template-columns:1fr}
+  .footer{margin:0 18px 22px;padding:20px 22px}
 }
 </style>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Diagnoza problemów technicznych, procesowych i energetycznych",
+  "name": "Rozpoznanie MMGRESS",
   "url": "https://mmgress.github.io/diagnoza-problemow.html",
-  "description": "Usługa diagnozy dla firm produkcyjnych, w których wszystko wygląda dobrze, a wynik się nie zgadza.",
+  "description": "Rozpoznanie rzeczywistych przyczyn strat, kosztów, awarii i problemów w obszarze energii, zasilania oraz infrastruktury technicznej.",
   "provider": {
-    "@type": "Person",
-    "name": "Michał Grzesiczak",
-    "url": "https://mmgress.github.io/about.html"
+    "@type": "Organization",
+    "name": "MMGRESS",
+    "url": "https://mmgress.github.io/"
   },
   "areaServed": "PL",
-  "inLanguage": "pl-PL"
+  "inLanguage": "pl-PL",
+  "serviceType": "Rozpoznanie przyczyn problemu technicznego, energetycznego i infrastrukturalnego"
 }
 </script>
 </head>
@@ -136,10 +406,9 @@ p{margin:0 0 16px;font-size:1.08rem}
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="/">MMGRESS</a>
-
     <nav class="nav" aria-label="Główne menu">
       <a href="/">Strona główna</a>
-      <a href="/diagnoza-problemow.html" class="active">Diagnoza</a>
+      <a href="/diagnoza-problemow.html" class="active">Rozpoznanie</a>
       <a href="/case-studies.html">Case studies</a>
       <a href="/analizy.html">Analizy</a>
       <a href="/about.html">O mnie</a>
@@ -152,30 +421,32 @@ p{margin:0 0 16px;font-size:1.08rem}
   <div class="hero-inner">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow">Diagnoza zamiast zgadywania</div>
-        <h1>Jeżeli wszystko wygląda dobrze, a wynik się nie zgadza, problem zwykle jest ukryty</h1>
+        <div class="eyebrow">Rozpoznanie MMGRESS</div>
+        <h1>Zanim kupisz rozwiązanie, sprawdź, czy dobrze nazwano problem.</h1>
         <p class="hero-intro">
-          Są sytuacje, w których maszyny działają, raporty się zgadzają, harmonogram wygląda poprawnie, a firma mimo to traci czas, pieniądze albo stabilność. W takich przypadkach problem rzadko leży w jednym urządzeniu. Najczęściej powstaje na styku technologii, procesu, energii i organizacji.
+          Koszty energii rosną, problem wraca, instalacja zachowuje się inaczej niż powinna albo produkcja traci czas, choć formalnie wszystko działa. W takich sytuacjach najdroższy błąd często polega na tym, że firma zaczyna od rozwiązania, zanim rozpozna prawdziwą przyczynę.
         </p>
-        <p class="hero-intro">
-          Właśnie tym zajmuje się MMGRESS: znalezieniem rzeczywistej przyczyny, zanim ktoś wyda pieniądze na niewłaściwe rozwiązanie.
+        <p class="hero-note">
+          Rozpoznanie MMGRESS to pierwszy krok przed inwestycją, modernizacją, kompensacją, monitoringiem albo kolejną naprawą. Chodzi o sprawdzenie, gdzie naprawdę powstaje strata i co warto zrobić dalej.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" id="cta-hero-contact" href="#kontakt">Opisz problem w 2–3 zdaniach</a>
-          <a class="btn btn-secondary" href="/case-studies.html">Najpierw pokaż przykłady</a>
+          <a class="cta-btn" href="#zakresy">Zobacz zakresy rozpoznania</a>
+          <a class="cta-btn secondary" href="#kontakt">Opisz sytuację</a>
         </div>
       </div>
+
       <aside class="hero-panel">
         <h2>To ma sens, gdy:</h2>
         <ul>
+          <li>koszt jest widoczny, ale przyczyna nie jest jasna,</li>
           <li>problem wraca mimo wcześniejszych działań,</li>
-          <li>dane są, ale decyzje nadal nie działają,</li>
-          <li>strata jest realna, ale źródło nie jest jasne,</li>
-          <li>proponowane rozwiązanie wygląda na zbyt duże albo zbyt drogie.</li>
+          <li>dane, faktury albo raporty nie prowadzą do decyzji,</li>
+          <li>ktoś proponuje drogie rozwiązanie, ale nie ma pewności, czy trafia w źródło problemu,</li>
+          <li>problem wygląda technicznie, ale jego skutki są finansowe, produkcyjne albo organizacyjne.</li>
         </ul>
         <div class="warn-box">
-          <strong>Nie zaczynam od sprzedaży urządzenia.</strong><br>
-          Najpierw trzeba ustalić, co naprawdę jest przyczyną problemu.
+          <strong>To nie jest sprzedaż urządzenia.</strong><br>
+          Najpierw trzeba ustalić, czy urządzenie, pomiar, zmiana ustawień albo inwestycja w ogóle odpowiadają na właściwy problem.
         </div>
       </aside>
     </div>
@@ -185,163 +456,185 @@ p{margin:0 0 16px;font-size:1.08rem}
 <main class="main">
   <section class="summary">
     <div class="summary-grid">
-      <div class="summary-card"><div class="label">Punkt startu</div><div class="value">Rzeczywisty problem</div></div>
-      <div class="summary-card"><div class="label">Podejście</div><div class="value">Diagnoza przyczyny</div></div>
-      <div class="summary-card"><div class="label">Zakres</div><div class="value">Technika + proces + energia</div></div>
-      <div class="summary-card"><div class="label">Efekt</div><div class="value">Decyzja, która ma sens</div></div>
+      <div class="summary-card"><div class="label">Produkt</div><div class="value">Rozpoznanie MMGRESS</div></div>
+      <div class="summary-card"><div class="label">Obszar</div><div class="value">Energia, zasilanie, infrastruktura</div></div>
+      <div class="summary-card"><div class="label">Cel</div><div class="value">Ustalić przyczynę</div></div>
+      <div class="summary-card"><div class="label">Efekt</div><div class="value">Decyzja co dalej</div></div>
     </div>
   </section>
 
   <section class="section">
-    <h2>Kiedy taki sposób pracy ma największy sens</h2>
-    <div class="steps">
-      <div class="step"><strong>Maszyny pracują, ale wydajność spada</strong>System pokazuje aktywność, ale liczby z produkcji tego nie potwierdzają.</div>
-      <div class="step"><strong>Raport wygląda dobrze, ale decyzje nie pomagają</strong>Dane są poprawne formalnie, ale nie opisują tego, co naprawdę dzieje się w praktyce.</div>
-      <div class="step"><strong>Problem wygląda na losowy</strong>Zdarzenie trwa sekundy, ale skutki ciągną się godzinami albo dniami.</div>
-      <div class="step"><strong>Rozwiązanie „na wszystko” jest zbyt drogie</strong>Trzeba znaleźć punkt krytyczny, a nie pompować budżet w cały układ.</div>
+    <h2>Co właściwie jest rozpoznawane</h2>
+    <p>
+      Nie chodzi o ogólne doradztwo ani o szukanie problemów na siłę. Punktem wyjścia jest konkretna sytuacja: koszt, strata, awaria, przestój, dziwne zachowanie instalacji, niejasna faktura, spadek wydajności albo planowana inwestycja, która może być oparta na zbyt słabych założeniach.
+    </p>
+    <p>
+      Rozpoznanie dotyczy przede wszystkim obszaru energii, zasilania i infrastruktury technicznej. W praktyce oznacza to spojrzenie na faktury, liczniki, pracę instalacji, urządzenia, pomiary, sposób użytkowania obiektu, przepływ informacji i decyzje, które wpływają na koszt albo stabilność działania.
+    </p>
+    <div class="note-box">
+      <strong>Najważniejsze pytanie brzmi prosto:</strong> czy problem naprawdę znajduje się tam, gdzie wszyscy go szukają?
     </div>
   </section>
 
-  <section class="section">
-    <h2>Co dokładnie dostajesz</h2>
-    <div class="result-box">
-      <p><strong>Jasne wskazanie, co jest rzeczywistą przyczyną problemu</strong></p>
-      <p><strong>Informację, co ma sens zrobić dalej, a czego nie warto ruszać</strong></p>
-      <p><strong>Podstawę do decyzji technicznej, organizacyjnej albo inwestycyjnej</strong></p>
-    </div>
-    <p>To nie zawsze oznacza duże wdrożenie. Czasem wystarczy zmiana jednego punktu pomiarowego. Czasem korekta procesu. Czasem zabezpieczenie tylko jednego fragmentu układu. Najpierw jednak trzeba wiedzieć, gdzie naprawdę leży problem.</p>
-  </section>
+  <section class="section wide" id="zakresy">
+    <h2>Trzy zakresy rozpoznania</h2>
+    <p>
+      Nie każdy temat wymaga wyjazdu, pomiarów i pełnej analizy. Czasem wystarczy sprawdzić faktury i podstawowe dane. Czasem trzeba porównać kilka źródeł informacji. A czasem dopiero wizyta na miejscu pokazuje, gdzie rozjeżdża się technika, proces i odpowiedzialność.
+    </p>
 
-  <section class="section wide">
-    <h2>Jak wygląda pierwszy krok</h2>
     <div class="cards-grid">
       <div class="card">
-        <div class="tag">Krok 1</div>
-        <h3>Opisujesz sytuację</h3>
-        <p>Wystarczą 2–3 zdania: co miało działać, co się nie zgadza i co było już sprawdzane.</p>
+        <div class="tag">Zakres 1</div>
+        <h3>Rozpoznanie wstępne</h3>
+        <p>
+          Dla sytuacji, w której trzeba szybko sprawdzić, czy temat w ogóle ma sens i czy w danych widać sygnały problemu.
+        </p>
+        <p>
+          Punkt wyjścia: faktury, podstawowe informacje o obiekcie, krótki opis sytuacji, zdjęcia rozdzielni, liczników albo urządzeń, jeżeli są dostępne.
+        </p>
+        <p>
+          Efekt: wstępna odpowiedź, czy problem wymaga dalszego rozpoznania, gdzie prawdopodobnie warto patrzeć i czego brakuje do sensownej decyzji.
+        </p>
+        <p class="price-note">Dobry pierwszy krok, gdy nie wiadomo jeszcze, czy temat jest realnym problemem, czy tylko podejrzeniem.</p>
       </div>
+
       <div class="card">
-        <div class="tag">Krok 2</div>
-        <h3>Sprawdzam, czy temat ma sens</h3>
-        <p>Jeżeli sprawa mieści się w moim zakresie pracy, wracam z konkretem, jaki może być następny krok.</p>
+        <div class="tag">Zakres 2</div>
+        <h3>Rozpoznanie rozszerzone</h3>
+        <p>
+          Dla sytuacji, w której problem jest już odczuwalny, ale źródło nie jest jasne albo wcześniejsze działania nie dały pewnego wyniku.
+        </p>
+        <p>
+          Punkt wyjścia: faktury, dane z liczników lub analizatorów, dokumentacja, rozmowa techniczna, opis tego, co było sprawdzane i jakie rozwiązania już proponowano.
+        </p>
+        <p>
+          Efekt: uporządkowanie możliwych przyczyn, wskazanie najbardziej prawdopodobnego mechanizmu problemu i decyzja, czy potrzebna jest wizyta, pomiar albo konkretne działanie techniczne.
+        </p>
+        <p class="price-note">Najczęstszy zakres, gdy firma widzi stratę, ale nie chce wydawać pieniędzy na ślepo.</p>
       </div>
+
       <div class="card">
-        <div class="tag">Krok 3</div>
-        <h3>Ustalamy dane i kierunek</h3>
-        <p>Nie ogólna rozmowa, tylko konkret: czego potrzeba, gdzie leży ryzyko i co ma sens analizować.</p>
+        <div class="tag">Zakres 3</div>
+        <h3>Rozpoznanie pełne</h3>
+        <p>
+          Dla sytuacji, w której problem wpływa na koszty, produkcję, bezpieczeństwo zasilania albo decyzję inwestycyjną i wymaga sprawdzenia na miejscu.
+        </p>
+        <p>
+          Punkt wyjścia: wizja lokalna, rozmowy z osobami technicznymi i decyzyjnymi, analiza układu zasilania, faktur, danych, pomiarów oraz sposobu pracy instalacji lub procesu.
+        </p>
+        <p>
+          Efekt: opis rzeczywistej przyczyny, rozdzielenie objawów od źródła problemu i rekomendacja dalszych działań: co zrobić, czego nie robić i gdzie nie warto wydawać pieniędzy.
+        </p>
+        <p class="price-note">Właściwy zakres przed większą inwestycją, modernizacją albo wtedy, gdy problem wraca mimo kilku prób naprawy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Co klient dostaje na końcu</h2>
+    <div class="result-box">
+      <p><strong>Nie chodzi o gruby raport dla samego raportu.</strong></p>
+      <p>Na końcu ma być jasne, co jest objawem, co jest najbardziej prawdopodobną przyczyną, jakich danych jeszcze brakuje i jaki następny krok ma sens techniczny oraz ekonomiczny.</p>
+    </div>
+    <p>
+      Czasem wynikiem jest decyzja o pomiarze. Czasem korekta ustawień. Czasem modernizacja kompensacji. Czasem monitoring. Czasem rezygnacja z większego zakupu, bo problem leży gdzie indziej. Najważniejsze jest to, żeby dalsze działania nie były zgadywaniem.
+    </p>
+  </section>
+
+  <section class="section wide">
+    <h2>Typowe sytuacje, z którymi pasuje zacząć</h2>
+    <div class="cards-grid two">
+      <div class="card"><div class="tag">Koszty energii</div><p>Rachunki rosną, pojawiają się opłaty za energię bierną, przekroczenia mocy albo inne pozycje, których nikt wcześniej nie analizował w kontekście pracy obiektu.</p></div>
+      <div class="card"><div class="tag">Zasilanie i stabilność</div><p>Występują krótkie zaniki, wyłączenia, dziwne zachowania urządzeń albo problemy, które trwają chwilę, ale skutki ciągną się godzinami.</p></div>
+      <div class="card"><div class="tag">Inwestycja techniczna</div><p>Firma planuje zakup, modernizację, kompensację, monitoring albo zmianę wykonawcy, ale nie ma pewności, czy dobrze określono źródło problemu.</p></div>
+      <div class="card"><div class="tag">Dane bez decyzji</div><p>Raporty, pomiary i dashboardy istnieją, ale nadal nie wiadomo, co z nich wynika albo dlaczego wynik procesu nie zgadza się z obrazem z systemu.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Jak wygląda pierwszy kontakt</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>Opis sytuacji</h3>
+        <p>Na początku wystarczą 2–3 zdania: co się dzieje, kiedy się pojawia, co było już sprawdzane i dlaczego temat stał się ważny.</p>
+      </div>
+      <div class="step">
+        <h3>Sprawdzenie, czy to pasuje do rozpoznania</h3>
+        <p>Nie każdy temat wymaga MMGRESS. Jeżeli sprawa jest prostą awarią, typowym montażem albo czymś spoza zakresu, lepiej powiedzieć to od razu.</p>
+      </div>
+      <div class="step">
+        <h3>Dobór zakresu</h3>
+        <p>Po krótkim opisie można określić, czy wystarczy rozpoznanie wstępne, czy potrzebna jest analiza rozszerzona albo pełne rozpoznanie na miejscu.</p>
       </div>
     </div>
   </section>
 
   <section class="section wide">
+    <h2>Przykłady pokazują najlepiej</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="tag">Energia bierna</div>
+        <h3>Kompensacja była, a koszty dalej rosły</h3>
+        <p>Problem nie polegał na prostym dołożeniu kolejnego urządzenia, tylko na zrozumieniu pracy całego układu zasilania i kompensacji.</p>
+        <a class="text-link" href="/case-study-energia-bierna-transformator-svg.html">Czytaj case study →</a>
+      </div>
+      <div class="card">
+        <div class="tag">Fotowoltaika</div>
+        <h3>Instalacja PV przez miesiące nie produkowała energii</h3>
+        <p>Falownik nie pokazywał błędu, urządzenie było wymieniane, a przyczyną okazał się brak jednej fazy po stronie zasilania.</p>
+        <a class="text-link" href="/case-study-pv-brak-fazy.html">Czytaj case study →</a>
+      </div>
+      <div class="card">
+        <div class="tag">Produkcja</div>
+        <h3>Maszyny „pracowały”, ale wynik spadał</h3>
+        <p>System mierzył zasilanie maszyny, a nie jej rzeczywistą pracę. Dane były formalnie dostępne, ale pokazywały nie to, co miało znaczenie.</p>
+        <a class="text-link" href="/case-study-wtryskarki-falszywy-odczyt-pracy.html">Czytaj case study →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Czego to nie obiecuje</h2>
+    <p>
+      Rozpoznanie nie oznacza, że każda sytuacja skończy się dużą inwestycją albo wdrożeniem. Nie oznacza też, że każde źródło problemu da się wskazać bez danych, pomiaru albo sprawdzenia na miejscu.
+    </p>
+    <div class="warn-box">
+      <strong>Uczciwy wynik rozpoznania może brzmieć:</strong> nie kupuj jeszcze urządzenia, najpierw sprawdź ten jeden punkt; nie rób dużej modernizacji, bo problem jest lokalny; albo odwrotnie — nie odkładaj tematu, bo koszt ukryty już pracuje codziennie.
+    </div>
+  </section>
+
+  <section class="section wide" id="kontakt">
     <div class="cta-band">
       <div>
-        <h2 style="margin-bottom:10px;">Masz podobny przypadek?</h2>
-        <p style="margin-bottom:0;">Nie zaczynaj od prezentacji. Zacznij od prostego opisu sytuacji.</p>
+        <h2>Opisz sytuację w 2–3 zdaniach</h2>
+        <p>Najprościej: co się dzieje, kiedy to widać, co było już sprawdzane i jaka decyzja jest przed firmą.</p>
       </div>
-      <a class="btn btn-primary" id="cta-mid-contact" href="#kontakt">Opisz problem teraz</a>
+      <a class="cta-btn" href="mailto:mmgress@proton.me?subject=Rozpoznanie%20MMGRESS%20-%20opis%20sytuacji">Napisz wiadomość</a>
     </div>
-  </section>
 
-  <section class="section wide">
-    <h2>Przykłady problemów, które już zostały rozwiązane</h2>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="tag">Pomiar / produkcja</div>
-        <h3>Wtryskarki „pracowały”, ale produkcja spadała</h3>
-        <p>System mierzył zasilanie maszyny, a nie jej rzeczywistą pracę. Dopiero właściwy sygnał pokazał, gdzie naprawdę znika wydajność.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Proces / organizacja</div>
-        <h3>Setki minut odzyskanych w jednej dobie</h3>
-        <p>Po poprawnym pomiarze wyszły zbyt długie precykle, zbyt długie cykle i czas martwy, który wcześniej był traktowany jak normalny.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Energia / odporność</div>
-        <h3>Sekundowy zanik napięcia rozwalał cały dzień pracy</h3>
-        <p>Źródło problemu było poza zakładem. Rozwiązaniem nie był wielki UPS na całą halę, tylko lokalne podtrzymanie krytycznej elektroniki.</p>
-      </div>
-    </div>
-    <p class="footer-note">Więcej przykładów znajdziesz w sekcji <a href="/case-studies.html">Case studies</a>.</p>
-  </section>
-
-  <section class="section wide">
-    <h2>Najczęstsze pytania</h2>
-    <div class="faq-grid">
-      <div class="faq-item">
-        <h3>Czy muszę mieć komplet danych?</h3>
-        <p>Nie. Wystarczy opis sytuacji i to, co już było sprawdzane. Brak części danych sam w sobie bywa ważną informacją.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Czy to jest oferta tylko dla dużych zakładów?</h3>
-        <p>Nie. Znaczenie ma nie rozmiar firmy, tylko rodzaj problemu i to, czy jego przyczyna rzeczywiście wymaga diagnozy.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Czy od razu proponujesz wdrożenie?</h3>
-        <p>Nie. Najpierw trzeba wiedzieć, co jest przyczyną. Dopiero potem można sensownie rozmawiać o rozwiązaniu.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Czy bierzesz każdy temat?</h3>
-        <p>Nie. Jeżeli sprawa nie pasuje do mojego sposobu pracy albo zakresu doświadczenia, mówię to wprost.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="kontakt">
-    <h2>Opisz problem w 2–3 zdaniach</h2>
-    <p>Najprostszy układ wiadomości:</p>
-    <div class="note-box">
-      <p><strong>1.</strong> Co miało działać</p>
-      <p><strong>2.</strong> Co się nie zgadza</p>
-      <p><strong>3.</strong> Co było już sprawdzane</p>
-    </div>
-    <div class="contact-box">
+    <div class="contact-box" style="margin-top:24px;">
       <p><strong>Kontakt</strong></p>
-      <p>Email: <a href="mailto:mmgress@proton.me?subject=Opis%20problemu%20-%20MMGRESS&body=Dzie%C5%84%20dobry,%0A%0Aopisuj%C4%99%20kr%C3%B3tko%20sytuacj%C4%99:%0A1.%20Co%20mia%C5%82o%20dzia%C5%82a%C4%87:%0A2.%20Co%20si%C4%99%20nie%20zgadza:%0A3.%20Co%20by%C5%82o%20ju%C5%BC%20sprawdzane:%0A%0AKontakt%20do%20mnie:%0A" id="cta-mail">mmgress@proton.me</a></p>
-      <p>Telefon: <a href="tel:+48881585906" id="cta-phone">+48 881 585 906</a></p>
-      <div class="contact-actions">
-        <a class="btn btn-primary" id="cta-mail-button" href="mailto:mmgress@proton.me?subject=Opis%20problemu%20-%20MMGRESS&body=Dzie%C5%84%20dobry,%0A%0Aopisuj%C4%99%20kr%C3%B3tko%20sytuacj%C4%99:%0A1.%20Co%20mia%C5%82o%20dzia%C5%82a%C4%87:%0A2.%20Co%20si%C4%99%20nie%20zgadza:%0A3.%20Co%20by%C5%82o%20ju%C5%BC%20sprawdzane:%0A%0AKontakt%20do%20mnie:%0A">Napisz wiadomość</a>
-        <a class="btn btn-secondary" id="cta-phone-button" href="tel:+48881585906">Zadzwoń</a>
-      </div>
+      <p class="contact-list">
+        Email: <a href="mailto:mmgress@proton.me">mmgress@proton.me</a><br>
+        Telefon: <a href="tel:+48881585906">+48 881 585 906</a>
+      </p>
+      <p>
+        Na początek nie trzeba przygotowywać pełnej dokumentacji. Wystarczy krótki opis sytuacji. Jeżeli temat pasuje do rozpoznania, kolejnym krokiem jest ustalenie zakresu.
+      </p>
     </div>
-    <p class="footer-note">Jeżeli temat ma sens, wrócę z konkretem: gdzie leży problem i czy warto to ruszać.</p>
   </section>
 </main>
 
-<script>
-function trackKontakt(eventName, label) {
-  if (typeof gtag === 'function') {
-    gtag('event', eventName, {
-      'event_category': 'kontakt',
-      'event_label': label
-    });
-  }
-}
+<footer class="footer">
+  <div>MMGRESS — rozpoznanie przyczyn strat i problemów w obszarze energii, zasilania oraz infrastruktury technicznej.</div>
+  <div class="footer-nav">
+    <a href="/">Strona główna</a>
+    <a href="/diagnoza-problemow.html">Rozpoznanie</a>
+    <a href="/case-studies.html">Case studies</a>
+    <a href="/analizy.html">Analizy</a>
+    <a href="/about.html">O mnie</a>
+  </div>
+</footer>
 
-
-document.getElementById('cta-hero-contact')?.addEventListener('click', function() {
-  trackKontakt('kontakt_cta', 'klik_hero_opisz_problem_diagnoza_landing');
-});
-
-document.getElementById('cta-mid-contact')?.addEventListener('click', function() {
-  trackKontakt('kontakt_cta', 'klik_mid_opisz_problem_diagnoza_landing');
-});
-
-document.getElementById('cta-mail')?.addEventListener('click', function() {
-  trackKontakt('kontakt_mail', 'klik_mail_diagnoza_landing');
-});
-
-document.getElementById('cta-mail-button')?.addEventListener('click', function() {
-  trackKontakt('kontakt_mail', 'klik_mail_button_diagnoza_landing');
-});
-
-document.getElementById('cta-phone')?.addEventListener('click', function() {
-  trackKontakt('kontakt_phone', 'klik_phone_diagnoza_landing');
-});
-
-document.getElementById('cta-phone-button')?.addEventListener('click', function() {
-  trackKontakt('kontakt_phone', 'klik_phone_button_diagnoza_landing');
-});
-</script>
 </body>
 </html>
