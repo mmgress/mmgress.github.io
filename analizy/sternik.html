@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sternik — logowanie</title>
+<meta name="description" content="Sternik — system kierowania zadaniami. Panel logowania.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EEF1F2;
+    --grid-line: rgba(22, 33, 43, 0.055);
+    --surface: #FFFFFF;
+    --surface-border: #DBE1E4;
+    --text-primary: #16212B;
+    --text-secondary: #5B6A74;
+    --text-muted: #8B98A1;
+    --accent: #C1743A;
+    --accent-hover: #A7622F;
+    --accent-contrast: #FFFFFF;
+    --signal: #3E8F63;
+    --danger: #B3492F;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --font-display: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+    --shadow-card: 0 1px 2px rgba(22,33,43,0.05), 0 12px 28px -8px rgba(22,33,43,0.14);
+  }
+
+  *, *::before, *::after{ box-sizing: border-box; }
+
+  html, body{
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+
+  body{
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .grid-overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 85%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 85%);
+  }
+
+  .page{
+    position: relative;
+    z-index: 1;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(28px, 6vw, 64px) 20px clamp(20px, 4vw, 36px);
+  }
+
+  /* Brand / site name */
+  .brand{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: clamp(28px, 6vh, 56px);
+    margin-top: clamp(20px, 8vh, 72px);
+  }
+
+  .brand-mark{
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 10px;
+  }
+
+  .status-dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 0 rgba(62,143,99,0.5);
+    animation: pulse 2.4s ease-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse{
+    0%   { box-shadow: 0 0 0 0 rgba(62,143,99,0.45); }
+    70%  { box-shadow: 0 0 0 7px rgba(62,143,99,0); }
+    100% { box-shadow: 0 0 0 0 rgba(62,143,99,0); }
+  }
+
+  .brand-eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .brand h1{
+    margin: 0;
+    font-size: clamp(1.9rem, 1.55rem + 1.4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .brand-tagline{
+    margin: 6px 0 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  /* Login card */
+  .login-card{
+    width: 100%;
+    max-width: 380px;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: clamp(24px, 5vw, 34px);
+  }
+
+  .field{
+    margin-bottom: 18px;
+  }
+
+  .field-label{
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 7px;
+  }
+
+  .input-wrap{
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"]{
+    width: 100%;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--bg);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-sm);
+    padding: 11px 13px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  input[type="password"]{
+    padding-right: 42px;
+  }
+
+  input::placeholder{
+    color: var(--text-muted);
+  }
+
+  input:focus-visible{
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(193,116,58,0.16);
+  }
+
+  input:invalid:not(:placeholder-shown){
+    border-color: var(--danger);
+  }
+
+  .toggle-visibility{
+    position: absolute;
+    right: 6px;
+    background: none;
+    border: none;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+  }
+
+  .toggle-visibility:hover{ color: var(--text-secondary); }
+  .toggle-visibility:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .toggle-visibility svg{ width: 18px; height: 18px; }
+  .toggle-visibility .icon-hidden{ display: none; }
+  .toggle-visibility[data-visible="true"] .icon-shown{ display: none; }
+  .toggle-visibility[data-visible="true"] .icon-hidden{ display: block; }
+
+  .row-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0 22px;
+    gap: 12px;
+  }
+
+  .remember{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .remember input[type="checkbox"]{
+    accent-color: var(--accent);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+
+  .link-muted{
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .link-muted:hover{
+    color: var(--text-primary);
+    border-color: var(--surface-border);
+  }
+
+  button[type="submit"]{
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-contrast);
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 13px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    transition: background 0.15s ease, opacity 0.15s ease;
+  }
+
+  button[type="submit"]:hover{ background: var(--accent-hover); }
+  button[type="submit"]:focus-visible{
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 2px;
+  }
+  button[type="submit"]:disabled{
+    opacity: 0.75;
+    cursor: default;
+  }
+
+  .spinner{
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    display: none;
+    animation: spin 0.7s linear infinite;
+  }
+
+  button[type="submit"].is-loading .spinner{ display: inline-block; }
+
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+
+  .form-message{
+    margin: 14px 0 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    text-align: center;
+    min-height: 1em;
+  }
+
+  .access-note{
+    margin: 20px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--surface-border);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  /* Footer */
+  .site-footer{
+    margin-top: auto;
+    padding-top: clamp(28px, 6vh, 48px);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+  }
+
+  .site-footer a{
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--surface-border);
+  }
+
+  .site-footer a:hover{ color: var(--text-primary); }
+
+  .site-footer .divider{
+    margin: 0 8px;
+    color: var(--surface-border);
+  }
+
+  @media (max-width: 360px){
+    .login-card{ padding: 20px; }
+    .brand h1{ font-size: 1.7rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .status-dot{ animation: none; }
+    .spinner{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="page">
+
+    <header class="brand">
+      <div class="brand-mark">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="brand-eyebrow">System kierowania zadaniami</span>
+      </div>
+      <h1>Sternik</h1>
+      <p class="brand-tagline">Zaloguj się, aby przejść do panelu</p>
+    </header>
+
+    <main class="login-card">
+      <form id="login-form" novalidate>
+
+        <div class="field">
+          <label class="field-label" for="email">Identyfikator</label>
+          <div class="input-wrap">
+            <input type="email" id="email" name="email" placeholder="np. jan.kowalski@firma.pl" autocomplete="username" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="password">Hasło</label>
+          <div class="input-wrap">
+            <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" minlength="8" required>
+            <button type="button" class="toggle-visibility" id="toggle-password" data-visible="false" aria-label="Pokaż hasło">
+              <svg class="icon-shown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="icon-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a20.3 20.3 0 0 1 5.06-5.94M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 7 11 7a20.5 20.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="row-between">
+          <label class="remember">
+            <input type="checkbox" id="remember" name="remember">
+            Zapamiętaj mnie
+          </label>
+          <a href="#" class="link-muted">Nie pamiętasz hasła?</a>
+        </div>
+
+        <button type="submit" id="submit-btn">
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="btn-label">Zaloguj się</span>
+        </button>
+
+        <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+
+        <p class="access-note">Dostęp mają wyłącznie zaproszeni użytkownicy.</p>
+      </form>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 MMGRESS</span>
+      <span class="divider">·</span>
+      <a href="https://mmgress.github.io" target="_blank" rel="noopener">mmgress.github.io</a>
+      <span class="divider">·</span>
+      <span>Wszelkie prawa zastrzeżone</span>
+    </footer>
+
+  </div>
+
+<script>
+  // Przełącznik widoczności hasła
+  const toggleBtn = document.getElementById('toggle-password');
+  const passwordInput = document.getElementById('password');
+
+  toggleBtn.addEventListener('click', () => {
+    const isVisible = toggleBtn.getAttribute('data-visible') === 'true';
+    toggleBtn.setAttribute('data-visible', String(!isVisible));
+    toggleBtn.setAttribute('aria-label', isVisible ? 'Pokaż hasło' : 'Ukryj hasło');
+    passwordInput.type = isVisible ? 'password' : 'text';
+  });
+
+  // Obsługa formularza logowania
+  // UWAGA (dev): to jest wersja przed-MVP bez backendu.
+  // W docelowej wersji podmienić poniższy blok na realne wywołanie API, np.:
+  //   const res = await fetch('/api/auth/login', { method: 'POST', body: JSON.stringify({email, password}) });
+  const form = document.getElementById('login-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnLabel = submitBtn.querySelector('.btn-label');
+  const message = document.getElementById('form-message');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.classList.add('is-loading');
+    btnLabel.textContent = 'Weryfikacja…';
+    message.textContent = '';
+
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('is-loading');
+      btnLabel.textContent = 'Zaloguj się';
+      message.textContent = 'Logowanie będzie aktywne po uruchomieniu systemu.';
+    }, 900);
+  });
+</script>
+
+</body>
+</html>
