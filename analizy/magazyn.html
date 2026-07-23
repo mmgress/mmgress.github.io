@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sternik — magazyn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-protected="true">
+
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="app-shell">
+
+    <header class="topbar">
+      <a class="topbar-brand" href="panel.html">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Sternik</span>
+      </a>
+      <div class="topbar-actions">
+        <div class="nav-dropdown">
+          <button type="button" class="nav-trigger" id="modules-trigger" aria-haspopup="true" aria-expanded="false">
+            Moduły
+            <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-menu" id="modules-menu" role="menu" aria-label="Moduły">
+            <a href="panel.html" role="menuitem">Panel główny</a>
+            <a href="harmonogram.html" role="menuitem">Harmonogram</a>
+            <a href="magazyn.html" role="menuitem" class="is-active" aria-current="page">Magazyn</a>
+            <a href="zadania.html" role="menuitem">Zadania</a>
+            <a href="klienci.html" role="menuitem">Klienci</a>
+            <a href="bilingi.html" role="menuitem">Bilingi</a>
+            <a href="zarzadzanie.html" role="menuitem">Zarządzanie</a>
+          </div>
+        </div>
+        <button type="button" class="btn-logout" id="logout-btn">Wyloguj</button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="page-header">
+        <span class="page-eyebrow">Moduł</span>
+        <h1>Magazyn</h1>
+        <p>Stany magazynowe, przyjęcia, wydania i pozycje wymagające uzupełnienia.</p>
+      </div>
+
+      <div class="module-grid">
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Zawartość magazynu</h2>
+            <span class="card-hint">5 pozycji</span>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr><th>Nazwa</th><th>Indeks</th><th>Ilość</th><th>Lokalizacja</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Wyłącznik różnicowoprądowy 40A</td><td>WRP-40-A</td><td>24 szt.</td><td>Regał A-3</td></tr>
+                <tr><td>Kabel YKY 3×2,5 mm²</td><td>KYK-325</td><td>340 m</td><td>Regał B-1</td></tr>
+                <tr><td>Stycznik LC1D18M7</td><td>STY-LC1D18</td><td>12 szt.</td><td>Regał A-5</td></tr>
+                <tr><td>Czujnik prądowy 100A</td><td>CZ-PRD-100</td><td>8 szt.</td><td>Regał C-2</td></tr>
+                <tr><td>Bezpiecznik topikowy gG 32A</td><td>BEZ-GG32</td><td>56 szt.</td><td>Regał A-1</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Przyjęcia towaru</h2>
+            <span class="card-hint">ostatnie 3</span>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr><th>Data</th><th>Dostawca</th><th>Pozycja</th><th>Ilość</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>21.07.2026</td><td>Elektro-Hurt Sp. z o.o.</td><td>Kabel YKY 3×2,5 mm²</td><td>200 m</td></tr>
+                <tr><td>18.07.2026</td><td>TechPrzemysł S.A.</td><td>Stycznik LC1D18M7</td><td>10 szt.</td></tr>
+                <tr><td>15.07.2026</td><td>Elektro-Hurt Sp. z o.o.</td><td>Bezpiecznik topikowy gG 32A</td><td>100 szt.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="button" class="btn btn-ghost" style="margin-top: 14px;" disabled>Nowe przyjęcie (wkrótce)</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Wydania towaru</h2>
+            <span class="card-hint">ostatnie 3</span>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr><th>Data</th><th>Odbiorca</th><th>Pozycja</th><th>Ilość</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>20.07.2026</td><td>Projekt: Hala produkcyjna — Łódź</td><td>Kabel YKY 3×2,5 mm²</td><td>80 m</td></tr>
+                <tr><td>19.07.2026</td><td>Projekt: Modernizacja SN — Poznań</td><td>Wyłącznik różnicowoprądowy 40A</td><td>4 szt.</td></tr>
+                <tr><td>16.07.2026</td><td>Projekt: Instalacja PV — Kalisz</td><td>Stycznik LC1D18M7</td><td>2 szt.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="button" class="btn btn-ghost" style="margin-top: 14px;" disabled>Nowe wydanie (wkrótce)</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Stany minimalne</h2>
+            <span class="card-hint">wymagają uzupełnienia</span>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr><th>Pozycja</th><th>Stan</th><th>Minimum</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Czujnik prądowy 100A</td><td>8 szt.</td><td>15 szt.</td><td><span class="badge badge-danger">Niski stan</span></td></tr>
+                <tr><td>Przekaźnik czasowy 24V</td><td>3 szt.</td><td>10 szt.</td><td><span class="badge badge-danger">Niski stan</span></td></tr>
+                <tr><td>Złącze szynowe WAGO 2273</td><td>20 szt.</td><td>50 szt.</td><td><span class="badge badge-warning">Uzupełnić</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 MMGRESS</span>
+      <span class="divider">·</span>
+      <a href="https://mmgress.github.io" target="_blank" rel="noopener">mmgress.github.io</a>
+    </footer>
+
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
