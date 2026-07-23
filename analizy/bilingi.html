@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sternik — bilingi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-protected="true">
+
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="app-shell">
+
+    <header class="topbar">
+      <a class="topbar-brand" href="panel.html">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Sternik</span>
+      </a>
+      <div class="topbar-actions">
+        <div class="nav-dropdown">
+          <button type="button" class="nav-trigger" id="modules-trigger" aria-haspopup="true" aria-expanded="false">
+            Moduły
+            <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-menu" id="modules-menu" role="menu" aria-label="Moduły">
+            <a href="panel.html" role="menuitem">Panel główny</a>
+            <a href="harmonogram.html" role="menuitem">Harmonogram</a>
+            <a href="magazyn.html" role="menuitem">Magazyn</a>
+            <a href="zadania.html" role="menuitem">Zadania</a>
+            <a href="klienci.html" role="menuitem">Klienci</a>
+            <a href="bilingi.html" role="menuitem" class="is-active" aria-current="page">Bilingi</a>
+            <a href="zarzadzanie.html" role="menuitem">Zarządzanie</a>
+          </div>
+        </div>
+        <button type="button" class="btn-logout" id="logout-btn">Wyloguj</button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="page-header">
+        <span class="page-eyebrow">Moduł</span>
+        <h1>Bilingi</h1>
+        <p>Faktury i rozliczenia z klientami.</p>
+      </div>
+
+      <div class="card">
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>Nr faktury</th><th>Klient</th><th>Kwota</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>FV/2026/07/014</td><td>Elektro-Przemysł Sp. z o.o.</td><td>12 400,00 zł</td><td><span class="badge badge-success">Opłacona</span></td></tr>
+              <tr><td>FV/2026/07/013</td><td>TechPrzemysł S.A.</td><td>6 250,00 zł</td><td><span class="badge badge-neutral">Oczekuje</span></td></tr>
+              <tr><td>FV/2026/06/041</td><td>Instalacje PV Kalisz</td><td>3 800,00 zł</td><td><span class="badge badge-danger">Zaległa</span></td></tr>
+              <tr><td>FV/2026/06/038</td><td>Hala Produkcyjna Łódź</td><td>18 900,00 zł</td><td><span class="badge badge-success">Opłacona</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note-muted">Wystawianie faktur, eksport i przypomnienia o płatnościach zostaną dodane w kolejnej iteracji systemu.</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 MMGRESS</span>
+      <span class="divider">·</span>
+      <a href="https://mmgress.github.io" target="_blank" rel="noopener">mmgress.github.io</a>
+    </footer>
+
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
