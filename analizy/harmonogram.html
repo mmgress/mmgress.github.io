@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sternik — harmonogram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-protected="true">
+
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="app-shell">
+
+    <header class="topbar">
+      <a class="topbar-brand" href="panel.html">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Sternik</span>
+      </a>
+      <div class="topbar-actions">
+        <div class="nav-dropdown">
+          <button type="button" class="nav-trigger" id="modules-trigger" aria-haspopup="true" aria-expanded="false">
+            Moduły
+            <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-menu" id="modules-menu" role="menu" aria-label="Moduły">
+            <a href="panel.html" role="menuitem">Panel główny</a>
+            <a href="harmonogram.html" role="menuitem" class="is-active" aria-current="page">Harmonogram</a>
+            <a href="magazyn.html" role="menuitem">Magazyn</a>
+            <a href="zadania.html" role="menuitem">Zadania</a>
+            <a href="klienci.html" role="menuitem">Klienci</a>
+            <a href="bilingi.html" role="menuitem">Bilingi</a>
+            <a href="zarzadzanie.html" role="menuitem">Zarządzanie</a>
+          </div>
+        </div>
+        <button type="button" class="btn-logout" id="logout-btn">Wyloguj</button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="page-header">
+        <span class="page-eyebrow">Moduł</span>
+        <h1>Harmonogram</h1>
+        <p>Podgląd kalendarza. Planowanie i przypisywanie terminów pojawi się w kolejnej iteracji.</p>
+      </div>
+
+      <div class="card" style="max-width: 480px; margin: 0 auto;">
+        <div class="calendar-toolbar">
+          <button type="button" class="btn btn-ghost" id="cal-prev" aria-label="Poprzedni miesiąc">‹</button>
+          <h2 id="cal-title">—</h2>
+          <button type="button" class="btn btn-ghost" id="cal-next" aria-label="Następny miesiąc">›</button>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 MMGRESS</span>
+      <span class="divider">·</span>
+      <a href="https://mmgress.github.io" target="_blank" rel="noopener">mmgress.github.io</a>
+    </footer>
+
+  </div>
+
+<script src="app.js"></script>
+<script>
+  (function () {
+    var grid = document.getElementById('calendar-grid');
+    var title = document.getElementById('cal-title');
+    var prevBtn = document.getElementById('cal-prev');
+    var nextBtn = document.getElementById('cal-next');
+
+    var monthNames = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+    var weekDays = ['Pon','Wt','Śr','Czw','Pt','Sob','Nd'];
+
+    var today = new Date();
+    var viewYear = today.getFullYear();
+    var viewMonth = today.getMonth();
+
+    function appendDay(num, muted, isToday) {
+      var cell = document.createElement('div');
+      cell.className = 'calendar-day' + (muted ? ' is-muted' : '') + (isToday ? ' is-today' : '');
+      cell.textContent = num;
+      grid.appendChild(cell);
+    }
+
+    function render() {
+      grid.innerHTML = '';
+
+      weekDays.forEach(function (d) {
+        var el = document.createElement('div');
+        el.className = 'calendar-weekday';
+        el.textContent = d;
+        grid.appendChild(el);
+      });
+
+      var firstOfMonth = new Date(viewYear, viewMonth, 1);
+      var firstWeekday = (firstOfMonth.getDay() + 6) % 7; // Pon = 0
+      var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+      var daysInPrevMonth = new Date(viewYear, viewMonth, 0).getDate();
+
+      for (var i = firstWeekday - 1; i >= 0; i--) {
+        appendDay(daysInPrevMonth - i, true);
+      }
+      for (var d = 1; d <= daysInMonth; d++) {
+        var isToday = d === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
+        appendDay(d, false, isToday);
+      }
+      var totalCells = firstWeekday + daysInMonth;
+      var remaining = (7 - (totalCells % 7)) % 7;
+      for (var t = 1; t <= remaining; t++) {
+        appendDay(t, true);
+      }
+
+      title.textContent = monthNames[viewMonth] + ' ' + viewYear;
+    }
+
+    prevBtn.addEventListener('click', function () {
+      viewMonth--;
+      if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      render();
+    });
+
+    nextBtn.addEventListener('click', function () {
+      viewMonth++;
+      if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      render();
+    });
+
+    render();
+  })();
+</script>
+</body>
+</html>
