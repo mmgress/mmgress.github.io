@@ -268,6 +268,10 @@ a{ color: inherit; }
   color: var(--text-primary);
   box-shadow: var(--shadow-card);
   transition: transform 0.15s ease, border-color 0.15s ease;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
 }
 
 .tile:hover{ transform: translateY(-2px); border-color: var(--accent-secondary); }
@@ -683,4 +687,142 @@ button[type="submit"].is-loading .spinner{ display: inline-block; }
 @media (prefers-reduced-motion: reduce){
   .status-dot{ animation: none; }
   .spinner{ animation: none; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Klienci — wyszukiwarka, breadcrumb, drzewiasta nawigacja                */
+/* ---------------------------------------------------------------------- */
+
+.search-bar{
+  position: relative;
+  max-width: 420px;
+  margin-bottom: 18px;
+}
+
+.search-bar svg{
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-bar input{
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px 10px 36px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search-bar input:focus-visible{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(193,116,58,0.16);
+}
+
+.breadcrumb{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.breadcrumb button{
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.breadcrumb button:hover{ color: var(--accent-hover); background: var(--warning-bg); }
+.breadcrumb .sep{ color: var(--surface-border); }
+.breadcrumb .current{ color: var(--text-primary); font-weight: 600; padding: 2px 4px; }
+
+.location-group{ margin-bottom: 26px; }
+
+.location-group-heading{
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.location-group-heading .count{ color: var(--text-secondary); }
+
+.tile-meta{
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.tile-path{
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-secondary);
+}
+
+.back-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.detail-title-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.sync-card{
+  border-left: 3px solid var(--accent-secondary);
+  background: var(--neutral-bg);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  font-size: 0.84rem;
+  color: var(--neutral-text);
+}
+
+.sync-card strong{ display: block; margin-bottom: 3px; font-size: 0.88rem; }
+
+.empty-state{
+  text-align: center;
+  padding: 22px 10px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.section-stack{ display: flex; flex-direction: column; gap: 18px; }
+
+.no-results{
+  text-align: center;
+  padding: 40px 10px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
