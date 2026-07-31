@@ -2,7 +2,511 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sternik — klienci</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-protected="true">
+
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="app-shell">
+
+    <header class="topbar">
+      <a class="topbar-brand" href="panel.html">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Sternik</span>
+      </a>
+      <div class="topbar-actions">
+        <div class="nav-dropdown">
+          <button type="button" class="nav-trigger" id="modules-trigger" aria-haspopup="true" aria-expanded="false">
+            Moduły
+            <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-menu" id="modules-menu" role="menu" aria-label="Moduły">
+            <a href="panel.html" role="menuitem">Panel główny</a>
+            <a href="harmonogram.html" role="menuitem">Harmonogram</a>
+            <a href="magazyn.html" role="menuitem">Magazyn</a>
+            <a href="zadania.html" role="menuitem">Zadania</a>
+            <a href="klienci.html" role="menuitem" class="is-active" aria-current="page">Klienci</a>
+            <a href="bilingi.html" role="menuitem">Bilingi</a>
+            <a href="zarzadzanie.html" role="menuitem">Zarządzanie</a>
+          </div>
+        </div>
+        <button type="button" class="btn-logout" id="logout-btn">Wyloguj</button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="page-header">
+        <span class="page-eyebrow">Moduł</span>
+        <h1>Klienci</h1>
+        <p>Firmy, lokalizacje, zadania, dokumenty energetyczne i odczyty liczników w jednym miejscu.</p>
+      </div>
+
+      <div class="search-bar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="text" id="client-search" placeholder="Szukaj: firma, miasto, lokalizacja…" autocomplete="off">
+      </div>
+
+      <div id="klienci-app">
+        <nav class="breadcrumb" id="breadcrumb" aria-label="Ścieżka nawigacji"></nav>
+        <div id="view-root"></div>
+        <div id="search-results" style="display:none;"></div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 MMGRESS</span>
+      <span class="divider">·</span>
+      <a href="https://mmgress.github.io" target="_blank" rel="noopener">mmgress.github.io</a>
+    </footer>
+
+  </div>
+
+<script src="app.js"></script>
+<script>
+(function () {
+
+  /* ------------------------------------------------------------------ */
+  /* Dane demonstracyjne. Docelowo mają pochodzić z backendu / bazy.     */
+  /* ------------------------------------------------------------------ */
+
+  function loc(id, name, city, voivodeship, powiat, extra) {
+    var base = { id: id, name: name, city: city, voivodeship: voivodeship, powiat: powiat, tasks: [], documents: [], readings: [] };
+    if (extra) { for (var k in extra) base[k] = extra[k]; }
+    return base;
+  }
+
+  var CLIENTS = [
+    {
+      id: 'splast',
+      name: 'SPlast',
+      autoSync: false,
+      locations: [
+        {
+          id: 'splast-siedziba',
+          name: 'Siedziba — zakład produkcyjny',
+          city: 'Gliwice', voivodeship: 'śląskie', powiat: 'gliwicki',
+          tasks: [
+            { name: 'Analiza faktury za energię elektryczną — lipiec 2026', due: '02.08.2026', status: 'warning', statusLabel: 'Nowe' },
+            { name: 'Projekt kompensacji mocy biernej — Hala 2', due: '10.08.2026', status: 'neutral', statusLabel: 'W trakcie' },
+            { name: 'Dobór magazynu energii', due: '18.08.2026', status: 'neutral', statusLabel: 'W trakcie' },
+            { name: 'Naprawa kompensatora — Hala 2', due: '05.08.2026', status: 'warning', statusLabel: 'Nowe' }
+          ],
+          documents: [
+            { date: '29.07.2026', type: 'Faktura za energię elektryczną', desc: 'Okres: lipiec 2026', status: 'warning', statusLabel: 'Do analizy' }
+          ],
+          readings: []
+        },
+        {
+          id: 'splast-hala2',
+          name: 'Hala 2 — magazyn',
+          city: 'Gliwice', voivodeship: 'śląskie', powiat: 'gliwicki',
+          tasks: [
+            { name: 'Przegląd stanu technicznego kompensatora', due: '12.08.2026', status: 'neutral', statusLabel: 'W trakcie' }
+          ],
+          documents: [], readings: []
+        },
+        {
+          id: 'splast-opole',
+          name: 'Oddział Opole',
+          city: 'Opole', voivodeship: 'opolskie', powiat: 'opolski',
+          tasks: [], documents: [], readings: []
+        }
+      ]
+    },
+    {
+      id: 'mas',
+      name: 'MAS',
+      autoSync: false,
+      city: 'Katowice',
+      locations: [],
+      tasks: [
+        { name: 'Analiza faktury za energię elektryczną', due: '03.08.2026', status: 'warning', statusLabel: 'Nowe' }
+      ],
+      documents: [
+        { date: '30.07.2026', type: 'Faktura za energię elektryczną', desc: 'Dokument otrzymany do analizy', status: 'warning', statusLabel: 'Do analizy' }
+      ],
+      readings: [
+        { date: '30.07.2026', stage: 'Przed montażem', obis: '1.8.0 = 48 210 kWh · 3.8.0 = 6 340 kvarh', photo: true, status: 'success', statusLabel: 'Zapisano' },
+        { date: '—', stage: 'Po montażu', obis: '—', photo: false, status: 'neutral', statusLabel: 'Zaplanowany' },
+        { date: '—', stage: 'Kontrolny (+7 dni)', obis: '—', photo: false, status: 'neutral', statusLabel: 'Zaplanowany' }
+      ]
+    },
+    {
+      id: 'zdrowit',
+      name: 'Zdrowit',
+      autoSync: true,
+      locations: [
+        loc('zdrowit-katowice', 'Apteka Zdrowit — Katowice Centrum', 'Katowice', 'śląskie', 'katowicki', {
+          tasks: [{ name: 'Odczyt licznika — kontrola miesięczna', due: '05.08.2026', status: 'neutral', statusLabel: 'W trakcie' }],
+          documents: [{ date: '27.07.2026', type: 'Faktura za energię elektryczną', desc: 'Lipiec 2026', status: 'success', statusLabel: 'Przeanalizowana' }],
+          readings: [{ date: '27.07.2026', stage: 'Odczyt bieżący', obis: '1.8.0 = 12 480 kWh', photo: false, status: 'success', statusLabel: 'Zapisano' }]
+        }),
+        loc('zdrowit-gliwice', 'Apteka Zdrowit — Gliwice', 'Gliwice', 'śląskie', 'gliwicki'),
+        loc('zdrowit-bytom', 'Apteka Zdrowit — Bytom', 'Bytom', 'śląskie', 'bytomski'),
+        loc('zdrowit-zabrze', 'Apteka Zdrowit — Zabrze', 'Zabrze', 'śląskie', 'zabrski'),
+        loc('zdrowit-chorzow', 'Apteka Zdrowit — Chorzów', 'Chorzów', 'śląskie', 'chorzowski'),
+        loc('zdrowit-ruda', 'Apteka Zdrowit — Ruda Śląska', 'Ruda Śląska', 'śląskie', 'rudzki'),
+        loc('zdrowit-tychy', 'Apteka Zdrowit — Tychy', 'Tychy', 'śląskie', 'tyski'),
+        loc('zdrowit-sosnowiec', 'Apteka Zdrowit — Sosnowiec', 'Sosnowiec', 'śląskie', 'sosnowiecki'),
+        loc('zdrowit-rybnik', 'Apteka Zdrowit — Rybnik', 'Rybnik', 'śląskie', 'rybnicki'),
+        loc('zdrowit-czestochowa', 'Apteka Zdrowit — Częstochowa', 'Częstochowa', 'śląskie', 'częstochowski'),
+        loc('zdrowit-krakow', 'Apteka Zdrowit — Kraków', 'Kraków', 'małopolskie', 'krakowski', {
+          documents: [{ date: '26.07.2026', type: 'Faktura za energię elektryczną', desc: 'Lipiec 2026', status: 'warning', statusLabel: 'Do analizy' }]
+        }),
+        loc('zdrowit-tarnow', 'Apteka Zdrowit — Tarnów', 'Tarnów', 'małopolskie', 'tarnowski'),
+        loc('zdrowit-nowysacz', 'Apteka Zdrowit — Nowy Sącz', 'Nowy Sącz', 'małopolskie', 'nowosądecki'),
+        loc('zdrowit-oswiecim', 'Apteka Zdrowit — Oświęcim', 'Oświęcim', 'małopolskie', 'oświęcimski'),
+        loc('zdrowit-chrzanow', 'Apteka Zdrowit — Chrzanów', 'Chrzanów', 'małopolskie', 'chrzanowski'),
+        loc('zdrowit-opole', 'Apteka Zdrowit — Opole', 'Opole', 'opolskie', 'opolski'),
+        loc('zdrowit-kkozle', 'Apteka Zdrowit — Kędzierzyn-Koźle', 'Kędzierzyn-Koźle', 'opolskie', 'kędzierzyńsko-kozielski'),
+        loc('zdrowit-nysa', 'Apteka Zdrowit — Nysa', 'Nysa', 'opolskie', 'nyski'),
+        loc('zdrowit-brzeg', 'Apteka Zdrowit — Brzeg', 'Brzeg', 'opolskie', 'brzeski')
+      ]
+    },
+    {
+      id: 'elektro-przemysl',
+      name: 'Elektro-Przemysł Sp. z o.o.',
+      autoSync: false,
+      city: 'Ruda Śląska',
+      locations: [],
+      tasks: [
+        { name: 'Przegląd instalacji — Hala B', due: '25.07.2026', status: 'neutral', statusLabel: 'W trakcie' }
+      ],
+      documents: [], readings: []
+    },
+    {
+      id: 'techprzemysl',
+      name: 'TechPrzemysł S.A.',
+      autoSync: false,
+      city: 'Częstochowa',
+      locations: [],
+      tasks: [
+        { name: 'Raport z pomiarów jakości energii', due: '28.07.2026', status: 'warning', statusLabel: 'Nowe' }
+      ],
+      documents: [], readings: []
+    }
+  ];
+
+  /* ------------------------------------------------------------------ */
+  /* Elementy DOM i stan nawigacji                                       */
+  /* ------------------------------------------------------------------ */
+
+  var appRoot = document.getElementById('klienci-app');
+  var breadcrumbEl = document.getElementById('breadcrumb');
+  var viewRoot = document.getElementById('view-root');
+  var searchResultsEl = document.getElementById('search-results');
+  var searchInput = document.getElementById('client-search');
+
+  var state = { level: 'companies', companyId: null, locationId: null };
+
+  var ICON_BUILDING = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg>';
+  var ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>';
+
+  /* ------------------------------------------------------------------ */
+  /* Pomocnicze                                                          */
+  /* ------------------------------------------------------------------ */
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function (ch) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+    });
+  }
+
+  function foldPolish(str) {
+    var map = { 'ą':'a','ć':'c','ę':'e','ł':'l','ń':'n','ó':'o','ś':'s','ź':'z','ż':'z' };
+    return String(str).toLowerCase().replace(/[ąćęłńóśźż]/g, function (ch) { return map[ch]; });
+  }
+
+  function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  function pluralLocations(n) {
+    if (n === 1) return n + ' lokalizacja';
+    var mod10 = n % 10, mod100 = n % 100;
+    if (mod10 >= 2 && mod10 <= 4 && !(mod100 >= 12 && mod100 <= 14)) return n + ' lokalizacje';
+    return n + ' lokalizacji';
+  }
+
+  function getCompany(id) { return CLIENTS.filter(function (c) { return c.id === id; })[0]; }
+
+  function resetSearchUI() {
+    searchInput.value = '';
+    searchResultsEl.style.display = 'none';
+    searchResultsEl.innerHTML = '';
+    viewRoot.style.display = '';
+    breadcrumbEl.style.display = '';
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Nawigacja                                                           */
+  /* ------------------------------------------------------------------ */
+
+  function showCompanies() { state = { level: 'companies' }; render(); }
+
+  function showCompany(companyId) {
+    var c = getCompany(companyId);
+    if (!c) { showCompanies(); return; }
+    if (c.locations.length > 0) showLocations(companyId);
+    else showDetail(companyId, null);
+  }
+
+  function showLocations(companyId) { state = { level: 'locations', companyId: companyId }; render(); }
+  function showDetail(companyId, locationId) { state = { level: 'detail', companyId: companyId, locationId: locationId || null }; render(); }
+
+  /* ------------------------------------------------------------------ */
+  /* Render: breadcrumb                                                  */
+  /* ------------------------------------------------------------------ */
+
+  function renderBreadcrumb() {
+    var html = '<button type="button" data-action="root">Klienci</button>';
+    if (state.level !== 'companies') {
+      var company = getCompany(state.companyId);
+      html += '<span class="sep">/</span>';
+      if (state.level === 'locations') {
+        html += '<span class="current">' + escapeHtml(company.name) + '</span>';
+      } else if (state.level === 'detail') {
+        if (state.locationId) {
+          html += '<button type="button" data-action="locations" data-company="' + company.id + '">' + escapeHtml(company.name) + '</button>';
+          var l = company.locations.filter(function (x) { return x.id === state.locationId; })[0];
+          html += '<span class="sep">/</span><span class="current">' + escapeHtml(l.name) + '</span>';
+        } else {
+          html += '<span class="current">' + escapeHtml(company.name) + '</span>';
+        }
+      }
+    }
+    breadcrumbEl.innerHTML = html;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Render: lista firm                                                  */
+  /* ------------------------------------------------------------------ */
+
+  function renderCompaniesView() {
+    var html = '<div class="tiles-grid">';
+    CLIENTS.forEach(function (c) {
+      var subtitle = c.locations.length > 0 ? pluralLocations(c.locations.length) : (c.city || 'Jedna lokalizacja');
+      html += '<button type="button" class="tile" data-action="company" data-company="' + c.id + '">' +
+        '<span class="tile-icon">' + ICON_BUILDING + '</span>' +
+        '<span class="tile-title">' + escapeHtml(c.name) + '</span>' +
+        '<span class="tile-desc">' + escapeHtml(subtitle) + '</span>' +
+        (c.autoSync ? '<span class="badge badge-neutral">Auto-sync</span>' : '') +
+        '</button>';
+    });
+    html += '</div>';
+    viewRoot.innerHTML = html;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Render: lista lokalizacji (grupowana wg województwa, jeśli dużo)     */
+  /* ------------------------------------------------------------------ */
+
+  function locTileHtml(company, l) {
+    return '<button type="button" class="tile" data-action="location" data-company="' + company.id + '" data-location="' + l.id + '">' +
+      '<span class="tile-icon">' + ICON_PIN + '</span>' +
+      '<span class="tile-title">' + escapeHtml(l.name) + '</span>' +
+      '<span class="tile-desc">' + escapeHtml(l.city) + '</span>' +
+      '<span class="tile-meta">pow. ' + escapeHtml(l.powiat) + '</span>' +
+      '</button>';
+  }
+
+  function renderLocationsView() {
+    var company = getCompany(state.companyId);
+    var locs = company.locations;
+    var html = '';
+
+    if (company.autoSync) html += syncCardHtml();
+
+    if (locs.length > 8) {
+      var groups = {};
+      locs.forEach(function (l) {
+        groups[l.voivodeship] = groups[l.voivodeship] || [];
+        groups[l.voivodeship].push(l);
+      });
+      Object.keys(groups).sort().forEach(function (voiv) {
+        var items = groups[voiv];
+        html += '<div class="location-group">' +
+          '<div class="location-group-heading">Województwo ' + escapeHtml(capitalize(voiv)) + ' <span class="count">— ' + pluralLocations(items.length) + '</span></div>' +
+          '<div class="tiles-grid">' + items.map(function (l) { return locTileHtml(company, l); }).join('') + '</div>' +
+          '</div>';
+      });
+    } else {
+      html += '<div class="tiles-grid">' + locs.map(function (l) { return locTileHtml(company, l); }).join('') + '</div>';
+    }
+
+    viewRoot.innerHTML = html;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Render: widok szczegółów (firma lub lokalizacja)                    */
+  /* ------------------------------------------------------------------ */
+
+  function badge(status, label) { return '<span class="badge badge-' + status + '">' + escapeHtml(label) + '</span>'; }
+
+  function emptyState(text) { return '<div class="empty-state">' + escapeHtml(text) + '</div>'; }
+
+  function sectionCard(title, inner) {
+    return '<div class="card"><div class="card-header"><h3 class="card-title">' + escapeHtml(title) + '</h3></div>' + inner + '</div>';
+  }
+
+  function renderTasksTable(tasks) {
+    if (!tasks || tasks.length === 0) return emptyState('Brak zadań przypisanych do tego klienta.');
+    var rows = tasks.map(function (t) {
+      return '<tr><td>' + escapeHtml(t.name) + '</td><td>' + escapeHtml(t.due) + '</td><td>' + badge(t.status, t.statusLabel) + '</td></tr>';
+    }).join('');
+    return '<div class="table-scroll"><table class="data-table"><thead><tr><th>Zadanie</th><th>Termin</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
+  function renderDocumentsTable(docs) {
+    if (!docs || docs.length === 0) return emptyState('Brak dokumentów przypisanych do tej lokalizacji.');
+    var rows = docs.map(function (d) {
+      return '<tr><td>' + escapeHtml(d.date) + '</td><td>' + escapeHtml(d.type) + '</td><td>' + escapeHtml(d.desc) + '</td><td>' + badge(d.status, d.statusLabel) + '</td></tr>';
+    }).join('');
+    return '<div class="table-scroll"><table class="data-table"><thead><tr><th>Data</th><th>Typ</th><th>Opis</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
+  function renderReadingsTable(readings) {
+    if (!readings || readings.length === 0) return emptyState('Brak zarejestrowanych odczytów licznika.');
+    var rows = readings.map(function (r) {
+      var photoCell = r.photo ? '<span class="badge badge-neutral">Załącznik</span>' : '—';
+      return '<tr><td>' + escapeHtml(r.date) + '</td><td>' + escapeHtml(r.stage) + '</td><td>' + escapeHtml(r.obis) + '</td><td>' + photoCell + '</td><td>' + badge(r.status, r.statusLabel) + '</td></tr>';
+    }).join('');
+    return '<div class="table-scroll"><table class="data-table"><thead><tr><th>Data</th><th>Etap</th><th>Odczyt (kody OBIS)</th><th>Zdjęcia</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
+  function syncCardHtml() {
+    return '<div class="sync-card"><strong>Automatyczne pobieranie dokumentów</strong>' +
+      'Ta firma ma nadsyłać faktury i odczyty z każdej lokalizacji automatycznie. Wymaga integracji e-mail/API po stronie backendu — obecnie brak połączenia. Ostatnia synchronizacja: —.</div>';
+  }
+
+  function renderDetailView() {
+    var company = getCompany(state.companyId);
+    var site = state.locationId ? company.locations.filter(function (l) { return l.id === state.locationId; })[0] : company;
+
+    var backBtn = state.locationId
+      ? '<button type="button" class="btn btn-ghost back-btn" data-action="locations" data-company="' + company.id + '">‹ Wróć do lokalizacji</button>'
+      : '<button type="button" class="btn btn-ghost back-btn" data-action="root">‹ Wróć do klientów</button>';
+
+    var html = backBtn;
+    html += '<div class="detail-title-row"><h2 style="margin:0;font-size:1.3rem;">' + escapeHtml(site.name) + '</h2></div>';
+
+    if (company.autoSync) html += syncCardHtml();
+
+    html += '<div class="section-stack">';
+    html += sectionCard('Zadania', renderTasksTable(site.tasks));
+    html += sectionCard('Dokumenty', renderDocumentsTable(site.documents));
+    html += sectionCard('Odczyty liczników', renderReadingsTable(site.readings));
+    html += '</div>';
+
+    viewRoot.innerHTML = html;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Render: dyspozytor                                                  */
+  /* ------------------------------------------------------------------ */
+
+  function render() {
+    renderBreadcrumb();
+    if (state.level === 'companies') renderCompaniesView();
+    else if (state.level === 'locations') renderLocationsView();
+    else renderDetailView();
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Wyszukiwarka globalna                                               */
+  /* ------------------------------------------------------------------ */
+
+  function renderSearchResults(results, query) {
+    if (results.length === 0) {
+      searchResultsEl.innerHTML = '<div class="no-results">Brak wyników dla „' + escapeHtml(query) + '”.</div>';
+    } else {
+      var html = '<div class="tiles-grid">';
+      results.forEach(function (r) {
+        if (r.type === 'company') {
+          var subtitle = r.company.locations.length > 0 ? pluralLocations(r.company.locations.length) : (r.company.city || 'Jedna lokalizacja');
+          html += '<button type="button" class="tile" data-action="company" data-company="' + r.company.id + '">' +
+            '<span class="tile-icon">' + ICON_BUILDING + '</span>' +
+            '<span class="tile-title">' + escapeHtml(r.company.name) + '</span>' +
+            '<span class="tile-desc">' + escapeHtml(subtitle) + '</span>' +
+            '<span class="tile-path">Klienci</span>' +
+            '</button>';
+        } else {
+          html += '<button type="button" class="tile" data-action="location" data-company="' + r.company.id + '" data-location="' + r.location.id + '">' +
+            '<span class="tile-icon">' + ICON_PIN + '</span>' +
+            '<span class="tile-title">' + escapeHtml(r.location.name) + '</span>' +
+            '<span class="tile-desc">' + escapeHtml(r.location.city) + '</span>' +
+            '<span class="tile-path">' + escapeHtml(r.company.name) + '</span>' +
+            '</button>';
+        }
+      });
+      html += '</div>';
+      searchResultsEl.innerHTML = html;
+    }
+    viewRoot.style.display = 'none';
+    breadcrumbEl.style.display = 'none';
+    searchResultsEl.style.display = '';
+  }
+
+  searchInput.addEventListener('input', function () {
+    var raw = searchInput.value.trim();
+    if (!raw) { resetSearchUI(); render(); return; }
+    var q = foldPolish(raw);
+    var results = [];
+    CLIENTS.forEach(function (c) {
+      if (foldPolish(c.name).indexOf(q) !== -1) results.push({ type: 'company', company: c });
+      c.locations.forEach(function (l) {
+        if (foldPolish(l.name).indexOf(q) !== -1 || foldPolish(l.city).indexOf(q) !== -1) {
+          results.push({ type: 'location', company: c, location: l });
+        }
+      });
+    });
+    renderSearchResults(results, raw);
+  });
+
+  /* ------------------------------------------------------------------ */
+  /* Delegacja kliknięć (breadcrumb, kafle firm/lokalizacji, wyniki)     */
+  /* ------------------------------------------------------------------ */
+
+  appRoot.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    var action = btn.dataset.action;
+
+    resetSearchUI();
+
+    if (action === 'root') showCompanies();
+    else if (action === 'company') showCompany(btn.dataset.company);
+    else if (action === 'locations') showLocations(btn.dataset.company);
+    else if (action === 'location') showDetail(btn.dataset.company, btn.dataset.location);
+  });
+
+  /* ------------------------------------------------------------------ */
+  /* Start — obsługuje głębokie linki: klienci.html?client=splast         */
+  /* ------------------------------------------------------------------ */
+
+  var params = new URLSearchParams(window.location.search);
+  var clientParam = params.get('client');
+  var locationParam = params.get('location');
+
+  if (clientParam && getCompany(clientParam)) {
+    if (locationParam) showDetail(clientParam, locationParam);
+    else showCompany(clientParam);
+  } else {
+    showCompanies();
+  }
+
+})();
+</script>
+</body>
+</html>>
 <title>Sternik — klienci</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
